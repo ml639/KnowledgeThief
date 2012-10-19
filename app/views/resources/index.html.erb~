@@ -1,0 +1,46 @@
+<!-- <% form_tag resources_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:tag] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %> -->
+
+<%= form_tag(resources_path, :method => "get") do %>
+  <p>
+    <%= text_field_tag :tag, params[:tag] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p> 
+<% end %>
+
+<h1>Resources</h1>
+
+<ul>
+  <% @resources.each do |resource| %>
+    <li>
+      <%= link_to resource.title, resource.link, :target => "_blank" %><br />
+      <%= resource.description %>
+    </li>
+  <% end %>
+</ul>
+
+<%= form_for(@resource) do |f| %>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :link %><br />
+    <%= f.text_field :link %>
+  </p>
+  <p>
+    <%= f.label :tag_list, "Tags (separated by commas)" %><br />
+    <%= f.text_field :tag_list %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

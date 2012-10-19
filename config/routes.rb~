@@ -1,6 +1,6 @@
 Kt::Application.routes.draw do
   resources :resources
-  get 'tags/:tag', to: 'resources#index', as: :tag
+  get 'tags/:tag', to: 'resourcess#index', as: :tag
 
   root to: 'resources#index'
 

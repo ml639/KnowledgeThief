@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-KnowledgeThief::Application.load_tasks
+Kt::Application.load_tasks

@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-KnowledgeThief::Application.config.secret_token = '032d5fb0cf0572c533d69abe300e6d86520a0ec6976efe1716a6656435fc94fe4a68ebb11543312c714e083fb1f8187aed0a34980a495b9ada090b522573e1a0'
+Kt::Application.config.secret_token = 'e4853514f56c23cfb962299c75ebeac1c78b9867f48f472562ad0103e7cce9b29a9b49f8b2ab52a5ac959cc2558f859bde47d65ee3ed3635c0d2164a89997c1d'
