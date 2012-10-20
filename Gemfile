@@ -16,6 +16,12 @@ gem 'acts-as-taggable-on', '~> 2.3.1'
 # Votable gem
 gem 'acts_as_votable'
 
+# Devise
+gem 'devise'
+
+# ActiveRecord Reputation System for voting and user reputation
+gem 'activerecord-reputation-system', require: 'reputation_system'
+
 gem 'twitter-bootstrap-rails'
 
 group :development do

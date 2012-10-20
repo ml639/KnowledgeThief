@@ -19,11 +19,18 @@
     <li>
       <%= link_to resource.title, resource.link, :target => "_blank" %><br />
       <%= resource.description %><br />
+        <%= pluralize resource.reputation_for(:votes).to_i, "vote" %>
+        <% if current_user && !current_user.voted_for?(resource) %>
+	| <%= link_to "up", vote_resource_path(resource, type: "up"), method: "post" %>
+	| <%= link_to "down", vote_resource_path(resource, type: "down"), method: "post" %>
+	<% end %><br />
       Tags: <%= raw resource.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
     </li>
   <% end %>
 </ul>
 
+<% if user_signed_in? %>
+   
 <%= form_for(@resource) do |f| %>
   <p>
     <%= f.label :title %><br />
@@ -45,3 +52,8 @@
     <%= f.submit %>
   </p>
 <% end %>
+
+<% else %>
+    <%= link_to "Sign in to add resources", new_user_session_path %>
+<% end %>
+

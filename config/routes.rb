@@ -1,6 +1,12 @@
 Kt::Application.routes.draw do
+
+
+  devise_for :users
+
   get "home/index"
-  resources :resources
+  resources :resources do
+    member { post :vote }
+  end
   get 'tags/:tag', to: 'resources#index', as: :tag
 
   root to: 'home#index'
