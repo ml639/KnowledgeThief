@@ -1,8 +1,10 @@
 Kt::Application.routes.draw do
+  get "home/index"
+
   resources :resources
   get 'tags/:tag', to: 'resources#index', as: :tag
 
-  root to: 'resources#index'
+  root to: 'home#index'
 
 
   # The priority is based upon order of creation:
