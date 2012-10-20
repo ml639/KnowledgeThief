@@ -1,6 +1,5 @@
 Kt::Application.routes.draw do
   get "home/index"
-
   resources :resources
   get 'tags/:tag', to: 'resources#index', as: :tag
 
