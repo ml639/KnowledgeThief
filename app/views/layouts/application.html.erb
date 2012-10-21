@@ -116,7 +116,7 @@
 					</div><!-- End of span10 -->
 					<div class="span3">
 						<div class="span3 sideBar">
-							<%=form_tag(:controller => "resources", :action => "create", :method => "post")%>
+							<%=form_tag(:controller => "/resources", :method => "post")%>
 								<%= label_tag(:title, "Title:") %>
 							    <%= text_field_tag(:title)  %>
 
@@ -133,7 +133,7 @@
 							   <%= submit_tag("Submit Resource") %>
 						</div>
 						<div class="span3 sideBar">
-							<%=form_tag(:controller => "resources", :action => "create", :method => "post")%>
+							<%=form_tag(:controller => "/resources", :method => "post")%>
 								<%= label_tag(:question, "Question:") %>
 							    <%= text_field_tag(:question)  %>
 
