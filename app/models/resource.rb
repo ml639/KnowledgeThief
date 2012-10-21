@@ -1,5 +1,9 @@
 class Resource < ActiveRecord::Base
-  attr_accessible :title, :description, :link, :tag_list
+  belongs_to :user
+
+  has_reputation :votes, source: :user, aggregated_by: :sum
+
+  attr_accessible :title, :description, :link, :tag_list, :user_id
   acts_as_taggable
   # acts_as_votable
 end
