@@ -5,55 +5,45 @@
   </p>
 <% end %> -->
 
-<%= form_tag(resources_path, :method => "get") do %>
-  <p>
-    <%= text_field_tag :tag, params[:tag] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p> 
-<% end %>
-
 <h1>Resources</h1>
-
+<div class="span8">
 <ul>
-  <% @resources.each do |resource| %>
+  <% if @resources.nil?%>
+  <% @resources.each do |learningresources| %>
     <li>
-      <%= link_to resource.title, resource.link, :target => "_blank" %><br />
-      <%= resource.description %><br />
-        <%= pluralize resource.reputation_for(:votes).to_i, "vote" %>
+      <%= link_to learningresources.title, learningresources.link, :target => "_blank" %><br />
+      <%= learningresources.description %><br />
+        <%= pluralize learningresources.reputation_for(:votes).to_i, "vote" %>
         <% if current_user && !current_user.voted_for?(resource) %>
-	| <%= link_to "up", vote_resource_path(resource, type: "up"), method: "post" %>
-	| <%= link_to "down", vote_resource_path(resource, type: "down"), method: "post" %>
+	| <%= link_to "up", vote_resource_path(learningresources, type: "up"), method: "post" %>
+	| <%= link_to "down", vote_resource_path(learningresources, type: "down"), method: "post" %>
 	<% end %><br />
-      Tags: <%= raw resource.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
+      Tags: <%= raw learningresources.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
     </li>
   <% end %>
+<%end%>
 </ul>
 
 <% if user_signed_in? %>
-   
-<%= form_for(@resource) do |f| %>
-  <p>
-    <%= f.label :title %><br />
+
+<%= form_for(@resources) do |f| %>
+	<%= label_tag(:title, "Title:") %>
     <%= f.text_field :title %>
-  </p>
-  <p>
+
     <%= f.label :description %><br />
     <%= f.text_area :description %>
-  </p>
-  <p>
+
     <%= f.label :link %><br />
     <%= f.text_field :link %>
-  </p>
-  <p>
+
     <%= f.label :tag_list, "Tags (separated by commas)" %><br />
     <%= f.text_field :tag_list %>
-  </p>
-  <p>
+	<br>
     <%= f.submit %>
-  </p>
+
 <% end %>
 
 <% else %>
     <%= link_to "Sign in to add resources", new_user_session_path %>
 <% end %>
-
+</div>

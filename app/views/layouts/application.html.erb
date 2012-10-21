@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Kt" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Knowledge Thief" %></title>
     <%= csrf_meta_tags %>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,800italic,400,800,300' rel='stylesheet' type='text/css'>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
@@ -33,57 +34,135 @@
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'images/favicon.ico', :rel => 'shortcut icon' %>
-  </head>
-  <body>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="container">
+			<div class="navbar">
+				<div class="navbar-inner">
+					<div class="container">
+						<a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</a>
+						<a class="brand" <%= link_to "KnowledgeThief", "/"  %></a>
+						<div class="nav-collapse">
+							<ul class="nav">		
+								<li><%= link_to "Resources", "/resources"  %></li>
+							</ul>
+			 				<!-- The drop down menu -->
+							<div><!-- Registration/Login Div -->
+								<ul class="nav pull-right">
+									<% if user_signed_in? %>
+										Signed in as <%= current_user.email %> ( Reputation: <%= current_user.reputation_for(:karma).to_i %>). Not you?
+			 							<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+									<% else %>
+										<li><%= link_to "Sign up", new_user_registration_path %> </li>
+										<li class="divider-vertical"></li>
+										<li class="drop down">
+										<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+										<div class="dropdown-menu" data-no-collapse="true" style="padding: 15px; padding-bottom: 0px;">
+											<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+												<div><%= f.label :email %><br />
+												<%= f.email_field :email %></div>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" <%= link_to "KnowledgeThief", "/"  %></a>
-          <div class="container nav-collapse">
-            <ul class="nav">
-              <li><%= link_to "Resources", "/resources"  %></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
+												<div><%= f.label :password %><br />
+												<%= f.password_field :password %></div>
+
+												<% if devise_mapping.rememberable? -%>
+													<div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+													<% end -%>
+													<div><%= f.submit "Sign in" %></div>
+											<% end %>	
+							            </div>
+									<% end %>
+										</li>
+								 </ul>
+							</div><!-- End Register/Login Div -->
+							<div style="clear:both;">
+						</div><!-- End of Nav Collapse -->
+						<div id="searchBar" class="span4">
+							<%= form_tag(resources_path, :method => "get") do %>
+						
+								<div id="searchText" class="span3">
+									<%= text_field_tag :tag,  params[:tag], :placeholder => "Search to learn anything" %>
+								</div>
+								<div id="searchButton" class ="span1">
+								    <%= submit_tag "Search", :name => nil %>
+								</div>
+						
+							<% end %>
+						</div><!-- TODO: Find out what this is. I have no idea where the parent of this tag is.-->
+						</div><!-- End of SearchBar Div-->
+					</div><!-- End of Container -->
+				</div><!--- End of navbar-inner-->
+			</div><!-- End of navbar-->
+			
+			
+			<!--Start of Content -->
+			<div id="content" class="container">
+				<div class="row">
+					<div id="mainContent" class="span8">
+							<div class="alert alert-success">
+								<button type="button" class="close" data-dismiss="alert" style="position:relative;top:-12px;">×</button>
+						  		<%= notice %>
+							</div>
+						<div class="alert alert-block">
+							<button type="button" class="close" data-dismiss="alert" style="position:relative;top:-12px;">×</button>
+						<%= alert %>
+						</div>
+		 				<%= yield %>
+					</div><!-- End of span10 -->
+					<div class="span3">
+						<div class="span3 sideBar">
+							<%=form_tag(:controller => "resources", :action => "create", :method => "post")%>
+								<%= label_tag(:title, "Title:") %>
+							    <%= text_field_tag(:title)  %>
+
+								<%= label_tag(:description, "Description:") %>
+								<%= text_area_tag(:description, "Description....") %>
+
+								<%= label_tag(:link, "Link:") %>
+							    <%= text_field_tag(:link)  %>
+							
+								<%= label_tag(:tag_list, "Tags(separated by commas):") %>
+							    <%= text_field_tag(:tag_list)  %>
+
+								<br>
+							   <%= submit_tag("Submit Resource") %>
+						</div>
+						<div class="span3 sideBar">
+							<%=form_tag(:controller => "resources", :action => "create", :method => "post")%>
+								<%= label_tag(:question, "Question:") %>
+							    <%= text_field_tag(:question)  %>
+
+								<%= label_tag(:tag_list, "Tags(separated by commas):") %>
+							    <%= text_field_tag(:tag_list)  %>
+
+								<br>
+							   <%= submit_tag("Submit Resource") %>
+						</div>
+					</div>
+				</div><!-- end of content row-->
+			</div> <!-- end of content container -->
+			
+		</div><!-- End of Container-->
+	</div><!-- End of Wrapper -->
+	
+	<footer>
+		<div class="container">
+			Copyright Team Prometheus 2012
       </div>
-    </div>
+    </footer>
+	
+	
 
 
 
 
-    <div id="user_nav">
-      <% if user_signed_in? %>
-        Signed in as <%= current_user.email %> ( Reputation: <%= current_user.reputation_for(:karma).to_i %>). Not you?
-        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-      <% else %>
-        <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
-      <% end %>
-    </div>
 
-
-
-
-    <div class="container">
-        <div class="row">
-          <div class="span10 offset2">
-             <p class="notice"><%= notice %></p>
-             <p class="alert"><%= alert %></p>
-
-             <%= yield %>
-          </div>
-        </div><!--/row-->
-
-      <footer>
-        <p>&copy; Company 2012</p>
-      </footer>
-
-    </div> <!-- /container -->
+	
 
     <!-- Javascripts
     ================================================== -->
