@@ -5,10 +5,11 @@
   </p>
 <% end %> -->
 
-<h1>Resources</h1>
 <div class="span8">
-<ul>
-  <% if @resources.nil?%>
+<% if @resources.empty?%>
+  <p> Sorry, we currently have no results for "<%= params[:tag] %>", you should contribute some! </p>
+<% else %>
+  <ul>
   <% @resources.each do |learningresources| %>
     <li>
       <%= link_to learningresources.title, learningresources.link, :target => "_blank" %><br />
@@ -21,12 +22,12 @@
       Tags: <%= raw learningresources.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
     </li>
   <% end %>
+  </ul>
 <%end%>
-</ul>
 
 <% if user_signed_in? %>
 
-<%= form_for(@resources) do |f| %>
+<%= form_for(@resource) do |f| %>
 	<%= label_tag(:title, "Title:") %>
     <%= f.text_field :title %>
 

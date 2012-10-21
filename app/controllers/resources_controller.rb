@@ -5,18 +5,18 @@ class ResourcesController < ApplicationController
     else
       @resources = Resource.find_with_reputation(:votes, :all, :limit => 10, order: "votes desc")
     end
-    @resources = Resource.new
+    @resource = Resource.new
   end
   def create
     params[:resource][:user_id] = current_user.id
-    @resources = Resource.new(params[:resource])
-    @resources.save
+    @resource = Resource.new(params[:resource])
+    @resource.save
     redirect_to resources_path
   end
   def vote
     value = params[:type] == "up" ? 1 : -1
-    @resources = Resource.find(params[:id])
-    @resources.add_or_update_evaluation(:votes, value, current_user)
+    @resource = Resource.find(params[:id])
+    @resource.add_or_update_evaluation(:votes, value, current_user)
     redirect_to :back, notice: "Thank you for voting"
   end
 end
