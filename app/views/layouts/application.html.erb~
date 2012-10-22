@@ -48,7 +48,7 @@
 	<div id="headerLeft"> <!-- Header left -->
 
 		<div id="logo">
-			<a href="resourceResults.html">Knowledge Thief</a>
+			<%= link_to "KnowledgeThief", "/"  %>
 		</div>
 
         <div id="headerSentence">

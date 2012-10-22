@@ -36,9 +36,10 @@ body{
 	display:inline-block;
 	color:#ccc;
 	margin: 8px 0 0 20px;
-	font-size:14px;
+	font-size:20px;
 	font-weight:700;
 	text-decoration:none;
+	pading-bottom:5px;
 }
 
 #headerSentence{
