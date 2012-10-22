@@ -5,6 +5,7 @@
   </p>
 <% end %> -->
 
+<div id="leftColumn">
 <% if @resources.empty?%>
       <div id="postResults">
     
@@ -52,5 +53,7 @@
 <% end %>
 
 
+
+</div>
 
 

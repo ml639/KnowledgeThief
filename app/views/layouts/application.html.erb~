@@ -133,9 +133,8 @@
 <!-- Center Column Main Content -->
 
 <div id="contentWrapper">
-<div id="leftColumn">
+
 <%= yield %>
-</div>
 
 <!-- Right Column -->
 
