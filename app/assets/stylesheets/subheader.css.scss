@@ -1,0 +1,86 @@
+
+/* Sub Header */
+
+#subHeader{
+	height:35px;
+	background-color:#f5f5f5;
+	border-bottom:solid 1px #ccc;
+	width:100%;
+	display:block;
+	position:relative;
+	top: -7px;
+	line-height:35px;
+	font-size:14px;
+	color:#777;
+	background-image:url('bgnoise-transparent.png');
+	box-shadow: 0px 0px 6px #666;
+	-moz-box-shadow: 0px 0px 6px #666;
+	-webkit-box-shadow: 0px 0px 6px #666;
+	overflow:hidden;
+	/* Fallback for web browsers that don't support RGBa */
+	background-color: rgb(213, 213, 213);
+	/* RGBa with 0.6 opacity */
+	background-color: rgba(213, 213, 213, 0.6);
+	/* For IE 5.5 - 7*/
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+	/* For IE 8*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+	
+}
+
+#subHeader p{
+	margin-left:22px;	
+	margin-top:10px;
+	margin-bottom:0px;
+}
+
+.breadCrumbs{
+	float:left;
+}
+
+#sort{
+	position:absolute;
+	right:28%;	
+}
+
+#sort p{
+	display:inline;
+	margin:0;
+	padding:0;
+}
+
+#sort p:hover, .sort p:active{
+	font-weight:700;	
+}
+
+.sortGreen{
+	color:#22B573;	
+}
+
+.sortBlue{
+	color:#65B4F3;
+}
+
+.sortRed{
+	color:#F14949;	
+}
+
+
+#rightSubHeader{
+	position:relative;
+	/* border-left:solid 1px #ccc; */
+	display:inline-block;
+	width:26%;
+	float:right;
+	text-align:right;
+	margin-right:20px;
+}
+
+#rightSubHeader p{
+	display:inline;
+	margin:0;
+}
+
+#rightSubHeader p:hover, #rightSubHeader p:active{
+	font-weight:600;
+}

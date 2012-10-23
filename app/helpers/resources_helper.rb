@@ -4,7 +4,7 @@ module ResourcesHelper
       end
 
       def resource
-        @resource ||= User.new
+        @devise_resource ||= User.new
       end
 
       def devise_mapping

@@ -1,5 +1,7 @@
 @import "twitter/bootstrap/bootstrap";
 @import "twitter/bootstrap/responsive";
+
+
 .wrapper > .container{
 width:100%;
 padding-top:0;
@@ -9,16 +11,51 @@ padding-top:0;
 	body{
 		padding-top:0px !important;
 		}
+	.navbar-inner > .container{
+		a{
+		margin-left:3%;
+		}
+	}
+	#loginSeperator{
+	display:none;
+	}
+	
+	
+	
+}
+
+@media (max-width: 1020px){
+	#headerSentence{
+		display:none !important;
+	}
+	
 }
 
 
 
 .navbar-inner > .container { 
-margin-left:2%;
+margin-left:1%;
 background:url('KT_Logo.png') no-repeat;
+	
 }
+
 .navbar .nav.pull-right{
-margin-right:2%;
+margin-top:1%;
+color:white;
+}
+
+.nav.pull-right {
+	li{
+		color:white !important;
+		font-weight:800;
+		a{
+		padding: 0 !important;
+		font-size:13px !important;
+		}
+	}
+}
+.dropdown-menu{
+color: #2c2c2c !important;
 }
 .navbar{
 margin:0;
@@ -29,6 +66,7 @@ padding:0;
   background-image: none;
   background-repeat: no-repeat;
   filter: none;
+  padding-bottom:15px;
 }
 .navbar .divider-vertical {
 height: 40px;
@@ -37,20 +75,26 @@ border-left: 1px solid gray;
 border-right: gray;
 }
 .navbar .nav > li > a{
+padding-top: 10px;
+padding-bottom: 10px;
+padding-left: 0px;
+padding-right: 15px;
 color:#DCDCDC;
 text-shadow: none;
+font-weight:600;
+font-size: 15px;
 }
 .navbar .brand {
 color:#DCDCDC;
 text-shadow: none;
 font-family:'Open Sans' , sans-serif;
 font-weight:800;
-font-size:25px;
+font-size:20px;
 margin-left:1%;
 }
 
 .navbar .nav > li > a:focus, .navbar .nav > li > a:hover{
-color:#DCDCDC;
+color:#FFF;
 }
 .navbar .nav > li > a{
 color:#DCDCDC;

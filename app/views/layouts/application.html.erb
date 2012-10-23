@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Knowledge Thief" %></title>
     <%= csrf_meta_tags %>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,800italic,400,800,300' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
@@ -47,19 +47,20 @@
 							<span class="icon-bar"></span>
 						</a>
 						<a class="brand" <%= link_to "KnowledgeThief", "/"  %></a>
+						<div id="headerSentence">
+					        Knowledge should be free - and shared. This is where we make that happen. <span style="font-weight:600; color:white; ">Learn more</span> 
+					    </div>
 						<div class="nav-collapse">
-							<ul class="nav">		
-								<li><%= link_to "Resources", "/resources"  %></li>
-							</ul>
+							
 			 				<!-- The drop down menu -->
 							<div><!-- Registration/Login Div -->
 								<ul class="nav pull-right">
 									<% if user_signed_in? %>
-										Signed in as <%= current_user.email %> ( Reputation: <%= current_user.reputation_for(:karma).to_i %>). Not you?
+										<%= current_user.email %> <br>( Reputation: <%= current_user.reputation_for(:karma).to_i %>)<br> Not you?
 			 							<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
 									<% else %>
 										<li><%= link_to "Sign up", new_user_registration_path %> </li>
-										<li class="divider-vertical"></li>
+										<li id="loginSeperator" style="margin-right:5px;margin-left:5px;">|</li>
 										<li class="drop down">
 										<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
 										<div class="dropdown-menu" data-no-collapse="true" style="padding: 15px; padding-bottom: 0px;">
@@ -93,66 +94,91 @@
 								</div>
 						
 							<% end %>
-						</div><!-- TODO: Find out what this is. I have no idea where the parent of this tag is.-->
-						</div><!-- End of SearchBar Div-->
+						</div><!-- End of SearchBar.-->
+						
+						</div><!-- End of Registration Div-->
+						<div id="navCollection">
+							<ul class="nav">	
+								<li id="navForums"><%= link_to "Forums", "/resources"  %></li>
+								<li id="navPaths"><%= link_to "Paths", "/resources"  %></li>
+								<li id="navResources"><%= link_to "Resources", resources_path  %></li>
+								<li id="navHome"><%= link_to "Home", "/"  %></li>
+							</ul>
+						</div>
+						
 					</div><!-- End of Container -->
 				</div><!--- End of navbar-inner-->
 			</div><!-- End of navbar-->
 			
 			
+			<!-- Sub Header -->
+
+			<div id="subHeader">
+
+			<div id="rightSubHeader">
+			    <p>submit a resource</p> | <p>ask a question</p>
+			</div>
+
+
+			<p class="breadCrumbs"> search > resonance structures <span style="color:#ccc;"> (all categories) </span> </p>
+
+			<div id="sort"> sort by: <p class="sortGreen">upvotes</p> | <p class="sortBlue">new</p> | <p class="sortRed">hot</p> 
+			</div>
+
+			</div>  <!-- end Sub Header -->
+
 			<!--Start of Content -->
 			<div id="content" class="container">
 				<div class="row">
 					<div id="mainContent" class="span8">
-							<div class="alert alert-success">
-								<button type="button" class="close" data-dismiss="alert" style="position:relative;top:-12px;">×</button>
-						  		<%= notice %>
-							</div>
-						<div class="alert alert-block">
-							<button type="button" class="close" data-dismiss="alert" style="position:relative;top:-12px;">×</button>
-						<%= alert %>
-						</div>
+						<% flash.each do |name, msg| %>
+						  <% if msg.is_a?(String) %>
+						    <div class="alert alert-<%= name == :notice ? "success" : "error" %>" style="margin-top:5px;">
+						      <a class="close" data-dismiss="alert">&#215;</a>
+						      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+						    </div>
+						  <% end %>
+						<% end %>
 		 				<%= yield %>
 					</div><!-- End of span10 -->
-					<div class="span3">
-						<div class="span3 sideBar">
-							<%=form_tag(:controller => "/resources", :method => "post")%>
-								<%= label_tag(:title, "Title:") %>
-							    <%= text_field_tag(:title)  %>
-
-								<%= label_tag(:description, "Description:") %>
-								<%= text_area_tag(:description, "Description....") %>
-
-								<%= label_tag(:link, "Link:") %>
-							    <%= text_field_tag(:link)  %>
-							
-								<%= label_tag(:tag_list, "Tags(separated by commas):") %>
-							    <%= text_field_tag(:tag_list)  %>
-
-								<br>
-							   <%= submit_tag("Submit Resource") %>
+					<div id="rightColumn" class="span3">
+						<div class="rightColumnBox" class="span3">
+							<p class="rightColumnHeader">Submit a Resource</p>
+							<%= form_for(Resource.new) do |f| %>
+								<p class="rightColumnSubHeader">Title</p>
+							    <%= f.text_field :title, :placeholder => "Enter a title" %>
+								<p class="rightColumnSubHeader">Description</p>
+							    <%= f.text_area :description, :rows => "5", :placeholder => "Give a short description" %>
+								<p class="rightColumnSubHeader">Link</p>
+							    <%= f.text_field :link, :placeholder => "Paste link to resource" %>
+								<p class="rightColumnSubHeader">Tags</p>
+							    <%= f.text_field :tag_list, :placeholder => "Type at least 3 tags separated by commas" %>
+							    <%= f.submit :class => "sidebarButton" %>
+							<% end %>
 						</div>
-						<div class="span3 sideBar">
-							<%=form_tag(:controller => "/resources", :method => "post")%>
-								<%= label_tag(:question, "Question:") %>
-							    <%= text_field_tag(:question)  %>
-
-								<%= label_tag(:tag_list, "Tags(separated by commas):") %>
-							    <%= text_field_tag(:tag_list)  %>
-
-								<br>
-							   <%= submit_tag("Submit Resource") %>
-						</div>
-					</div>
-				</div><!-- end of content row-->
-			</div> <!-- end of content container -->
+						<div class="rightColumnBox" class="span3">
+							<p class="rightColumnHeader">Ask a question</p>
+					    	<p class="rightColumnSubHeader">Question:</p>
+							<form>
+								<input type="text" placeholder="Ask the community">
+							</form>
+						<p class="rightColumnSubHeader">Tags</p>
+						<form name="rightInput" action="" method="get">
+							<input type="text" placeholder="Type at least 3 tags">
+							<input type="submit" value="submit" class="sidebarButton">
+						</form>
+					</div><!-- End of right ColumnBox -->
+				</div><!-- End of rightColumn -->
+					
+			</div><!-- end of content row-->
+		</div> <!-- end of content container -->
 			
-		</div><!-- End of Container-->
+	</div><!-- End of Container-->
 	</div><!-- End of Wrapper -->
 	
 	<footer>
 		<div class="container">
-			Copyright Team Prometheus 2012
+			(c) 2012 KnowledgeThief - About - Terms - Privacy - Upload - Blog - Twitter - Facebook
       </div>
     </footer>
 	
