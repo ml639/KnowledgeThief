@@ -14,3 +14,156 @@ width:80%;
 #resource_tag_list{
 width:80%;
 }
+
+
+.resultWrapper{
+	position:relative;
+	display:block;
+	height:96px;
+	width:100%;
+	padding-top:10px;
+	padding-bottom:6px;
+	border: solid 1px #999;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	background-color:white;
+	box-shadow: 1px 1px 3px #999;
+	-moz-box-shadow: 1px 1px 3px #999;
+	-webkit-box-shadow: 1px 1px 3px #999;
+	margin-top:5px;
+}
+
+/* 
+.resultWrapper:hover{
+background:#F8F8F8;	
+}
+*/
+
+.resultWrapper:first-child{
+	margin-top:11px;
+}
+
+.voteBox{
+	position:absolute;
+	left:12px;
+	height:75px;
+	width:35px;
+	display:inline-block;
+	padding-left:14px;
+	border-left: 5px solid #22B573;
+	line-height:75px;
+	color:#666;
+	font-weight:700;
+	font-size:18px;
+}
+
+.resourceThumb{
+	position:absolute;
+	height: 75px;
+	width:135px;
+	left:77px;
+	display:inline-block;
+}
+
+.resourceCentralWrapper{
+	position:absolute;
+	left:212px;
+	top:0px;
+	display:inline-block;
+	padding-right:6px;
+	padding-top:10px;
+}
+
+.resourceTitle a{
+	font-size:18px;
+	color:#333;
+	display:block;
+	margin-left:10px;
+	font-weight:600;
+	text-decoration:none;
+}
+
+.resourceDescription{
+	font-size:13px;
+	color:#777;
+	margin-left:10px;
+	margin-top:2px;
+	display:block;
+	height:30px;
+	line-height:1.2;
+	overflow:hidden;
+}
+
+.subInfo{
+	font-size:13px;
+	color:#999;
+	margin-left:10px;
+	margin-top:5px;
+	display:block;
+}
+
+.subOptions a{
+	font-size:13px;
+	color:#65B4F3;
+	margin-left:10px;
+	margin-top:2px;
+	font-weight:600;
+	text-decoration:none;
+}
+
+#postResults{
+	margin-top:11px;
+	color:#333;
+	font-size:16px;	
+}
+
+.noResults{
+	margin-bottom:15px;	
+}
+
+/* End Main content resource results */
+
+/* Main content resource Page */
+
+.resourceItself{
+	width:600px;
+	height:auto;
+	margin:0 auto;
+	margin-top:20px;
+	
+}
+
+.resourceTitleItself{
+	font-size:18px;
+	color:#333;
+	display:inline-block;
+	margin:0 auto;
+	font-weight:600;
+	margin-bottom:6px;
+}
+
+.resourceDescriptionItself{
+	position:relative;
+	font-size:13px;
+	color:#666;
+	display:block;
+	margin:0 auto;
+	margin-top:30px;
+	margin-top:26px;
+	width:665px;
+}
+
+.subOptionsItself a{
+	position:relative;
+	font-size:13px;
+	color:#65B4F3;
+	margin-left:10px;
+	margin-top:2px;
+	font-weight:600;
+	text-decoration:none;
+	float:right;
+}
+
+.resourceWrapperItself a{
+	
+}
