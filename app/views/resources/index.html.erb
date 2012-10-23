@@ -5,46 +5,50 @@
   </p>
 <% end %> -->
 
-<div class="span8">
 <% if @resources.empty?%>
-  <p> Sorry, we currently have no results for "<%= params[:tag] %>", you should contribute some! </p>
+      <div id="postResults">
+    
+    <p class="noResults">Sorry, we currently have no results for "<%= params[:tag] %>", you should contribute some!</p>
+    
+    </div>
 <% else %>
-  <ul>
   <% @resources.each do |learningresources| %>
-    <li>
-      <%= link_to learningresources.title, learningresources.link, :target => "_blank" %><br />
-      <%= learningresources.description %><br />
-        <%= pluralize learningresources.reputation_for(:votes).to_i, "vote" %>
-        <% if current_user && !current_user.voted_for?(resource) %>
-	| <%= link_to "up", vote_resource_path(learningresources, type: "up"), method: "post" %>
-	| <%= link_to "down", vote_resource_path(learningresources, type: "down"), method: "post" %>
-	<% end %><br />
-      Tags: <%= raw learningresources.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
-    </li>
-  <% end %>
-  </ul>
-<%end%>
+ 
+    <div class="resultWrapper"> <!-- result wrapper -->
+        <div class="voteBox">
+	<% unless current_user %>
+        <img src="triangle.png" style="position:absolute; top:0; left:12px;">
+	<% else %>
+	<%= link_to image_tag('triangle.png', :style => "position:absolute; top:0; left:12px;"), vote_resource_path(learningresources, type: "up"), method: "post" %>
+	<% end %>
+        <%= learningresources.reputation_for(:votes).to_i %>
+	<% unless current_user %>
+        <img src="/assets/bottomTriangle.png" style="position:absolute; bottom:0; left:12px;">
+	<% else %>
+	<%= link_to image_tag('/assets/bottomTriangle.png', :style => "position:absolute; bottom:0; left:12px;"), vote_resource_path(learningresources, type: "down"), method: "post" %>
+	<% end %>        
+	</div>
+        <div class="resourceThumb">
+         <%= link_to image_tag('thumbex.JPG'), "#" %>
+        </div>
+        
+        <div class="resourceCentralWrapper">
+        <div class="resourceTitle">
+        <%= link_to learningresources.title, learningresources.link, :target => "_blank" %><br />
+        </div>
+    
+        <div class="resourceDescription">
+        <%= learningresources.description %>
+        </div>
+    
+    <div class="subOptions">
+    <a href="#">share</a>  <a href="#">save</a>  <a href="#">manage</a>  <a href="#">flag</a>
+    </div>
+    
+ </div> <!-- end central wrapper -->
 
-<% if user_signed_in? %>
-
-<%= form_for(@resource) do |f| %>
-	<%= label_tag(:title, "Title:") %>
-    <%= f.text_field :title %>
-
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-
-    <%= f.label :link %><br />
-    <%= f.text_field :link %>
-
-    <%= f.label :tag_list, "Tags (separated by commas)" %><br />
-    <%= f.text_field :tag_list %>
-	<br>
-    <%= f.submit %>
-
+</div> <!-- end result wrapper -->
+ <% end %>
 <% end %>
 
-<% else %>
-    <%= link_to "Sign in to add resources", new_user_session_path %>
-<% end %>
-</div>
+
