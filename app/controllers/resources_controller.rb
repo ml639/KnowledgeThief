@@ -28,7 +28,7 @@ class ResourcesController < ApplicationController
       youtube_id = $5
       thumbnail_Link = "http://img.youtube.com/vi/#{youtube_id}/1.jpg"
     else
-      thumbnail_Link = "none"
+      thumbnail_Link = nil
     end
     thumbnail_Link
   end
