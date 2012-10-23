@@ -4,7 +4,6 @@
     <%= submit_tag "Search", :name => nil %>
   </p>
 <% end %> -->
-
 <% if @resources.empty?%>
       <div id="postResults">
     
@@ -13,7 +12,6 @@
     </div>
 <% else %>
   <% @resources.each do |learningresources| %>
- 
     <div class="resultWrapper"> <!-- result wrapper -->
         <div class="voteBox">
 	<% unless current_user %>
@@ -34,7 +32,11 @@
 	<% end %>        
 	</div>
         <div class="resourceThumb">
-         <%= link_to image_tag('thumbex.JPG'), "#" %>
+		<% if learningresources.youtubeID %>
+			<img src ="<%=  learningresources.youtubeID %>"/>
+		<% else %>
+			<%= link_to image_tag('thumbex.JPG'), "#" %>
+		<% end %>
         </div>
         
         <div class="resourceCentralWrapper">

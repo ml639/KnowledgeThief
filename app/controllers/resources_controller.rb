@@ -10,6 +10,7 @@ class ResourcesController < ApplicationController
   def create
     params[:resource][:user_id] = current_user.id
     @resource = Resource.new(params[:resource])
+    @resource[:youtubeID] = self.isYoutube(@resource[:link])
     @resource.save
     redirect_to resources_path
   end
@@ -19,4 +20,18 @@ class ResourcesController < ApplicationController
     @resource.add_or_update_evaluation(:votes, value, current_user)
     redirect_to :back, notice: "Thank you for voting"
   end
+  
+  def isYoutube(youtube_url)
+    regex = %r{http://www.youtube.com}
+    if youtube_url[regex]
+      youtube_url[/^.*((v\/)|(embed\/)|(watch\?))\??v?=?([^\&\?]*).*/]
+      youtube_id = $5
+      thumbnail_Link = "http://img.youtube.com/vi/#{youtube_id}/1.jpg"
+    else
+      thumbnail_Link = "none"
+    end
+    thumbnail_Link
+  end
+  
+  
 end

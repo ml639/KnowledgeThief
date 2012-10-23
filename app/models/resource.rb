@@ -3,7 +3,7 @@ class Resource < ActiveRecord::Base
 
   has_reputation :votes, source: :user, aggregated_by: :sum
 
-  attr_accessible :title, :description, :link, :tag_list, :user_id
+  attr_accessible :title, :description, :link, :tag_list, :user_id, :youtubeID
   acts_as_taggable
   # acts_as_votable
 end

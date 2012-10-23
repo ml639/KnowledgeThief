@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121020065914) do
+ActiveRecord::Schema.define(:version => 20121023201901) do
 
   create_table "resources", :force => true do |t|
     t.text     "link"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20121020065914) do
     t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "youtubeID"
   end
 
   create_table "rs_evaluations", :force => true do |t|
