@@ -24,7 +24,7 @@ require 'active_record/fixtures'
  # OperatingSystem.find_or_create_by_name(os)
 #end
 
-Resource.delete_all
+#Resource.delete_all # Have this line if we want to delete all resources before we add them.
 open("http://atr.eng.utah.edu/~lwilkins/kt/seed_resources.txt") do |seed_resources|
   seed_resources.read.each_line do |r|
     title, link, description, tags = r.chomp.split("|")
