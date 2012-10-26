@@ -14,6 +14,7 @@
     <![endif]-->
 
     <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
 
 </head>
 <body>
@@ -43,7 +44,7 @@
 	    </div>
 	</form>
 
-
+	
 	<div id="navCollection">
 		<div id="navForums">
 	    <a href="/" >
@@ -89,11 +90,63 @@
 	</div>  <!-- End Header left -->
 
 	<div id="headerRight"> <!-- Header right -->
+		<% if user_signed_in? %>
+		 <div class="signin">
+			<nav>
+			<ul>
+				<li id="login">
+					<a id="login-trigger" href="#">
+							<%= current_user.email %> 
+					</a>
+					<div id="login-content">
+					<br> Reputation: <%= current_user.reputation_for(:karma).to_i %>
+					</div>                     
+				</li>
+				<li id="signup">
+						<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+				</li>
+			</ul>
+			</nav>
+		
+				
+				
+		
+			
+		
+		<% else %>
+		 <div class="signin">
+			<nav>
+			<ul>
+				<li id="login">
+					<a id="login-trigger" href="#">
+						Log in <span>▼</span>
+					</a>
+					<div id="login-content">
+						<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+							<div><%= f.label :email %><br />
+							<%= f.email_field :email %></div>
 
-	 <div class="signin">
-	 	<a href="/register">Sign up</a>  | 
+							<div><%= f.label :password %><br />
+							<%= f.password_field :password %></div>
+
+							<% if devise_mapping.rememberable? -%>
+								<div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+								<% end -%>
+								<div><%= f.submit "Sign in" %></div>
+						<% end %>
+					</div>                     
+				</li>
+				<li id="signup">
+					<a href="/register">Sign up FREE</a>
+				</li>
+			</ul>
+			</nav>
+		
+		<%end%>
+	 	<!-- ><a href="/register">Sign up</a>  | 
 		<div style="display:inline; font-size:12px; color: #eee; margin-right:1px;" class="icon-user"></div>
 		<a href="/login"> Sign In </a> 
+		-->
 	 </div>
 
 	 <div class="notifications">
@@ -101,7 +154,7 @@
 	   <p><div style="display:inline; font-size:12px;" class="icon-certificate"></div> earned profile badge</p>
 	 </div>
 
-	 <a href="/contact"><img src="assets/footerFeedbackIcon.png" style="float:left; position: absolute; top:8px; right:200px;"></a>
+
 
 
 	</div> <!-- End Header right -->
@@ -203,7 +256,7 @@
 
 	<div id="footer">
 	(c) 2012 KnowledgeThief - About - Terms - Privacy - Upload - Blog - Twitter - Facebook</div>
-
+ <a href="/contact"><img src="assets/footerFeedbackIcon.png" style="float:right; position:relative;"></a>
 	</div>
 
 </body>
