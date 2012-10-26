@@ -7,25 +7,31 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-user_email = "landontest@gmail.com"
-user_pass = "tester"
+#user_email = "landontest@gmail.com"
+#user_pass = "tester"
 
-user = User.create!(:email => user_email, 
-                    :password = user_pass, 
-                    :password_confirmation = user_pass)
+#user = User.create!(:email => user_email, 
+ #                   :password = user_pass, 
+ #                   :password_confirmation = user_pass)
 
 # Confirm the user for Devise
-user.confirm!
+# user.confirm!
 
-resource_title = "Harvard Computer Systems and Machine Organization Lectures"
-resource_description = "bla bla"
-resource_link = "http://google.com"
-resource_tag_list = "computer systems, machine organization, computer science"
+require 'open-uri'
+require 'active_record/fixtures'
 
-r = Resource.create!(:title => resource_title, 
-                     :description = resource_description, 
-                     :link = resource_link)
+#["Windows", "Linux", "Mac OS X"].each do |os|
+ # OperatingSystem.find_or_create_by_name(os)
+#end
 
-r.tag_list = tag_string
+Resource.delete_all
+open("http://atr.eng.utah.edu/~lwilkins/kt/seed_resources.txt") do |seed_resources|
+  seed_resources.read.each_line do |r|
+    title, link, description, tags = r.chomp.split("|")
+    temp_resource = Resource.create!(:title => title, :link => link, :description => description)
+    temp_resource.tag_list = tags
+    temp_resource.save!
+  end
+end
 
-r.save!
+#Fixtures.create_fixtures("#{Rails.root}/test/fixtures", "operating_systems")
