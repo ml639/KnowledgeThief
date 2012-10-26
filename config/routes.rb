@@ -6,11 +6,19 @@ Kt::Application.routes.draw do
   devise_for :users
 
   get "home/index"
-  
+  devise_scope :user do
+    get "/login" => "devise/sessions#new"
+    
+  end
+  devise_for :user, :path => '', :path_names => {:sign_up => "register" }
   
   get 'tags/:tag', to: 'resources#index', as: :tag
 
-  root to: 'home#index'
+  match 'contact' => 'contact#new', :as => 'contact', :via => :get
+  match 'contact' => 'contact#create', :as => 'contact', :via => :post
+
+
+  root to: 'home#index', :as => :home
 
 
   # The priority is based upon order of creation:

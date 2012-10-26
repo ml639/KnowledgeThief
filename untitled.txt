@@ -1,0 +1,5 @@
+I think the idea is interesting, but i'm still a little confused by what the overall project goal is. It's called a backend solution,  but it seems more like a fullstack solution. Are you guys offering webhosting and DB solutions? It sounds like a really cool idea, and I think if executed well, it could be a great project. I'm not sure how you will pay for such an app or even do a full scalability test of your application, since it seems like server costs could get expensive pretty fast. Cool idea though.
+
+I think a search by sketch system sounds like a really cool idea. I thought maybe you could use some more rehearsing on your presentation, since I thought the presentation didn't do a great job of conveying the awesomeness of the idea. 
+
+You guys mentioned that the solution would be scalable, I wanted to know a little more about that.

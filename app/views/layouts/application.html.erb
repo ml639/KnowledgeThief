@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width,user-scalable=no" />
     <title><%= content_for?(:title) ? yield(:title) : "Knowledge Thief" %></title>
     <%= csrf_meta_tags %>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -15,185 +15,223 @@
 
     <%= stylesheet_link_tag "application", :media => "all" %>
 
-    <!-- For third-generation iPad with high-resolution Retina display: -->
-    <!-- Size should be 144 x 144 pixels -->
-    <%= favicon_link_tag 'images/apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
-
-    <!-- For iPhone with high-resolution Retina display: -->
-    <!-- Size should be 114 x 114 pixels -->
-    <%= favicon_link_tag 'images/apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
-
-    <!-- For first- and second-generation iPad: -->
-    <!-- Size should be 72 x 72 pixels -->
-    <%= favicon_link_tag 'images/apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
-
-    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-    <!-- Size should be 57 x 57 pixels -->
-    <%= favicon_link_tag 'images/apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
-
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'images/favicon.ico', :rel => 'shortcut icon' %>
 </head>
 <body>
-	<div class="wrapper">
-		<div class="container">
-			<div class="navbar">
-				<div class="navbar-inner">
-					<div class="container">
-						<a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</a>
-						<a class="brand" <%= link_to "KnowledgeThief", "/"  %></a>
-						<div id="headerSentence">
-					        Knowledge should be free - and shared. This is where we make that happen. <span style="font-weight:600; color:white; ">Learn more</span> 
-					    </div>
-						<div class="nav-collapse">
-							
-			 				<!-- The drop down menu -->
-							<div><!-- Registration/Login Div -->
-								<ul class="nav pull-right">
-									<% if user_signed_in? %>
-										<%= current_user.email %> <br>( Reputation: <%= current_user.reputation_for(:karma).to_i %>)<br> Not you?
-			 							<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-									<% else %>
-										<li><%= link_to "Sign up", new_user_registration_path %> </li>
-										<li id="loginSeperator" style="margin-right:5px;margin-left:5px;">|</li>
-										<li class="drop down">
-										<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
-										<div class="dropdown-menu" data-no-collapse="true" style="padding: 15px; padding-bottom: 0px;">
-											<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-												<div><%= f.label :email %><br />
-												<%= f.email_field :email %></div>
 
-												<div><%= f.label :password %><br />
-												<%= f.password_field :password %></div>
+	<div id="wrapper">
 
-												<% if devise_mapping.rememberable? -%>
-													<div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-													<% end -%>
-													<div><%= f.submit "Sign in" %></div>
-											<% end %>	
-							            </div>
-									<% end %>
-										</li>
-								 </ul>
-							</div><!-- End Register/Login Div -->
-							<div style="clear:both;">
-						</div><!-- End of Nav Collapse -->
-						<div id="searchBar" class="span4">
-							<%= form_tag(resources_path, :method => "get") do %>
-						
-								<div id="searchText" class="span3">
-									<%= text_field_tag :tag,  params[:tag], :placeholder => "Search to learn anything" %>
-								</div>
-								<div id="searchButton" class ="span1">
-								    <%= submit_tag "Search", :name => nil %>
-								</div>
-						
-							<% end %>
-						</div><!-- End of SearchBar.-->
-						
-						</div><!-- End of Registration Div-->
-						<div id="navCollection">
-							<ul class="nav">	
-								<li id="navForums"><%= link_to "Forums", "/resources"  %></li>
-								<li id="navPaths"><%= link_to "Paths", "/resources"  %></li>
-								<li id="navResources"><%= link_to "Resources", resources_path  %></li>
-								<li id="navHome"><%= link_to "Home", "/"  %></li>
-							</ul>
-						</div>
-						
-					</div><!-- End of Container -->
-				</div><!--- End of navbar-inner-->
-			</div><!-- End of navbar-->
-			
-			
-			<!-- Sub Header -->
+	<!-- Header -->
 
-			<div id="subHeader">
+	<div id="header">
+		<div id="headerLeft"> <!-- Header left -->
 
-			<div id="rightSubHeader">
-			    <p>submit a resource</p> | <p>ask a question</p>
-			</div>
+			<div id="logo">
+	        	<a href="#"><img src="assets/KT_Logo.png" height="64px"></a>
+	        </div>
+			<div id="logoText">
+	        	<a href="/"><span style="font-weight:400">Knowledge</span> Thief</a>
+	        </div>
+	        <!-- 
+	        <div id="headerSentence">
+	            home .... resources paths forums 
+	    	</div> -->
+
+	<form accept-charset="utf8" action="/resources" method="get">
+		<div id="mainSearchWrapper">
+	    	<%= text_field_tag :tag,  params[:tag], :class =>"mainSearch", :placeholder => "Search to learn anything" %>
+	    <input type="image" src="assets/searchIcon.png" value=" " class="mainSubmit">
+	    </div>
+	</form>
 
 
-			<p class="breadCrumbs"> search > resonance structures <span style="color:#ccc;"> (all categories) </span> </p>
+	<div id="navCollection">
+		<div id="navForums">
+	    <a href="/" >
+	   		<p>Forums</p>
+	    	<img src="assets/forumsIcon.png" height="100%">
+	    </a>
+	    </div>
 
-			<div id="sort"> sort by: <p class="sortGreen">upvotes</p> | <p class="sortBlue">new</p> | <p class="sortRed">hot</p> 
-			</div>
+	    <div id="navPaths">
+	    <a href="/">
+	    	<p>Paths</p>
+	    	<img src="assets/pathsIcon.png" height="100%">
+	    </a>
+	    </div>
 
-			</div>  <!-- end Sub Header -->
+	    <div id="navResources">
+	    <a href="/resources">
+	    	<% if currentPath(resources_path) == "current" %>
+			<% @current = "<p class = '#{currentPath(resources_path)}' >" %>
+			<%=raw @current %>
+			<%else%>
+			<p>
+			<%end%>
+				Resources</p>
+	    	<img src="assets/resourcesIcon.png" height="100%">
+	    </a>
+	    </div>
 
-			<!--Start of Content -->
-			<div id="content" class="container">
-				<div class="row">
-					<div id="mainContent" class="span8">
-						<% flash.each do |name, msg| %>
-						  <% if msg.is_a?(String) %>
-						    <div class="alert alert-<%= name == :notice ? "success" : "error" %>" style="margin-top:5px;">
-						      <a class="close" data-dismiss="alert">&#215;</a>
-						      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-						    </div>
-						  <% end %>
-						<% end %>
-		 				<%= yield %>
-					</div><!-- End of span10 -->
-					<div id="rightColumn" class="span3">
-						<div class="rightColumnBox" class="span3">
-							<p class="rightColumnHeader">Submit a Resource</p>
-							<%= form_for(Resource.new) do |f| %>
-								<p class="rightColumnSubHeader">Title</p>
-							    <%= f.text_field :title, :placeholder => "Enter a title" %>
-								<p class="rightColumnSubHeader">Description</p>
-							    <%= f.text_area :description, :rows => "5", :placeholder => "Give a short description" %>
-								<p class="rightColumnSubHeader">Link</p>
-							    <%= f.text_field :link, :placeholder => "Paste link to resource" %>
-								<p class="rightColumnSubHeader">Tags</p>
-							    <%= f.text_field :tag_list, :placeholder => "Type at least 3 tags separated by commas" %>
-							    <%= f.submit :class => "sidebarButton" %>
-							<% end %>
-						</div>
-						<div class="rightColumnBox" class="span3">
-							<p class="rightColumnHeader">Ask a question</p>
-					    	<p class="rightColumnSubHeader">Question:</p>
-							<form>
-								<input type="text" placeholder="Ask the community">
-							</form>
-						<p class="rightColumnSubHeader">Tags</p>
-						<form name="rightInput" action="" method="get">
-							<input type="text" placeholder="Type at least 3 tags">
-							<input type="submit" value="submit" class="sidebarButton">
-						</form>
-					</div><!-- End of right ColumnBox -->
-				</div><!-- End of rightColumn -->
-					
-			</div><!-- end of content row-->
-		</div> <!-- end of content container -->
-			
-	</div><!-- End of Container-->
-	</div><!-- End of Wrapper -->
-	
-	<footer>
-		<div class="container">
-			(c) 2012 KnowledgeThief - About - Terms - Privacy - Upload - Blog - Twitter - Facebook
-      </div>
-    </footer>
-	
-	
+		<div id="navHome">
+	    <a href="/">
+	    	<% if currentPath(home_path) == "current" %>
+			<% @current = "<p class = '#{currentPath(home_path)}' >" %>
+			<%=raw @current %>
+			<%else%>
+			<p>
+			<%end%>
+			Home</p>
+	    	<img src="assets/homeIcon.png" height="100%">
+	    </a>
+	    </div>	   
+	</div>
+
+	</div>  <!-- End Header left -->
+
+	<div id="headerRight"> <!-- Header right -->
+
+	 <div class="signin">
+	 	<a href="/register">Sign up</a>  | 
+		<div style="display:inline; font-size:12px; color: #eee; margin-right:1px;" class="icon-user"></div>
+		<a href="/login"> Sign In </a> 
+	 </div>
+
+	 <div class="notifications">
+	   <p><div style="display:inline; font-size:12px;" class="icon-unlock"></div> unlocked new abilities</p>
+	   <p><div style="display:inline; font-size:12px;" class="icon-certificate"></div> earned profile badge</p>
+	 </div>
+
+	 <a href="/contact"><img src="assets/footerFeedbackIcon.png" style="float:left; position: absolute; top:8px; right:200px;"></a>
+
+
+	</div> <!-- End Header right -->
+
+	</div> <!-- End Header -->
+
+	<!-- Sub Header -->
+
+	<div id="subHeader">	
+
+		<div id="rightSubHeader">
+			<a href="#"><div style="display:inline; font-size:12px; margin-right:1px; color:#ccc;" class="icon-signin"></div> submit a resource</a> | <a href="#"><div style="display:inline; font-size:12px; margin-right:1px; color:#ccc;" class="icon-question-sign"></div> ask a question</a>
+		</div>
+
+
+		<p class="breadCrumbs">  </span> </p>
+
+		<div id="sort"> sort by: <a href="#" class="sortGreen">upvotes</a> | <a href="#" class="sortBlue">new</a> | <a href="#" class="sortRed">hot</a> 
+		</div>
+
+	</div>  <!-- end Sub Header -->
 
 
 
+	<!-- Center Column Main Content -->
+
+	<div id="contentWrapper">
+
+	<div id="leftColumn">
+
+	    <div class="resultWrapper"> <!-- result wrapper -->
+	        <div class="voteBox">
+	        <img src="assets/triangle.png" style="position:absolute; top:0; left:0;">
+	        87
+	        <img src="assets/bottomTriangle.png" style="position:absolute; bottom:0; left:0;">
+	        </div>
+	        <div class="resourceThumb">
+	         <a href="resourcePage.html"><img src="assets/Prof1.JPG"></a>
+	        </div>
+
+	        <div class="resourceCentralWrapper">
+	        <div class="resourceTitle">
+	        <a href="resourcePage.html">Resonance Structures intro</a> 
+	        </div>
+	        <div class="resourceDescription">
+	        A brief introduction on the organic semblance of resonance structures and their place within all organic chemistries wonderful journeys and bla blablfd dsbf lasdlasa bs f introduction on the organic semblance of resonance structures and their place within all organic chemistries wonderful journeys and...
+	        </div>
+
+	    <div class="subOptions">
+	    	<a href="#"><div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-share"></div> share</a>  <a href="#"> <div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-plus"></div> save</a>  <a href="#"><div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-wrench"></div> edit</a>  <a href="#"><div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-flag"></div> flag</a>
+	    </div>
+
+	 </div> <!-- end central wrapper -->
+
+	</div> <!-- end result wrapper -->
+
+		<div id="contentHeader">
+	       Featured resources 
+	    </div>
+
+	    <div id="postResults">
+
+	    </div>
+		<%= yield %>
 
 
-	
+	</div>
 
-    <!-- Javascripts
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "application" %>
 
-  </body>
+	<!-- Right Column -->
+
+	<div id="rightColumn">
+
+
+	    <div class="rightColumnBox">
+	    <p class="rightColumnHeader">
+	        Submit a Resource
+	    </p>
+
+	    <div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-link"></div>
+	    <p class="rightColumnSubHeader">Link </p>
+	    <div class="inputPadding">
+				    
+			<%= form_for(Resource.new) do |f| %>
+	        <%= f.text_field :link, :placeholder => "Paste link to resource" %>
+	        <div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-book"></div>
+	        <p class="rightColumnSubHeader" style="display:inline-block;">Title </p>
+	        <%= f.text_field :title, :placeholder => "Enter a title" %>
+
+	        <div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-info-sign"></div>
+	        <p class="rightColumnSubHeader" style="display:inline-block;">Description </p>
+	        <%= f.text_area :description, :rows => "5", :placeholder => "Give a short description" %>
+
+	        <div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-tags"></div>
+	        <p class="rightColumnSubHeader" style="display:inline-block;">Tags </p>
+	         <%= f.text_field :tag_list, :placeholder => "Type at least 3 tags" %>
+	        <%= f.submit :class => "submit" %>
+			<% end %>
+	    </div>
+
+	</div>
+
+
+	<div class="rightColumnBox">
+	    <p class="rightColumnHeader">Ask a question </p>
+	    <div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-question-sign"></div>
+	    <p class="rightColumnSubHeader">Question: </p>
+	    <form class="inputPadding">
+	        <input type="text" placeholder="Ask the community">
+	        <div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-tags"></div>
+	        <p class="rightColumnSubHeader">Tags</p>
+	        <input type="text" placeholder="Type at least 3 descriptive tags">
+	        <input type="submit" value="Ask" class="submit">
+	    </form>
+	</div>
+
+	</div>
+
+
+	<!-- Footer -->
+
+	</div> <!-- End Content Wrapper -->
+
+	<div id="footer">
+	(c) 2012 KnowledgeThief - About - Terms - Privacy - Upload - Blog - Twitter - Facebook</div>
+
+	</div>
+
+</body>
 </html>

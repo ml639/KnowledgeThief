@@ -4,36 +4,39 @@
     <%= submit_tag "Search", :name => nil %>
   </p>
 <% end %> -->
+ 
 <% if @resources.empty?%>
       <div id="postResults">
-    
     <p class="noResults">Sorry, we currently have no results for "<%= params[:tag] %>", you should contribute some!</p>
     
     </div>
 <% else %>
   <% @resources.each do |learningresources| %>
+
     <div class="resultWrapper"> <!-- result wrapper -->
         <div class="voteBox">
-	<% unless current_user %>
-	<div style="position:absolute; bottom:0; left:12px;height:15px;top:-25px;">
-	 <%= image_tag("triangle.png")%></div>
-	<% else %>
-	<%= link_to image_tag('triangle.png', :style => "position:absolute; top:0; left:12px;"), vote_resource_path(learningresources, type: "up"), method: "post" %>
-	<% end %>
-	<div id="resourceReputation" style="position:relative;left:8px;">
+				<% unless current_user %>
+				<div style="position:absolute; top:0; left:0;">
+				 <%= image_tag("triangle.png")%></div>
+				<% else %>
+				<%= link_to image_tag('triangle.png', :style => "position:absolute; top:0; left:0;"), vote_resource_path(learningresources, type: "up"), method: "post" %>
+				<% end %>
+				
+	<div class="resourceReputation">
         <%= learningresources.reputation_for(:votes).to_i %>
 	</div>
+	
 	<% unless current_user %>
-	<div style="position:absolute; bottom:0; left:12px;height: 15px; top: 25px;">
+	<div style="position:absolute; bottom:0; left:0;">
 		<%= image_tag("bottomTriangle.png")%></div>
 
 	<% else %>
-	<%= link_to image_tag('bottomTriangle.png', :style => "position:absolute; bottom:0; left:12px;"), vote_resource_path(learningresources, type: "down"), method: "post" %>
+	<%= link_to image_tag('bottomTriangle.png', :style => "position:absolute; bottom:0; left:0;"), vote_resource_path(learningresources, type: "down"), method: "post" %>
 	<% end %>        
 	</div>
         <div class="resourceThumb">
 		<% if learningresources.youtubeID.nil? %>
-			<%= link_to image_tag('thumbex.JPG'), "#" %>
+			<%= link_to image_tag('websiteHolder.png'), "#" %>
 		<% else %>
 			<img src ="<%=  learningresources.youtubeID %>"/>
 			
@@ -49,14 +52,16 @@
         <%= learningresources.description %>
         </div>
     
-    <div class="subOptions">
-    <a href="#">share</a>  <a href="#">save</a>  <a href="#">manage</a>  <a href="#">flag</a>
-    </div>
+    	<div class="subOptions">
+	    	<a href="#"><div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-share"></div> share</a>  <a href="#"> <div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-plus"></div> save</a>  <a href="#"><div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-wrench"></div> edit</a>  <a href="#"><div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-flag"></div> flag</a>
+	    </div>
     
  </div> <!-- end central wrapper -->
 
 </div> <!-- end result wrapper -->
  <% end %>
 <% end %>
-
+<p class="postResultsOptions">
+   Not finding what you're looking for? Consider contributing to the community and your honor score by submitting a link to an external resource <span style="font-weight:700; color:#333;"> Here. </span> Or, consider asking the community your question <span style="font-weight:700; color:#333;"> Here. </span>
+   </p>
 

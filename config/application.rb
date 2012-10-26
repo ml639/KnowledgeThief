@@ -58,5 +58,18 @@ module Kt
     config.assets.initialize_on_precompile = false
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :domain               => "knowledgethief.com",
+      :user_name            => "KT@knowledgethief.com",
+      :password             => "pass1234",
+      :authentication       => :plain,
+      :enable_starttls_auto => true
+    }
+
+    config.action_mailer.default_url_options = {
+      :host => "knowledgethief.com"
+    }
   end
 end

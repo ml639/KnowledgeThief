@@ -22,7 +22,6 @@ gem 'devise'
 # ActiveRecord Reputation System for voting and user reputation
 gem 'activerecord-reputation-system', require: 'reputation_system'
 
-gem 'twitter-bootstrap-rails'
 
 group :development do
    gem 'sqlite3'
