@@ -12,7 +12,7 @@ module ApplicationHelper
   end
   
   def currentPath(path)
-    "current" if current_page?(path)
+    "here" if current_page?(path)
   end
 end
 

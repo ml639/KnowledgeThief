@@ -4,7 +4,25 @@
     <%= submit_tag "Search", :name => nil %>
   </p>
 <% end %> -->
- 
+ <div id="showOnly">
+
+    	Show: 
+
+        <a href="#"> All</a> |
+
+        <a href="#">Questions</a> |  
+
+        <a href="#">Paths</a> | 
+
+        <a href="#" class="selected">Resources</a>
+
+    </div>
+
+    <div id="sort"> 
+
+        Sort by: <a href="#" class="selected">Upvotes</a> | <a href="#">New</a>
+
+    </div>
 <% if @resources.empty?%>
       <div id="postResults">
     <p class="noResults">Sorry, we currently have no results for "<%= params[:tag] %>", you should contribute some!</p>
@@ -13,55 +31,84 @@
 <% else %>
   <% @resources.each do |learningresources| %>
 
-    <div class="resultWrapper"> <!-- result wrapper -->
-        <div class="voteBox">
-				<% unless current_user %>
-				<div style="position:absolute; top:0; left:0;">
-				 <%= image_tag("triangle.png")%></div>
-				<% else %>
-				<%= link_to image_tag('triangle.png', :style => "position:absolute; top:0; left:0;"), vote_resource_path(learningresources, type: "up"), method: "post" %>
-				<% end %>
-				
-	<div class="resourceReputation">
-        <%= learningresources.reputation_for(:votes).to_i %>
-	</div>
-	
-	<% unless current_user %>
-	<div style="position:absolute; bottom:0; left:0;">
-		<%= image_tag("bottomTriangle.png")%></div>
+<!---------------------->
 
-	<% else %>
-	<%= link_to image_tag('bottomTriangle.png', :style => "position:absolute; bottom:0; left:0;"), vote_resource_path(learningresources, type: "down"), method: "post" %>
-	<% end %>        
-	</div>
-        <div class="resourceThumb">
-		<% if learningresources.youtubeID.nil? %>
-			<%= link_to image_tag('websiteHolder.png'), "#" %>
-		<% else %>
-			<img src ="<%=  learningresources.youtubeID %>"/>
-			
-		<% end %>
+
+<div class="resultWrapper" style="margin-left:20%"> <!-- result wrapper -->
+
+    <div class="resourceThumb">
+    
+        	<% if learningresources.youtubeID.nil? %>
+				<%= link_to image_tag('websiteHolder.png'), "#", :style => "margin:0;" %>
+			<% else %>
+				<img src ="<%=  learningresources.youtubeID %>"/>
+			<% end %>
+        
+    </div>
+    
+    <div class="voteBox">
+    
+        <p class="upvotes">
+        
+       <%= learningresources.reputation_for(:votes).to_i %>
+        
+        </p>
+                    
+        <a href="#"><img src="assets/topTriangle.png" style="position:absolute; bottom:22px; left:4px;"></a>
+        
+        <a href="#"><img src="assets/bottomTriangle.png" style="position:absolute; bottom:0; left:4px;"></a>
+    
+    </div> <!-- end voteBox -->
+    
+
+        <div class="resourceTitle">
+        		<% if learningresources.youtubeID.nil? %>
+					<%= link_to learningresources.title, learningresources.link, :target => "_blank", :class => "resourceViewer" %>
+				<% else %>
+				
+					<%= link_to learningresources.title, youtube_embed(learningresources.link), :target => "_blank", :class => "resourceViewer" %>
+				<% end %>
+			  
+            <div class="subInfo">
+        
+           
+            
+        </div>
+    
+            
         </div>
         
-        <div class="resourceCentralWrapper">
-        <div class="resourceTitle">
-        <%= link_to learningresources.title, learningresources.link, :target => "_blank" %><br />
+        
+        <div class="resourceTags">
+        
+			<a href="#">resonance structures, organic chemistry 2, cellular biology</a> 
+            
         </div>
-    
+        
         <div class="resourceDescription">
-        <%= learningresources.description %>
+        
+           <%= learningresources.description %>
+            
         </div>
+        <div class="postedBy">
     
-    	<div class="subOptions">
-	    	<a href="#"><div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-share"></div> share</a>  <a href="#"> <div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-plus"></div> save</a>  <a href="#"><div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-wrench"></div> edit</a>  <a href="#"><div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-flag"></div> flag</a>
-	    </div>
-    
- </div> <!-- end central wrapper -->
+    		linked by <a href="#" class="userName">Professor Jenkins</a>
+            
+            <p class="timeAgo">
+            
+            	1 week ago
+            
+            </p>
+        		<div class="subOptions">
+			    	<a href="#"><div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-share"></div> share</a>  <a href="#"> <div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-plus"></div> save</a>  <a href="#"><div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-wrench"></div> edit</a>  <a href="#"><div style="display:inline; font-size:12px; color: #1FBF39; margin-right:1px;" class="icon-flag"></div> flag</a>
+			    </div>
+   		</div>
 
 </div> <!-- end result wrapper -->
+
+
+
  <% end %>
 <% end %>
-<p class="postResultsOptions">
-   Not finding what you're looking for? Consider contributing to the community and your honor score by submitting a link to an external resource <span style="font-weight:700; color:#333;"> Here. </span> Or, consider asking the community your question <span style="font-weight:700; color:#333;"> Here. </span>
-   </p>
+
 

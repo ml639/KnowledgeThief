@@ -1,10 +1,13 @@
 Kt::Application.routes.draw do
  
+
+
   resources :resources do
       member { post :vote }
     end
   devise_for :users
 
+  resources :learningPaths
   get "home/index"
   devise_scope :user do
     get "/login" => "devise/sessions#new"
@@ -16,8 +19,8 @@ Kt::Application.routes.draw do
 
   match 'contact' => 'contact#new', :as => 'contact', :via => :get
   match 'contact' => 'contact#create', :as => 'contact', :via => :post
-
-
+  match '/forums' => 'forums#index'
+  
   root to: 'home#index', :as => :home
 
 
