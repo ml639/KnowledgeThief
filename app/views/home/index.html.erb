@@ -1,3 +1,93 @@
+	
+	<div id="contentOptions">
+
+	    <div id="showOnly">
+
+	    	Show: 
+
+	        <a href="#"> All</a> |
+
+	        <a href="#">Questions</a> |  
+
+	        <a href="#">Paths</a> | 
+
+	        <a href="#" class="selected">Resources</a>
+
+	    </div>
+
+	    <div id="sort"> 
+
+	        Sort by: <a href="#" class="selected">Upvotes</a> | <a href="#">New</a>
+
+	    </div>
+
+	</div> <!-- end contentOptions -->
+
+		<div id="contentHeader" style="border-bottom:none; text-align:center;">
+
+	    	Welcome to <span style="robotoRegular; font-size:24px; color:#C66F58;">Knowledge Thief</span> - the hub of the web's best <span style="robotoRegular; font-size:24px; color:#C66F58;">free</span> learning content for any topic.<br>
+
+	    </div>
+
+	    <div id="contentSubHeader" style="text-align:center;">
+
+	        Search for help in any class. View the resource. Rate it. Enjoy learning from the best.<br><br>
+
+
+	        <a href="#" style="font-size:15px;">Tell me more</a> <br><br>
+
+	    </div>
+
+
+	    <div id="homeDash">
+
+	    	<div id="dashFarLeft">
+
+	    	<a href="#" class="homeDashSelected">Recently<br> viewed</a><br>
+
+	        </div>
+
+	        <div id="dashLeft">
+
+	        <a href="#" style="color:#5F9367; font-size:24px; font-family:robotoLight; line-height:1.28">Questions<br> to answer</a><br>
+
+	        <a href="#" style="padding-top:2px;; font-family:robotoMedium; text-transform:lowercase; color:#AF5D41; font-size:13px; border-bottom:none; margin-top:4px;">Customize</a>
+
+	        </div>
+
+	        <div id="dashRight">
+
+	        <a href="#" style="color:#5F9367; font-size:24px; font-family:robotoLight; line-height:1.28">Recommended<br> for you</a><br>     
+
+	        <a href="#" style="padding-top:2px;; font-family:robotoMedium; text-transform:lowercase; color:#AF5D41; font-size:13px; border-bottom:none; margin-top:4px;"">Customize</a>   
+
+	        </div>
+
+	        <div id="dashFarRight">
+
+
+	        <a href="#" style="color:#5F9367; font-size:24px; font-family:robotoLight; line-height:1.28">Popular<br> resources</a><br>
+
+	        <a href="#" style="padding-top:2px;; font-family:robotoMedium; text-transform:lowercase; color:#AF5D41; font-size:13px; border-bottom:none; margin-top:4px;"">Customize</a>
+
+	        </div>
+
+	    </div>
+
+
+
+
+	    <div id="contentHeader">
+
+	        Recently viewed 
+
+	        <!-- <div id="contentSubHeader">
+
+	    		<a href="#">Customize</a> 
+
+	    	</div> -->
+
+	    </div>
 		<% if @resources.empty?%>
 		      <div id="postResults">
 		    <p class="noResults">Sorry, we currently have no results for "<%= params[:tag] %>", you should contribute some!</p>
