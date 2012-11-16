@@ -11,6 +11,9 @@
 	color:#619E6D;
 	color:#5F9367;
 }
+html,body{
+	height:100%;
+}
 
 a, img {
     border:none;
@@ -22,13 +25,17 @@ a, img {
 	
 	
 }
-
+#frameHolder{
+	overflow:hidden;
+	height:100%;
+	display:none;
+	padding-top:60px;
+}
 #wrapper{
 	position:relative;
 	overflow:auto;
 	min-width:768px;
 	height:100%;
-	min-height:900px;
 }
 
 /* start header */
@@ -321,7 +328,6 @@ input{
 #contentWrapper{
 position:relative;
 width: 100%;
-padding-top:60px;
 }
 
 
@@ -332,6 +338,7 @@ padding-top:60px;
 margin: 0 auto;
 width:663px;
 min-height:900px;
+padding-top:60px;
 }
 
 #homeDash{
