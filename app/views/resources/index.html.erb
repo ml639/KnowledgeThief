@@ -1,4 +1,27 @@
 
+<div id="contentOptions">
+
+    <div id="showOnly">
+
+    	Show: 
+
+        <a href="#"> All</a> |
+
+        <a href="#">Questions</a> |  
+
+        <a href="#">Paths</a> | 
+
+        <a href="#" class="selected">Resources</a>
+
+    </div>
+
+    <div id="sort"> 
+
+        Sort by: <a href="#" class="selected">Upvotes</a> | <a href="#">New</a>
+
+    </div>
+
+</div> <!-- end contentOptions -->
 <% if @resources.empty?%>
       <div id="postResults">
     <p class="noResults">Sorry, we currently have no results for "<%= params[:tag] %>", you should contribute some!</p>
