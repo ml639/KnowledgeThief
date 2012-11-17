@@ -29,6 +29,7 @@ a, img {
 	overflow:hidden;
 	height:100%;
 	display:none;
+	padding-top:60px;
 }
 #wrapper{
 	position:relative;
