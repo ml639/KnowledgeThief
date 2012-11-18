@@ -23,10 +23,15 @@ var ResourceView = function(){
 		   {"top": "-1000px"},"slow");
 		theIframe2.parentNode.removeChild(theIframe2);    	
 	};
+	
+	comments = function(){
+		$('.slide-out-div').fadeIn("slow");
+	}
 
 	return{
 		init : init,
-		remove : remove
+		remove : remove,
+		comments : comments
 	}
 };
 
@@ -35,8 +40,8 @@ $(function(){
 	$('.resourceViewer').click(function(){
 		var link = jQuery(this);
 		var link_href = link.attr('href');
-		
-	    rView.init(link_href)
+	    rView.init(link_href);
+		rView.comments();
 		return false
 	});
 	$('#home_Button').click(function(){
@@ -46,5 +51,6 @@ $(function(){
 		$("#resourceViewMenu").animate(
 			   {"top": "-50px"},"slow");
 		$("#resourceViewMenu").fadeOut();
+		$('.slide-out-div').fadeOut("slow");
 	});
 });

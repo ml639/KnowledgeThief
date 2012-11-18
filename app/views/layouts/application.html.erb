@@ -40,7 +40,7 @@
 	
 	    <div id="logoText">
 			<a href="/" style="margin-top:2px;"><img src="assets/KT_Logo.png" height="40px"></a>
-	        <a href="/" style="font-family:robotoRegular, Helvetica, Arial, sans-serif; color:#fff;margin-left:35px;">k<span style="font-family: robotoRegular, helvetica, arial, sans-serif; color:#fff; font-size:35px;">t</span></a>
+	        <a href="/" style="font-family:robotoRegular, Helvetica, Arial, sans-serif; color:#fff;margin-left:30px;margin-top:13px;font-size:20px">KnowledgeThief</a>
 
 	    </div>
 
@@ -59,26 +59,26 @@
 
 
 
-				<div id="resourceViewMenu" style="display:none;position:relative;top:-50px;">
+				<div id="resourceViewMenu" style="display:none;position:relative;top:-50px;left:20px;">
 	            <a href="/"><img src="assets/circleThumbsDown.png" height="30px" style="position:relative; display:inline-block; float:left; margin-left:-60px; margin-top:-29px;" /></a>
 
 	            <a href="/"><img src="assets/circle_thumbsUp.png" height="30px" style="position:relative; display:inline-block; float:left; margin-left:-100px; margin-top:-29px;" /></a>
 
-	            <a href="#"><img src="assets/circleHome.png" id="home_Button" height="30px" style="position:relative; display:inline-block; float:left; margin-left:-140px; margin-top:-29px;" /></a>
+	            <a href="#"><img src="assets/circleBack.png" id="home_Button" height="30px" style="position:relative; display:inline-block; float:left; margin-left:-140px; margin-top:-29px;" /></a>
 
 				</div>
 
-				
+				<div id="resourceAddMenu" style="position:relative;right:15px;">
 				<a class="modalPopup" href="#modalAskQuestion"><img src="assets/circleQuestion.png" height="30px" style="position:relative; display:inline-block; float:right; margin-right:-60px; margin-top:-29px;" /></a>
-			
+				
 
 			
-				<a href="#"><img src="assets/circlePath.png" height="30px" style="position:relative; display:inline-block; float:right; margin-right:-100px; margin-top:-29px;" /></a>
+				<a class="modalPopup" href="#modalAddPath"><img src="assets/circlePath.png" height="30px" style="position:relative; display:inline-block; float:right; margin-right:-100px; margin-top:-29px;" /></a>
 				
 					
-				<a class="modalPopup" href="#modalAddResource"><img src="assets/circleResource.png" height="30px" style="position:relative; display:inline-block; float:right; margin-right:-140px; margin-top:-29px;" /></a>
-	    	</div> <!-- end mainSearchWrapper -->
-
+				<a class="modalPopup" href="#modalAddResource"><img src="assets/circleResource.png" height="31px" style="position:relative; display:inline-block; float:right; margin-right:-140px; margin-top:-29px;" /></a>
+	    	</div> 
+				</div><!-- end mainSearchWrapper -->
 
 
 	<div id="headerRight"> <!-- Header right -->
@@ -114,14 +114,31 @@
 							<%= f.password_field :password %></div>
 
 							<% if devise_mapping.rememberable? -%>
-								<div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+								<div id="rememberMeCheckbox"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
 								<% end -%>
 								<div><%= f.submit "Sign in" %></div>
 						<% end %>
 					</div>                     
 				</li>
-				<li id="signup">
-					<a href="/register">Sign Up</a>
+				<li id="register" style="margin-left:1px;">
+					<a id="register-trigger" href="#">
+						Sign Up
+					</a>
+					<div id="register-content">
+						<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+						  <%= devise_error_messages! %>
+
+						  <div><%= f.label :email %><br />
+						  <%= f.email_field :email %></div>
+
+						  <div><%= f.label :password %><br />
+						  <%= f.password_field :password %></div>
+
+						  <div><%= f.label :password_confirmation %><br />
+						  <%= f.password_field :password_confirmation %></div>
+						
+						  <div style="margin-top:5px;"><%= f.submit "Sign up" %></div>
+						<%end%>
 				</li>
 			</ul>
 			</nav>
@@ -180,13 +197,11 @@
 	
 		
 		</div> <!-- end contentWrapper -->
-		</div> <!-- end wrapper -->
+	</div> <!-- end wrapper -->
+</div>
 
-
-
-		</div>
-
-<div id="modalAddResource" style="display:none;">
+<!-- Miscellaneous HTML    -->
+<div class="modalForm" id="modalAddResource" style="display:none;">
 	      <h2>  Submit a Resource</h2>
 
 	    
@@ -212,7 +227,22 @@
 			<% end %>
 
 </div>
-<div id="modalAskQuestion" style="display:none; margin-left:25%;margin-right:25%;margin-top:25%">
+</div>
+<div class="modalForm" id="modalAskQuestion" style="display:none; margin-left:25%;margin-right:25%;margin-top:25%">
+	<h2>Ask a question </h2>
+		<div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-question-sign"></div>
+        <p class="rightColumnSubHeader" style="display:inline-block;">Question </p>
+
+		<form class="inputPadding">
+	        <input type="text" placeholder="Ask the community"><br>
+			<div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-tags"></div>
+	        <p class="rightColumnSubHeader" style="display:inline-block;">Tags </p><br>
+
+	        <input type="text" placeholder="Type at least 3 descriptive tags">
+	        <input type="submit" value="Ask" class="submit">
+	    </form>
+</div>
+<div class="modalForm" id="modalAddPath" style="display:none; margin-left:25%;margin-right:25%;margin-top:25%">
 	<h2>Ask a question </h2>
 		<div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-question-sign"></div>
         <p class="rightColumnSubHeader" style="display:inline-block;">Question </p>
@@ -227,5 +257,11 @@
 	    </form>
 </div>
 
+<div class="slide-out-div" style="display:none;">
+    <a class="handle" href="http://link-for-non-js-users">Content</a>
+    <h1>Comments</h1>
+    <p>This is a comment
+	</p>
+</div>
 	</body>
 	</html>
