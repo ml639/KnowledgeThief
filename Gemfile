@@ -25,6 +25,8 @@ gem 'activerecord-reputation-system', require: 'reputation_system'
 
 group :development do
    gem 'sqlite3'
+   gem 'rspec-rails', '~> 2.0', :group => :test
+   gem 'simplecov', :require => false, :group => :test
 end
 
 # Gems used only for assets and not required

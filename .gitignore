@@ -13,3 +13,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore Gemfile.lock so you install gems
+Gemfile.lock
+
+# Ignore coverage directory (should be generated when you run tests)
+coverage/
