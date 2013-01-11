@@ -27,6 +27,13 @@ group :development do
    gem 'sqlite3'
    gem 'rspec-rails', '~> 2.0', :group => :test
    gem 'simplecov', :require => false, :group => :test
+   gem 'capybara', :group => :test
+   gem 'rb-inotify'
+   gem 'libnotify'
+   gem 'guard'
+   gem 'guard-rspec'
+   gem 'guard-spork'
+   gem 'spork'
 end
 
 # Gems used only for assets and not required

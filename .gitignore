@@ -13,6 +13,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+*.swp
+*~
+bundler_stubs/
 
 # Ignore Gemfile.lock so you install gems
 Gemfile.lock
