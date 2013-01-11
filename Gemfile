@@ -2,9 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.7'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem "pg"
 
 # For Ubuntu to be happy
@@ -25,15 +22,21 @@ gem 'activerecord-reputation-system', require: 'reputation_system'
 
 group :development do
    gem 'sqlite3'
-   gem 'rspec-rails', '~> 2.0', :group => :test
-   gem 'simplecov', :require => false, :group => :test
-   gem 'capybara', :group => :test
    gem 'rb-inotify'
    gem 'libnotify'
    gem 'guard'
    gem 'guard-rspec'
    gem 'guard-spork'
    gem 'spork'
+end
+
+group :development, :test do
+   gem 'rspec-rails', '~> 2.0'
+   gem 'simplecov', :require => false
+   gem 'capybara'
+   # To use debugger
+   gem 'debugger'
+   gem 'pry'
 end
 
 # Gems used only for assets and not required
@@ -61,5 +64,3 @@ gem 'jquery-rails'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-# gem 'debugger'
