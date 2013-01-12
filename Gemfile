@@ -24,18 +24,25 @@ group :development do
    gem 'sqlite3'
    gem 'rb-inotify'
    gem 'libnotify'
+
+   # Guard allows for monitoring file changes and reloading spec's
    gem 'guard'
    gem 'guard-rspec'
+   # Spork is a rspec speed improving gem
    gem 'guard-spork'
    gem 'spork'
 end
 
 group :development, :test do
+   # RSPEC is a testing framework for rails
    gem 'rspec-rails', '~> 2.0'
+   # Simplecov is a code coverage generator that works with RSPEC
    gem 'simplecov', :require => false
+   # Capybara allows for integration testing with RSPEC along with Selenium UI testing 
    gem 'capybara'
-   # To use debugger
+   # Debugger helps with debugging rails applications
    gem 'debugger'
+   # Pry allows for an alternative IRB terminal and a lot of debugging functionality
    gem 'pry'
 end
 
