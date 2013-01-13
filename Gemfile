@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Updated to 3.2.11 for security
+# Updating to 3.2.11 for security soon
 gem 'rails', '3.2.11'
 
 gem "pg"
@@ -23,8 +23,13 @@ gem 'activerecord-reputation-system', require: 'reputation_system'
 
 group :development do
    gem 'sqlite3'
-   gem 'rb-inotify'
-   gem 'libnotify'
+   gem 'rb-inotify', :require => false
+   gem 'rb-fsevent', :require => false
+   gem 'rb-fchange', :require => false
+
+   gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
+   gem 'growl' if /darwin/ =~ RUBY_PLATFORM
+
 
    # Guard allows for monitoring file changes and reloading spec's
    gem 'guard'
