@@ -6,5 +6,8 @@ class HomeController < ApplicationController
         @resources = Resource.find_with_reputation(:votes, :all, :limit => 10, order: "votes desc")
       end
       @resource = Resource.new
+      
+      # @resources = (find recent)
+      # @resources = (find recommended)
   end
 end
