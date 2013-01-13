@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.7'
+# Updated to 3.2.11 for security
+gem 'rails', '3.2.11'
 
 gem "pg"
 
