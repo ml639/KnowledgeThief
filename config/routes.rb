@@ -6,7 +6,7 @@ Kt::Application.routes.draw do
       member { post :vote }
     end
   devise_for :users
-
+  resources :userResourceView
   resources :learningPaths
   get "home/index"
   devise_scope :user do

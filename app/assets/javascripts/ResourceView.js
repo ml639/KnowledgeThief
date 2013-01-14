@@ -1,6 +1,8 @@
 var ResourceView = function(){
 	 var theIframe2 = document.createElement("iframe");
-	init = function(url){
+	 var resource_id = 0;
+	init = function(url,new_resource_id){
+		resource_id = new_resource_id;
 		theIframe2.setAttribute("id", "main-iframe2");
 		theIframe2.setAttribute("src", url);
 		theIframe2.style.width = "100%";
@@ -27,11 +29,58 @@ var ResourceView = function(){
 	comments = function(){
 		$('.slide-out-div').fadeIn("slow");
 	}
-
+	logUser = function(new_resource_id){
+		$.ajax({
+			type: "post",
+			url: "userResourceView",
+			data: {
+				resource_id : new_resource_id
+			},
+			dataType: "json",
+			// Define request handlers.
+			success: function( objResponse ){
+				// Check to see if request was successful.
+				if (objResponse.success){
+				} else {
+				}
+			},
+			error: function( objRequest, strError ){
+				alert("Please login or create an account to vote");
+			}
+		});
+	}
+	vote = function(vote){
+		$.ajax({
+			type: "post",
+			url: "resources/"+resource_id +"/vote",
+			data: {
+				type : vote
+			},
+			dataType: "json",
+			// Define request handlers.
+			success: function( objResponse ){
+				// Check to see if request was successful.
+				if (objResponse.success){
+					if(vote === 'up'){
+						$('.upvote_image').attr('src',"/assets/circle_thumbsUp_here.png");
+					}else{
+						$('.downvote_image').attr('src',"/assets/circle_thumbsDown_here.png");
+					}
+				} else {
+					alert("sucess1");
+				}
+			},
+			error: function( objRequest, strError ){
+				alert("Please login or create an account to vote");
+			}
+		});
+	}
 	return{
 		init : init,
 		remove : remove,
-		comments : comments
+		comments : comments,
+		vote : vote,
+		logUser : logUser
 	}
 };
 
@@ -40,8 +89,10 @@ $(function(){
 	$('.resourceViewer').click(function(){
 		var link = jQuery(this);
 		var link_href = link.attr('href');
-	    rView.init(link_href);
+		var resource_id = link.attr('value');
+	    rView.init(link_href, resource_id);
 		rView.comments();
+		rView.logUser(resource_id);
 		return false
 	});
 	$('#home_Button').click(function(){
@@ -52,5 +103,12 @@ $(function(){
 			   {"top": "-50px"},"slow");
 		$("#resourceViewMenu").fadeOut();
 		$('.slide-out-div').fadeOut("slow");
+	});
+	
+	$(".ajaxUpvote").click(function(){
+		rView.vote('up');
+	});
+	$(".ajaxDownvote").click(function(){
+		rView.vote('down');
 	});
 });
