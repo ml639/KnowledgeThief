@@ -1,0 +1,2 @@
+class UserResourceViewController < ApplicationController
+end

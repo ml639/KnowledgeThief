@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Updating to 3.2.11 for security soon
+# Rails 3.2.11 
 gem 'rails', '3.2.11'
 
 gem "pg"
@@ -20,20 +20,26 @@ gem 'devise'
 # ActiveRecord Reputation System for voting and user reputation
 gem 'activerecord-reputation-system', require: 'reputation_system'
 
+# Audited gem in order to track activity
+gem "audited-activerecord", "~> 3.0"
+
 
 group :development do
    gem 'sqlite3'
+   
+   # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false
    gem 'rb-fsevent', :require => false
    gem 'rb-fchange', :require => false
-
+   
+   # Similiarly, the following two gems together ensure functionality for both Linux and Mac (respectively)
    gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
    gem 'growl' if /darwin/ =~ RUBY_PLATFORM
-
 
    # Guard allows for monitoring file changes and reloading spec's
    gem 'guard'
    gem 'guard-rspec'
+   
    # Spork is a rspec speed improving gem
    gem 'guard-spork'
    gem 'spork'

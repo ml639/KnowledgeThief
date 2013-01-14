@@ -190,7 +190,7 @@
 <div id="contentColumn">
 
 
-		<%= yield %>
+		<%= yield.dup.force_encoding(Encoding::UTF_8) %>
 
 	
 		
