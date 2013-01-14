@@ -50,25 +50,19 @@
 
 
 	        <div id="mainSearchWrapper">
-
 	           	<form accept-charset="utf8" action="/resources" method="get">
 						<div id="mainSearchWrapper">
 					    	<%= text_field_tag :tag,  params[:tag], :class =>"mainSearch", :placeholder => "I want to learn..." %>
 					    <input type="image" src="assets/searchIcon.png" value=" " class="mainSubmit">
 					    </div>
 					</form>
-			
-
-
-
 
 				<div id="resourceViewMenu" style="display:none;position:relative;top:-50px;left:20px;">
-	            <a href="/"><img src="assets/circleThumbsDown.png" height="30px" style="position:relative; display:inline-block; float:left; margin-left:-60px; margin-top:-29px;" /></a>
+	            <a href="#" class="ajaxDownvote"><img class="downvote_image" src="assets/circleThumbsDown.png" height="30px" style="position:relative; display:inline-block; float:left; margin-left:-60px; margin-top:-29px;" /></a>
 
-	            <a href="/"><img src="assets/circle_thumbsUp.png" height="30px" style="position:relative; display:inline-block; float:left; margin-left:-100px; margin-top:-29px;" /></a>
+	            <a href="#" class="ajaxUpvote"><img class="upvote_image" src="assets/circle_thumbsUp.png" height="30px" style="position:relative; display:inline-block; float:left; margin-left:-100px; margin-top:-29px;" /></a>
 
 	            <a href="#"><img src="assets/circleBack.png" id="home_Button" height="30px" style="position:relative; display:inline-block; float:left; margin-left:-140px; margin-top:-29px;" /></a>
-
 				</div>
 
 				<div id="resourceAddMenu" style="position:relative;right:15px;">

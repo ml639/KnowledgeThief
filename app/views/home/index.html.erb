@@ -100,7 +100,7 @@
 
 
 		<div class="resultWrapper" style="margin-left:20%"> <!-- result wrapper -->
-
+			
 		    <div class="resourceThumb">
 
 		        	<% if learningresources.youtubeID.nil? %>
@@ -122,13 +122,13 @@
 					<% unless current_user %>
 					 	<%= image_tag("topTriangle.png", :style => "position:absolute; bottom:22px; left:4px;")%>
 					<% else %>
-					<%= link_to image_tag('topTriangle.png', :style => "position:absolute; bottom:22px; left:4px;"), vote_resource_path(learningresources, type: "up"), method: "post" %>
+					<%= link_to image_tag('topTriangle.png', :style => "position:absolute; bottom:22px; left:4px;"), vote_resource_path(learningresources, type: "up"), method: "post", :value => learningresources.id %>
 					<% end %>
 		       
 					<% unless current_user %>
 							<%= image_tag("bottomTriangle.png", :style => "position:absolute; bottom:0; left:4px;")%>
 						<% else %>
-						<%= link_to image_tag('bottomTriangle.png', :style => "position:absolute; bottom:0; left:4px;"), vote_resource_path(learningresources, type: "down"), method: "post" %>
+						<%= link_to image_tag('bottomTriangle.png', :style => "position:absolute; bottom:0; left:4px;"), vote_resource_path(learningresources, type: "down"), method: "post"%>
 						<% end %>
 
 		    </div> <!-- end voteBox -->
@@ -136,10 +136,10 @@
 
 		        <div class="resourceTitle">
 		        		<% if learningresources.youtubeID.nil? %>
-							<%= link_to learningresources.title, learningresources.link, :target => "_blank", :class => "resourceViewer" %>
+							<%= link_to learningresources.title, learningresources.link, :target => "_blank", :class => "resourceViewer", :value => learningresources.id  %>
 						<% else %>
 
-							<%= link_to learningresources.title, youtube_embed(learningresources.link), :target => "_blank", :class => "resourceViewer" %>
+							<%= link_to learningresources.title, youtube_embed(learningresources.link), :target => "_blank", :class => "resourceViewer", :value => learningresources.id  %>
 						<% end %>
 
 		            <div class="subInfo">
