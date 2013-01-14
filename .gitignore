@@ -18,7 +18,7 @@
 bundler_stubs/
 
 # Ignore Gemfile.lock so you install gems
-Gemfile.lock
+#Gemfile.lock
 
 # Ignore coverage directory (should be generated when you run tests)
 coverage/
