@@ -29,6 +29,26 @@ var ResourceView = function(){
 	comments = function(){
 		$('.slide-out-div').fadeIn("slow");
 	}
+	logUser = function(new_resource_id){
+		$.ajax({
+			type: "post",
+			url: "userResourceView",
+			data: {
+				resource_id : new_resource_id
+			},
+			dataType: "json",
+			// Define request handlers.
+			success: function( objResponse ){
+				// Check to see if request was successful.
+				if (objResponse.success){
+				} else {
+				}
+			},
+			error: function( objRequest, strError ){
+				alert("Please login or create an account to vote");
+			}
+		});
+	}
 	vote = function(vote){
 		$.ajax({
 			type: "post",
@@ -72,7 +92,7 @@ $(function(){
 		var resource_id = link.attr('value');
 	    rView.init(link_href, resource_id);
 		rView.comments();
-		rView.logUser();
+		rView.logUser(resource_id);
 		return false
 	});
 	$('#home_Button').click(function(){

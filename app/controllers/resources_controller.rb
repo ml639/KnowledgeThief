@@ -7,6 +7,7 @@ class ResourcesController < ApplicationController
     end
     @resource = Resource.new
   end
+  
   def create
     params[:resource][:user_id] = current_user.id
     @resource = Resource.new(params[:resource])
