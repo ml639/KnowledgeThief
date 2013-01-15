@@ -11,10 +11,15 @@ class HomeController < ApplicationController
       
       @resource = Resource.new
       
-      # @resources = Popular resources
-      @resources = Resource.find_with_reputation(:votes, :all, :limit => 10, order: "votes desc")
-      
-      # @resources = Recent resources (pending User Activity gem)
+      if current_user && params[:selection_type] && params[:selection_type] == "recent"
+        # @resources = Recent resources (pending User Activity gem)
+        @resources = current_user.recently_viewed_resources
+        @select_type = "Recent"
+      else
+        # @resources = Popular resources
+        @resources = Resource.find_with_reputation(:votes, :all, :limit => 10, order: "votes desc")
+        @select_type = "Popular"
+      end
       
       # @resources = Recommended resources (pending User Activity gem)
   end

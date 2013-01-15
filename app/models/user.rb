@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :resources
-
+  has_many :resource_views, :class_name => 'UserResourceView'
+  has_many :viewed_resources, :through => :resource_views, :source => :resource
+  
   has_many :evaluations, class_name: "RSEvaluation", as: :source
 
   has_reputation :votes, source: {reputation: :votes, of: :resources}, aggregated_by: :sum
@@ -10,6 +12,10 @@ class User < ActiveRecord::Base
 
   def voted_for?(resource)
     evaluations.where(target_type: resource.class, target_id: resource.id).present?
+  end
+  
+  def recently_viewed_resources
+    viewed_resources.order('user_resource_views.created_at DESC')
   end
 
 
