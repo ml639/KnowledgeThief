@@ -17,8 +17,12 @@
 *~
 bundler_stubs/
 
-# Ignore Gemfile.lock so you install gems
-#Gemfile.lock
+# Ignore Gemfile.lock so you install gems (breaks Heroku, don't do this)
+# Gemfile.lock
 
 # Ignore coverage directory (should be generated when you run tests)
 coverage/
+
+# Ignore sublime text project stuff
+kt.sublime*
+*.TODO
