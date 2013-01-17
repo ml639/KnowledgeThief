@@ -1,5 +1,6 @@
 class Resource < ActiveRecord::Base
   belongs_to :user
+  has_many :resource_views, :class_name => 'UserResourceView'
 
   has_reputation :votes, source: :user, aggregated_by: :sum
 

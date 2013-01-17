@@ -43,13 +43,13 @@
 
 	    	<div id="dashFarLeft">
 
-	    	<a href="#" class="homeDashSelected">Popular</a><br>
+	    	<%= link_to "Popular", home_index_path(:selection_type => "popular"),  :class => "homeDashSelected"%><br>
 
 	        </div>
 
 	        <div id="dashLeft">
 
-	        <a href="#" style="color:#5F9367; font-size:24px; font-family:robotoLight; line-height:1.28">Recent</a><br>
+	        <%= link_to "Recent", home_index_path(:selection_type => "recent"),  :style => "color:#5F9367; font-size:24px; font-family:robotoLight; line-height:1.28" %><br>
 
 	        <a href="#" style="padding-top:2px;; font-family:robotoMedium; text-transform:lowercase; color:#AF5D41; font-size:13px; border-bottom:none; margin-top:4px;">Customize</a>
 
@@ -79,7 +79,7 @@
 
 	    <div id="contentHeader">
 
-	        Popular 
+	        <%= @select_type %> 
 
 	        <!-- <div id="contentSubHeader">
 
