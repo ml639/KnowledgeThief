@@ -23,6 +23,8 @@ gem 'activerecord-reputation-system', require: 'reputation_system'
 # Audited gem in order to track activity
 gem "audited-activerecord", "~> 3.0"
 
+# Tire gem for using ElasticSearch for fulltext search
+gem "tire"
 
 group :development do
    gem 'sqlite3'
