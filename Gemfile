@@ -26,6 +26,9 @@ gem "audited-activerecord", "~> 3.0"
 # Tire gem for using ElasticSearch for fulltext search
 gem "tire"
 
+# Pagination gem for creating dynamic pages on the go for a better user experience
+gem 'will_paginate'
+
 group :development do
    gem 'sqlite3'
    

@@ -1,10 +1,10 @@
 class ResourcesController < ApplicationController
   def index
-    if params[:tag] && params[:tag] != ""
-      @resources = Resource.tagged_with(params[:tag]).find_with_reputation(:votes, :all, order: "votes desc")
-    else
-      @resources = Resource.find_with_reputation(:votes, :all, :limit => 10, order: "votes desc")
-    end
+#    if params[:tag] && params[:tag] != ""
+#      @resources = Resource.tagged_with(params[:tag]).find_with_reputation(:votes, :all, order: "votes desc")
+#    else
+#      @resources = Resource.find_with_reputation(:votes, :all, :limit => 10, order: "votes desc")
+#    end
     @resource = Resource.new
   end
   
@@ -37,6 +37,10 @@ class ResourcesController < ApplicationController
     end
     thumbnail_Link
   end
-  
+
+   def search
+      @resource = Resource.search(params[:q], :page => (params[:page] || 1),
+                                 :per_page =>15, load: true )
+   end
   
 end

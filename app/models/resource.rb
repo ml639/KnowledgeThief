@@ -13,6 +13,7 @@ class Resource < ActiveRecord::Base
   mapping do 
       indexes :id,  :index => :not_analyzed
       indexes :title, :analyzer => 'snowball', :boost => 40
+      #tag_list not being indexed correctly...
       indexes :tag_list, :analyzer => 'snowball', :boost => 8
       indexes :description, :analyzer => 'snowball', :boost => 2
       indexes :user_id, :analyzer => 'snowball'

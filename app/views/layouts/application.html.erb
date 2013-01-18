@@ -50,9 +50,9 @@
 
 
 	        <div id="mainSearchWrapper">
-	           	<form accept-charset="utf8" action="/resources" method="get">
+	           	<form accept-charset="utf8" action="/search" method="get">
 						<div id="mainSearchWrapper">
-					    	<%= text_field_tag :tag,  params[:tag], :class =>"mainSearch", :placeholder => "I want to learn..." %>
+					    	<%= text_field_tag :q,  params[:q], :class =>"mainSearch", :placeholder => "I want to learn..." %>
 					    <input type="image" src="assets/searchIcon.png" value=" " class="mainSubmit">
 					    </div>
 					</form>

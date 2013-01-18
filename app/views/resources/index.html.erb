@@ -22,9 +22,9 @@
     </div>
 
 </div> <!-- end contentOptions -->
-<% if @resources.empty?%>
+<% if @resources.nil?%>
       <div id="postResults">
-    <p class="noResults">Sorry, we currently have no results for "<%= params[:tag] %>", you should contribute some!</p>
+    <p class="noResults">Sorry, we currently have no results for "<%= params[:q] %>", you should contribute some!</p>
     
     </div>
 <% else %>
