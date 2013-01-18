@@ -5,7 +5,7 @@ class ResourcesController < ApplicationController
 #    else
 #      @resources = Resource.find_with_reputation(:votes, :all, :limit => 10, order: "votes desc")
 #    end
-    @resource = Resource.new
+  #  @resource = Resource.new
   end
   
   def create
