@@ -16,6 +16,7 @@ class Resource < ActiveRecord::Base
       #tag_list not being indexed correctly...
       indexes :tag_list, :analyzer => 'snowball', :boost => 8
       indexes :description, :analyzer => 'snowball', :boost => 2
+      #user_id index is having troubles
       indexes :user_id, :analyzer => 'snowball'
   end
 end
