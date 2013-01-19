@@ -38,14 +38,8 @@
 					<% unless current_user %>
 					 	<%= image_tag("topTriangle.png", :style => "position:absolute; bottom:22px; left:4px;")%>
 					<% else %>
-					<%= link_to image_tag('topTriangle.png', :style => "position:absolute; bottom:22px; left:4px;"), vote_resource_path(learningresources, type: "up"), method: "post", :value => learningresources.id %>
-					<% end %>
-		       
-					<% unless current_user %>
-							<%= image_tag("bottomTriangle.png", :style => "position:absolute; bottom:0; left:4px;")%>
-						<% else %>
-						<%= link_to image_tag('bottomTriangle.png', :style => "position:absolute; bottom:0; left:4px;"), vote_resource_path(learningresources, type: "down"), method: "post"%>
-						<% end %>
+				
+					<!-- Upvote / Downvote go Here !-->	
 
 		    </div> <!-- end voteBox -->
 
