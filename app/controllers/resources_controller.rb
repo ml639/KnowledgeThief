@@ -9,10 +9,26 @@ class ResourcesController < ApplicationController
   end
   
   def create
-    params[:resource][:user_id] = current_user.id
-    @resource = Resource.new(params[:resource])
-    @resource[:youtubeID] = self.isYoutube(@resource[:link])
-    @resource.save
+
+    # Usability concern here... need to make sure that they are redirected back here once they log in or something
+    if current_user == nil
+      flash[:alert] = "You must log in to submit a resource!"
+      redirect_to resources_path
+      return
+    else
+      params[:resource][:user_id] = current_user.id
+    end
+    
+
+    # Check to see if this resource unique
+    params[:resource][:link] = Post::URI.clean(params[:resource][:link])
+    if unique_link?(params[:resource][:link])
+      @resource = Resource.new(params[:resource])
+      @resource[:youtubeID] = self.isYoutube(@resource[:link])
+      @resource.save
+    else
+      flash[:alert] = "This resource has already been added!"
+    end
     redirect_to resources_path
   end
   
@@ -36,6 +52,10 @@ class ResourcesController < ApplicationController
       thumbnail_Link = nil
     end
     thumbnail_Link
+  end
+
+  def unique_link?(url)
+    Resource.find_by_link(url) == nil
   end
   
   

@@ -23,6 +23,8 @@ gem 'activerecord-reputation-system', require: 'reputation_system'
 # Audited gem in order to track activity
 gem "audited-activerecord", "~> 3.0"
 
+# PostRank-URI for URI normalization
+gem "postrank-uri", "~> 1.0.17"
 
 group :development do
    gem 'sqlite3'
