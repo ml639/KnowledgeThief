@@ -1,9 +1,3 @@
-	 <%= 
-	  #@resource.results.each do |document|
-	  #    "* #{ document.title } "
-	  #   end 
-	     %>
-
 	    <% if @resource.empty?%>
 		      <div id="postResults">
 		    <p class="noResults">Sorry, we currently have no results for "<%= params[:q] %>", you should contribute some!</p>
@@ -71,9 +65,9 @@
 
 
 		        <div class="resourceTags">
-
-					<a href="#">resonance structures, organic chemistry 2, cellular biology</a> 
-
+					<a href="#">
+					  resonance structures, organic chemistry 2, cellular biology
+					</a> 
 		        </div>
 
 		        <div class="resourceDescription">

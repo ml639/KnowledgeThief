@@ -7,7 +7,9 @@ class Resource < ActiveRecord::Base
 
   has_reputation :votes, source: :user, aggregated_by: :sum
 
-  attr_accessible :title, :description, :link, :tag_list, :user_id, :youtubeID
+  attr_accessible :title, :description, 
+                  :link, :tag_list, :user_id, 
+                  :youtubeID, :type
   acts_as_taggable
 
   mapping do 
@@ -19,4 +21,15 @@ class Resource < ActiveRecord::Base
       #user_id index is having troubles
       indexes :user_id, :analyzer => 'snowball'
   end
+
+  def self.search(params)
+    tire.search(load: true,
+                :page => (params[:page] || 1), 
+                :per_page => 15 ) do
+        query { string params[:q]} if params[:q].present?
+#        filter :term, media_type: params[:filter]
+# add in later                sort  { by    :votes, 'desc' }
+    end
+  end
+
 end
