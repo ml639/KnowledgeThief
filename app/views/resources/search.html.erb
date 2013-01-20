@@ -1,3 +1,6 @@
+		<%= 
+		 select("filter","media_type",
+				   ["Article","Video","Blog", "Game", "Course", "Book", "Interactive Course"], {}, { :index => nil,  :form => 'search_form' }) %>
 	    <% if @resource.empty?%>
 		      <div id="postResults">
 		    <p class="noResults">Sorry, we currently have no results for "<%= params[:q] %>", you should contribute some!</p>

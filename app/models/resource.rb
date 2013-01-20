@@ -1,7 +1,6 @@
 class Resource < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
-
   belongs_to :user
   has_many :resource_views, :class_name => 'UserResourceView'
 
@@ -9,7 +8,7 @@ class Resource < ActiveRecord::Base
 
   attr_accessible :title, :description, 
                   :link, :tag_list, :user_id, 
-                  :youtubeID, :type
+                  :youtubeID, :type, :media_type
   acts_as_taggable
 
   mapping do 
@@ -20,6 +19,7 @@ class Resource < ActiveRecord::Base
       indexes :description, :analyzer => 'snowball', :boost => 2
       #user_id index is having troubles
       indexes :user_id, :analyzer => 'snowball'
+      indexes :media_type, :analyzer => 'snowball'
   end
 
   def self.search(params)
@@ -27,9 +27,13 @@ class Resource < ActiveRecord::Base
                 :page => (params[:page] || 1), 
                 :per_page => 15 ) do
         query { string params[:q]} if params[:q].present?
-#        filter :term, media_type: params[:filter]
+       # raise params[:filter][0][:media_type].downcase.to_s
+        unless params[:filter].nil?
+          filter :terms, :media_type => [params[:filter][0][:media_type].downcase]
+        end
 # add in later                sort  { by    :votes, 'desc' }
     end
   end
 
 end
+

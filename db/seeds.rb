@@ -30,7 +30,7 @@ open("http://atr.eng.utah.edu/~lwilkins/kt/seed_resources.txt") do |seed_resourc
     title, media_type, link, description, tags = r.chomp.split("|")
     temp_resource = Resource.create!(:title => title, 
     								 :link => link, 
-    								 :description => description
+    								 :description => description,
     								 :media_type => media_type)
     temp_resource.tag_list = tags
     temp_resource.save!
