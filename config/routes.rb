@@ -2,6 +2,11 @@ Kt::Application.routes.draw do
  
 
 
+  resources :comments do
+    member {post :forresource}
+  end
+
+
   resources :resources do
       member { post :vote }
     end

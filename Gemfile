@@ -26,7 +26,6 @@ gem "audited-activerecord", "~> 3.0"
 
 group :development do
    gem 'sqlite3'
-   
    # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false
    gem 'rb-fsevent', :require => false
@@ -46,6 +45,7 @@ group :development do
 end
 
 group :development, :test do
+   # Jasmine spec testing gems
    # RSPEC is a testing framework for rails
    gem 'rspec-rails', '~> 2.0'
    # Simplecov is a code coverage generator that works with RSPEC

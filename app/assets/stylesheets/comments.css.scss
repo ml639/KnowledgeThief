@@ -1,14 +1,21 @@
+// Place all the styles related to the comments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
 .slide-out-div {
-    padding: 20px;
-    width: 250px;
-	height:50%;
-    background: url("header-bg.png");
-    border: 1px solid gray;
-	p{
-		color:white !important;
-	}
-	h1{
-		font-size:25px;
-		color:white !important;
-	}
+padding: 20px;
+width: 250px;
+height: 50%;
+background: url("header-bg.png");
+border: 1px solid gray;
+position:relative;
+}
+
+.commentform{
+width:100%;
+	position: absolute; 
+	bottom: 0;
+}
+#commentsHolder{
+height:250px;
+overflow:auto;
 }

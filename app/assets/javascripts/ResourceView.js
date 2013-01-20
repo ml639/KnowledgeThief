@@ -28,6 +28,21 @@ var ResourceView = function(){
 	
 	comments = function(){
 		$('.slide-out-div').fadeIn("slow");
+		$.ajax({
+			type: "post",
+			url: "comments/"+resource_id +"/forresource",
+			dataType: "json",
+			// Define request handlers.
+			success: function( objResponse ){
+				// Check to see if request was successful.
+				$.each(objResponse.comments, function(i, item) {
+    				$('.commentsList').append("<li>" +item.content +"</li>");
+				});
+			},
+			error: function( objRequest, strError ){
+				alert("error with comment");
+			}
+		});
 	}
 	logUser = function(new_resource_id){
 		$.ajax({
@@ -45,7 +60,29 @@ var ResourceView = function(){
 				}
 			},
 			error: function( objRequest, strError ){
-				alert("Please login or create an account to vote");
+				
+			}
+		});
+	}
+	saveComment = function(commentText){
+		$.ajax({
+			type: "post",
+			url: "comments/",
+			data: {
+				content : commentText,
+				resource : resource_id
+			},
+			dataType: "json",
+			// Define request handlers.
+			success: function( objResponse ){
+				// Check to see if request was successful.
+				$('.commentsList').html('');
+				$.each(objResponse.comments, function(i, item) {
+    				$('.commentsList').append("<li>" +item.content +"</li>");
+				});
+			},
+			error: function( objRequest, strError ){
+				alert("error with comment");
 			}
 		});
 	}
@@ -80,7 +117,8 @@ var ResourceView = function(){
 		remove : remove,
 		comments : comments,
 		vote : vote,
-		logUser : logUser
+		logUser : logUser,
+		saveComment : saveComment
 	}
 };
 
@@ -110,5 +148,9 @@ $(function(){
 	});
 	$(".ajaxDownvote").click(function(){
 		rView.vote('down');
+	});
+	$('#saveComment').click(function(){
+		var commentText = $("#commenttext").val();
+		rView.saveComment(commentText);
 	});
 });

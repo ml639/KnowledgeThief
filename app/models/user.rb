@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :resources
+  has_many :comments
   has_many :resource_views, :class_name => 'UserResourceView'
   has_many :viewed_resources, :through => :resource_views, :source => :resource
   
