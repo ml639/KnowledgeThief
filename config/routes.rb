@@ -1,10 +1,11 @@
 Kt::Application.routes.draw do
  
 
-#  Not entirely sure why this is here, but it's screwing up my route.
-#  resources :resources do
-#      member { post :vote }
-#    end
+  resources :resources do
+      member { post :vote }
+      collection { get :search }
+  end
+
   devise_for :users
   resources :userResourceView
   resources :learningPaths
@@ -15,8 +16,7 @@ Kt::Application.routes.draw do
   end
   devise_for :user, :path => '', :path_names => {:sign_up => "register" }
   
-  match '/search', to: 'resources#search', as: :q
-  match '/resources', to: 'resources#create', :via => :post
+#  match '/resources', to: 'resources#create', :via => :post
 
   match '/resources', to: 'home#index', :via => :get
   

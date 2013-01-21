@@ -3,7 +3,7 @@ module ApplicationHelper
     :user
   end
 
-  def resource
+  def user_resource
      @devise_resource ||= User.new
   end
 
