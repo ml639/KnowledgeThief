@@ -35,7 +35,7 @@ class ResourcesController < ApplicationController
 
    def search
       @resource = Resource.search(params)
-      @resource.results
+     # @resource.results
    end
   
 end

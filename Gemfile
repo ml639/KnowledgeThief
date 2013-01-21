@@ -29,8 +29,11 @@ gem "tire"
 # Pagination gem for creating dynamic pages on the go for a better user experience
 gem 'will_paginate'
 
+# Postgresql gem for better continuous integration with Heroku
+gem 'pg'
+
+
 group :development do
-   gem 'sqlite3'
    
    # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false
