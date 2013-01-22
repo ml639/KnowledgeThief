@@ -52,8 +52,8 @@
 	        <div id="mainSearchWrapper">
 	           	<form id="search_form" accept-charset="utf8" action="/resources/search" method="get">
 						<div id="mainSearchWrapper">
-					    	<%= text_field_tag :q,  params[:q], :class =>"mainSearch", :placeholder => "I want to learn..." %>
-					    <input type="image" src="assets/searchIcon.png" value=" " class="mainSubmit">
+					    	<%= text_field_tag :q,  params[:q], :class =>"mainSearch", :id => "search_input_text",:placeholder => "I want to learn..." %>
+					    <input type="image" src="assets/searchIcon.png" value=" " class="mainSubmit" id="search_button">
 					    </div>
 					</form>
 
