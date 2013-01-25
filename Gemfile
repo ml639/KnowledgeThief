@@ -17,6 +17,9 @@ gem 'acts_as_votable'
 # Devise
 gem 'devise'
 
+# Omniauth
+gem 'omniauth'
+gem 'omniauth-facebook'
 # ActiveRecord Reputation System for voting and user reputation
 gem 'activerecord-reputation-system', require: 'reputation_system'
 
