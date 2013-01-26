@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 class ResourcesController < ApplicationController
   def index
 
@@ -34,8 +36,20 @@ class ResourcesController < ApplicationController
   end
 
    def search
-      @resource = Resource.search(params)
-     # @resource.results
+   # raise params.to_s
+    @resource = Resource.search(params)
+
+    unless params[:filter].nil? 
+      case params[:filter][0][:sort].downcase
+      when "newest"
+        @resource = @resource.to_a.sort_by!{|resource| resource.created_at }
+      when "votes"
+        @resource = @resource.to_a.sort_by!{|a| a.reputation_for(:votes).to_i }.reverse
+      else
+        @resource = @resource.to_a 
+      end
+    end
+
+    @resource = @resource.paginate(:page => 1, :per_page => 15)
    end
-  
 end

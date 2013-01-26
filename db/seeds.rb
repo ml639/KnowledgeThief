@@ -30,8 +30,8 @@ File.open("app/assets/files/seed_resources.txt") do |seed_resources|
     pairs = r.chomp.split("|")
   	title = pairs[0].unpack("C*").pack("U*")
   	media_type = pairs[1].unpack("C*").pack("U*")
-  	description = pairs[2].unpack("C*").pack("U*")
-  	link = pairs[3].unpack("C*").pack("U*")
+  	link = pairs[2].unpack("C*").pack("U*")
+    description = pairs[3].unpack("C*").pack("U*")
   	tags = pairs[4].unpack("C*").pack("U*")
 
     temp_resource = Resource.create!(:title => title, 

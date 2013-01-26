@@ -1,6 +1,18 @@
-		<%= 
+		<%=
+		 if params[:filter].nil?
+			selected1 = ""
+			selected2 = ""
+		else
+			selected1 = params[:filter][0][:media_type]
+			selected2 = params[:filter][0][:sort]
+		 end 
 		 select("filter","media_type",
-				   ["Article","Video","Blog", "Game", "Course", "Book", "Interactive Course"], {}, { :index => nil,  :form => 'search_form' }) %>
+				   ["","Article","Video","Blog", "Game", "Course", "Book", "Interactive Course"], {}, { :include_blank => true, :index => nil,  :form => 'search_form', :selected => selected1 }) %>
+	<%=
+		 select("filter","sort",
+				   ["Relevancy","Votes","Newest"], {}, { :index => nil,
+				   								         :form => 'search_form',
+				   								   :selected => selected2}) %>	
 	    <% if @resource.empty?%>
 		      <div id="postResults">
 		    <p class="noResults">Sorry, we currently have no results for "<%= params[:q] %>", you should contribute some!</p>
@@ -76,6 +88,7 @@
 		        <div class="resourceDescription">
 
 		           <%= learningresources.description %>
+		           <%= learningresources.media_type %>
 
 		        </div>
 		        <div class="postedBy">
@@ -98,5 +111,4 @@
 
 		 <% end %>
 		<% end %> 
-	     <%= will_paginate(@resource) %>
 

@@ -15,7 +15,7 @@ class Resource < ActiveRecord::Base
       indexes :id,  :index => :not_analyzed
       indexes :title, :analyzer => 'snowball', :boost => 40
       #tag_list not being indexed correctly...
-      indexes :tag_list, :analyzer => 'snowball', :boost => 8
+#      indexes :tag_list, :analyzer => 'snowball', :boost => 8
       indexes :description, :analyzer => 'snowball', :boost => 2
       #user_id index is having troubles
       indexes :user_id, :analyzer => 'snowball'
@@ -29,11 +29,11 @@ class Resource < ActiveRecord::Base
         query { string params[:q]} if params[:q].present?
        # raise params[:filter][0][:media_type].downcase.to_s
         unless params[:filter].nil?
+         unless params[:filter][0][:media_type].blank?
           filter :terms, :media_type => [params[:filter][0][:media_type].downcase]
+         end
         end
-# add in later                sort  { by    :votes, 'desc' }
     end
   end
 
 end
-
