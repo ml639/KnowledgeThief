@@ -1,0 +1,540 @@
+/**
+*= require ./theme
+*/
+@import './var';
+@import './mixins';
+@import './forms';
+@import './common';
+
+#engage, .engage_body {
+  font-family: $font-family;
+  font-size:  $font-size;
+  font-weight: normal;
+  color: $main-font-color;
+  letter-spacing:normal;
+  text-align: left;
+
+  #engage-content {
+    text-align:center;
+    width:$page-width;
+    margin: 20px auto;
+    background: $background-color;
+    @include border-radius(5px, 5px, 5px, 5px);
+    @include box-shadow(0, 0, 3px, rgba(0, 0, 0, 0.25));
+    padding: 10px 20px;
+    text-align:left;
+    position: relative;
+    padding-bottom:20px;
+  }
+
+  #user-data {
+    position:absolute;
+    right:20px;
+    top:0px;
+    background: $user-data-bg;
+    border: 1px solid $user-data-border;
+    border-top:0;
+    @include border-radius(0, 0, 5px, 5px); 
+    padding: 10px;
+    position: absolute;
+    text-shadow: 0 0 1px $inner-box-and-button-text;
+  }
+
+  .box {
+    background: $box-background;
+    padding:10px;
+    @include border-radius(5px, 5px, 5px, 5px);
+    border: 1px solid $borders;
+    .white-box {
+      padding:10px;
+      background: $inner-box-and-button-text;
+      border: 1px solid $borders;
+      @include border-radius(5px, 5px, 5px, 5px);
+    }
+  }
+  
+  .pagination {
+    margin:10px 0;
+    text-align:center;
+    
+    .page {
+      a {
+        background:$border-color;
+        color:$inner-box-and-button-text;
+        padding:1px 5px;
+        @include border-radius(2px, 2px, 2px, 2px);
+        &:hover {
+          text-decoration:none;       
+        }
+      }
+      &.current {
+        background:$link-color;
+        color:$inner-box-and-button-text;
+        padding:1px 2px 1px 5px;
+        margin-right:3px; 
+        @include border-radius(2px, 2px, 2px, 2px);
+      }
+    }
+  }
+  
+  h1, h2, h3, h4 {
+    margin:5px 0 10px 0;
+    text-transform:none;
+    font-weight:bold;
+    color: $main-font-color; 
+    font-family: $font-family; 
+  }
+  
+  h2 {
+    margin-bottom:15px;
+    font-size:130%;
+  }
+  
+  h3 {
+    font-size:110%;
+  }
+  
+  h4, h5 {
+    font-size:100%;
+  }
+  
+  a {
+    color: $link-color; 
+    text-decoration:none;  
+    &:hover {
+      text-decoration:none;
+    }
+    img {
+      border: none;
+    }
+  }
+  
+  ol, ul {
+    margin:0;
+    padding:0;
+    list-style:none;
+  }
+  
+  #flash-messages {
+    list-style:none;
+    width: $page-width + 40px;
+    margin: 0 auto;
+    position: relative;
+    
+    .flash-message {
+      margin: 10px 0;
+      padding: 7px 15px;
+      color: $inner-box-and-button-text;
+      font-size:90%;
+      @include linear-gradient($link-color, $button-gradient);
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+      border-width: 1px;
+      border-style: solid;
+      @include border-radius(5px, 5px, 5px, 5px);
+      border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+      
+      &.notice {
+        @include linear-gradient($notice-gradient, $idea);
+      }
+      &.error, &.alert {
+        @include linear-gradient($problem, $alert-gradient);
+      }
+      &.warning {
+        @include linear-gradient($warning-gradient, $praise);
+      }
+      
+      
+    }
+    .engage-close {
+      color: $lines-and-shadows;
+      font-size: 14px;
+      position: absolute;
+      right: 10px;
+      text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.5);
+      top: 5px;
+    }
+  }
+  .header {
+    padding:5px 15px;
+    @include border-radius(10px, 10px, 10px, 10px);
+    @include linear-gradient($borders, $lines-and-shadows);
+    border:1px solid $border-color;
+    margin-bottom:10px;
+    @include box-shadow-inset(0, 1px, 0, $inner-box-and-button-text, inset);
+    
+    #topic-filters {
+      float:left;
+      .filter-name {
+        padding:7px 0px;
+        display:block;
+        float:left;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+      }
+      
+      #status-filter, #style-filter {
+        position:relative;
+        float:left;
+        
+        .dropdown {
+          cursor: pointer;
+          display:block;
+          margin:5px 10px;
+          @include linear-gradient(#b0b0b0,#b1b1b1);
+          background-image: url('<%= asset_path('dropdown.png') %>');
+          background-repeat: no-repeat;
+          background-position: 103px 6px;
+          @include border-radius(5px, 5px, 5px, 5px);
+          border: 1px solid #a8a8a8;
+          border-top: 1px solid #a3a3a3;
+          padding:1px 10px;
+          width:100px;
+          color:$inner-box-and-button-text;
+          @include box-shadow-inset(0, 1px, 0, $border-color, inset);
+        }
+        
+        .options {
+          display:none;
+          list-style:none;
+          position: absolute;
+          top:25px;
+          margin:0 10px;
+          padding:5px 5px 5px 10px;
+          @include linear-gradient($borders,$lines-and-shadows);
+          @include border-radius(5px, 5px, 5px, 5px);
+          width:105px;
+          border:1px solid $border-color;
+          z-index:300;
+          li {
+            line-height:16px;
+            color:#999;
+            a {
+              color:$main-font-color;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .toggle-new-topic {
+    margin:2px 0 0;
+    float:right;
+    display:block;
+  }  
+  
+  .cancel {
+    line-height: 24px;
+    margin-right: 15px;
+  }
+  
+  .actions {
+    font-size:90%;
+    white-space: nowrap;
+  }
+  
+  .topic-container, .topic-details {
+    padding: 8px 0px;
+    @include border-radius(10px, 10px, 10px, 10px);
+    
+    .topic {
+      padding-bottom:5px;
+      margin-bottom:5px;
+      border-bottom:1px dashed $border-color;
+      position:relative;
+      
+      .author {
+        .created_at {
+          font-weight: normal;
+        }
+        img {
+          float:left;
+          margin:5px 10px 20px 0px;
+          border:2px solid $border-color;
+        }
+      }
+      
+      &.last, &:last-child {
+        border-bottom:none;
+      }
+      
+      .about {
+        line-height:1.3;
+        color: $lighter-text-color;
+        margin-left:46px;
+        font-size:95%;
+        .user {
+          a {
+            color: $lighter-text-color;
+          }
+        }
+      }
+      
+      .style {
+        font-weight:normal;
+        @include border-radius(3px, 3px, 3px, 3px);
+        color:$inner-box-and-button-text;
+        font-size:95%;
+        padding:1px 3px;
+        position:relative;
+        top:5px;
+        min-width:40px;
+        display:inline-block;
+        text-align:center;
+        text-transform:uppercase;
+        font-family: $font-family;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+        float:right;
+        margin-bottom:5px;
+        &.problem {
+          background:$problem;
+        }
+        &.idea {
+          background:$idea;
+        }
+        &.question {
+          background:$question;
+        }
+        &.praise {
+          background:$praise;
+        }
+      }
+      .title {
+        font-size:120%;
+        font-weight:bold;
+        color: $link-color;
+        a {
+          font-weight:bold;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        .actions {
+          margin-left:10px;
+          a {
+            font-weight:normal;
+            font-size:90%;
+          }
+        }
+      }
+      
+      .status {
+        font-weight: bold;
+      }
+      
+      .votes {
+        float:right;
+      }
+    }
+    
+    .links {
+      margin:10px 0 5px;
+    }
+    
+    .icon-comments {
+      background: url('<%= asset_path('comment.png') %>') no-repeat left center;
+      padding-left:16px;
+    }
+    .icon-votes-add {
+      background: url('<%= asset_path('vote-add.png') %>') no-repeat left center;
+      padding: 0px 0 0px 20px;
+      text-indent: -99999px;
+      display: inline-block;
+    }
+    .icon-followers {
+      background: url('<%= asset_path('followers.png') %>') no-repeat top left;
+      padding: 0px 0 0px 22px;
+      display:inline-block;
+    }
+  }
+  
+  .topic-details {
+    padding:0px 0 10px 0;
+    @include border-radius(0, 0, 0, 0);
+    position:relative;
+    
+    .topic {
+      border:none;
+      padding-bottom:10px;
+      .author {
+        img {
+          margin:7px 10px 5px 0px;
+        }
+      }
+      .about {
+        margin:5px 0;
+        line-height:1.4;
+        .created_at {
+          float:left;
+        }
+      }
+      .message {
+        margin:5px 0;
+        padding:10px 0;
+        border-top:1px solid $lines-and-shadows;
+        border-bottom:1px solid $lines-and-shadows;
+      }
+      #follow {
+        float:left;
+        line-height:20px;
+      }
+      .votes {
+        float:left;
+        margin-right:10px;
+        line-height: 20px;
+      }
+    }
+  }
+  
+  .task-status {
+    font-weight:normal;
+    @include border-radius(3px, 3px, 3px, 3px);
+    color:$inner-box-and-button-text;
+    font-size:95%;
+    padding:2px 5px;
+    position:relative;
+    display:inline-block;
+    text-align:center;
+    text-transform:uppercase;
+    font-family: $font-family;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+    
+    &.done {
+      background:$idea;
+    }
+    &.pending {
+      background:$question;
+    }
+    &.accepted {
+      background:$praise;
+    }
+  }
+  
+  .back {
+    font-size: 80%;
+  }
+  
+  .nav-back {
+    a {
+      font-weight: bold !important;
+    }
+  }
+  
+  .comments-container {
+    .comment {
+      padding-bottom:5px;
+      margin-bottom:5px;
+      border-bottom:1px dashed $border-color;
+      
+      &.last, &:last-child {
+        border-bottom:none;
+      }
+      
+      .avatar {
+        float:left;
+        margin-right:10px;
+        margin-left:5px;
+        img {
+          border: 2px solid $border-color;
+        }
+      }
+      
+      .comment-content {
+        float:left;
+        width:90%;
+        
+        .author {
+          color: $lighter-text-color;
+        }
+      }
+    }
+  }
+  
+  .buttons {
+    margin:10px 0;
+  }
+  
+  a.button, button, input[type=submit] {
+    padding:4px 8px;
+    color:$inner-box-and-button-text;
+    text-decoration:none;
+    line-height:18px;
+    @include linear-gradient($link-color, $button-gradient);
+    @include border-radius(5px, 5px, 5px, 5px); 
+    border-color: rgba(10, 161, 226, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.1);
+    border-width: 1px;
+    border-style: solid;
+    font-family:$font-family;
+    
+    &:hover {
+      text-decoration:none;
+      background: $button-gradient;
+    }
+    
+    &.create, &.update {
+      float:right;
+    }
+  }
+  
+  .back-link {
+    float:right;
+    line-height:20px;
+    margin-left:10px;
+    padding:5px;
+  }
+
+  .shared-links {
+    a:after {
+      content:" | ";
+    }
+    a:last-child:after {
+      content:"";
+    }
+  }
+
+  table {
+    border:1px solid $border-color;
+    border-collapse: collapse;
+    width: 100%;
+    margin:10px 0;
+    background: $background-color;
+    td, th {
+      border:1px solid $border-color;
+      padding:2px 3px;
+    }
+    th {
+      padding:4px 5px;
+      background:$borders;
+      text-align:center;
+    }
+    tbody {
+      tr:nth-child(2n) {
+        background: none repeat scroll 0 0 $lines-and-shadows;
+      }
+      tr:nth-child(2n+1) {
+        background: none repeat scroll 0 0 $inner-box-and-button-text;
+      }
+    }
+    thead tr th {
+      color: $main-font-color;
+    }
+  }
+  #engage_popup {
+    #flash-messages {
+      width: 100%;
+      .flash-message {
+        margin-top:0;
+      }
+    }
+    form {
+      margin-top:10px;
+    }
+    a {
+      color:$link-color;
+    }
+  }
+  #topic-form-container {
+    margin-bottom:10px;  
+  }   
+}
+

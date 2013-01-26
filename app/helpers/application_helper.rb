@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include Engage::ApplicationHelper
   def resource_name
     :user
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130119230833) do
+ActiveRecord::Schema.define(:version => 20130121015842) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -41,6 +41,68 @@ ActiveRecord::Schema.define(:version => 20130119230833) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "engage_comments", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "topic_id",   :null => false
+    t.text     "body",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "engage_followings", :force => true do |t|
+    t.integer  "user_id",                     :null => false
+    t.integer  "topic_id",                    :null => false
+    t.string   "token",      :default => "0", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  add_index "engage_followings", ["user_id", "topic_id"], :name => "index_engage_followings_on_user_id_and_topic_id", :unique => true
+
+  create_table "engage_topics", :force => true do |t|
+    t.string   "title",                                                 :null => false
+    t.text     "message"
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
+    t.string   "style",           :limit => 16, :default => "question", :null => false
+    t.integer  "user_id",                                               :null => false
+    t.string   "string"
+    t.integer  "votes_count",                   :default => 0,          :null => false
+    t.string   "status",          :limit => 16, :default => "pending",  :null => false
+    t.integer  "comments_count",                :default => 0,          :null => false
+    t.integer  "followers_count",               :default => 0,          :null => false
+    t.boolean  "private",                       :default => false,      :null => false
+  end
+
+  add_index "engage_topics", ["comments_count"], :name => "index_engage_topics_on_comments_count"
+  add_index "engage_topics", ["followers_count"], :name => "index_engage_topics_on_followers_count"
+  add_index "engage_topics", ["private"], :name => "index_engage_topics_on_private"
+  add_index "engage_topics", ["status"], :name => "index_engage_topics_on_status"
+  add_index "engage_topics", ["style"], :name => "index_engage_topics_on_style"
+  add_index "engage_topics", ["user_id"], :name => "index_engage_topics_on_user_id"
+  add_index "engage_topics", ["votes_count"], :name => "index_engage_topics_on_votes_count"
+
+  create_table "engage_user_profiles", :force => true do |t|
+    t.integer  "user_id",                       :null => false
+    t.boolean  "admin",      :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "username"
+    t.string   "email"
+  end
+
+  add_index "engage_user_profiles", ["user_id"], :name => "index_engage_user_profiles_on_user_id"
+
+  create_table "engage_votes", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "topic_id",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "engage_votes", ["topic_id"], :name => "index_engage_votes_on_topic_id"
+  add_index "engage_votes", ["user_id"], :name => "index_engage_votes_on_user_id"
 
   create_table "resources", :force => true do |t|
     t.text     "link"

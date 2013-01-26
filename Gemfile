@@ -26,6 +26,9 @@ gem "audited-activerecord", "~> 3.0"
 # PostRank-URI for URI normalization
 gem "postrank-uri", "~> 1.0.17"
 
+# Engage! for user support forum
+gem 'engagecsm'
+
 group :development do
    gem 'sqlite3'
    # The following three gems will make sure Linux, Mac and Windows work (respectively)

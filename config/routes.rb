@@ -2,6 +2,8 @@ Kt::Application.routes.draw do
  
 
 
+  mount Engage::Engine => '/engage', :as => 'engage'
+
   resources :comments do
     member {post :forresource}
   end
