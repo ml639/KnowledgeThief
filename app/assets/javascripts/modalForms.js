@@ -22,8 +22,8 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$('.modalPopup_question').fancybox({
-	    maxWidth    : 300,
-	    maxHeight   : 250,
+	    maxWidth    : 600,
+	    maxHeight   : 600,
 	    fitToView   : true,
 	    autoSize    : false,
 	    openEffect  : 'none',

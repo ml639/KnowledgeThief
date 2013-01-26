@@ -27,7 +27,12 @@ require 'active_record/fixtures'
 Resource.delete_all # Have this line if we want to delete all resources before we add them.
 open("http://atr.eng.utah.edu/~lwilkins/kt/seed_resources.txt") do |seed_resources|
   seed_resources.read.each_line do |r|
-    title, link, description, tags = r.chomp.split("|")
+  	pairs = r.chomp.split("|")
+  	title = pairs[0].unpack("C*").pack("U*")
+  	description = pairs[1].unpack("C*").pack("U*")
+  	link = pairs[2].unpack("C*").pack("U*")
+  	tags = pairs[3].unpack("C*").pack("U*")
+    
     temp_resource = Resource.create!(:title => title, :link => link, :description => description)
     temp_resource.tag_list = tags
     temp_resource.save!

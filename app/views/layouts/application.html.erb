@@ -39,7 +39,7 @@
 	<div id="wrapper">
 	<div id="frameHolder"></div>
 	<div id="header">
-
+ 
 
 	    <div id="logoText">
 			<a href="/" style="margin-top:2px;"><img src="assets/KT_Logo.png" height="40px"></a>
@@ -65,7 +65,6 @@
 				<div id="resourceAddMenu" style="position:relative;right:15px;">
 				<a class="modalPopup_question" href="#modalAskQuestion"><img src="assets/circleQuestion.png" height="30px" style="position:relative; display:inline-block; float:right; margin-right:-60px; margin-top:-29px;" /></a>
 				
-
 			
 				<a class="modalPopup" href="#modalAddPath"><img src="assets/circlePath.png" height="30px" style="position:relative; display:inline-block; float:right; margin-right:-100px; margin-top:-29px;" /></a>
 				
@@ -223,15 +222,20 @@
 	<h2>Ask a question </h2>
 		<div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-question-sign"></div>
         <p class="rightColumnSubHeader" style="display:inline-block;">Question </p>
+		<%= form_for(Resource.new) do |f| %>
 
-		<form class="inputPadding">
-	        <textarea rows="4" cols="45"></textarea>
-			<div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-tags"></div>
+	        <p class="rightColumnSubHeader" style="display:inline-block;">Title </p><br>
+	        <%= f.text_field :title, :placeholder => "Enter a title" %><br>
+
+	        <div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-info-sign"></div>
+	        <p class="rightColumnSubHeader" style="display:inline-block;">Description </p><br>
+	        <%= f.text_area :description, :rows => "7", :placeholder => "What is your question?", :style => "width:100%;" %><br>
+
+	        <div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-tags"></div>
 	        <p class="rightColumnSubHeader" style="display:inline-block;">Tags </p><br>
-
-	        <input type="text" placeholder="Type at least 3 descriptive tags">
-	        <input type="submit" value="Ask" class="submit">
-	    </form>
+	         <%= f.text_field :tag_list, :placeholder => "Type at least 3 tags" %><br>
+	        <%= f.submit "Ask Question", :class => "submit" %>
+			<% end %>
 </div>
 <div class="modalForm" id="modalAddPath" style="display:none;" >
 	<script>
@@ -284,7 +288,7 @@
 </div>
 
 <div class="slide-out-div" style="display:none;">
-    <a class="handle" href="http://link-for-non-js-users">Content</a>
+    <a class="handle" href="#">Content</a>
     <h1>Comments</h1>
     <div id="commentsHolder">
     <ul class="commentsList">
@@ -295,6 +299,8 @@
 		<input id="commenttext" placeholder="comment..." type="text">
 		 <button type="button" id="saveComment" >save</button>
 	</form>
+	<% else %>
+		<div> Login to comment </div>
 	<% end %>
 </div>
 	</body>

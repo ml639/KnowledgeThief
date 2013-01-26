@@ -8,14 +8,26 @@ height: 50%;
 background: url("header-bg.png");
 border: 1px solid gray;
 position:relative;
+color:white !important;
+	li{
+	color:white !important;
+	}
+	h1{
+	color:white !important;
+	}
 }
 
 .commentform{
 width:100%;
-	position: absolute; 
-	bottom: 0;
+position: absolute; 
+bottom: 0;
+color:white !important;
 }
 #commentsHolder{
 height:250px;
 overflow:auto;
+color:white !important;
+}
+#commentsList{
+
 }
