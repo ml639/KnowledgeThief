@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ResourcesController do
   it "can be created" do
-    
+   	ResourcesController.new 
   end
 
   it "displays each feature" do
