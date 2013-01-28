@@ -29,8 +29,10 @@ gem "postrank-uri", "~> 1.0.17"
 # Engage! for user support forum
 gem 'engagecsm'
 
+# Postgresql gem for better continuous integration with Heroku
+gem 'pg'
+
 group :development do
-   gem 'sqlite3'
    # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false
    gem 'rb-fsevent', :require => false
