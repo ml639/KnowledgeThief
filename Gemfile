@@ -32,6 +32,9 @@ gem 'engagecsm'
 # Postgresql gem for better continuous integration with Heroku
 gem 'pg'
 
+# pg_search for fulltext searching in postgresql
+gem 'pg_search'
+
 group :development do
    # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false

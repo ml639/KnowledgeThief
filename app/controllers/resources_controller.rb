@@ -1,11 +1,6 @@
 class ResourcesController < ApplicationController
   def index
-    if params[:tag] && params[:tag] != ""
-      @resources = Resource.tagged_with(params[:tag]).find_with_reputation(:votes, :all, order: "votes desc")
-    else
-      @resources = Resource.find_with_reputation(:votes, :all, :limit => 10, order: "votes desc")
-    end
-    @resource = Resource.new
+      @resources = Resource.all
   end
   
   def create
@@ -58,5 +53,8 @@ class ResourcesController < ApplicationController
     Resource.find_by_link(url) == nil
   end
   
-  
+  def search
+      @resource = Resource.full_search(params[:q])
+      @resource.reject!{|r| !r.media_type.eql? params[:filter][0][:media_type].downcase } if params[:filter] && !params[:filter][0][:media_type].blank?
+  end 
 end

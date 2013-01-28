@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130121015842) do
+ActiveRecord::Schema.define(:version => 20130128010513) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -104,6 +104,14 @@ ActiveRecord::Schema.define(:version => 20130121015842) do
   add_index "engage_votes", ["topic_id"], :name => "index_engage_votes_on_topic_id"
   add_index "engage_votes", ["user_id"], :name => "index_engage_votes_on_user_id"
 
+  create_table "pg_search_documents", :force => true do |t|
+    t.text     "content"
+    t.integer  "searchable_id"
+    t.string   "searchable_type"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "resources", :force => true do |t|
     t.text     "link"
     t.string   "title"
@@ -112,6 +120,7 @@ ActiveRecord::Schema.define(:version => 20130121015842) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "youtubeID"
+    t.string   "media_type"
   end
 
   create_table "rs_evaluations", :force => true do |t|
