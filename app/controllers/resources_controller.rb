@@ -57,7 +57,8 @@ class ResourcesController < ApplicationController
   
   def search
      @resource = Resource.full_search(params[:q])
-     @resource.reject!{|r| !r.media_type.eql? params[:filter][0][:media_type].downcase } if params[:filter] && !params[:filter][0][:media_type].blank?
+   #  raise params.to_s
+     @resource = @resource.reject!{|r| !r.media_type.eql? params[:filter][0][:media_type].downcase } if params[:filter] && !params[:filter][0][:media_type].blank?
 
      if params[:filter] 
       case params[:filter][0][:sort].downcase 
@@ -66,7 +67,6 @@ class ResourcesController < ApplicationController
       when 'votes'
          then @resource = @resource.sort_by!{|r| r.reputation_for(:votes).to_i}.reverse
       else
-       @resource 
       end
      end
 
