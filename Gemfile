@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 # Rails 3.2.11 
 gem 'rails', '3.2.11'
 
-gem "pg"
-
 # For Ubuntu to be happy
 gem 'therubyracer'
 
