@@ -62,14 +62,14 @@ class ResourcesController < ApplicationController
      if params[:filter] 
       case params[:filter][0][:sort].downcase 
       when 'newest'
-         then @resource.sort_by{|r| r.created_at}
+         then @resource = @resource.sort_by{|r| r.created_at}
       when 'votes'
-         then @resource.sort_by!{|r| r.votes.to_i}
+         then @resource = @resource.sort_by!{|r| r.reputation_for(:votes).to_i}.reverse
       else
        @resource 
       end
      end
 
-     @resource = @resource.paginate(:page => 1, :per_page => 15)   
+     @resource = @resource.paginate(:page => (params[:page] || 1), :per_page => 15)   
   end 
 end
