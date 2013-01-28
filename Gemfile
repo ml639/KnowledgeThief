@@ -35,6 +35,9 @@ gem 'pg'
 # pg_search for fulltext searching in postgresql
 gem 'pg_search'
 
+# will_paginate for easier pagination
+gem 'will_paginate'
+
 group :development do
    # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false

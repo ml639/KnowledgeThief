@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 class ResourcesController < ApplicationController
   def index
       @resources = Resource.all
@@ -54,7 +56,20 @@ class ResourcesController < ApplicationController
   end
   
   def search
-      @resource = Resource.full_search(params[:q])
-      @resource.reject!{|r| !r.media_type.eql? params[:filter][0][:media_type].downcase } if params[:filter] && !params[:filter][0][:media_type].blank?
+     @resource = Resource.full_search(params[:q])
+     @resource.reject!{|r| !r.media_type.eql? params[:filter][0][:media_type].downcase } if params[:filter] && !params[:filter][0][:media_type].blank?
+
+     if params[:filter] 
+      case params[:filter][0][:sort].downcase 
+      when 'newest'
+         then @resource.sort_by{|r| r.created_at}
+      when 'votes'
+         then @resource.sort_by!{|r| r.votes.to_i}
+      else
+       @resource 
+      end
+     end
+
+     @resource = @resource.paginate(:page => 1, :per_page => 15)   
   end 
 end

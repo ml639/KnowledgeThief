@@ -24,5 +24,4 @@ class Resource < ActiveRecord::Base
   attr_accessible :title, :description, :link, :tag_list,
                   :user_id, :youtubeID, :media_type
   acts_as_taggable
-  # acts_as_votable
 end
