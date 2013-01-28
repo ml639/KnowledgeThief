@@ -47,7 +47,7 @@
 
 	    </div>
 	        <div id="mainSearchWrapper">
-	           	<form accept-charset="utf8" action="/resources" method="get">
+	           	<form accept-charset="utf8" action="/resources/search" method="get">
 						<div id="mainSearchWrapper">
 					    	<%= text_field_tag :tag,  params[:tag], :class =>"mainSearch", :placeholder => "I want to learn..." %>
 					    <input type="image" src="assets/searchIcon.png" value=" " class="mainSubmit">
@@ -99,7 +99,7 @@
 						Log in <span>▼</span>
 					</a>
 					<div id="login-content">
-						<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+						<%= form_for(user_resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 							<div><%= f.label :email %><br />
 							<%= f.email_field :email %></div>
 
