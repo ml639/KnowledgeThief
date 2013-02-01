@@ -36,6 +36,9 @@ gem 'pg_search'
 # will_paginate for easier pagination
 gem 'will_paginate'
 
+# Google search (limited to 100 queries for free)
+gem "google-api-client", "~> 0.6.2"
+
 group :development do
    # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false
