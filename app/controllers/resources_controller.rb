@@ -79,26 +79,26 @@ class ResourcesController < ApplicationController
 
   def google(q, filter)
     # Authenticating into Google's API
-    client = Google::APIClient.new(:key => 'AIzaSyBmByzcpxbsLsg7u7GlF8I5dJwITuSyCNU', :authorization => nil)
+    #client = Google::APIClient.new(:key => 'AIzaSyBmByzcpxbsLsg7u7GlF8I5dJwITuSyCNU', :authorization => nil)
 
     # Discover the Custom Search API
-    search = client.discovered_api('customsearch')
+    #search = client.discovered_api('customsearch')
 
     # Search Google CSE
-    response = client.execute(
-      :api_method => search.cse.list,
-      :parameters => {
-        'q' => "#{q} #{filter}",
-        'key' => 'AIzaSyBmByzcpxbsLsg7u7GlF8I5dJwITuSyCNU',
-        'cx' => '016679902470578435641:scswmfxveaa'
-      }
-    )
+    # response = client.execute(
+    #   :api_method => search.cse.list,
+    #   :parameters => {
+    #     'q' => "#{q} #{filter}",
+    #     'key' => 'AIzaSyBmByzcpxbsLsg7u7GlF8I5dJwITuSyCNU',
+    #     'cx' => '016679902470578435641:scswmfxveaa'
+    #   }
+    # )
 
     # Decode the results
-    results = ActiveSupport::JSON.decode(response.body, {:symbolize_names => true})
+    # results = ActiveSupport::JSON.decode(response.body, {:symbolize_names => true})
 
-    # Return an empty array if Google CSE limit has been met.
-    results["items"] == nil ? [] : results["items"]
+    # # Return an empty array if Google CSE limit has been met.
+    # results["items"] == nil ? [] : results["items"]
 
     # Now add those to our database here (call this method before )
     #attr_accessible :title, :description, :link, :tag_list,

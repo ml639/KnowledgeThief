@@ -5,7 +5,7 @@
 		else
 			selected1 = params[:filter][0][:media_type]
 			selected2 = params[:filter][0][:sort]
-		 end 
+		 end
 		 options = options_for_select(["", "Article", "Video", "Blog", "Game", "Course", "Book","Interactive Course"], selected1)
 		 select("filter","media_type",
 				  options,{}, { :include_blank => true, :index => nil,
@@ -14,7 +14,7 @@
 		 options = options_for_select(["Relevancy", "Votes", "Newest"], selected2)
 		 select("filter","sort",
 				  options,{},{:index => nil,:form => 'search_form',
-				   								   }) %>	
+				   								   }) %>
 	    <% if @resource.empty?%>
 		      <div id="postResults">
 		    <p class="noResults">Sorry, we currently have no results for "<%= params[:q] %>", you should contribute some!</p>
@@ -25,9 +25,8 @@
 
 		<!---------------------->
 
-
 		<div class="resultWrapper" style="margin-left:20%"> <!-- result wrapper -->
-			
+
 		    <div class="resourceThumb">
 
 		        	<% if learningresources.youtubeID.nil? %>
@@ -39,21 +38,21 @@
 		    </div>
 
 		    <div class="voteBox">
-				
+
 		        <p class="upvotes">
 
 		       <%= learningresources.reputation_for(:votes).to_i %>
 
 		        </p>
-					
+
 					<% unless current_user %>
 					 	<%= image_tag("topTriangle.png", :style => "position:absolute; bottom:22px; left:4px;")%>
 					<% else %>
-				
+
 					<!-- Upvote / Downvote go Here !-->
 						<%= link_to image_tag('topTriangle.png', :style => "position:absolute; bottom:22px; left:4px;"), vote_resource_path(learningresources, type: "up"), method: "post", :value => learningresources.id %>
 					<% end %>
-		       
+
 					<% unless current_user %>
 							<%= image_tag("bottomTriangle.png", :style => "position:absolute; bottom:0; left:4px;")%>
 						<% else %>
@@ -87,8 +86,8 @@
 					 	learningresources.tag_list.each do |tag|
 					 		tag.to_s
 					 	end
-					 %>	
-					</a> 
+					 %>
+					</a>
 		        </div>
 
 		        <div class="resourceDescription">
