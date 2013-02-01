@@ -59,9 +59,10 @@ group :development do
    gem 'guard-spork'
    gem 'spork'
 
-   # Better Errors for debugging. Binding of Caller is to make Better Errors work even better!
+   # For debugging, see http://railscasts.com/episodes/402-better-errors-railspanel
    gem "better_errors"
    gem "binding_of_caller"
+   gem 'meta_request'
 end
 
 group :development, :test do

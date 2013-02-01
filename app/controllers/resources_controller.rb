@@ -72,7 +72,6 @@ class ResourcesController < ApplicationController
       else
       end
      end
-
      @resource = @resource.paginate(:page => (params[:page] || 1), :per_page => 15)
   end
 
