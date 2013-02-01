@@ -2,6 +2,9 @@ Kt::Application.routes.draw do
  
 
 
+  resources :paths
+
+
   mount Engage::Engine => '/engage', :as => 'engage'
 
   resources :comments do
