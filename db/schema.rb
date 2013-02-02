@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130119230833) do
+ActiveRecord::Schema.define(:version => 20130201231642) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(:version => 20130119230833) do
   add_index "audits", ["auditable_id", "auditable_type"], :name => "auditable_index"
   add_index "audits", ["created_at"], :name => "index_audits_on_created_at"
   add_index "audits", ["user_id", "user_type"], :name => "user_index"
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -133,6 +141,16 @@ ActiveRecord::Schema.define(:version => 20130119230833) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "full_name"
+    t.string   "nickname"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "image"
+    t.string   "location"
+    t.date     "birthday"
+    t.string   "hometown_name"
+    t.string   "bio"
+    t.string   "gender"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

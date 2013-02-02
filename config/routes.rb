@@ -1,5 +1,6 @@
 Kt::Application.routes.draw do
  
+  #resources :authentications
 
 
   resources :comments do
@@ -11,6 +12,7 @@ Kt::Application.routes.draw do
       member { post :vote }
     end
   devise_for :users
+ 
   resources :userResourceView
   resources :learningPaths
   get "home/index"
@@ -19,8 +21,12 @@ Kt::Application.routes.draw do
     
   end
   devise_for :user, :path => '', :path_names => {:sign_up => "register" }
-  
+  match '/user_profile', :to =>'users#index'
   get 'tags/:tag', to: 'resources#index', as: :tag
+
+  match '/auth/:provider/callback' => 'authentications#create'
+  match '/auth/:provider/failure', :to => 'authentications#failure'
+  #match '/auth/:provider/callback?error_reason...', :to => 'profiles#failure'
 
   match 'contact' => 'contact#new', :as => 'contact', :via => :get
   match 'contact' => 'contact#create', :as => 'contact', :via => :post
