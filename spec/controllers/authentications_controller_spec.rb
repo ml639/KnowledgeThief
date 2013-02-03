@@ -20,6 +20,14 @@ require 'spec_helper'
 
 describe AuthenticationsController do
 
+  before do
+    request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
+  end
+
+  it "sets a session variable to the OmniAuth auth hash" do
+    request.env["omniauth.auth"]['uid'].should == '123545'
+  end
+  
   # This should return the minimal set of attributes required to create a valid
   # Authentication. As you add validations to Authentication, be sure to
   # update the return value of this method accordingly.
@@ -34,6 +42,8 @@ describe AuthenticationsController do
     {}
   end
 
+
+=begin
   describe "GET index" do
     it "assigns all authentications as @authentications" do
       authentication = Authentication.create! valid_attributes
@@ -160,5 +170,5 @@ describe AuthenticationsController do
       response.should redirect_to(authentications_url)
     end
   end
-
+=end
 end
