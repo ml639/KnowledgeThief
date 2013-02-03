@@ -64,10 +64,10 @@
 
 		        <div class="resourceTitle">
 		        		<% if learningresources.youtubeID.nil? %>
-							<%= link_to learningresources.title, learningresources.link, :target => "_blank", :class => "resourceViewer", :value => learningresources.id  %>
+							<%= link_to learningresources.title, learningresources.link, :target => "_blank", :class => "resourceViewer", :value => learningresources.id, :value => learningresources.id  %>
 						<% else %>
 
-							<%= link_to learningresources.title, youtube_embed(learningresources.link), :target => "_blank", :class => "resourceViewer", :value => learningresources.id  %>
+							<%= link_to learningresources.title, youtube_embed(learningresources.link), :target => "_blank", :class => "resourceViewer", :value => learningresources.id, :value => learningresources.id %>
 						<% end %>
 
 		            <div class="subInfo">

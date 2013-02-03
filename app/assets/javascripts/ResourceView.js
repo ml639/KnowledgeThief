@@ -253,10 +253,10 @@ $(function(){
 			return true;
 		}else{
 			var link_href = link.attr('href');
-			var resource_id = link.attr('value');
-	    	rView.init(link_href, resource_id);
-			rView.comments(resource_id);
-			rView.logUser(resource_id);
+			var get_resource_id = link.attr('value');
+	    	rView.init(link_href, get_resource_id);
+			rView.comments(get_resource_id);
+			rView.logUser(get_resource_id);
 			return false;
 		}
 	});

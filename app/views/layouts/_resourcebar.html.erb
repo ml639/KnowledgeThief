@@ -60,6 +60,16 @@
 			    	<div id="commentsHolder">
 			    		<ul class="commentsList"></ul>
 					</div>	
+					<div id="newCommentForm">
+						<% if(current_user) %>
+    						<form accept-charset="utf8" class="commentform" action="/comments/0/forresource" method="get">
+								<input id="commenttext" placeholder="comment..." type="text">
+		 						<button type="button" id="saveComment" >save</button>
+							</form>
+						<% else %>
+								<div> Login to comment </div>
+						<% end %>
+					</div>
 				</div>
 			</div>
 			<div class="info-box" class="colorChange">
@@ -68,6 +78,7 @@
 			    	<div id="commentsHolder">
 			    		<ul class="commentsList"></ul>
 					</div>	
+					
 				</div>
 			</div>
 		</div>
