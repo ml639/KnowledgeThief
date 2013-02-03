@@ -38,4 +38,6 @@ Kt::Application.configure do
   # As devise says:
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+  # For paperclip to work
+  Paperclip.options[:command_path] = "/usr/local/bin/"
 end

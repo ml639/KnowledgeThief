@@ -39,7 +39,14 @@ gem 'will_paginate'
 # Google search (limited to 100 queries for free)
 gem "google-api-client", "~> 0.6.2"
 
+# IMGKit for site thumbnails
+gem "imgkit", "~> 1.3.7"
 
+# Amazon S3 storage
+gem 'aws-sdk', '~> 1.3.4'
+
+# Paperclip for file uploads
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 group :development do
    # The following three gems will make sure Linux, Mac and Windows work (respectively)

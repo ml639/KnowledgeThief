@@ -334,7 +334,11 @@ CREATE TABLE resources (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     "youtubeID" character varying(255),
-    media_type character varying(255)
+    media_type character varying(255),
+    snapshot_file_name character varying(255),
+    snapshot_content_type character varying(255),
+    snapshot_file_size integer,
+    snapshot_updated_at timestamp without time zone
 );
 
 
@@ -1173,3 +1177,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130128005941');
 INSERT INTO schema_migrations (version) VALUES ('20130128010513');
 
 INSERT INTO schema_migrations (version) VALUES ('20130128021131');
+
+INSERT INTO schema_migrations (version) VALUES ('20130203203047');
