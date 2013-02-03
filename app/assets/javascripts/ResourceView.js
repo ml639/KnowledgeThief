@@ -135,10 +135,10 @@ var ResourceView = function(){
 		$('#contentColumn').fadeIn();
 	};
 	
-	comments = function(){
+	comments = function(new_resource_id){
 		$.ajax({
 			type: "post",
-			url: "comments/"+resource_id +"/forresource",
+			url: "comments/"+new_resource_id +"/forresource",
 			dataType: "json",
 			// Define request handlers.
 			success: function( objResponse ){
@@ -247,12 +247,18 @@ $(function(){
 	var rView = new ResourceView()
 	$('.resourceViewer').click(function(){
 		var link = jQuery(this);
-		var link_href = link.attr('href');
-		var resource_id = link.attr('value');
-	    rView.init(link_href, resource_id);
-		rView.comments();
-		rView.logUser(resource_id);
-		return false
+		//this is hacky as shit. split on /'s and check if its a resource link
+		var parts = link.attr('href').split('/');
+		if(parts[1] == "resources"){
+			return true;
+		}else{
+			var link_href = link.attr('href');
+			var resource_id = link.attr('value');
+	    	rView.init(link_href, resource_id);
+			rView.comments(resource_id);
+			rView.logUser(resource_id);
+			return false;
+		}
 	});
 	
 	$(".ajaxUpvote").click(function(){

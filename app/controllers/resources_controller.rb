@@ -5,6 +5,10 @@ class ResourcesController < ApplicationController
       @resources = Resource.all
   end
 
+  def show
+    @resource = Resource.find(params[:id])
+  end
+
   def create
 
     # Usability concern here... need to make sure that they are redirected back here once they log in or something
@@ -16,16 +20,25 @@ class ResourcesController < ApplicationController
       params[:resource][:user_id] = current_user.id
     end
 
-
-    # Check to see if this resource unique
-    params[:resource][:link] = Post::URI.clean(params[:resource][:link])
-    if unique_link?(params[:resource][:link])
-      @resource = Resource.new(params[:resource])
-      @resource[:youtubeID] = self.isYoutube(@resource[:link])
-      @resource.save
+    # If no link is provided, it is a question
+    if(params[:resource][:link] != nil)
+      # Not a question, check to see if this resource unique
+      params[:resource][:link] = PostRank::URI.clean(params[:resource][:link])
+      if unique_link?(params[:resource][:link])
+        @resource = Resource.new(params[:resource])
+        @resource[:youtubeID] = self.isYoutube(@resource[:link])
+        @resource.save
+      else
+        flash[:alert] = "This resource has already been added!"
+      end
+    # No link provided, so this must be a question  
     else
-      flash[:alert] = "This resource has already been added!"
+      @resource = Resource.new(params[:resource])
+      @resource.save
+      @resource.update_attribute(:link, "/resources/"+@resource.id.to_s)
     end
+    
+    
     redirect_to resources_path
   end
 
