@@ -1,7 +1,15 @@
 require 'spec_helper'
 
 describe ResourcesController do
-  it "vote" do
-    
+  it "can be created" do
+   	ResourcesController.new 
   end
+
+  it "displays each feature" do
+  end
+
+  it "defines if it is a youtube link or not" do
+
+  end
+  
 end

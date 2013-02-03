@@ -1,0 +1,1181 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: audits; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE audits (
+    id integer NOT NULL,
+    auditable_id integer,
+    auditable_type character varying(255),
+    associated_id integer,
+    associated_type character varying(255),
+    user_id integer,
+    user_type character varying(255),
+    username character varying(255),
+    action character varying(255),
+    audited_changes text,
+    version integer DEFAULT 0,
+    comment character varying(255),
+    remote_address character varying(255),
+    created_at timestamp without time zone
+);
+
+
+--
+-- Name: audits_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE audits_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: audits_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE audits_id_seq OWNED BY audits.id;
+
+
+--
+-- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE comments (
+    id integer NOT NULL,
+    content text,
+    user_id integer,
+    resource_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
+
+
+--
+-- Name: engage_comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE engage_comments (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    topic_id integer NOT NULL,
+    body text NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: engage_comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE engage_comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: engage_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE engage_comments_id_seq OWNED BY engage_comments.id;
+
+
+--
+-- Name: engage_followings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE engage_followings (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    topic_id integer NOT NULL,
+    token character varying(255) DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: engage_followings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE engage_followings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: engage_followings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE engage_followings_id_seq OWNED BY engage_followings.id;
+
+
+--
+-- Name: engage_topics; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE engage_topics (
+    id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    message text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    style character varying(16) DEFAULT 'question'::character varying NOT NULL,
+    user_id integer NOT NULL,
+    string character varying(255),
+    votes_count integer DEFAULT 0 NOT NULL,
+    status character varying(16) DEFAULT 'pending'::character varying NOT NULL,
+    comments_count integer DEFAULT 0 NOT NULL,
+    followers_count integer DEFAULT 0 NOT NULL,
+    private boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: engage_topics_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE engage_topics_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: engage_topics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE engage_topics_id_seq OWNED BY engage_topics.id;
+
+
+--
+-- Name: engage_user_profiles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE engage_user_profiles (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    admin boolean DEFAULT false NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    username character varying(255),
+    email character varying(255)
+);
+
+
+--
+-- Name: engage_user_profiles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE engage_user_profiles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: engage_user_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE engage_user_profiles_id_seq OWNED BY engage_user_profiles.id;
+
+
+--
+-- Name: engage_votes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE engage_votes (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    topic_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: engage_votes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE engage_votes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: engage_votes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE engage_votes_id_seq OWNED BY engage_votes.id;
+
+
+--
+-- Name: pg_search_documents; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE pg_search_documents (
+    id integer NOT NULL,
+    content text,
+    searchable_id integer,
+    searchable_type character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: pg_search_documents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE pg_search_documents_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pg_search_documents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE pg_search_documents_id_seq OWNED BY pg_search_documents.id;
+
+
+--
+-- Name: resources; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE resources (
+    id integer NOT NULL,
+    link text,
+    title character varying(255),
+    description text,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    "youtubeID" character varying(255),
+    media_type character varying(255),
+    snapshot_file_name character varying(255),
+    snapshot_content_type character varying(255),
+    snapshot_file_size integer,
+    snapshot_updated_at timestamp without time zone
+);
+
+
+--
+-- Name: resources_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE resources_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: resources_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE resources_id_seq OWNED BY resources.id;
+
+
+--
+-- Name: rs_evaluations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE rs_evaluations (
+    id integer NOT NULL,
+    reputation_name character varying(255),
+    source_id integer,
+    source_type character varying(255),
+    target_id integer,
+    target_type character varying(255),
+    value double precision DEFAULT 0,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: rs_evaluations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE rs_evaluations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: rs_evaluations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE rs_evaluations_id_seq OWNED BY rs_evaluations.id;
+
+
+--
+-- Name: rs_reputation_messages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE rs_reputation_messages (
+    id integer NOT NULL,
+    sender_id integer,
+    sender_type character varying(255),
+    receiver_id integer,
+    weight double precision DEFAULT 1,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: rs_reputation_messages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE rs_reputation_messages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: rs_reputation_messages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE rs_reputation_messages_id_seq OWNED BY rs_reputation_messages.id;
+
+
+--
+-- Name: rs_reputations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE rs_reputations (
+    id integer NOT NULL,
+    reputation_name character varying(255),
+    value double precision DEFAULT 0,
+    aggregated_by character varying(255),
+    target_id integer,
+    target_type character varying(255),
+    active boolean DEFAULT true,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: rs_reputations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE rs_reputations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: rs_reputations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE rs_reputations_id_seq OWNED BY rs_reputations.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying(255) NOT NULL
+);
+
+
+--
+-- Name: taggings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE taggings (
+    id integer NOT NULL,
+    tag_id integer,
+    taggable_id integer,
+    taggable_type character varying(255),
+    tagger_id integer,
+    tagger_type character varying(255),
+    context character varying(128),
+    created_at timestamp without time zone
+);
+
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE taggings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE taggings_id_seq OWNED BY taggings.id;
+
+
+--
+-- Name: tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tags (
+    id integer NOT NULL,
+    name character varying(255)
+);
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE tags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
+
+
+--
+-- Name: user_resource_views; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE user_resource_views (
+    id integer NOT NULL,
+    resource_id integer,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: user_resource_views_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE user_resource_views_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: user_resource_views_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE user_resource_views_id_seq OWNED BY user_resource_views.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    email character varying(255) DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying(255),
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip character varying(255),
+    last_sign_in_ip character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: votes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE votes (
+    id integer NOT NULL,
+    votable_id integer,
+    votable_type character varying(255),
+    voter_id integer,
+    voter_type character varying(255),
+    vote_flag boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: votes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE votes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: votes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE votes_id_seq OWNED BY votes.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY audits ALTER COLUMN id SET DEFAULT nextval('audits_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY engage_comments ALTER COLUMN id SET DEFAULT nextval('engage_comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY engage_followings ALTER COLUMN id SET DEFAULT nextval('engage_followings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY engage_topics ALTER COLUMN id SET DEFAULT nextval('engage_topics_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY engage_user_profiles ALTER COLUMN id SET DEFAULT nextval('engage_user_profiles_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY engage_votes ALTER COLUMN id SET DEFAULT nextval('engage_votes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY pg_search_documents ALTER COLUMN id SET DEFAULT nextval('pg_search_documents_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY resources ALTER COLUMN id SET DEFAULT nextval('resources_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY rs_evaluations ALTER COLUMN id SET DEFAULT nextval('rs_evaluations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY rs_reputation_messages ALTER COLUMN id SET DEFAULT nextval('rs_reputation_messages_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY rs_reputations ALTER COLUMN id SET DEFAULT nextval('rs_reputations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY taggings ALTER COLUMN id SET DEFAULT nextval('taggings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_resource_views ALTER COLUMN id SET DEFAULT nextval('user_resource_views_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY votes ALTER COLUMN id SET DEFAULT nextval('votes_id_seq'::regclass);
+
+
+--
+-- Name: audits_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY audits
+    ADD CONSTRAINT audits_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: engage_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY engage_comments
+    ADD CONSTRAINT engage_comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: engage_followings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY engage_followings
+    ADD CONSTRAINT engage_followings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: engage_topics_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY engage_topics
+    ADD CONSTRAINT engage_topics_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: engage_user_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY engage_user_profiles
+    ADD CONSTRAINT engage_user_profiles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: engage_votes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY engage_votes
+    ADD CONSTRAINT engage_votes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pg_search_documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY pg_search_documents
+    ADD CONSTRAINT pg_search_documents_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: resources_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY resources
+    ADD CONSTRAINT resources_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: rs_evaluations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY rs_evaluations
+    ADD CONSTRAINT rs_evaluations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: rs_reputation_messages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY rs_reputation_messages
+    ADD CONSTRAINT rs_reputation_messages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: rs_reputations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY rs_reputations
+    ADD CONSTRAINT rs_reputations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: taggings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY taggings
+    ADD CONSTRAINT taggings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tags
+    ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_resource_views_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY user_resource_views
+    ADD CONSTRAINT user_resource_views_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: votes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY votes
+    ADD CONSTRAINT votes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: associated_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX associated_index ON audits USING btree (associated_id, associated_type);
+
+
+--
+-- Name: auditable_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX auditable_index ON audits USING btree (auditable_id, auditable_type);
+
+
+--
+-- Name: index_audits_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_audits_on_created_at ON audits USING btree (created_at);
+
+
+--
+-- Name: index_engage_followings_on_user_id_and_topic_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_engage_followings_on_user_id_and_topic_id ON engage_followings USING btree (user_id, topic_id);
+
+
+--
+-- Name: index_engage_topics_on_comments_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_engage_topics_on_comments_count ON engage_topics USING btree (comments_count);
+
+
+--
+-- Name: index_engage_topics_on_followers_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_engage_topics_on_followers_count ON engage_topics USING btree (followers_count);
+
+
+--
+-- Name: index_engage_topics_on_private; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_engage_topics_on_private ON engage_topics USING btree (private);
+
+
+--
+-- Name: index_engage_topics_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_engage_topics_on_status ON engage_topics USING btree (status);
+
+
+--
+-- Name: index_engage_topics_on_style; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_engage_topics_on_style ON engage_topics USING btree (style);
+
+
+--
+-- Name: index_engage_topics_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_engage_topics_on_user_id ON engage_topics USING btree (user_id);
+
+
+--
+-- Name: index_engage_topics_on_votes_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_engage_topics_on_votes_count ON engage_topics USING btree (votes_count);
+
+
+--
+-- Name: index_engage_user_profiles_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_engage_user_profiles_on_user_id ON engage_user_profiles USING btree (user_id);
+
+
+--
+-- Name: index_engage_votes_on_topic_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_engage_votes_on_topic_id ON engage_votes USING btree (topic_id);
+
+
+--
+-- Name: index_engage_votes_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_engage_votes_on_user_id ON engage_votes USING btree (user_id);
+
+
+--
+-- Name: index_rs_evaluations_on_reputation_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_rs_evaluations_on_reputation_name ON rs_evaluations USING btree (reputation_name);
+
+
+--
+-- Name: index_rs_evaluations_on_reputation_name_and_source_and_target; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_rs_evaluations_on_reputation_name_and_source_and_target ON rs_evaluations USING btree (reputation_name, source_id, source_type, target_id, target_type);
+
+
+--
+-- Name: index_rs_evaluations_on_source_id_and_source_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_rs_evaluations_on_source_id_and_source_type ON rs_evaluations USING btree (source_id, source_type);
+
+
+--
+-- Name: index_rs_evaluations_on_target_id_and_target_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_rs_evaluations_on_target_id_and_target_type ON rs_evaluations USING btree (target_id, target_type);
+
+
+--
+-- Name: index_rs_reputation_messages_on_receiver_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_rs_reputation_messages_on_receiver_id ON rs_reputation_messages USING btree (receiver_id);
+
+
+--
+-- Name: index_rs_reputation_messages_on_receiver_id_and_sender; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_rs_reputation_messages_on_receiver_id_and_sender ON rs_reputation_messages USING btree (receiver_id, sender_id, sender_type);
+
+
+--
+-- Name: index_rs_reputation_messages_on_sender_id_and_sender_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_rs_reputation_messages_on_sender_id_and_sender_type ON rs_reputation_messages USING btree (sender_id, sender_type);
+
+
+--
+-- Name: index_rs_reputations_on_reputation_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_rs_reputations_on_reputation_name ON rs_reputations USING btree (reputation_name);
+
+
+--
+-- Name: index_rs_reputations_on_reputation_name_and_target; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_rs_reputations_on_reputation_name_and_target ON rs_reputations USING btree (reputation_name, target_id, target_type);
+
+
+--
+-- Name: index_rs_reputations_on_target_id_and_target_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_rs_reputations_on_target_id_and_target_type ON rs_reputations USING btree (target_id, target_type);
+
+
+--
+-- Name: index_taggings_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_taggings_on_tag_id ON taggings USING btree (tag_id);
+
+
+--
+-- Name: index_taggings_on_taggable_id_and_taggable_type_and_context; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_taggings_on_taggable_id_and_taggable_type_and_context ON taggings USING btree (taggable_id, taggable_type, context);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
+
+
+--
+-- Name: index_votes_on_votable_id_and_votable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_votes_on_votable_id_and_votable_type ON votes USING btree (votable_id, votable_type);
+
+
+--
+-- Name: index_votes_on_voter_id_and_voter_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_votes_on_voter_id_and_voter_type ON votes USING btree (voter_id, voter_type);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: user_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX user_index ON audits USING btree (user_id, user_type);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+INSERT INTO schema_migrations (version) VALUES ('20121019184613');
+
+INSERT INTO schema_migrations (version) VALUES ('20121019184720');
+
+INSERT INTO schema_migrations (version) VALUES ('20121019222914');
+
+INSERT INTO schema_migrations (version) VALUES ('20121020055312');
+
+INSERT INTO schema_migrations (version) VALUES ('20121020065908');
+
+INSERT INTO schema_migrations (version) VALUES ('20121020065909');
+
+INSERT INTO schema_migrations (version) VALUES ('20121020065910');
+
+INSERT INTO schema_migrations (version) VALUES ('20121020065911');
+
+INSERT INTO schema_migrations (version) VALUES ('20121020065912');
+
+INSERT INTO schema_migrations (version) VALUES ('20121020065913');
+
+INSERT INTO schema_migrations (version) VALUES ('20121020065914');
+
+INSERT INTO schema_migrations (version) VALUES ('20121023201901');
+
+INSERT INTO schema_migrations (version) VALUES ('20130113203220');
+
+INSERT INTO schema_migrations (version) VALUES ('20130113235816');
+
+INSERT INTO schema_migrations (version) VALUES ('20130119230833');
+
+INSERT INTO schema_migrations (version) VALUES ('20130121015838');
+
+INSERT INTO schema_migrations (version) VALUES ('20130121015839');
+
+INSERT INTO schema_migrations (version) VALUES ('20130121015840');
+
+INSERT INTO schema_migrations (version) VALUES ('20130121015841');
+
+INSERT INTO schema_migrations (version) VALUES ('20130121015842');
+
+INSERT INTO schema_migrations (version) VALUES ('20130128003259');
+
+INSERT INTO schema_migrations (version) VALUES ('20130128005941');
+
+INSERT INTO schema_migrations (version) VALUES ('20130128010513');
+
+INSERT INTO schema_migrations (version) VALUES ('20130128021131');
+
+INSERT INTO schema_migrations (version) VALUES ('20130203203047');

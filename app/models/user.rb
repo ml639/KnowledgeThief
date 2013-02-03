@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include Engage::Extensions::User
   has_many :resources
   has_many :comments
   has_many :resource_views, :class_name => 'UserResourceView'

@@ -1,9 +1,7 @@
 source 'https://rubygems.org'
 
-# Rails 3.2.11 
+# Rails 3.2.11
 gem 'rails', '3.2.11'
-
-gem "pg"
 
 # For Ubuntu to be happy
 gem 'therubyracer'
@@ -29,13 +27,36 @@ gem "audited-activerecord", "~> 3.0"
 # PostRank-URI for URI normalization
 gem "postrank-uri", "~> 1.0.17"
 
+# Engage! for user support forum
+gem 'engagecsm'
+
+# Postgresql gem for better continuous integration with Heroku
+gem 'pg'
+
+# pg_search for fulltext searching in postgresql
+gem 'pg_search'
+
+# will_paginate for easier pagination
+gem 'will_paginate'
+
+# Google search (limited to 100 queries for free)
+gem "google-api-client", "~> 0.6.2"
+
+# IMGKit for site thumbnails
+gem "imgkit", "~> 1.3.7"
+
+# Amazon S3 storage
+gem 'aws-sdk', '~> 1.3.4'
+
+# Paperclip for file uploads
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+
 group :development do
-   gem 'sqlite3'
    # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false
    gem 'rb-fsevent', :require => false
    gem 'rb-fchange', :require => false
-   
+
    # Similiarly, the following two gems together ensure functionality for both Linux and Mac (respectively)
    gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
    gem 'growl' if /darwin/ =~ RUBY_PLATFORM
@@ -43,10 +64,15 @@ group :development do
    # Guard allows for monitoring file changes and reloading spec's
    gem 'guard'
    gem 'guard-rspec'
-   
+
    # Spork is a rspec speed improving gem
    gem 'guard-spork'
    gem 'spork'
+
+   # For debugging, see http://railscasts.com/episodes/402-better-errors-railspanel
+   gem "better_errors"
+   gem "binding_of_caller"
+   gem 'meta_request'
 end
 
 group :development, :test do
@@ -55,7 +81,7 @@ group :development, :test do
    gem 'rspec-rails', '~> 2.0'
    # Simplecov is a code coverage generator that works with RSPEC
    gem 'simplecov', :require => false
-   # Capybara allows for integration testing with RSPEC along with Selenium UI testing 
+   # Capybara allows for integration testing with RSPEC along with Selenium UI testing
    gem 'capybara'
    # Debugger helps with debugging rails applications
    gem 'debugger'

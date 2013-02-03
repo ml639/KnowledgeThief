@@ -3,6 +3,8 @@ Kt::Application.routes.draw do
   #resources :authentications
 
 
+  mount Engage::Engine => '/engage', :as => 'engage'
+
   resources :comments do
     member {post :forresource}
   end
@@ -10,7 +12,9 @@ Kt::Application.routes.draw do
 
   resources :resources do
       member { post :vote }
+      collection {get :search}
     end
+
   devise_for :users
  
   resources :userResourceView
@@ -21,13 +25,15 @@ Kt::Application.routes.draw do
     
   end
   devise_for :user, :path => '', :path_names => {:sign_up => "register" }
+
   match '/user_profile', :to =>'users#index'
   get 'tags/:tag', to: 'resources#index', as: :tag
 
   match '/auth/:provider/callback' => 'authentications#create'
   match '/auth/:provider/failure', :to => 'authentications#failure'
   #match '/auth/:provider/callback?error_reason...', :to => 'profiles#failure'
-
+  
+  match '/resources', to: 'resources#create', :via => :post
   match 'contact' => 'contact#new', :as => 'contact', :via => :get
   match 'contact' => 'contact#create', :as => 'contact', :via => :post
   match '/forums' => 'forums#index'
