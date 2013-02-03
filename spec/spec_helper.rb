@@ -40,6 +40,14 @@ Spork.prefork do
       # the seed, which is printed after each run.
       #     --seed 1234
       config.order = "random"
+
+      OmniAuth.config.test_mode = true
+  
+      omniauth_hash = { 'uid' => '12345', info: { 'nickname' => 'testuser', 'email' => "foo@bar.com" }, 'credentials' => { 'token' => 'umad', 'secret' => 'bro?' } }
+  
+      OmniAuth.config.add_mock(:facebook, omniauth_hash)
+
+      config.include OauthMocking
     end
 end
 
