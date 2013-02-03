@@ -10,8 +10,8 @@
 #user_email = "landontest@gmail.com"
 #user_pass = "tester"
 
-#user = User.create!(:email => user_email, 
- #                   :password = user_pass, 
+#user = User.create!(:email => user_email,
+ #                   :password = user_pass,
  #                   :password_confirmation = user_pass)
 
 # Confirm the user for Devise
@@ -45,13 +45,36 @@ File.open("app/assets/files/seed_resources.txt") do |seed_resources|
     description = pairs[3].unpack("C*").pack("U*")
     tags = pairs[4].unpack("C*").pack("U*")
 
-    temp_resource = Resource.create!(:title => title, 
-                     :link => link, 
+    temp_resource = Resource.create!(:title => title,
+                     :link => link,
                      :description => description,
                      :media_type => media_type)
 >>>>>>> 975c2fd8315210a30498813506bbf00bd84119e9
     temp_resource.tag_list = tags
+
+    url = PostRank::URI.clean(temp_resource.link)
+
+    side_size = 300
+    crop_side_size = 300
+
+    kit = IMGKit.new(url, :quality => 50,
+                          :width   => side_size,
+                          :height  => side_size,
+                          "crop-w" => crop_side_size,
+                          "crop-h" => crop_side_size,
+                          "zoom"   => 0.35,
+                          "disable-smart-width" => true,
+                          "load-error-handling" => "ignore")
+
+    img   = kit.to_img(:jpg)
+
+    file  = Tempfile.new(["resource_#{temp_resource.id}", 'jpg'], 'tmp',
+                         :encoding => 'ascii-8bit')
+    file.write(img)
+    file.flush
+    temp_resource.snapshot = file
     temp_resource.save!
+    file.unlink
   end
 end
 

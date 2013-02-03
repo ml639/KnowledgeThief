@@ -1,0 +1,12 @@
+development:
+  bucket: knowledgethief-dev
+  access_key_id: 0SYCSZ147YCG32ZRFS82
+  secret_access_key: RVOoKnVmHgk3DFgspftj93stfEUnySj/dO9afaUs
+test:
+  bucket: knowledgethief-test
+  access_key_id: 0SYCSZ147YCG32ZRFS82
+  secret_access_key: RVOoKnVmHgk3DFgspftj93stfEUnySj/dO9afaUs
+production:
+  bucket: knowledgethief-pro
+  access_key_id: 0SYCSZ147YCG32ZRFS82
+  secret_access_key: RVOoKnVmHgk3DFgspftj93stfEUnySj/dO9afaUs

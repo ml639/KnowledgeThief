@@ -22,6 +22,7 @@ class ResourcesController < ApplicationController
     if unique_link?(params[:resource][:link])
       @resource = Resource.new(params[:resource])
       @resource[:youtubeID] = self.isYoutube(@resource[:link])
+      upload_image(@resource)
       @resource.save
     else
       flash[:alert] = "This resource has already been added!"
@@ -58,6 +59,7 @@ class ResourcesController < ApplicationController
   def search
     # Make sure google(q, filter) is run first so the sort encompasses those results as well.
     #google(params[:q], filter)
+     #upload_images
 
      @resource = Resource.full_search(params[:q])
    #  raise params.to_s
@@ -106,5 +108,39 @@ class ResourcesController < ApplicationController
     #
   end
 
+  # def upload_images
+  #   all_r = Resource.all
+  #   all_r.each do |r|
+  #     upload_image(r)
+  #   end
+  # end
+
+  # To display the image in view: <%= image_tag @resource.snapshot.url %>
+  def upload_image(r)
+
+    url = PostRank::URI.clean(r.link)
+
+    side_size = 300
+    crop_side_size = 300
+
+    kit = IMGKit.new(url, :quality => 50,
+                          :width   => side_size,
+                          :height  => side_size,
+                          "crop-w" => crop_side_size,
+                          "crop-h" => crop_side_size,
+                          "zoom"   => 0.35,
+                          "disable-smart-width" => true,
+                          "load-error-handling" => "ignore")
+
+    img   = kit.to_img(:jpg)
+
+    file  = Tempfile.new(["resource_#{r.id}", 'jpg'], 'tmp',
+                         :encoding => 'ascii-8bit')
+    file.write(img)
+    file.flush
+    r.snapshot = file
+    r.save
+    file.unlink
+  end
 
 end
