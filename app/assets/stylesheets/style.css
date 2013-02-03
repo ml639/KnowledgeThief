@@ -25,12 +25,7 @@ a, img {
 	
 	
 }
-#frameHolder{
-	overflow:hidden;
-	height:100%;
-	display:none;
-	padding-top:60px;
-}
+
 #wrapper{
 	position:relative;
 	overflow:auto;
@@ -65,84 +60,6 @@ a, img {
 	left:20px;
 	font-family:robotoThin;
 }
-
-#mainSearchWrapper{
-	position:relative; 
-	margin: 0 auto; 
-	margin-top:8px;
-	height:30px; 
-	width:663px;
-	width:390px;
-}
-
-input.mainSearch{
-	width:100%;  
-	height:30px; 
-	font-size:16px;
-	padding:0;
-	padding-top:3px;
-	padding-left:8px;
-	font-family:robotoLight;
-	color:#666;
-	border-top:#666;
-	border-left:#666;
-	border-right:#ccc;
-	border-bottom:#ccc;
-	outline:none;
-}
-
-input.mainSearch:focus{
-border:solid 1px #C66F58;
-}
-
-input.mainSubmit{
-	position:relative; 
-	display:inline-block; 
-	margin-top:-29px; 
-	height:29px;  
-	background:transparent; 
-	border:none;
-	float:right;
-}
-
-/* 
-input{
-	position:relative;
-	height:29px;
-	width:100%;
-	background-color:white;
-	color:#666;
-	padding-left:9px;
-	border-radius:2px;
-	-moz-border-radius:2px;
-	font-size:13px;
-}
-
-.inputPadding{
-	padding-bottom:50px;	
-}
-
-.submit{
-	position:relative;
-	display:inline-block;
-	margin-left:13px;
-	margin-top:11px;
-	margin-bottom:5px;
-	background-color:#ddd;
-	width:40%;
-	height:40px;
-	color:#444;
-	font-size:13px;
-	text-align:center;
-	border-left: 1px solid #ccc;
-	border-radius:2px;
-	-moz-border-radius:2px;
-	float:right;
-}
-
-*/
-
-
 
 #fixedFooter{
 	position:fixed;

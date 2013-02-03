@@ -1,0 +1,312 @@
+#slideshow #slidesContainer {
+  display:none;
+  margin:0 auto;
+  width:1000px;
+  height:263px;
+  overflow:auto; /* allow scrollbar */
+  position:relative;
+}
+#slideshow #slidesContainer .slide {
+  margin:0 auto;
+  width:540px; /* reduce by 20 pixels to avoid horizontal scroll */
+  height:263px;
+}
+#bar-wrap {
+  position: fixed;
+  width: 850px; 
+  top:585px;
+  right: 10px;
+}
+#resourceNavigation{
+  width:54px;
+  float:left;
+}
+.navigation-box{
+  height:54px;
+  width:54px;
+  background:black;
+  margin-top:10px;
+}
+.navigation-box-white{
+display:none;
+position: relative;
+left: -1px;
+top: 0;
+width: 54px;
+background: #fff;
+height: 54px;
+}
+#resourceNav-info{
+background: url("icons.png") -405px 0px no-repeat black;
+z-index:52;
+}
+#nav-info-button{
+  background: url("icons.png") -405px -53px no-repeat black;
+}
+#resourceNav-addResource{
+background: url("icons.png") -484px 0px no-repeat black;
+}
+#resourceNav-addQuestion{
+background: url("icons.png") -444px 0px no-repeat black;
+}
+#resourceNav-addPath{
+background: url("icons.png") -369px 0px no-repeat black;
+}
+
+#searchTitle{
+  float:left;
+  position:relative; 
+  bottom:-2px; 
+  right:10px;
+  width:10%;
+}
+
+input.mainSearch{
+  margin-top:10px;
+  width:90%;  
+  height:30px; 
+  font-size:16px;
+  padding:0;
+  padding-top:3px;
+  padding-left:8px;
+  font-family:robotoLight;
+  color:#666;
+  border-top:#666;
+  border-left:#666;
+  border-right:#ccc;
+  border-bottom:#ccc;
+  outline:none;
+  float:left;
+}
+
+input.mainSearch:focus{
+border:solid 1px #C66F58;
+}
+
+input.mainSubmit{
+  position:relative; 
+  display:inline-block; 
+  margin-top:-29px; 
+  height:29px;  
+  background:transparent; 
+  border:none;
+  float:right;
+}
+.white-buttons-background {
+position: absolute;
+left: 0;
+top: 0;
+width: 0;
+background: #fff;
+height: 54px;
+}
+.toggled-bg {
+background: url("icons.png") -265px 0px no-repeat black !important;
+}
+.home-white {
+display:none;
+position: absolute;
+left: 0;
+bottom: 0;
+width: 54px;
+background: #fff;
+height: 54px;
+}
+.upvote-white {
+display:none;
+position: absolute;
+left: 0;
+bottom: 0;
+width: 54px;
+background: #fff;
+height: 54px;
+}
+.downvote-white {
+display:none;
+position: absolute;
+left: -1px;
+top: 0;
+width: 54px;
+background: #fff;
+height: 54px;
+}
+.button-right, #button-home, .button-left, #button-upvote, #button-downvote {
+  width: 53px;
+  height: 53px;
+  position: relative;
+  float: left;
+  margin-right: 10px; }
+
+ .info-toggle, #info-toggle{
+  width: 53px;
+  height: 53px;
+  position: relative;
+  float: right;
+  right:0;
+  margin-right: 10px; 
+ }
+ .toggled-a {
+background: url("icons.png") -265px -53px no-repeat transparent !important;
+}
+
+.button-right {
+  background: url("icons.png") -53px 0px no-repeat black; }
+
+.button-left {
+  background: url("icons.png") 0px 0px no-repeat black; }
+
+#button-upvote {
+  background: url("icons.png") -106px 0px no-repeat black; }
+
+#button-home {
+  background: url("icons.png") -315px 0px no-repeat black; }
+
+#home {
+  background: url("icons.png") -315px -53px;
+  opacity: 0; }
+
+#button-downvote {
+  background: url("icons.png") -159px 0px no-repeat black; }
+
+#a-prev, #a-next, #prevslide, #nextslide, .info-toggle a, #info-toggle a, #about-close a, #contact-close a, #home, #upvote, #downvote {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 53px;
+  height: 53px; }
+
+  .navigation-box{
+    cursor:pointer;
+  }
+ #nav-path-button a, #nav-resource-button a, #nav-question-button a, #nav-info-button a{
+
+ }
+#a-prev, #prevslide {
+  background: url("icons.png") 0px -53px;
+  opacity: 0; }
+
+#a-next, #nextslide {
+  background: url("icons.png") -53px -53px;
+  opacity: 0; }
+
+/*#prevslide:active, #nextslide:active{ margin-top:-19px; }*/
+#upvote {
+  background: url("icons.png") -106px -53px;
+  opacity: 0; }
+
+#downvote {
+  background: url("icons.png") -159px -53px;
+  opacity: 0; }
+
+#prevslide:hover, #nextslide:hover, #upvote:hover, #downvote:hover, #a-next:hover, #a-prev:hover,#nav-path-button:hover, #nav-resource-button:hover, #nav-question-button:hover, #nav-info-button:hover {
+  cursor: pointer; }
+
+.info-toggle a, #info-toggle a {
+background: url("icons.png") -212px -53px no-repeat transparent;
+opacity: 0;
+}
+
+.info-toggle, #info-toggle {
+background: url("icons.png") -212px 0px no-repeat black;
+}
+
+#search-box {
+  width: 470px;
+  height: 53px;
+  background: black;
+  float: left;
+  position:relative;
+  right:5px;
+  padding: 0px 7px 0px 25px; }
+  @media handheld, only screen and (max-width: 721px), only screen and (max-device-width: 721px) {
+    #search-box {
+      width: auto;
+      height: auto;
+      float: left;
+      font-size: auto;
+      padding: 5px 0 0 20px; } }
+
+h1, h2 {
+  font-family: sans-serif;
+  font-size: 32px;
+  color: #fff;
+  font-weight: normal;
+  letter-spacing: 1px; }
+  @media handheld, only screen and (max-width: 721px), only screen and (max-device-width: 721px) {
+    h1, h2 {
+      font-size: 2em; } }
+
+#questions-form, #resource-form, #path-form{
+  padding:10px;
+  display:none;
+  float:right;
+  width:780px;
+  background: black;
+  font-family: serif;
+  color:white !important;
+}
+.formHolder{
+  min-height:250px;
+  height:100%;
+  color:white !important;
+  input,textarea{
+    float:right;
+    width:75%;
+    color:black;
+  }
+  label{
+    color:white !important;
+  }
+  .inputField{
+    padding:5px;
+  }
+}
+#resourceContent{
+padding-top: 10px;
+float:left;
+margin-left:9px;
+}
+.info-box {
+float: right;
+width: 381px;
+background: black;
+font-family: serif;
+font-size: 14px;
+margin-right:15px;
+line-height: 150%;
+padding: 20px 15px 15px 15px;
+color: #a3a4a7;
+ }
+  @media handheld, only screen and (max-width: 721px), only screen and (max-device-width: 721px) {
+    #info-box {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 20px 10px 15px 10px;
+      margin: 0; } }
+
+#info-box p, .text-box p {
+  padding: 0 10px;
+  margin-bottom: 15px; }
+
+.link {
+  position: relative;
+  display: block;
+  height: 28px;
+  margin: 15px 0 0 0; }
+
+.link a {
+  height: 22px;
+  padding: 6px 10px 0 10px; }
+
+.submit {
+  padding: 5px 11px;
+  font-size: 1.2em;
+  height:50px;
+}
+
+.submit:hover {
+
+}
