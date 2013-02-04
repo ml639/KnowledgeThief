@@ -62,11 +62,17 @@ group :development do
    gem 'rb-fchange', :require => false
 
    # Similiarly, the following two gems together ensure functionality for both Linux and Mac (respectively)
-   if /linux/ =~ RUBY_PLATFORM
-     gem 'libnotify', :require => nil
-   elsif /darwin/ =~ RUBY_PLATFORM
-     gem 'growl', :require => nil
+   group :darwin do
+     gem 'growl', :require => false
    end
+   group :linux do
+     gem 'libnotify', :require => false
+   end
+   # if /linux/ =~ RUBY_PLATFORM
+   #   gem 'libnotify', :require => false
+   # elsif /darwin/ =~ RUBY_PLATFORM
+
+   # end
    # gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
    # gem 'growl' if /darwin/ =~ RUBY_PLATFORM
 
