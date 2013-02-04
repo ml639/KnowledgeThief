@@ -1,0 +1,10 @@
+   <div id="mainSearchWrapper">
+		<%= form_tag("/resources/search", :method => "get") do %>
+			<%= text_field_tag(:q, params[:q],
+			    {:id => "search_input_text", :class=>"mainSearch",
+			     :placeholder => "I want to learn..."}) %>
+			<%= image_submit_tag("searchIcon.png", {:class=>"mainSubmit"}) %>
+			<%= hidden_field_tag :filter %>
+			<%= hidden_field_tag :sort %>
+		<% end %>
+   </div>

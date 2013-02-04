@@ -57,16 +57,14 @@ class ResourcesController < ApplicationController
   
   def search
      @resource = Resource.full_search(params[:q])
-   #  raise params.to_s
-     @resource = @resource.reject!{|r| !r.media_type.eql? params[:filter][0][:media_type].downcase } if params[:filter] && !params[:filter][0][:media_type].blank?
+     @resource = @resource.reject!{|r| !r.media_type.eql? params[:filter].downcase } unless params[:filter].blank?
 
-     if params[:filter] 
-      case params[:filter][0][:sort].downcase 
+     unless params[:sort].blank? 
+      case params[:sort].downcase 
       when 'newest'
          then @resource = @resource.sort_by{|r| r.created_at}
       when 'votes'
          then @resource = @resource.sort_by!{|r| r.reputation_for(:votes).to_i}.reverse
-      else
       end
      end
 

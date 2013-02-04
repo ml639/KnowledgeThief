@@ -1,12 +1,12 @@
-<div id="resultWrapper"> <!-- result wrapper -->
+<div id="resultWrapper" class="item"> <!-- result wrapper -->
     <div class="resourceThumb">
         <%= link_to(image_tag("resourceex.JPG", :style => "height:257px;width=257px;", :class=>"thumbImg"), url_for(resource.link)) %>  
     </div>
    	<div id="hoverBox">
         <div id="thumbs">
             <% if current_user %> 
-                <%=# link_to image_tag("thumbUp.png", :style => "height:18px;margin-top:8px;"), vote_resource_path(resources, type: "up"),
-                   # method: "post"
+                <%= link_to image_tag("thumbUp.png", :style => "height:18px;margin-top:8px;"), vote_resource_path(resource, type: "up"),
+                    method: "post"
                      %>  
             <% else %>
                 <%= image_tag("thumbUp.png", :style => "height:18px;margin-top:8px;") %>
