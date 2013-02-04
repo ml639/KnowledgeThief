@@ -1,0 +1,29 @@
+<div id="header">
+
+    <div id="logoText">
+
+        <%= link_to "Knowledge Thief", url_for(:action=>"index", :controller=>"home") %> 
+    </div>
+
+    <div class="signin">
+    
+    <a href="#">
+    
+        <div class="notifications unread">
+        
+            3
+        
+        </div>
+    
+    </a>
+        
+       <% unless current_user.nil? %>
+           <%= link_to "#{current_user.email}", url_for(:action=>"user") %>
+       <% else %>
+           <%= link_to "Sign In", url_for(current_user) %>
+       <% end %>
+        <%= link_to image_tag("downArrow.png", :style => "height:5px;margin-left:3px;vertical-align:middle;"), url_for(current_user) %> 
+    </div>
+    
+
+ </div>

@@ -17,6 +17,8 @@ class Resource < ActiveRecord::Base
    }
 
   belongs_to :user
+  belongs_to :path
+  
   has_many :resource_views, :class_name => 'UserResourceView'
   has_many :comments
   has_reputation :votes, source: :user, aggregated_by: :sum

@@ -55,6 +55,10 @@ gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'daemons'
 gem 'delayed_job_active_record'
 
+# Slim for slim syntax for erb html files
+gem 'slim'
+gem 'slim-rails'
+
 group :development do
    # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false
@@ -128,4 +132,3 @@ gem 'jquery-rails'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-

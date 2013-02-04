@@ -361,6 +361,39 @@ ALTER SEQUENCE engage_votes_id_seq OWNED BY engage_votes.id;
 
 
 --
+-- Name: paths; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE paths (
+    id integer NOT NULL,
+    name character varying(255),
+    content text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    resource_id integer
+);
+
+
+--
+-- Name: paths_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE paths_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: paths_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE paths_id_seq OWNED BY paths.id;
+
+
+--
 -- Name: pg_search_documents; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -407,10 +440,14 @@ CREATE TABLE resources (
     updated_at timestamp without time zone NOT NULL,
     "youtubeID" character varying(255),
     media_type character varying(255),
+<<<<<<< HEAD
     snapshot_file_name character varying(255),
     snapshot_content_type character varying(255),
     snapshot_file_size integer,
     snapshot_updated_at timestamp without time zone
+=======
+    path_id integer
+>>>>>>> new_design
 );
 
 
@@ -796,6 +833,13 @@ ALTER TABLE ONLY engage_votes ALTER COLUMN id SET DEFAULT nextval('engage_votes_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY paths ALTER COLUMN id SET DEFAULT nextval('paths_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY pg_search_documents ALTER COLUMN id SET DEFAULT nextval('pg_search_documents_id_seq'::regclass);
 
 
@@ -932,6 +976,14 @@ ALTER TABLE ONLY engage_user_profiles
 
 ALTER TABLE ONLY engage_votes
     ADD CONSTRAINT engage_votes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: paths_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY paths
+    ADD CONSTRAINT paths_pkey PRIMARY KEY (id);
 
 
 --
@@ -1299,6 +1351,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130128010513');
 
 INSERT INTO schema_migrations (version) VALUES ('20130128021131');
 
+<<<<<<< HEAD
 INSERT INTO schema_migrations (version) VALUES ('20130201223700');
 
 INSERT INTO schema_migrations (version) VALUES ('20130201231642');
@@ -1306,3 +1359,10 @@ INSERT INTO schema_migrations (version) VALUES ('20130201231642');
 INSERT INTO schema_migrations (version) VALUES ('20130203203047');
 
 INSERT INTO schema_migrations (version) VALUES ('20130204041213');
+=======
+INSERT INTO schema_migrations (version) VALUES ('20130201205610');
+
+INSERT INTO schema_migrations (version) VALUES ('20130201222813');
+
+INSERT INTO schema_migrations (version) VALUES ('20130201222848');
+>>>>>>> new_design

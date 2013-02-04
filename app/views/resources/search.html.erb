@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 		<%=
 		 if params[:filter].nil?
 			selected1 = ""
@@ -118,3 +119,21 @@
 		<% end %>
 
 		<%= will_paginate(@resource) %>
+=======
+<%= content_for :top_section do %>
+ <div id="topTitle">
+       Search
+ </div>
+
+    <%= render 'shared/search' %>
+	<%= render 'shared/leftMenu' %>
+	<%= render 'shared/rightMenu' %>    
+<%  end %>
+
+<%= content_for :bottom_wrapper do %>
+	<%= render 'shared/filter' %>
+	<%= (render :partial => 'shared/results', :collection => @resource, :as => 'resource') || "Sorry, no results returned. Please try again!" %>
+
+	<%= will_paginate(@resource) %>
+<%  end %>
+>>>>>>> new_design
