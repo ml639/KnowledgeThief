@@ -5,6 +5,6 @@ Engage.configure do |config|
   config.internal_authentication = false
   config.current_user_method = Proc.new { current_user }
   config.login_link = { :path => :new_user_session_path, :opts => {:remote => true} }
-  config.username_method = Proc.new { "Bob" }
-  config.email_method = Proc.new { "landonwilkins@gmail.com" }
+  config.username_method = Proc.new { email }
+  config.email_method = Proc.new { email  }
 end
