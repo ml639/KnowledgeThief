@@ -34,19 +34,19 @@
 		<a href="#" id="info-button" class="info-button ui-link" style="opacity: 0;"></a>
 	</div>
 	<div id ="resourceNavigation">
-		<div class="navigation-box" id="resourceNav-info">
+		<div class="navigation-box colorChange" id="resourceNav-info">
 			<div class="navigation-box-white"></div>
 			<a href="#" id="nav-info-button" class="" style="opacity: 0;"></a>
 		</div>
-		<div class="navigation-box" id="resourceNav-addQuestion">
+		<div class="navigation-box colorChange" id="resourceNav-addQuestion">
 			<div class="navigation-box-white"></div>
 			<a href="#" id="nav-question-button" class="" style="opacity: 0;"></a>
 		</div>
-		<div class="navigation-box" id="resourceNav-addResource">
+		<div class="navigation-box colorChange" id="resourceNav-addResource">
 			<div class="navigation-box-white"></div>
 			<a href="#" id="nav-resource-button" class="" style="opacity: 0;"></a>
 		</div>
-		<div class="navigation-box" id="resourceNav-addPath">
+		<div class="navigation-box colorChange" id="resourceNav-addPath">
 			<div class="navigation-box-white"></div>
 			<a href="#" id="nav-path-button" class="" style="opacity: 0;"></a>
 		</div>
@@ -54,7 +54,7 @@
 	<div id="resourceContent">
 		<!-- comments and search results -->
 		<div id="information-box" class="navHere">
-			<div class="info-box " class="colorChange" style="margin-right:10px;">
+			<div class="info-box colorChange" style="margin-right:10px;">
 				<div class="info-content">
 					<h2>Comments</h2>
 			    	<div id="commentsHolder">
@@ -72,7 +72,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="info-box" class="colorChange">
+			<div class="info-box colorChange">
 				<div class="info-content">
 					<h2>Search Results</h2>
 			    	<div id="commentsHolder">
@@ -84,9 +84,9 @@
 		</div>
 		<!-- End ofcomments and search results -->
 		<!-- Ask a Question -->
-		<div id="questions-form">
+		<div id="questions-form colorChange">
 			<h2>New Question</h2>
-			<div class="formHolder">
+			<div class="formHolder colorChange">
 				<%= form_for(Resource.new) do |f| %>
 					<div class="inputField">
 						<div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-question-sign"></div>
@@ -111,9 +111,9 @@
 		</div>
 		<!-- End of questions -->
 		<!-- Add a Resource -->
-		<div id="resource-form">
+		<div id="resource-form colorChange">
 			<h2>New Resource</h2>
-			<div class="formHolder">
+			<div class="formHolder colorChange">
 				<%= form_for(Resource.new) do |f| %>
 					<div class="inputField">
 						<div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-link"></div>
@@ -143,9 +143,9 @@
 		</div>
 		<!-- End of Resource -->
 		<!-- Add a Path -->
-		<div id="path-form">
+		<div id="path-form colorChange">
 			<h2>New Path</h2>
-			<div class="formHolder">
+			<div class="formHolder colorChange">
 			</div>
 		</div>
 		<!-- End of Paths -->
