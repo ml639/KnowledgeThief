@@ -1,4 +1,5 @@
 require 'will_paginate/array'
+require 'google/api_client'
 
 class ResourcesController < ApplicationController
   def index
@@ -58,8 +59,18 @@ class ResourcesController < ApplicationController
 
   def search
     # Make sure google(q, filter) is run first so the sort encompasses those results as well.
-    #google(params[:q], filter)
-     #upload_images
+        # Make sure google(q, filter) is run first so the sort encompasses those results as well.
+    filter = "site"
+    if params[:filter] && !params[:filter][0][:media_type].blank?
+      filter = params[:filter][0][:media_type].downcase
+    end
+
+    # Change this second parameter to filter when we figure out the organzation.
+    # google(params[:q], filter)
+    #google(params[:q], "videos")
+
+
+
 
      @resource = Resource.full_search(params[:q])
    #  raise params.to_s
@@ -80,32 +91,57 @@ class ResourcesController < ApplicationController
 
   def google(q, filter)
     # Authenticating into Google's API
-    #client = Google::APIClient.new(:key => 'AIzaSyBmByzcpxbsLsg7u7GlF8I5dJwITuSyCNU', :authorization => nil)
+    client = Google::APIClient.new(:key => 'AIzaSyBmByzcpxbsLsg7u7GlF8I5dJwITuSyCNU', :authorization => nil)
 
     # Discover the Custom Search API
-    #search = client.discovered_api('customsearch')
+    search = client.discovered_api('customsearch')
 
     # Search Google CSE
-    # response = client.execute(
-    #   :api_method => search.cse.list,
-    #   :parameters => {
-    #     'q' => "#{q} #{filter}",
-    #     'key' => 'AIzaSyBmByzcpxbsLsg7u7GlF8I5dJwITuSyCNU',
-    #     'cx' => '016679902470578435641:scswmfxveaa'
-    #   }
-    # )
+    #   cx => the custom search engine that will search the entire web
+    response = client.execute(
+      :api_method => search.cse.list,
+      :parameters => {
+        'q' => "#{q} #{filter}",
+        'key' => 'AIzaSyBmByzcpxbsLsg7u7GlF8I5dJwITuSyCNU',
+        'cx' => '016679902470578435641:scswmfxveaa'
+      }
+    )
 
     # Decode the results
-    # results = ActiveSupport::JSON.decode(response.body, {:symbolize_names => true})
+    results = ActiveSupport::JSON.decode(response.body, {:symbolize_names => true})
 
-    # # Return an empty array if Google CSE limit has been met.
-    # results["items"] == nil ? [] : results["items"]
+    # Return an empty array if Google CSE limit has been met.
+    #results["items"] == nil ? [] : results["items"]
+    #results = {"items" => []}
 
     # Now add those to our database here (call this method before )
-    #attr_accessible :title, :description, :link, :tag_list,
+    # attr_accessible :title, :description, :link, :tag_list,
     #              :user_id, :youtubeID, :media_type
-    #google_result["title"], google_result["link"], google_result["snippet"]
-    #
+    # google_result["title"], google_result["link"], google_result["snippet"]
+
+
+    # Example
+    # Harvard CS61 - Computer Systems|
+    # video|http://cm.dce.harvard.edu/2012/01/13836/publicationListing.shtml|
+    # Harvard's version of CS4400. Topics include assembly, buffer overflow,
+    # optimization and virtual memory.|computer systems, machine organization
+
+    results["items"].each do |r|
+      r["link"] = PostRank::URI.clean(r["link"])
+      if unique_link?(r["link"])
+        temp_resource = Resource.create!(:title => r["title"],
+                                         :link => r["link"],
+                                         :description => r["snippet"],
+                                         :media_type => "other",
+                                         :user_id => 1)
+        temp_resource.tag_list = q
+        upload_image(temp_resource)
+        temp_resource.save!
+
+      end
+    end
+
+
   end
 
   # def upload_images
