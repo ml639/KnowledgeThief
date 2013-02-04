@@ -8,8 +8,7 @@ class HomeController < ApplicationController
       #  @resources = Resource.find_with_reputation(:votes, :all, :limit => 10, order: "votes desc")
       #end
       
-      
-      @resource = Resource.new
+      @resources =  Resource.all
       
       if current_user && params[:selection_type] && params[:selection_type] == "recent"
         # @resources = Recent resources (pending User Activity gem)

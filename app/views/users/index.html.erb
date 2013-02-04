@@ -1,0 +1,87 @@
+<div>
+	
+	<div id="tempcontent" class="tempclearfix" style="margin-top:35px;">
+		<section id="templeft">
+			<div id="tempuserStats" class="tempclearfix">
+				<div class="pic">
+					<a href="#"><img src=<%= current_user.image%> width="150" height="150" /></a>
+				</div>
+				
+				<div class="data">
+					<h1><%=current_user.full_name%></h1>
+					<h3><%=current_user.location%></h3>
+					<h4></h4>
+					<div class="socialMediaLinks">
+						
+					</div>
+					<div class="sep"></div>
+					<ul class="numbers clearfix">
+						<li>Reputation<strong>18</strong></li>
+						<li>Comment<strong>4</strong></li>
+						<li class="tempnobrdr">Resource<strong>7</strong></li>
+					</ul>
+				</div>
+			</div>
+			
+			<h1 style="color:#000;">About Me:</h1>
+			<p style="color:#000;"><%=current_user.bio%></p>
+		</section>
+		
+		<section id="tempright">
+			<div class="gcontent">
+				<div class="head"><h1>Badges(3)</h1></div>
+				<div class="boxy">
+					
+					<div class="badgeCount">
+						<a href="#"><%= link_to image_tag("foursquare-badge.png")%></a>
+						<a href="#"><%= link_to image_tag("foursquare-badge.png")%></a>
+						<a href="#"><%= link_to image_tag("foursquare-badge.png")%></a>
+					</div>
+					
+					<span><a href="#">See all…</a></span>
+				</div>
+			</div>
+			
+			<div class="gcontent">
+				<div class="head"><h1>Friends List</h1></div>
+				<div class="boxy">
+					<p>Your friends - 106 total</p>
+					
+					<div class="tempfriendslist clearfix">
+						<div class="tempfriend">
+							<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Jerry K.", :class=>".cusimg"%></a><span class="friendly"><a href="#">Jerry K.</a></span>
+						</div>
+						
+						<div class="tempfriend">
+							<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Katie F.", :class=>".cusimg" %></a>
+							<span class="friendly"><a href="#">Katie F.</a></span>
+						</div>
+						
+						<div class="tempfriend">
+							<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Ash K.", :class=>".cusimg" %></a>
+							<span class="friendly"><a href="#">Ash K.</a></span>
+						</div>
+						
+						<div class="tempfriend">
+							<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Sponge B.", :class=>".cusimg" %></a>
+							<span class="friendly"><a href="#">Sponge B.</a></span>
+						</div>
+						
+						<div class="tempfriend">
+							<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Frank", :class=>".cusimg" %></a>
+							<span class="friendly"><a href="#">Frank</a></span>
+						</div>
+						
+						<div class="tempfriend">
+							<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Alexa S.", :class=>".cusimg" %></a>
+							<span class="friendly"><a href="#">Alexa S.</a></span>
+						</div>
+					</div>
+					
+					<br/><br/><br/><br/><br/><br/><span class="friendseeall"><a href="#">See all...</a></span>
+				</div>
+			</div>
+		</section>
+	</div>
+
+</div>

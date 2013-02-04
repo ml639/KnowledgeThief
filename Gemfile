@@ -15,6 +15,9 @@ gem 'acts_as_votable'
 # Devise
 gem 'devise'
 
+# Omniauth
+gem 'omniauth'
+gem 'omniauth-facebook'
 # ActiveRecord Reputation System for voting and user reputation
 gem 'activerecord-reputation-system', require: 'reputation_system'
 
@@ -48,6 +51,14 @@ gem 'aws-sdk', '~> 1.3.4'
 # Paperclip for file uploads
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
+# For background jobs (image snap and uploading)
+gem 'daemons'
+gem 'delayed_job_active_record'
+
+# Slim for slim syntax for erb html files
+gem 'slim'
+gem 'slim-rails'
+
 group :development do
    # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false
@@ -55,8 +66,19 @@ group :development do
    gem 'rb-fchange', :require => false
 
    # Similiarly, the following two gems together ensure functionality for both Linux and Mac (respectively)
-   gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
-   gem 'growl' if /darwin/ =~ RUBY_PLATFORM
+   group :darwin do
+     gem 'growl', :require => false
+   end
+   group :linux do
+     gem 'libnotify', :require => false
+   end
+   # if /linux/ =~ RUBY_PLATFORM
+   #   gem 'libnotify', :require => false
+   # elsif /darwin/ =~ RUBY_PLATFORM
+
+   # end
+   # gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
+   # gem 'growl' if /darwin/ =~ RUBY_PLATFORM
 
    # Guard allows for monitoring file changes and reloading spec's
    gem 'guard'
@@ -110,4 +132,3 @@ gem 'jquery-rails'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-

@@ -84,6 +84,39 @@ ALTER SEQUENCE audits_id_seq OWNED BY audits.id;
 
 
 --
+-- Name: authentications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE authentications (
+    id integer NOT NULL,
+    user_id integer,
+    provider character varying(255),
+    uid character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: authentications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE authentications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: authentications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE authentications_id_seq OWNED BY authentications.id;
+
+
+--
 -- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -114,6 +147,45 @@ CREATE SEQUENCE comments_id_seq
 --
 
 ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
+
+
+--
+-- Name: delayed_jobs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE delayed_jobs (
+    id integer NOT NULL,
+    priority integer DEFAULT 0,
+    attempts integer DEFAULT 0,
+    handler text,
+    last_error text,
+    run_at timestamp without time zone,
+    locked_at timestamp without time zone,
+    failed_at timestamp without time zone,
+    locked_by character varying(255),
+    queue character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: delayed_jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE delayed_jobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: delayed_jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE delayed_jobs_id_seq OWNED BY delayed_jobs.id;
 
 
 --
@@ -289,6 +361,39 @@ ALTER SEQUENCE engage_votes_id_seq OWNED BY engage_votes.id;
 
 
 --
+-- Name: paths; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE paths (
+    id integer NOT NULL,
+    name character varying(255),
+    content text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    resource_id integer
+);
+
+
+--
+-- Name: paths_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE paths_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: paths_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE paths_id_seq OWNED BY paths.id;
+
+
+--
 -- Name: pg_search_documents; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -338,7 +443,8 @@ CREATE TABLE resources (
     snapshot_file_name character varying(255),
     snapshot_content_type character varying(255),
     snapshot_file_size integer,
-    snapshot_updated_at timestamp without time zone
+    snapshot_updated_at timestamp without time zone,
+    path_id integer
 );
 
 
@@ -589,7 +695,17 @@ CREATE TABLE users (
     current_sign_in_ip character varying(255),
     last_sign_in_ip character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    full_name character varying(255),
+    nickname character varying(255),
+    first_name character varying(255),
+    last_name character varying(255),
+    image character varying(255),
+    location character varying(255),
+    birthday date,
+    hometown_name character varying(255),
+    bio character varying(255),
+    gender character varying(255)
 );
 
 
@@ -658,7 +774,21 @@ ALTER TABLE ONLY audits ALTER COLUMN id SET DEFAULT nextval('audits_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY authentications ALTER COLUMN id SET DEFAULT nextval('authentications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY delayed_jobs ALTER COLUMN id SET DEFAULT nextval('delayed_jobs_id_seq'::regclass);
 
 
 --
@@ -694,6 +824,13 @@ ALTER TABLE ONLY engage_user_profiles ALTER COLUMN id SET DEFAULT nextval('engag
 --
 
 ALTER TABLE ONLY engage_votes ALTER COLUMN id SET DEFAULT nextval('engage_votes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY paths ALTER COLUMN id SET DEFAULT nextval('paths_id_seq'::regclass);
 
 
 --
@@ -775,11 +912,27 @@ ALTER TABLE ONLY audits
 
 
 --
+-- Name: authentications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY authentications
+    ADD CONSTRAINT authentications_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY delayed_jobs
+    ADD CONSTRAINT delayed_jobs_pkey PRIMARY KEY (id);
 
 
 --
@@ -820,6 +973,14 @@ ALTER TABLE ONLY engage_user_profiles
 
 ALTER TABLE ONLY engage_votes
     ADD CONSTRAINT engage_votes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: paths_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY paths
+    ADD CONSTRAINT paths_pkey PRIMARY KEY (id);
 
 
 --
@@ -914,6 +1075,13 @@ CREATE INDEX associated_index ON audits USING btree (associated_id, associated_t
 --
 
 CREATE INDEX auditable_index ON audits USING btree (auditable_id, auditable_type);
+
+
+--
+-- Name: delayed_jobs_priority; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX delayed_jobs_priority ON delayed_jobs USING btree (priority, run_at);
 
 
 --
@@ -1170,6 +1338,8 @@ INSERT INTO schema_migrations (version) VALUES ('20130121015841');
 
 INSERT INTO schema_migrations (version) VALUES ('20130121015842');
 
+INSERT INTO schema_migrations (version) VALUES ('20130125233852');
+
 INSERT INTO schema_migrations (version) VALUES ('20130128003259');
 
 INSERT INTO schema_migrations (version) VALUES ('20130128005941');
@@ -1178,4 +1348,16 @@ INSERT INTO schema_migrations (version) VALUES ('20130128010513');
 
 INSERT INTO schema_migrations (version) VALUES ('20130128021131');
 
+INSERT INTO schema_migrations (version) VALUES ('20130201205610');
+
+INSERT INTO schema_migrations (version) VALUES ('20130201222813');
+
+INSERT INTO schema_migrations (version) VALUES ('20130201222848');
+
+INSERT INTO schema_migrations (version) VALUES ('20130201223700');
+
+INSERT INTO schema_migrations (version) VALUES ('20130201231642');
+
 INSERT INTO schema_migrations (version) VALUES ('20130203203047');
+
+INSERT INTO schema_migrations (version) VALUES ('20130204041213');

@@ -71,5 +71,16 @@ module Kt
     config.action_mailer.default_url_options = {
       :host => "knowledgethief.com"
     }
+
+    # run before each request in dev, or during initialization in test & prod
+    config.to_prepare do
+      # re-open the `Vote` class so we can make some changes
+      Engage::Vote.class_exec do
+        # the custom changes
+        attr_accessible :user
+      end
+    end
+
+
   end
 end
