@@ -150,6 +150,45 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
+-- Name: delayed_jobs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE delayed_jobs (
+    id integer NOT NULL,
+    priority integer DEFAULT 0,
+    attempts integer DEFAULT 0,
+    handler text,
+    last_error text,
+    run_at timestamp without time zone,
+    locked_at timestamp without time zone,
+    failed_at timestamp without time zone,
+    locked_by character varying(255),
+    queue character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: delayed_jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE delayed_jobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: delayed_jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE delayed_jobs_id_seq OWNED BY delayed_jobs.id;
+
+
+--
 -- Name: engage_comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -715,6 +754,13 @@ ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY delayed_jobs ALTER COLUMN id SET DEFAULT nextval('delayed_jobs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY engage_comments ALTER COLUMN id SET DEFAULT nextval('engage_comments_id_seq'::regclass);
 
 
@@ -838,6 +884,14 @@ ALTER TABLE ONLY authentications
 
 ALTER TABLE ONLY comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY delayed_jobs
+    ADD CONSTRAINT delayed_jobs_pkey PRIMARY KEY (id);
 
 
 --
@@ -972,6 +1026,13 @@ CREATE INDEX associated_index ON audits USING btree (associated_id, associated_t
 --
 
 CREATE INDEX auditable_index ON audits USING btree (auditable_id, auditable_type);
+
+
+--
+-- Name: delayed_jobs_priority; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX delayed_jobs_priority ON delayed_jobs USING btree (priority, run_at);
 
 
 --
@@ -1243,3 +1304,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130201223700');
 INSERT INTO schema_migrations (version) VALUES ('20130201231642');
 
 INSERT INTO schema_migrations (version) VALUES ('20130203203047');
+
+INSERT INTO schema_migrations (version) VALUES ('20130204041213');

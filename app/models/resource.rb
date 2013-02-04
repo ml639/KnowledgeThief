@@ -31,4 +31,33 @@ class Resource < ActiveRecord::Base
                     :s3_credentials => "#{Rails.root}/config/s3.yml"
 
 
+
+  def self.deliver(id)
+    r = find(id)
+    url = PostRank::URI.clean(r.link)
+
+    side_size = 300
+    crop_side_size = 300
+
+    kit = IMGKit.new(url, :quality => 50,
+                          :width   => side_size,
+                          :height  => side_size,
+                          "crop-w" => crop_side_size,
+                          "crop-h" => crop_side_size,
+                          "zoom"   => 0.35,
+                          "disable-smart-width" => true,
+                          "load-error-handling" => "ignore")
+
+    img   = kit.to_img(:jpg)
+
+    file  = Tempfile.new(["resource_#{r.id}", 'jpg'], 'tmp',
+                         :encoding => 'ascii-8bit')
+    file.write(img)
+    file.flush
+    r.snapshot = file
+    r.save
+    file.unlink
+  end
 end
+
+

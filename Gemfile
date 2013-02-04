@@ -51,6 +51,10 @@ gem 'aws-sdk', '~> 1.3.4'
 # Paperclip for file uploads
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
+# For background jobs (image snap and uploading)
+gem 'daemons'
+gem 'delayed_job_active_record'
+
 group :development do
    # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false

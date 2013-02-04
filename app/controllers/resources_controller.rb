@@ -67,7 +67,7 @@ class ResourcesController < ApplicationController
 
     # Change this second parameter to filter when we figure out the organzation.
     # google(params[:q], filter)
-    #google(params[:q], "videos")
+    # google(params[:q], "videos")
 
 
 
@@ -153,30 +153,30 @@ class ResourcesController < ApplicationController
 
   # To display the image in view: <%= image_tag @resource.snapshot.url %>
   def upload_image(r)
+    Resource.delay.deliver(r.id)
+    # url = PostRank::URI.clean(r.link)
 
-    url = PostRank::URI.clean(r.link)
+    # side_size = 300
+    # crop_side_size = 300
 
-    side_size = 300
-    crop_side_size = 300
+    # kit = IMGKit.new(url, :quality => 50,
+    #                       :width   => side_size,
+    #                       :height  => side_size,
+    #                       "crop-w" => crop_side_size,
+    #                       "crop-h" => crop_side_size,
+    #                       "zoom"   => 0.35,
+    #                       "disable-smart-width" => true,
+    #                       "load-error-handling" => "ignore")
 
-    kit = IMGKit.new(url, :quality => 50,
-                          :width   => side_size,
-                          :height  => side_size,
-                          "crop-w" => crop_side_size,
-                          "crop-h" => crop_side_size,
-                          "zoom"   => 0.35,
-                          "disable-smart-width" => true,
-                          "load-error-handling" => "ignore")
+    # img   = kit.to_img(:jpg)
 
-    img   = kit.to_img(:jpg)
-
-    file  = Tempfile.new(["resource_#{r.id}", 'jpg'], 'tmp',
-                         :encoding => 'ascii-8bit')
-    file.write(img)
-    file.flush
-    r.snapshot = file
-    r.save
-    file.unlink
+    # file  = Tempfile.new(["resource_#{r.id}", 'jpg'], 'tmp',
+    #                      :encoding => 'ascii-8bit')
+    # file.write(img)
+    # file.flush
+    # r.snapshot = file
+    # r.save
+    # file.unlink
   end
 
 end
