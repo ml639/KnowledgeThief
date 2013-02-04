@@ -62,8 +62,13 @@ group :development do
    gem 'rb-fchange', :require => false
 
    # Similiarly, the following two gems together ensure functionality for both Linux and Mac (respectively)
-   gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
-   gem 'growl' if /darwin/ =~ RUBY_PLATFORM
+   if /linux/ =~ RUBY_PLATFORM
+     gem 'libnotify', :require => nil
+   elsif /darwin/ =~ RUBY_PLATFORM
+     gem 'growl', :require => nil
+   end
+   # gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
+   # gem 'growl' if /darwin/ =~ RUBY_PLATFORM
 
    # Guard allows for monitoring file changes and reloading spec's
    gem 'guard'
