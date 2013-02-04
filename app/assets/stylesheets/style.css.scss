@@ -95,6 +95,7 @@ ul{
 	height:230px;
 	width:100%;	
 	background-color:#F90;
+	border-bottom:solid 1px black;
 }
 
 #topTitle{
@@ -108,11 +109,25 @@ ul{
 	opacity:.6;
 }
 
-#topSection li{
-	font-size:22px;	
-	line-height:1.5;
+#topSection li,a{
+	
+		font-size:22px;	
+		line-height:1.5;
+		color:white;
+		text-decoration:none;
+		cursor:pointer;
+		font-weight:300;
 }
+#topSection {
+	li:hover,a:hover{
+		text-shadow: gray 0.1em 0.1em 0.1em;
+		font-size:25px;	
+		line-height:1.5;
+		color:white;
+		text-decoration:none;
+		cursor:pointer;
 
+}}
 #leftMenu{
 	position:absolute;
 	left:40px;
@@ -138,6 +153,7 @@ ul{
 }
 
 input.mainSearch{
+	font-family: 'Open Sans';
 	width:100%;  
 	height:40px; 
 	font-size:22px;
@@ -146,10 +162,8 @@ input.mainSearch{
 	padding-top:3px;
 	padding-left:8px;
 	color:#666;
-	border-top:#666;
-	border-left:#666;
-	border-right:#ccc;
-	border-bottom:#ccc;
+	border-style:solid;
+	border-width:1px;
 	outline:none;
 	background-color:white;
 	box-shadow:inset 0px 0px 2px #666;
@@ -224,6 +238,8 @@ input{
 	overflow:hidden;
 	background:white;
 	margin:0;
+	border-right:solid 1px black;
+	height:100%;
 }
 
 #resultWrapper{
@@ -233,6 +249,7 @@ input{
 	overflow:hidden;
 	background:#999;
 	margin:0;
+	float:left;
 }
 
 /*#dummy{
@@ -247,8 +264,20 @@ input{
 }
 
 #filterText li{
+	a{
 	font-size:17px;	
 	line-height:1.2;
+	text-decoration:none;
+	color:darkgray;
+	margin-left:15px;	
+	font-family: "Open Sans";
+	font-weight:300;
+	}
+	a:hover{
+		font-size:19px;
+		color:black;
+	}
+	
 }
 
 #resourceThumb{
