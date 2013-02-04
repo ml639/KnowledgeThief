@@ -1,3 +1,8 @@
+a{
+  background-color: transparent !important;
+
+}
+
 #slideshow #slidesContainer {
   display:none;
   margin:0 auto;
@@ -15,7 +20,8 @@
   position: fixed;
   width: 850px; 
   top:585px;
-  right: 10px;
+  right: -5000px;
+  z-index:52;
 }
 #resourceNavigation{
   width:54px;

@@ -15,6 +15,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.treeTable.js
+//= require jquery.isotope.min.js
 //= require_tree .
 
 
