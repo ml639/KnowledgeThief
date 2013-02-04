@@ -67,7 +67,7 @@ class ResourcesController < ApplicationController
 
     # Change this second parameter to filter when we figure out the organzation.
     # google(params[:q], filter)
-    google(params[:q], "videos")
+    #google(params[:q], "videos")
 
 
 
