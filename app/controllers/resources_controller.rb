@@ -75,13 +75,8 @@ class ResourcesController < ApplicationController
      @resource = Resource.full_search(params[:q])
      @resource = @resource.reject!{|r| !r.media_type.eql? params[:filter].downcase } unless params[:filter].blank?
 
-<<<<<<< HEAD
-     if params[:filter]
-      case params[:filter][0][:sort].downcase
-=======
      unless params[:sort].blank? 
       case params[:sort].downcase 
->>>>>>> new_design
       when 'newest'
          then @resource = @resource.sort_by{|r| r.created_at}
       when 'votes'
