@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Rails 3.2.11 
+# Rails 3.2.11
 gem 'rails', '3.2.11'
 
 # For Ubuntu to be happy
@@ -36,12 +36,16 @@ gem 'pg_search'
 # will_paginate for easier pagination
 gem 'will_paginate'
 
+# Slim for slim syntax for erb html files
+gem 'slim'
+gem 'slim-rails'
+
 group :development do
    # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false
    gem 'rb-fsevent', :require => false
    gem 'rb-fchange', :require => false
-   
+
    # Similiarly, the following two gems together ensure functionality for both Linux and Mac (respectively)
    gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
    gem 'growl' if /darwin/ =~ RUBY_PLATFORM
@@ -49,7 +53,7 @@ group :development do
    # Guard allows for monitoring file changes and reloading spec's
    gem 'guard'
    gem 'guard-rspec'
-   
+
    # Spork is a rspec speed improving gem
    gem 'guard-spork'
    gem 'spork'
@@ -61,7 +65,7 @@ group :development, :test do
    gem 'rspec-rails', '~> 2.0'
    # Simplecov is a code coverage generator that works with RSPEC
    gem 'simplecov', :require => false
-   # Capybara allows for integration testing with RSPEC along with Selenium UI testing 
+   # Capybara allows for integration testing with RSPEC along with Selenium UI testing
    gem 'capybara'
    # Debugger helps with debugging rails applications
    gem 'debugger'
@@ -93,4 +97,3 @@ gem 'jquery-rails'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
