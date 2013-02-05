@@ -262,7 +262,7 @@ var ResourceView = function(){
 			$("#info-button").removeClass("toggled-a");
 			$("#info-toggle").removeClass("toggled-bg")
 			$("#bar-wrap").animate(
-		  	 	{"bottom": "-355px"},{
+		  	 	{"bottom": "-340px"},{
 		     		duration: 500,
 		     		complete: function(){
 
