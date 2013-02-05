@@ -28,3 +28,8 @@ coverage/
 # Ignore sublime text project stuff
 kt.sublime*
 *.TODO
+
+# Ignore backup
+_backup/
+# Ben's stuff
+KTDescription3.pdf
