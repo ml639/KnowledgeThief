@@ -1,4 +1,4 @@
-<div id="resultWrapper" class="item"> <!-- result wrapper -->
+<div id="resultWrapper" class="item thumb"> <!-- result wrapper -->
     <div class="resourceThumb" value="<%= resource.id %>">
         <%= link_to(image_tag(resource.snapshot.url, :style => "height:257px;width=257px;", :class=>"thumbImg"), url_for(resource.link)) %>  
     </div>
@@ -19,6 +19,10 @@
             <%= resource.title %>
         </div>
 
+    </div>
+    
+    <div class="text">
+     <%= resource.description %>
     </div>
 
 </div> <!-- end result wrapper -->
