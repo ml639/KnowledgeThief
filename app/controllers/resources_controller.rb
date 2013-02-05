@@ -85,8 +85,12 @@ class ResourcesController < ApplicationController
 
 
 
-
-     @resource = Resource.full_search(params[:q])
+      unless params[:q].blank?
+        @resource = Resource.full_search(params[:q])
+      else
+        @resource = Resource.all
+      end
+    
      @resource = @resource.reject!{|r| !r.media_type.eql? params[:filter].downcase } unless params[:filter].blank?
 
      unless params[:sort].blank?
@@ -97,7 +101,7 @@ class ResourcesController < ApplicationController
          then @resource = @resource.sort_by!{|r| r.reputation_for(:votes).to_i}.reverse
       end
      end
-     @resource = @resource.paginate(:page => (params[:page] || 1), :per_page => 15)
+     @resource = @resource.paginate(:page => (params[:page] || 1), :per_page => 15) unless @resource.nil?
   end
 
 
