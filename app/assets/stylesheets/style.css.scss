@@ -394,9 +394,10 @@ input{
 .text, .text-js {
     display: none;
     position: absolute;
-    bottom: 0;
+    bottom: 40px;
     left: 0;
     width: 100%;
+    max-height: 200px;
     background: #999;
     background: rgba(0,0,0,0.3);
     text-align: center

@@ -23,3 +23,15 @@ $('.text').hide().removeClass('text').addClass('text-js');
 $('.thumb').hover(function(){
     $(this).find('.text-js').fadeToggle();
 });
+
+function setFilter(val)
+{
+    $('#filter').val(val);
+   	$('#search').submit(); 
+}
+
+function setSort(val)
+{
+    $('#sort').val(val);
+   	$('#search').submit(); 
+}
