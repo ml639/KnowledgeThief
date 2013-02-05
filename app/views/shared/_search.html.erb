@@ -1,5 +1,5 @@
    <div id="mainSearchWrapper">
-		<%= form_tag("/resources/search", :method => "get") do %>
+		<%= form_tag("/resources/search", :method => "get", :id => "search") do %>
 			<%= text_field_tag(:q, params[:q],
 			    {:id => "search_input_text", :class=>"mainSearch",
 			     :placeholder => "I want to learn..."}) %>

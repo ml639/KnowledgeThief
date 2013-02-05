@@ -52,10 +52,11 @@ ul#tempn li.sel a { color: #fff; text-shadow: 0px 1px 2px #88b618; }
 #tempright .gcontent .boxy span { font-size: 1.2em; display: block; margin-bottom: 7px; }
 
 #tempright .gcontent .boxy .tempfriendslist { display: block; margin-bottom: 15px; }
-#tempright .gcontent .boxy .tempfriend { border-top: 1px solid #ccc; float: left; height: 40px; padding: 5px 5px 5px 4px; width: 100px; }
-#tempright .gcontent .boxy .tempfriend .cusimg { border: 1px solid #ccc; float: left; padding: 2px; background: #fff; margin-right: 4px; }
-#tempright .gcontent .boxy .tempfriend .friendly { float: right; position: relative; top: 12px; font-size: 1.2em; }
-#tempright .gcontent .boxy .tempfriend .friendseeall { float:left; top: 12px; font-size: 1.2em; }
+#tempright .gcontent .boxy .tempfriend { border-top: 1px solid #ccc; float: left; height: 50px; padding: 5px 5px 5px 4px; width: 100px;}
+#tempright .gcontent .boxy .tempfriend .cusimg { border: 1px solid #ccc; float: left; padding: 1px; background: #fff; margin-right: 4px; }
+#tempright .gcontent .boxy .tempfriend .friendly {float: right; position: relative; top: -35px;
+left: 3px; font-size: 1em; color:black;}
+#tempright .gcontent .boxy .tempfriend .friendseeall { float:left; top: 12px; font-size: 1.2em; color:black;}
 
 /** @group clearfix **/
 .tempclearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }

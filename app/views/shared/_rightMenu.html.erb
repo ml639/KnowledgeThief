@@ -1,7 +1,9 @@
   <div id="rightMenu">
     
     	<ul>
-        	<li>Profile</li>
+        	<% if user_signed_in? %>
+                <li><%= link_to "Profile", url_for('user_profile')%></li>
+            <% end %>
         	<li><%= link_to "Submit a Question", '#', :class=>"addQuestion" %></li>
             <li><%= link_to "Submit a Resource", '#', :class=>"addResource" %></li>
         </ul>
