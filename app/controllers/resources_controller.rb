@@ -32,7 +32,7 @@ class ResourcesController < ApplicationController
       else
         flash[:alert] = "This resource has already been added!"
       end
-    # No link provided, so this must be a question  
+    # No link provided, so this must be a question
     else
       @resource = Resource.new(params[:resource])
       @resource[:youtubeID] = self.isYoutube(@resource[:link])
@@ -40,8 +40,8 @@ class ResourcesController < ApplicationController
       @resource.save
       @resource.update_attribute(:link, "/resources/"+@resource.id.to_s)
     end
-    
-    
+
+
     redirect_to resources_path
   end
 
@@ -89,8 +89,8 @@ class ResourcesController < ApplicationController
      @resource = Resource.full_search(params[:q])
      @resource = @resource.reject!{|r| !r.media_type.eql? params[:filter].downcase } unless params[:filter].blank?
 
-     unless params[:sort].blank? 
-      case params[:sort].downcase 
+     unless params[:sort].blank?
+      case params[:sort].downcase
       when 'newest'
          then @resource = @resource.sort_by{|r| r.created_at}
       when 'votes'
