@@ -19,6 +19,12 @@
                 <%= yield :bottom_wrapper %>
                 <%= yield %>
             </div>
+            <div class="addNewResourceForm" style="display:none;">
+                <%= render :partial => 'layouts/addResourceForm' %>
+            </div>
+            <div class="addNewQuestionForm" style="display:none;">
+                <%= render :partial => 'layouts/addQuestionForm' %>
+            </div>
         </div> <!-- end contentWrapper -->
 
     </div> <!-- end wrapper -->

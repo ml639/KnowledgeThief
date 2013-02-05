@@ -1,11 +1,11 @@
   <div id="rightMenu">
     
     	<ul>
-    		<% if user_signed_in? %>
-        		<li><%= link_to "Profile", url_for('user_profile')%></li>
-        	<% end %>
-        	<li>Ask a question</li>
-            <li><%= link_to "Submit a resource", url_for('new_resource')%></li>
+        	<% if user_signed_in? %>
+                <li><%= link_to "Profile", url_for('user_profile')%></li>
+            <% end %>
+        	<li><%= link_to "Submit a Question", '#', :class=>"addQuestion" %></li>
+            <li><%= link_to "Submit a Resource", '#', :class=>"addResource" %></li>
         </ul>
     
     </div>

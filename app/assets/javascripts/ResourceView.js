@@ -311,7 +311,7 @@ var ResourceView = function(){
 					    timediff = difference/(60*24) + " days ago";
 					  }
 
-    				$('.commentsList').append("<li>" +item.content +timediff +"</li>").hide().fadeIn();
+    				$('.commentsList').append("<li>" +item.content +timediff +"  minutes ago</li>").hide().fadeIn();
 				});
 			},
 			error: function( objRequest, strError ){
@@ -400,7 +400,7 @@ var ResourceView = function(){
 };
 
 $(function(){
-	var rView = new ResourceView()
+	var rView = new ResourceView();
 	$('.resourceThumb').click(function(){
 		var link = $(this).find('a').attr('href')
 		//this is hacky as shit. split on /'s and check if its a resource link
