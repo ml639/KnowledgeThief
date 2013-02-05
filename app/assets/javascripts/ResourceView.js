@@ -111,8 +111,9 @@ var ResourceView = function(){
     	return this;
 	};
 	setKeyBindings = function(){
-		$('#home').bind('click', function(){
-  			remove();
+
+		$('#home').click(function(){
+  			removeBar();
   		});
   		$('.control')
     		.bind('click', function(){
@@ -247,7 +248,7 @@ var ResourceView = function(){
 			$("#info-button").removeClass("toggled-a");
 			$("#info-toggle").removeClass("toggled-bg")
 			$("#bar-wrap").animate(
-		  	 	{"top": "650px"},{
+		  	 	{"bottom": "-340px"},{
 		     		duration: 500,
 		     		complete: function(){   
 		     	
@@ -258,7 +259,7 @@ var ResourceView = function(){
 			$("#info-button").addClass("toggled-a");
 			$("#info-toggle").addClass("toggled-bg");
 			$("#bar-wrap").animate(
-				{"top": "200px"},{
+				{"bottom": "10px"},{
 		     	duration: 500,
 		     	complete: function(){
 		     }
@@ -266,7 +267,7 @@ var ResourceView = function(){
 			isToggledUp = true;
 		}	
 	};
-	remove = function(){
+	removeBar = function(){
 		$("#slidesContainer").html('');   	
 		$("#slideshow").fadeOut("fast");
 		$("#slidesContainer").fadeOut("fast");
@@ -390,7 +391,7 @@ var ResourceView = function(){
 	};
 	return{
 		init : init,
-		remove : remove,
+		removeBar : removeBar,
 		comments : comments,
 		vote : vote,
 		logUser : logUser,
