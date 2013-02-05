@@ -6,17 +6,17 @@
 		</div>
 		<div id="button-upvote" class="colorChange" style="width: 53px;">
 			<div class="upvote-white"></div>
-			<a id="upvote" class="load-item ui-link" style="opacity: 0;"></a>
+			<a id="upvote" class="load-item ui-link ajaxUpvote" style="opacity: 0;"></a>
 		</div>
 		<div id="button-downvote" class="colorChange" style="width: 53px;">
 			<div class="downvote-white"></div>
-			<a id="downvote" class="load-item ui-link" style="opacity: 0;"></a>
+			<a id="downvote" class="load-item ui-link ajaxDownvote" style="opacity: 0;"></a>
 		</div>
 		<div id="search-box" class="colorChange">
 			<h1 id="searchTitle">KT</h1>
 			<form accept-charset="utf8" action="/resources/search" method="get" id="mainSearchWrapper">
-			    <%= text_field_tag :q,  params[:q],{:id => "search_input_text", :class =>"mainSearch", :placeholder => "I want to learn..."} %>
-			    <input type="image" src="assets/searchIcon.png" value=" " class="mainSubmit">
+			    <%= text_field_tag :q,  params[:q],{:id => "search_input_text", :class =>"veilSearch", :placeholder => "I want to learn..."} %>
+			    <input type="image" src="assets/searchIcon.png" value=" " class="veilSubmit">
 			</form>
 		</div>
 		
@@ -75,16 +75,12 @@
 			<div class="info-box colorChange">
 				<div class="info-content">
 					<h2>Search Results</h2>
-			    	<div id="commentsHolder">
-			    		<ul class="commentsList"></ul>
-					</div>	
-					
 				</div>
 			</div>
 		</div>
 		<!-- End ofcomments and search results -->
 		<!-- Ask a Question -->
-		<div id="questions-form colorChange">
+		<div id="questions-form" clsas="colorChange">
 			<h2>New Question</h2>
 			<div class="formHolder colorChange">
 				<%= form_for(Resource.new) do |f| %>
@@ -111,7 +107,7 @@
 		</div>
 		<!-- End of questions -->
 		<!-- Add a Resource -->
-		<div id="resource-form colorChange">
+		<div id="resource-form" class="colorChange">
 			<h2>New Resource</h2>
 			<div class="formHolder colorChange">
 				<%= form_for(Resource.new) do |f| %>
@@ -143,7 +139,7 @@
 		</div>
 		<!-- End of Resource -->
 		<!-- Add a Path -->
-		<div id="path-form colorChange">
+		<div id="path-form" class="colorChange">
 			<h2>New Path</h2>
 			<div class="formHolder colorChange">
 			</div>

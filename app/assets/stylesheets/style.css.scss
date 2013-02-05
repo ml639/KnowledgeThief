@@ -51,27 +51,6 @@ ul{
 	-o-transition: all 0.4s ease-out;
 }
 
-.signin{
-	margin-top: -34px;
-	position:absolute;
-	right:20px;
-}
-
-
-.signin a{
-	display:inline;
-	color:#999;
-	text-decoration:none;
-	font-size:16px;	
-	padding-left:30px;
-}
-
-.signin a:hover, .signin a:active{
-	-webkit-transition: all 0.4s ease-out;
-	-moz-transition: all 0.4s ease-out;
-	-o-transition: all 0.4s ease-out;
-	color:#eee;	
-}
 
 .notifications{
 	position:absolute;
@@ -185,7 +164,34 @@ input.mainSubmit{
 	border:none;
 	float:right;
 }
-
+input.veilSubmit{
+	position:relative; 
+	display:inline-block; 
+	margin-top:-39px; 
+	height:39px;  
+	background:transparent; 
+	border:none;
+	float:right;
+	right:20px;
+}
+input.veilSearch{
+	font-family: 'Open Sans';
+	width:85%;  
+	height:40px; 
+	font-size:22px;
+	font-weight:300;
+	padding:0;
+	padding-top:3px;
+	padding-left:8px;
+	color:#666;
+	border-style:solid;
+	border-width:1px;
+	outline:none;
+	background-color:white;
+	box-shadow:inset 0px 0px 2px #666;
+	-webkit-box-shadow:inset 0px 0px 2px #666;
+	-moz-box-shadow:inset 0px 0px 2px #666;
+}
 /* 
 input{
 	position:relative;
