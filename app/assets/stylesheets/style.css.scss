@@ -19,6 +19,7 @@ ul{
 	position:relative;
 	overflow:auto;
 	min-width:768px;
+	z-index:1;
 }
 
 /* start header */
@@ -235,6 +236,64 @@ input{
 	min-height:100%;	
 	width:100%;
 	max-width:100%;
+}
+
+.cancelButton{
+	padding:10px;
+	width: 200px;
+	float:left;
+	cursor:pointer;
+}
+.myButton{
+	padding:10px !important;
+	width: 200px !important;
+	float:left !important;
+	cursor:pointer;
+}
+.cancelButton:hover{
+	background:#efefef;
+}
+.myButton:hover{
+	background:#efefef;
+}
+.addNewResourceForm{
+	position:relative;
+	height:100%;
+	min-height:100%;	
+	width:100%;
+	max-width:100%;
+	background:#333;
+	padding-bottom:90px;
+	padding-top:25px;
+	.new_resource{
+		color:white !important;
+		width: 400px;
+		margin-left:auto;
+		margin-right:auto;
+		input,textarea{
+			width:100%;
+		}
+	}
+}
+
+.addNewQuestionForm{
+	position:relative;
+	height:100%;
+	min-height:100%;	
+	width:100%;
+	max-width:100%;
+	background:#333;
+	padding-bottom:140px;
+	padding-top:25px;
+	.new_resource{
+		color:white !important;
+		width: 400px;
+		margin-left:auto;
+		margin-right:auto;
+		input,textarea{
+			width:100%;
+		}
+	}
 }
 
 #filterWrapper{
