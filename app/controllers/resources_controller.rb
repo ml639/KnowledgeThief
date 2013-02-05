@@ -28,8 +28,8 @@ class ResourcesController < ApplicationController
       if unique_link?(params[:resource][:link])
         @resource = Resource.new(params[:resource])
         @resource[:youtubeID] = self.isYoutube(@resource[:link])
-        upload_image(@resource)
         @resource.save
+        upload_image(@resource)
       else
         flash[:alert] = "This resource has already been added!"
       end
