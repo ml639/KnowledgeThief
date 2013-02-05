@@ -247,7 +247,7 @@ var ResourceView = function(){
 			$("#info-button").removeClass("toggled-a");
 			$("#info-toggle").removeClass("toggled-bg")
 			$("#bar-wrap").animate(
-		  	 	{"top": "585px"},{
+		  	 	{"top": "650px"},{
 		     		duration: 500,
 		     		complete: function(){   
 		     	
