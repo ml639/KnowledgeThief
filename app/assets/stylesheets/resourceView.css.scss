@@ -18,8 +18,8 @@ a{
 }
 #bar-wrap {
   position: fixed;
-  width: 850px; 
-  bottom:-345px;
+  width: 850px;
+  bottom:-355px;
   right: -5000px;
   z-index:52;
 }
@@ -64,16 +64,16 @@ background: url("icons.png") -369px 0px no-repeat black;
 
 #searchTitle{
   float:left;
-  position:relative; 
-  bottom:-2px; 
+  position:relative;
+  bottom:-2px;
   right:10px;
   width:10%;
 }
 
 input.mainSearch{
   margin-top:10px;
-  width:90%;  
-  height:30px; 
+  width:90%;
+  height:30px;
   font-size:16px;
   padding:0;
   padding-top:3px;
@@ -93,11 +93,11 @@ border:solid 1px #C66F58;
 }
 
 input.mainSubmit{
-  position:relative; 
-  display:inline-block; 
-  margin-top:-29px; 
-  height:29px;  
-  background:transparent; 
+  position:relative;
+  display:inline-block;
+  margin-top:-29px;
+  height:29px;
+  background:transparent;
   border:none;
   float:right;
 }
@@ -152,7 +152,7 @@ height: 54px;
   position: relative;
   float: right;
   right:0;
-  margin-right: 10px; 
+  margin-right: 10px;
  }
  .toggled-a {
 background: url("icons.png") -265px -53px no-repeat transparent !important;

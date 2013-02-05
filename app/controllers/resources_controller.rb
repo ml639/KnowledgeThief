@@ -80,7 +80,7 @@ class ResourcesController < ApplicationController
 
     # Change this second parameter to filter when we figure out the organzation.
     # google(params[:q], filter)
-    #google(params[:q], "videos")
+    google(params[:q], "videos")
 
 
 
@@ -89,7 +89,7 @@ class ResourcesController < ApplicationController
       else
         @resource = Resource.all
       end
-    
+
      @resource = @resource.reject!{|r| !r.media_type.eql? params[:filter].downcase } unless params[:filter].blank?
 
      unless params[:sort].blank?

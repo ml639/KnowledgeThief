@@ -26,7 +26,7 @@ var ResourceView = function(){
 		for(var i = 0 ; i< searchResultURLS.length; i++){
 			if(searchResultURLS[i] === url){
 				if(i != 0){//load the page before the current click.
-					var prevIframe = document.createElement("iframe");	
+					var prevIframe = document.createElement("iframe");
 					prevIframe.setAttribute("id", "main-iframe2");
 					prevIframe.setAttribute("src", searchResultURLS[i-1]);
 					prevIframe.style.float = "left";
@@ -34,13 +34,13 @@ var ResourceView = function(){
 					prevIframe.style.width = "100%";
 					prevIframe.style.border = "none";
 					prevIframe.style.top = "-1000px";
-					newSlide = $("<div class='slide'></div>").appendTo("#slidesContainer"); 
+					newSlide = $("<div class='slide'></div>").appendTo("#slidesContainer");
 					$(newSlide).append(prevIframe);
 					isFirst = false;
 					iFrameURLS.push(searchResultURLS[i-1]);
 				}
 				//load the current click
-				var tempIFrame = document.createElement("iframe");	
+				var tempIFrame = document.createElement("iframe");
 				tempIFrame.setAttribute("id", "main-iframe2");
 				tempIFrame.setAttribute("src", searchResultURLS[i]);
 				tempIFrame.style.float = "left";
@@ -48,11 +48,11 @@ var ResourceView = function(){
 				tempIFrame.style.width = "100%";
 				tempIFrame.style.border = "none";
 				tempIFrame.style.top = "-1000px";
-				newSlide = $("<div class='slide'></div>").appendTo("#slidesContainer"); 
+				newSlide = $("<div class='slide'></div>").appendTo("#slidesContainer");
 				$(newSlide).append(tempIFrame);
 				iFrameURLS.push(searchResultURLS[i]);
 				if(i < searchResultURLS.length-1){
-					var nextIFrame = document.createElement("iframe");	
+					var nextIFrame = document.createElement("iframe");
 					nextIFrame.setAttribute("id", "main-iframe2");
 					nextIFrame.setAttribute("src", searchResultURLS[i+1]);
 					nextIFrame.style.float = "left";
@@ -60,7 +60,7 @@ var ResourceView = function(){
 					nextIFrame.style.width = "100%";
 					nextIFrame.style.border = "none";
 					nextIFrame.style.top = "-1000px";
-					newSlide = $("<div class='slide'></div>").appendTo("#slidesContainer"); 
+					newSlide = $("<div class='slide'></div>").appendTo("#slidesContainer");
 					$(newSlide).append(nextIFrame);
 					iFrameURLS.push(searchResultURLS[i+1]);
 				}
@@ -84,7 +84,7 @@ var ResourceView = function(){
   			$('#slideInner').css('marginLeft', -slideWidth);
   			currentPosition++;
   		}
-  		
+
 		$("#slideshow").fadeIn("fast");
 		$("#slidesContainer").fadeIn("fast");
 		$('#contentWrapper').fadeOut();
@@ -97,7 +97,7 @@ var ResourceView = function(){
 		    		if(!isToggledUp){
 					 $('#navCollapse').stop().fadeOut();
 					 }
-					}, 3000 );	
+					}, 3000 );
 		     }
 		   });
 	};
@@ -119,12 +119,12 @@ var ResourceView = function(){
 	    $('#info-button').mouseover(function(){
 	          $('#navCollapse').fadeIn();
 	       });
-	    $('#bar-wrap').mouseleave(function(){   
+	    $('#bar-wrap').mouseleave(function(){
 	    	setTimeout(function() {
 	    		if(!isToggledUp){
 					 $('#navCollapse').stop().fadeOut();
 						 }
-						}, 3000 );	
+						}, 3000 );
 	       });
 		$('#home').click(function(){
   			removeBar();
@@ -134,16 +134,16 @@ var ResourceView = function(){
     		// Determine new position
     		var isNext  = ($(this).attr('id')=='nextslide') ? true : false;
     		if(currentPosition == 0  && !isNext)
-    			return false; 
+    			return false;
     		else if(currentPosition == numberOfSlides-1 && isNext)
     			return false;
-    		else{ 
+    		else{
     			currentPosition = ($(this).attr('id')=='nextslide') ? currentPosition+1 : currentPosition-1;
 	      		$(".colorChange").changeColors({
 	    			time: 333
 				});
 	      		// Hide / show controls
-	      		
+
 	      		// Move slideInner using margin-left
 	      		$("#slideInner").animate(
 		   			{"marginLeft": slideWidth*(-currentPosition)},{
@@ -152,33 +152,33 @@ var ResourceView = function(){
 		       			manageIframes(currentPosition);
 				     }
 				   });
-    		}      		
+    		}
     	});
     	$('.navigation-box').click(function(event){
     		var clickedButtonId = event.target.id;
 	    	$('.navHere').slideUp(250, function() {
 	    		var oldActive = $('.navHere').attr('id');
-	    		switch (clickedButtonId) { 
-	        		case 'resourceNav-info': 
+	    		switch (clickedButtonId) {
+	        		case 'resourceNav-info':
 	        			$('#information-box').slideDown(250);
 	        			$("#"+oldActive).removeClass('navHere');
 						$('#information-box').addClass('navHere');
 	             		break;
-	             	case 'resourceNav-addQuestion': 
+	             	case 'resourceNav-addQuestion':
 	             		$('#questions-form').slideDown(250);
 	             		$("#"+oldActive).removeClass('navHere');
 						$('#questions-form').addClass('navHere');
-	             		break; 
-	             	case 'resourceNav-addResource': 
+	             		break;
+	             	case 'resourceNav-addResource':
 	             		$('#resource-form').slideDown(250);
 	             		$("#"+oldActive).removeClass('navHere');
 						$('#resource-form').addClass('navHere');
-	             		break; 
-	             	case 'resourceNav-addPath': 
+	             		break;
+	             	case 'resourceNav-addPath':
 	             		$('#path-form').slideDown(250);
 	             		$("#"+oldActive).removeClass('navHere');
 						$('#path-form').addClass('navHere');
-	             		break;    
+	             		break;
 	    		}
 			});
     	});
@@ -197,8 +197,8 @@ var ResourceView = function(){
 	          $(this).prev().slideDown(250);
 	          $(this).animate({opacity: 1}, 250);
 	       });
-	    
-	    $('#upvote').mouseout(function(){   
+
+	    $('#upvote').mouseout(function(){
 	          $(this).prev().slideUp(250);
 	          $(this).animate({opacity: 0}, 250);
 	       });
@@ -206,8 +206,8 @@ var ResourceView = function(){
 	          $(this).prev().slideDown(250);
 	          $(this).animate({opacity: 1}, 250);
 	       });
-	    
-	    $('#downvote').mouseout(function(){   
+
+	    $('#downvote').mouseout(function(){
 	          $(this).prev().slideUp(250);
 	          $(this).animate({opacity: 0}, 250);
 	       });
@@ -216,13 +216,13 @@ var ResourceView = function(){
 	          $(this).find('a').prev().slideDown(250);
 	          $(this).find('a').animate({opacity: 1}, 250);
 	       });
-	    
-	    $('#button-home').mouseout(function(){   
+
+	    $('#button-home').mouseout(function(){
 	          $(this).find('a').prev().slideUp(250);
 	          $(this).find('a').animate({opacity: 0}, 250);
 	       });
-	    
-	   
+
+
 	};
 	manageIframes = function(position){
 		//check the current position and load the next iframe if possible.
@@ -230,11 +230,11 @@ var ResourceView = function(){
 		var new_res_id = $('a[href$="'+currentLink+'"]').parent().attr('value');
 		resource_id = new_res_id;
 		comments(resource_id);
-    	if(position==0){ 
-    		$('#leftControl').hide() 
-    	}else if(position == numberOfSlides-1){ 
+    	if(position==0){
+    		$('#leftControl').hide()
+    	}else if(position == numberOfSlides-1){
     		var indexOfUrl = searchResultURLS.indexOf(iFrameURLS[position]);
-    		var tempIFrame = document.createElement("iframe");	
+    		var tempIFrame = document.createElement("iframe");
 				tempIFrame.setAttribute("id", "main-iframe2");
 				tempIFrame.setAttribute("src", searchResultURLS[indexOfUrl+1]);
 				tempIFrame.style.float = "left";
@@ -242,7 +242,7 @@ var ResourceView = function(){
 				tempIFrame.style.width = "100%";
 				tempIFrame.style.border = "none";
 				tempIFrame.style.top = "-1000px";
-				newSlide = $("<div class='slide'></div>").appendTo("#slideInner"); 
+				newSlide = $("<div class='slide'></div>").appendTo("#slideInner");
 				$(newSlide).append(tempIFrame);
 				iFrameURLS.push(searchResultURLS[indexOfUrl+1]);
     	}
@@ -262,10 +262,10 @@ var ResourceView = function(){
 			$("#info-button").removeClass("toggled-a");
 			$("#info-toggle").removeClass("toggled-bg")
 			$("#bar-wrap").animate(
-		  	 	{"bottom": "-340px"},{
+		  	 	{"bottom": "-355px"},{
 		     		duration: 500,
-		     		complete: function(){   
-		     	
+		     		complete: function(){
+
 		     	}
 		   });
 			isToggledUp = false;
@@ -279,10 +279,10 @@ var ResourceView = function(){
 		     }
 		   });
 			isToggledUp = true;
-		}	
+		}
 	};
 	removeBar = function(){
-		$("#slidesContainer").html('');   	
+		$("#slidesContainer").html('');
 		$("#slideshow").fadeOut("fast");
 		$("#slidesContainer").fadeOut("fast");
 		$('#contentWrapper').fadeIn();
@@ -300,9 +300,9 @@ var ResourceView = function(){
 		   });
 		currentPosition = 0;
 		numberOfSlides = 0;
-		
+
 	};
-	
+
 	comments = function(new_resource_id){
 		$.ajax({
 			type: "post",
@@ -350,7 +350,7 @@ var ResourceView = function(){
 				}
 			},
 			error: function( objRequest, strError ){
-				
+
 			}
 		});
 	};
