@@ -12,13 +12,14 @@
         <%= render :partial => 'layouts/resourceSlideShow' %>
         <div id="contentWrapper">
             <div id="topSection">
-              <%= yield :top_section %> 
+              <%= yield :top_section %>
               </div>
             <div class="bottomWrapper">
                 <%= yield :bottom_wrapper %>
+                <%= yield %>
             </div>
         </div> <!-- end contentWrapper -->
-		
+
     </div> <!-- end wrapper -->
     <%= render :partial => 'layouts/resourcebar' %>
     <%= javascript_include_tag "application" %>
