@@ -1,6 +1,6 @@
 <div id="resultWrapper" class="item"> <!-- result wrapper -->
-    <div class="resourceThumb">
-        <%= link_to(image_tag("resourceex.JPG", :style => "height:257px;width=257px;", :class=>"thumbImg"), url_for(resource.link)) %>  
+    <div class="resourceThumb" value="<%= resource.id %>">
+        <%= link_to(image_tag(resource.snapshot.url, :style => "height:257px;width=257px;", :class=>"thumbImg"), url_for(resource.link)) %>  
     </div>
    	<div id="hoverBox">
         <div id="thumbs">

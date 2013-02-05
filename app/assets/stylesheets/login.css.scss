@@ -1,166 +1,54 @@
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  position: relative;
-  float: right;
-  background: url("header-bg.png");
-  color:#fff;
-}
 
-nav li {
-  float: left;          
-}
-
-nav #login {
-  -moz-box-shadow: 1px 0 0 #fff;
-  -webkit-box-shadow: 1px 0 0 #fff;
-  box-shadow: 1px 0 0 #fff;  
-}
-
-nav #login-trigger,
-nav #signup a {
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
-  height: 25px;
-  line-height: 25px;
-  font-weight: bold;
-  padding: 0 8px;
-  text-decoration: none;
-  color: #777;
-}
-nav #register-trigger,
-nav #signup a {
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
-  height: 25px;
-  line-height: 25px;
-  font-weight: bold;
-  padding: 0 8px;
-  text-decoration: none;
-  color: #777;
-}
-
-
-nav #login-trigger, #register-trigger {
-  -moz-border-radius: 3px 0 0 3px;
-  -webkit-border-radius: 3px 0 0 3px;
-  border-radius: 3px 0 0 3px;
-}
-
-nav #login-trigger:hover,
-nav #login .active,
-nav #signup a:hover {
-	background: url("header-bg.png");
-	color: #fff;
-}
-nav #register-trigger:hover,
-nav #register .active,
-nav #signup a:hover {
-	background: url("header-bg.png");
-	color: #fff;
-}
-
-#login-content{
-	a{
-		color:white !important;
-	}
-}
-nav #login-content {
-  display: none;
-  position: absolute;
-  top: 24px;
-  right: 0;
-  z-index: 999;    
-  background: url("header-bg.png");
-  padding: 15px;
-  border-bottom:solid 1px gray;
-  border-left:solid 1px gray;
-  border-right:solid 1px gray;
-
-}
-nav #register-content {
-  display: none;
-  position: absolute;
-  top: 24px;
-  right: 0;
-  z-index: 999;    
-  background: url("header-bg.png");
-  padding: 15px;
-  border-bottom:solid 1px gray;
-  border-left:solid 1px gray;
-  border-right:solid 1px gray;
-
-}
-
-nav li #login-content {
-  right: 0;
-  width: 200px;  
-}
-nav li #register-content {
-  right: 0;
-  width: 200px;  
-}
-/*--------------------*/
-
-#login-content, #register-content {
-	input {
-		  background: #f1f1f1;
-		  padding: 3px 5px;
-		  margin: 0 0 5px 0;
-		  width: 180px !important;
-		  border: 1px solid #ccc;
-		  -moz-box-shadow: 0 1px 1px #ccc inset;
-		  -webkit-box-shadow: 0 1px 1px #ccc inset;
-		  box-shadow: 0 1px 1px #ccc inset;
-		}
-}
-
-#login-content, #register-content{
-	input:focus {
-  		background-color: #fff;
-		border-color: #e8c291;
-		outline: none;
-		-moz-box-shadow: 0 0 0 1px #e8c291 inset;
-		-webkit-box-shadow: 0 0 0 1px #e8c291 inset;
-		box-shadow: 0 0 0 1px #e8c291 inset;
-	}
-}
-#header{
-	label {
-  		color:white !important;
-	}span{
-		color:#5F9367 !important;
-	}
-}
-
-#rememberMeCheckbox{
-	label{
-		position:relative;
-		bottom:28px;
-		right:55px;
-	}
-}
-/*--------------------*/
 .signin{
-	position:relative;
-	float:right;
-	left:350px;
-	bottom:30px;
-	color:#fff;
-	font-size:13px;
-	text-align:right;
+  span{
+    color:white !important;
+  }
+  
+  position:relative;
+  float:left;
+  left:80%;
+  margin-top:-34px;
+  ul{
+    li{
+      display:inline; 
+      float:left;
+    }
+  }
 }
 
-#login label {
-  float: right;
-  line-height: 30px;
+
+.signin a{
+  display:inline;
+  color:#999;
+  text-decoration:none;
+  font-size:16px; 
+  padding-left:30px;
 }
 
-#login label input {
-  position: relative;
-  top: 2px;
-  right: 2px;
+.signin a:hover, .signin a:active{
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  color:#eee; 
+}
+
+#login-content {
+  display: none;
+  position: absolute;
+  top: 24px;
+  right: 0;
+  z-index: 999;    
+  padding: 15px;
+  background:#333;
+  color:white;
+}
+#register-content {
+  display: none;
+  position: absolute;
+  top: 24px;
+  right: 0;
+  z-index: 999;    
+  padding: 15px;
+  background:#333;
+  color:white;
 }

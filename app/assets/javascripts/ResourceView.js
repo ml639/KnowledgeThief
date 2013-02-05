@@ -1,5 +1,4 @@
 var ResourceView = function(){
-	
 	var resource_id = 0;
 	var isToggledUp = false;
 	var currentPosition = 0;
@@ -20,7 +19,7 @@ var ResourceView = function(){
 
   		setKeyBindings();
 
-		$('.resourceTitle').each(function(){
+		$('.resourceThumb').each(function(){
   			searchResultURLS.push($(this).find('a').attr('href'));
 		});
 		var isFirst = true;
@@ -88,7 +87,8 @@ var ResourceView = function(){
   		
 		$("#slideshow").fadeIn("fast");
 		$("#slidesContainer").fadeIn("fast");
-		$('#contentColumn').fadeOut();
+		$('#contentWrapper').fadeOut();
+		$('#header').fadeOut();
 		$("#bar-wrap").animate(
 		   {"right": "10px"},{
 		     duration: 1000,
@@ -168,14 +168,14 @@ var ResourceView = function(){
 			});
     	});
 		$(".ajaxUpvote").click(function(){
-			rView.vote('up');
+			vote('up');
 		});
 		$(".ajaxDownvote").click(function(){
-			rView.vote('down');
+			vote('down');
 		});
 		$('#saveComment').click(function(){
 			var commentText = $("#commenttext").val();
-			rView.saveComment(commentText);
+			saveComment(commentText);
 		});
 
 		$('#upvote').mouseover(function(){
@@ -207,12 +207,14 @@ var ResourceView = function(){
 	          $(this).find('a').animate({opacity: 0}, 250);
 	       });
 	    
-	    $("#info-toggle").click(function(){
-	    	toggleBar();
-	    });
+	   
 	};
 	manageIframes = function(position){
 		//check the current position and load the next iframe if possible.
+		var currentLink = iFrameURLS[position];
+		var new_res_id = $('a[href$="'+currentLink+'"]').parent().attr('value');
+		resource_id = new_res_id;
+		comments(resource_id);
     	if(position==0){ 
     		$('#leftControl').hide() 
     	}else if(position == numberOfSlides-1){ 
@@ -254,28 +256,36 @@ var ResourceView = function(){
 			isToggledUp = false;
 		}else{
 			$("#info-button").addClass("toggled-a");
-			$("#info-toggle").addClass("toggled-bg")
+			$("#info-toggle").addClass("toggled-bg");
 			$("#bar-wrap").animate(
 				{"top": "200px"},{
 		     	duration: 500,
 		     	complete: function(){
-		       
 		     }
 		   });
 			isToggledUp = true;
 		}	
-		
 	};
 	remove = function(){
 		$("#slidesContainer").html('');   	
 		$("#slideshow").fadeOut("fast");
 		$("#slidesContainer").fadeOut("fast");
-		$('#contentColumn').fadeIn();
+		$('#contentWrapper').fadeIn();
+		$('#header').fadeIn();
 		resource_id = 0;
-		isToggledUp = false;
+		if(isToggledUp == true){
+			toggleBar();
+		}
+		$("#bar-wrap").animate(
+		   {"right": "-5000px"},{
+		     duration: 1000,
+		     complete: function(){
+		       	$("#fadeAway").fadeIn(1000);
+		     }
+		   });
 		currentPosition = 0;
 		numberOfSlides = 0;
-
+		
 	};
 	
 	comments = function(new_resource_id){
@@ -286,6 +296,7 @@ var ResourceView = function(){
 			// Define request handlers.
 			success: function( objResponse ){
 				// Check to see if request was successful.
+				$('.commentsList').empty();
 				$.each(objResponse.comments, function(i, item) {
 					  var today = new Date();
 					  var post =item.updated_at;
@@ -299,7 +310,8 @@ var ResourceView = function(){
 					  }else if(difference >= 1440){
 					    timediff = difference/(60*24) + " days ago";
 					  }
-    				$('.commentsList').append("<li><div class='commentContent>'" +item.content +"</div><div class='commentInfo>" +timediff +"</div></li>");
+
+    				$('.commentsList').append("<li>" +item.content +timediff +"</li>").hide().fadeIn();
 				});
 			},
 			error: function( objRequest, strError ){
@@ -341,7 +353,7 @@ var ResourceView = function(){
 				// Check to see if request was successful.
 				$('.commentsList').html('');
 				$.each(objResponse.comments, function(i, item) {
-    				$('.commentsList').append("<li>" +item.content +"</li>");
+    				$('.commentsList').append("<li>" +item.content +"</li>").hide().fadeIn();
 				});
 			},
 			error: function( objRequest, strError ){
@@ -361,6 +373,7 @@ var ResourceView = function(){
 			success: function( objResponse ){
 				// Check to see if request was successful.
 				if (objResponse.success){
+					alert("Thanks for voting!");
 					if(vote === 'up'){
 						$('.upvote_image').attr('src',"/assets/circle_thumbsUp_here.png");
 					}else{
@@ -388,21 +401,25 @@ var ResourceView = function(){
 
 $(function(){
 	var rView = new ResourceView()
-	$('.resourceViewer').click(function(){
-		var link = jQuery(this);
+	$('.resourceThumb').click(function(){
+		var link = $(this).find('a').attr('href')
 		//this is hacky as shit. split on /'s and check if its a resource link
-		var parts = link.attr('href').split('/');
+		var parts = link.split('/');
 		if(parts[1] == "resources"){
 			return true;
 		}else{
-			var link_href = link.attr('href');
-			var get_resource_id = link.attr('value');
+			var link_href = link;
+			var get_resource_id = $(this).attr('value');
 	    	rView.init(link_href, get_resource_id);
 			rView.comments(get_resource_id);
 			rView.logUser(get_resource_id);
 			return false;
 		}
 	});
-	
+	$("#info-toggle").click(function(e){
+	    	 if( e.target.tagName.toUpperCase() !== 'INPUT' ) {
+	    	 	rView.toggleBar();
+	    	 }
+	    });
 
 });
