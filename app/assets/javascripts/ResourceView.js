@@ -93,7 +93,11 @@ var ResourceView = function(){
 		   {"right": "10px"},{
 		     duration: 1000,
 		     complete: function(){
-		       	$("#fadeAway").fadeIn(1000);
+		       	setTimeout(function() {
+		    		if(!isToggledUp){
+					 $('#navCollapse').stop().fadeOut();
+					 }
+					}, 3000 );	
 		     }
 		   });
 	};
@@ -112,6 +116,16 @@ var ResourceView = function(){
 	};
 	setKeyBindings = function(){
 
+	    $('#info-button').mouseover(function(){
+	          $('#navCollapse').fadeIn();
+	       });
+	    $('#bar-wrap').mouseleave(function(){   
+	    	setTimeout(function() {
+	    		if(!isToggledUp){
+					 $('#navCollapse').stop().fadeOut();
+						 }
+						}, 3000 );	
+	       });
 		$('#home').click(function(){
   			removeBar();
   		});
