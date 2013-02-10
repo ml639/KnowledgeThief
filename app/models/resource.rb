@@ -84,18 +84,18 @@ class Resource < ActiveRecord::Base
 
   def self.google(q, filter)
     # Authenticating into Google's API
-    client = Google::APIClient.new(:key => 'AIzaSyBmByzcpxbsLsg7u7GlF8I5dJwITuSyCNU', :authorization => nil)
+    client = Google::APIClient.new(:key => CONFIG[:GOOGLE_KEY], :authorization => nil)
 
     # Discover the Custom Search API
     search = client.discovered_api('customsearch')
 
     # Search Google CSE
-    #   cx => the custom search engine that will search the entire web
+    #   cx => the custom search engine that will search the entire web (doesn't need to be hidden)
     response = client.execute(
       :api_method => search.cse.list,
       :parameters => {
         'q' => "#{q} #{filter}",
-        'key' => 'AIzaSyBmByzcpxbsLsg7u7GlF8I5dJwITuSyCNU',
+        'key' => CONFIG[:GOOGLE_KEY],
         'cx' => '016679902470578435641:scswmfxveaa'
       }
     )
@@ -104,7 +104,7 @@ class Resource < ActiveRecord::Base
     results = ActiveSupport::JSON.decode(response.body, {:symbolize_names => true})
 
     # Return an empty array if Google CSE limit has been met.
-    #results["items"] == nil ? [] : results["items"]
+    results["items"] = results["items"] == nil ? [] : results["items"]
     #results = {"items" => []}
 
     # Now add those to our database here (call this method before )

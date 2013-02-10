@@ -64,7 +64,7 @@ class ResourcesController < ApplicationController
 
     # Change this second parameter to filter when we figure out the organzation.
     ############ google(params[:q], filter) ####################################
-    #Resource.google(params[:q], "videos")
+    Resource.google(params[:q], "videos")
 
     unless params[:q].blank?
       @resource = Resource.full_search(params[:q])
