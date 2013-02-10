@@ -13,8 +13,14 @@
         <%= render :partial => 'layouts/resourceSlideShow' %>
         <div id="contentWrapper">
             <div id="topSection">
-              <%= yield :top_section %>
-              </div>
+               <% if flash[:notice] %>
+                  <p class="notice"><%= flash[:notice] %></p>
+                <% end %>
+                <% if flash[:error] %>
+                  <p class="error"><%= flash[:error] %></p>
+                <% end %>
+               <%= yield :top_section %>
+            </div>
             <div class="bottomWrapper">
                 <%= yield :bottom_wrapper %>
                 <%= yield %>

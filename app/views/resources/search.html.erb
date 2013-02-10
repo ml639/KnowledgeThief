@@ -4,7 +4,7 @@
  </div>
 
     <%= render 'shared/search' %>
-        <%= render 'shared/leftMenu' %>
+        <%= render 'shared/leftMenu'  %>
         <%= render 'shared/rightMenu' %>
 <%  end %>
 
@@ -13,6 +13,6 @@
         <%= (render :partial => 'shared/results', :collection => @resource,
 :as => 'resource') || "Sorry, no results returned. Please try again!"
 %>
-
-        <%= will_paginate(@resource) %>
 <%  end %>
+
+<%= will_paginate(@resource, :class => "digg_pagination")  %>

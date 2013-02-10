@@ -101,7 +101,7 @@ class ResourcesController < ApplicationController
          then @resource = @resource.sort_by!{|r| r.reputation_for(:votes).to_i}.reverse
       end
      end
-     @resource = @resource.paginate(:page => (params[:page] || 1), :per_page => 15) unless @resource.nil?
+     @resource = @resource.paginate(:page => (params[:page] || 1), :per_page => 14) unless @resource.nil?
   end
 
 
