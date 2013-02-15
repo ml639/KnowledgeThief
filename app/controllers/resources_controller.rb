@@ -27,7 +27,7 @@ class ResourcesController < ApplicationController
       params[:resource][:link] = PostRank::URI.clean(params[:resource][:link])
       if Resource.unique_link?(params[:resource][:link])
         @resource = Resource.new(params[:resource])
-        @resource[:youtubeID] = self.isYoutube(@resource[:link])
+        @resource[:youtubeID] = Resource.isYoutube(@resource[:link])
         @resource.save
         Resource.upload_image(@resource)
       else
