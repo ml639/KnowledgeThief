@@ -84,7 +84,7 @@ class Resource < ActiveRecord::Base
 
   def self.google(q, filter)
     # Authenticating into Google's API
-    client = Google::APIClient.new(:key => CONFIG[:GOOGLE_KEY], :authorization => nil)
+    client = Google::APIClient.new(:key => "AIzaSyBmByzcpxbsLsg7u7GlF8I5dJwITuSyCNU", :authorization => nil)
 
     # Discover the Custom Search API
     search = client.discovered_api('customsearch')
@@ -95,7 +95,7 @@ class Resource < ActiveRecord::Base
       :api_method => search.cse.list,
       :parameters => {
         'q' => "#{q} #{filter}",
-        'key' => CONFIG[:GOOGLE_KEY],
+        'key' => "AIzaSyBmByzcpxbsLsg7u7GlF8I5dJwITuSyCNU",
         'cx' => '016679902470578435641:scswmfxveaa'
       }
     )
