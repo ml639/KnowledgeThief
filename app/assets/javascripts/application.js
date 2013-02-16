@@ -35,3 +35,10 @@ function setSort(val)
     $('#sort').val(val);
    	$('#search').submit(); 
 }
+
+// Isotope stuff
+$('#container').isotope({
+  // options
+  itemSelector : '.item',
+  layoutMode : 'fitRows'
+});
