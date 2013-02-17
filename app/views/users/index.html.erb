@@ -3,6 +3,7 @@
 		document.getElementById("topSection").style.visibility="hidden";
 		document.getElementById("topSection").style.height="0";
 	</script>
+	<script type="text/javascript">console.log("<%= @rc%>")</script>
 	<div id="tempcontent" class="tempclearfix" style="margin-top:35px;">
 		<section id="templeft">
 			<div id="tempuserStats" class="tempclearfix">
@@ -85,6 +86,87 @@
 					<br/><br/><br/><br/><br/><br/><span class="friendseeall"><a href="#" style="color:black">See all...</a></span>
 				</div>
 			</div>
+		</section>
+		<section id="tempcenter">
+
+			<div id="tempuserStats" class="tempclearfix">
+
+				<div class="subheader user-tabs-nav">
+		        <div id="tabs">
+		            <a class="youarehere" href="/users/1769385/mikeliu639?tab=summary" title="your overall summary">
+		                        
+		                summary
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=answers" title="answers you have provided">
+		                        
+		                answers
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=questions" title="questions you have asked">
+		                        
+		                questions
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=tags" title="tags you have posts in">
+		                        
+		                tags
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=badges" title="badges you have earned">
+		                        
+		                badges
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=favorites" title="questions you have favorited">
+		                        
+		                favorites
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=bounties" title="bounties you have participated in">
+		                        
+		                bounties
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=reputation" title="reputation you have earned">
+		                        
+		                reputation
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=activity" title="your recent activity">
+		                        
+		                activity
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=responses" title="your recent responses">
+		                        
+		                responses
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=votes" title="votes you have cast">
+		                        
+		                votes
+		            </a>
+		        </div>
+		    </div>
+
+			<div>
+			<ul class="tabset_tabs">
+			   <li><a href="#tab1" class="active">Tab 1 1234</a></li>
+			   <li><a href="#tab2">Tab 2</a></li>
+			   <li><a href="#tab3">Tab 3</a></li>
+			</ul>
+
+			<div id="tab1" class="tabset_content">
+			   <h2 class="tabset_label">Tab 1</h2>
+			   Tab 1 Content
+			</div>
+
+			<div id="tab2" class="tabset_content">
+			   <h2 class="tabset_label">Tab 2</h2>
+			   Tab 2 Content
+			</div>
+
+			<div id="tab3" class="tabset_content">
+			   <h2 class="tabset_label">Tab 3</h2>
+			   Tab 3 Content
+			</div>
+		</div>
+				<div id="resource">
+					<%= @rc.each do |r|
+							r.to_s
+						end %>
+				</div>
 		</section>
 	</div>
 
