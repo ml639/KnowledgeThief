@@ -15,6 +15,8 @@ gem 'acts_as_votable'
 # Devise
 gem 'devise'
 
+gem 'activeadmin'
+
 # Omniauth
 gem 'omniauth'
 gem 'omniauth-facebook'

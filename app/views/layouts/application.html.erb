@@ -12,9 +12,10 @@
         <%= render "shared/header" %>
         <%= render :partial => 'layouts/resourceSlideShow' %>
         <div id="contentWrapper">
-            <div id="topSection">
-              <%= yield :top_section %>
-              </div>
+            <div id="topSection"onclick="c(event);">
+                
+                <%= yield :top_section %>
+            </div>
             <div class="bottomWrapper">
                 <%= yield :bottom_wrapper %>
                 <%= yield %>

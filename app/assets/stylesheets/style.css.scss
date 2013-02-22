@@ -87,6 +87,9 @@ ul{
 	padding-top:25px;
 	font-weight:200;
 	opacity:.6;
+	top: 0;
+	left:475px;
+  	position: absolute;
 }
 
 #topSection li,a{
@@ -126,11 +129,13 @@ ul{
 }
 
 #mainSearchWrapper{
-	position:relative; 
+	position:absolute; 
 	margin: 0 auto; 
-	margin-top:8px;
 	height:40px; 
 	width:450px;
+	margin-top:0;
+	top:100px;
+	left:325px;
 }
 
 input.mainSearch{
