@@ -1,11 +1,15 @@
  <div id="header">
-
-    <div id="logoText">
-
-        <%= link_to "Knowledge Thief", "/" %>
-
-    </div>
-    <% if user_signed_in? %>
+    
+    <a href="#" class="addResource">
+      <%= image_tag "link.png", :class => 'headerIcon', :style => 'margin-left:40px;' %>
+      <p class="iconText" style="position:absolute; left:37px; top:10px;">Submit a Learning Resource</p>    
+    </a>
+    
+    <a href="#" class="addQuestion">
+      <div style="display:inline; font-size:25px; color:white; position:relative; left:235px; bottom:3px;" class="headerIcon icon-question-sign"></div>        
+      <p class="iconText" style="position:absolute; left:295px; top:10px;">Ask a Question</p> 
+    </a> 
+     <% if user_signed_in? %>
      <div class="signin">
       <ul>
 
@@ -64,10 +68,9 @@
             <%end%>
         </li>
       </ul>
-
+   </div>
     <%end%>
 
+    
     </div>
-
-
- </div>
+  </div>

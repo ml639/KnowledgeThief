@@ -10,15 +10,16 @@ var ResourceView = function(){
     var iFrameURLS = new Array();
 	init = function(url,new_resource_id){
 		resource_id = new_resource_id;
+		$('#slidesContainer').css('overflow', 'hidden');
+		slideWidth = $(window).width();
 		$("#slideshow").css({'width': slideWidth});
 		$("#slidesContainer").css({'width': slideWidth});
 		$("#slideshow").css({'height': slideHeight});
 		$("#slidesContainer").css({'height': slideHeight});
 		// Remove scrollbar in JS
-  		$('#slidesContainer').css('overflow', 'hidden');
-
+  		
   		setKeyBindings();
-
+  		slideWidth = $(window).width();
 		$('.resourceThumb').each(function(){
   			searchResultURLS.push($(this).find('a').attr('href'));
 		});
@@ -93,6 +94,7 @@ var ResourceView = function(){
 		   {"right": "10px"},{
 		     duration: 1000,
 		     complete: function(){
+		     	cleanup();
 		       	setTimeout(function() {
 		    		if(!isToggledUp){
 					 $('#navCollapse').stop().fadeOut();
@@ -100,6 +102,16 @@ var ResourceView = function(){
 					}, 3000 );
 		     }
 		   });
+	};
+	cleanup = function(){
+		slideWidth = $(window).width();
+		$("#slideshow").css({'width': slideWidth});
+		$("#slidesContainer").css({'width': slideWidth});
+		$('#slideInner').css('width', slideWidth * numberOfSlides);
+  		$('#slideInner').css('marginLeft', -slideWidth);
+  		$('.slide').css({
+      		'width' : slideWidth
+    	});
 	};
 	$.fn.changeColors = function(userOptions){
 		var randomColor = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
@@ -221,8 +233,6 @@ var ResourceView = function(){
 	          $(this).find('a').prev().slideUp(250);
 	          $(this).find('a').animate({opacity: 0}, 250);
 	       });
-
-
 	};
 	manageIframes = function(position){
 		//check the current position and load the next iframe if possible.
@@ -306,7 +316,7 @@ var ResourceView = function(){
 	comments = function(new_resource_id){
 		$.ajax({
 			type: "post",
-			url: "comments/"+new_resource_id +"/forresource",
+			url: "/comments/"+new_resource_id +"/forresource",
 			dataType: "json",
 			// Define request handlers.
 			success: function( objResponse ){
@@ -357,7 +367,7 @@ var ResourceView = function(){
 	saveComment = function(commentText){
 		$.ajax({
 			type: "post",
-			url: "comments/",
+			url: "/comments/",
 			data: {
 				content : commentText,
 				resource : resource_id
