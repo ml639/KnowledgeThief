@@ -45,7 +45,7 @@ class ResourcesController < ApplicationController
   end
 
   def vote
-    value = params[:type] == "up" ? 1 : -1
+    value = params[:type] == "up" ? 5 : -2
     @resource = Resource.find(params[:id])
     @resource.add_or_update_evaluation(:votes, value, current_user)
     respond_to do |format|
