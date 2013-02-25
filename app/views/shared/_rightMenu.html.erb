@@ -1,11 +1,5 @@
-  <div id="rightMenu">
-    
-    	<ul>
-        	<% if user_signed_in? %>
-                <li><%= link_to "Profile", url_for('user_profile')%></li>
-            <% end %>
-        	<li><%= link_to "Submit a Question", '#', :class=>"addQuestion" %></li>
-            <li><%= link_to "Submit a Resource", '#', :class=>"addResource" %></li>
-        </ul>
-    
-    </div>
+<div id="topRight">
+    	<a href="/user_profile" style="z-index:99;" id="profileLink">
+    		Profile 
+    	<%= image_tag "rightArrow.png", :style => 'height:40px; margin-bottom:-5px;' %>         
+</div>

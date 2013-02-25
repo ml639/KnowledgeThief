@@ -18,9 +18,9 @@
 		</div>
 		<div id="search-box" class="colorChange">
 			<h1 id="searchTitle">KT</h1>
-			<form accept-charset="utf8" action="/resources/search" method="get" id="mainSearchWrapper">
+			<form accept-charset="utf8" action="/resources/search" method="get" id="veilSearchWrapper">
 			    <%= text_field_tag :q,  params[:q],{:id => "search_input_text", :class =>"veilSearch", :placeholder => "I want to learn..."} %>
-			    <input type="image" src="assets/searchIcon.png" value=" " class="veilSubmit">
+			    <%= image_tag( 'searchIcon.png', :class=>"veilSubmit") %>
 			</form>
 		</div>
 		

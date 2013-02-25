@@ -10,6 +10,10 @@ class PathsController < ApplicationController
     end
   end
 
+  def ajaxPaths
+     @paths = Path.all
+     render :partial => "pathsPartial"
+  end
   # GET /paths/1
   # GET /paths/1.json
   def show

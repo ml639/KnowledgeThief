@@ -8,17 +8,20 @@ var ResourceView = function(){
   	var numberOfSlides = slides.length;
     var searchResultURLS = new Array();
     var iFrameURLS = new Array();
+
+    var slidesContainer = $('#slidesContainer');
+    var slideShow = $("#slideshow");
+    var slidesInner = $('#slideInner');
 	init = function(url,new_resource_id){
 		resource_id = new_resource_id;
-		$("#slideshow").css({'width': slideWidth});
-		$("#slidesContainer").css({'width': slideWidth});
-		$("#slideshow").css({'height': slideHeight});
-		$("#slidesContainer").css({'height': slideHeight});
+		updateBrowserHistory();
+		cleanUpWindow();
+
+		slidesContainer.css('overflow', 'hidden');
+		
 		// Remove scrollbar in JS
-  		$('#slidesContainer').css('overflow', 'hidden');
-
   		setKeyBindings();
-
+  		slideWidth = $(window).width();
 		$('.resourceThumb').each(function(){
   			searchResultURLS.push($(this).find('a').attr('href'));
 		});
@@ -26,42 +29,15 @@ var ResourceView = function(){
 		for(var i = 0 ; i< searchResultURLS.length; i++){
 			if(searchResultURLS[i] === url){
 				if(i != 0){//load the page before the current click.
-					var prevIframe = document.createElement("iframe");
-					prevIframe.setAttribute("id", "main-iframe2");
-					prevIframe.setAttribute("src", searchResultURLS[i-1]);
-					prevIframe.style.float = "left";
-					prevIframe.style.height = "100%";
-					prevIframe.style.width = "100%";
-					prevIframe.style.border = "none";
-					prevIframe.style.top = "-1000px";
-					newSlide = $("<div class='slide'></div>").appendTo("#slidesContainer");
-					$(newSlide).append(prevIframe);
-					isFirst = false;
+					var prevIframe = createIframe(searchResultURLS[i-1]);
 					iFrameURLS.push(searchResultURLS[i-1]);
+					isFirst = false;
 				}
 				//load the current click
-				var tempIFrame = document.createElement("iframe");
-				tempIFrame.setAttribute("id", "main-iframe2");
-				tempIFrame.setAttribute("src", searchResultURLS[i]);
-				tempIFrame.style.float = "left";
-				tempIFrame.style.height = "100%";
-				tempIFrame.style.width = "100%";
-				tempIFrame.style.border = "none";
-				tempIFrame.style.top = "-1000px";
-				newSlide = $("<div class='slide'></div>").appendTo("#slidesContainer");
-				$(newSlide).append(tempIFrame);
+				var tempIFrame = createIframe(searchResultURLS[i]);
 				iFrameURLS.push(searchResultURLS[i]);
 				if(i < searchResultURLS.length-1){
-					var nextIFrame = document.createElement("iframe");
-					nextIFrame.setAttribute("id", "main-iframe2");
-					nextIFrame.setAttribute("src", searchResultURLS[i+1]);
-					nextIFrame.style.float = "left";
-					nextIFrame.style.height = "100%";
-					nextIFrame.style.width = "100%";
-					nextIFrame.style.border = "none";
-					nextIFrame.style.top = "-1000px";
-					newSlide = $("<div class='slide'></div>").appendTo("#slidesContainer");
-					$(newSlide).append(nextIFrame);
+					var nextIFrame = createIframe(searchResultURLS[i+1]);
 					iFrameURLS.push(searchResultURLS[i+1]);
 				}
 				break;
@@ -77,6 +53,7 @@ var ResourceView = function(){
       		'height': slideHeight,
       		'width' : slideWidth
     	});
+		slidesInner = $('#slideInner');
 		numberOfSlides = slides.length
 		// Set #slideInner width equal to total width of all slides
   		$('#slideInner').css('width', slideWidth * numberOfSlides);
@@ -93,6 +70,7 @@ var ResourceView = function(){
 		   {"right": "10px"},{
 		     duration: 1000,
 		     complete: function(){
+		     	cleanUpWindow();
 		       	setTimeout(function() {
 		    		if(!isToggledUp){
 					 $('#navCollapse').stop().fadeOut();
@@ -100,7 +78,33 @@ var ResourceView = function(){
 					}, 3000 );
 		     }
 		   });
-	};
+	},
+	cleanUpWindow = function(){
+		slideWidth = $(window).width();
+		slideHeight = $(window).height();
+		slideShow.css({'width': slideWidth});
+		slidesContainer.css({'width': slideWidth});
+		slidesContainer.css({'height': slideHeight});
+		$('#slideInner').css('width', slideWidth * numberOfSlides);
+  		$('#slideInner').css('marginLeft', -slideWidth);
+  		$('.slide').css({
+      		'width' : slideWidth,
+      		'height': slideHeight
+    	});
+		slideShow.css({'height': slideHeight});
+	},
+	createIframe = function(url){
+		var newIframe = document.createElement("iframe");
+		newIframe.setAttribute("id", "main-iframe2");
+		newIframe.setAttribute("src", url);
+		newIframe.style.float = "left";
+		newIframe.style.height = "100%";
+		newIframe.style.width = "100%";
+		newIframe.style.border = "none";
+		newIframe.style.top = "-1000px";
+		newSlide = $("<div class='slide'></div>").appendTo("#slidesContainer");
+		$(newSlide).append(newIframe);
+	},
 	$.fn.changeColors = function(userOptions){
 		var randomColor = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
 		// starting color, ending color, duration in ms
@@ -113,8 +117,35 @@ var ResourceView = function(){
         backgroundColor: options.end
     	}, options.time);
     	return this;
-	};
+	},
+
+	updateBrowserHistory = function(){
+		window.history.isResource = true; // set a variable in our history we can check for during a popstate event.  
+		window.history.pushState({isResource: true}, "resourceViewEvent", '/resources/'+resource_id);
+	},
+	slideView = function(distance){ // -1 to slide left, +1 to slide right.
+		currentPosition = currentPosition + distance;
+		// Move slideInner using margin-left
+  		$("#slideInner").animate(
+   			{"marginLeft": slideWidth*(-currentPosition)},{
+     		duration: 750,
+     		complete: function(){
+       			manageIframes(currentPosition);
+       			updateBrowserHistory(); // update our browser history to reflect the new page.
+		     }
+		});
+	},
 	setKeyBindings = function(){
+		$(window).bind('popstate', function (ev){
+  			if (window.history.isResource && ev.originalEvent.state == null){
+  				// If a popstate occurs, check to see if we're in a resource, if so, remove the iframe, else, do nothing.
+  				// if the originalEvent.state is false, then we know we're returning to the original page.
+  				removeBar();
+  			}else if(ev.originalEvent.state.isResource){
+  				history.back();
+  				slideView(-1);
+  			}
+		});
 
 	    $('#info-button').mouseover(function(){
 	          $('#navCollapse').fadeIn();
@@ -126,35 +157,24 @@ var ResourceView = function(){
 						 }
 						}, 3000 );
 	       });
-		$('#home').click(function(){
-  			removeBar();
+		$('#home').click(function(event){
+			event.preventDefault();
+  			history.go(-currentPosition);
   		});
   		$('.control')
-    		.bind('click', function(){
+    		.bind('click', function(event){
+    		event.preventDefault();
     		// Determine new position
     		var isNext  = ($(this).attr('id')=='nextslide') ? true : false;
     		if(currentPosition == 0  && !isNext)
     			return false;
     		else if(currentPosition == numberOfSlides-1 && isNext)
     			return false;
-    		else{
-    			currentPosition = ($(this).attr('id')=='nextslide') ? currentPosition+1 : currentPosition-1;
-	      		$(".colorChange").changeColors({
-	    			time: 333
-				});
-	      		// Hide / show controls
-
-	      		// Move slideInner using margin-left
-	      		$("#slideInner").animate(
-		   			{"marginLeft": slideWidth*(-currentPosition)},{
-		     		duration: 750,
-		     		complete: function(){
-		       			manageIframes(currentPosition);
-				     }
-				   });
-    		}
+    		else
+    			($(this).attr('id')=='nextslide') ? slideView(1) : slideView(-1);
     	});
     	$('.navigation-box').click(function(event){
+    		event.preventDefault();
     		var clickedButtonId = event.target.id;
 	    	$('.navHere').slideUp(250, function() {
 	    		var oldActive = $('.navHere').attr('id');
@@ -182,7 +202,8 @@ var ResourceView = function(){
 	    		}
 			});
     	});
-		$(".ajaxUpvote").click(function(){
+		$(".ajaxUpvote").click(function(e){
+			e.preventDefault();
 			vote('up');
 		});
 		$(".ajaxDownvote").click(function(){
@@ -221,9 +242,7 @@ var ResourceView = function(){
 	          $(this).find('a').prev().slideUp(250);
 	          $(this).find('a').animate({opacity: 0}, 250);
 	       });
-
-
-	};
+	},
 	manageIframes = function(position){
 		//check the current position and load the next iframe if possible.
 		var currentLink = iFrameURLS[position];
@@ -256,7 +275,7 @@ var ResourceView = function(){
 		numberOfSlides = slides.length
 		// Set #slideInner width equal to total width of all slides
   		$('#slideInner').css('width', slideWidth * numberOfSlides);
-	};
+	},
 	toggleBar = function(){
 		if(isToggledUp){
 			$("#info-button").removeClass("toggled-a");
@@ -280,7 +299,7 @@ var ResourceView = function(){
 		   });
 			isToggledUp = true;
 		}
-	};
+	},
 	removeBar = function(){
 		$("#slidesContainer").html('');
 		$("#slideshow").fadeOut("fast");
@@ -301,12 +320,12 @@ var ResourceView = function(){
 		currentPosition = 0;
 		numberOfSlides = 0;
 
-	};
+	},
 
 	comments = function(new_resource_id){
 		$.ajax({
 			type: "post",
-			url: "comments/"+new_resource_id +"/forresource",
+			url: "/comments/"+new_resource_id +"/forresource",
 			dataType: "json",
 			// Define request handlers.
 			success: function( objResponse ){
@@ -333,7 +352,7 @@ var ResourceView = function(){
 				alert("error with comment");
 			}
 		});
-	};
+	},
 	logUser = function(new_resource_id){
 		$.ajax({
 			type: "post",
@@ -353,11 +372,11 @@ var ResourceView = function(){
 
 			}
 		});
-	};
+	},
 	saveComment = function(commentText){
 		$.ajax({
 			type: "post",
-			url: "comments/",
+			url: "/comments/",
 			data: {
 				content : commentText,
 				resource : resource_id
@@ -375,7 +394,7 @@ var ResourceView = function(){
 				alert("error with comment");
 			}
 		});
-	};
+	},
 	vote = function(vote){
 		$.ajax({
 			type: "post",
@@ -417,7 +436,7 @@ var ResourceView = function(){
 $(function(){
 	var rView = new ResourceView();
 	$('.resourceThumb').click(function(){
-		var link = $(this).find('a').attr('href')
+		var link = $(this).find('a').attr('href');
 		//this is hacky as shit. split on /'s and check if its a resource link
 		var parts = link.split('/');
 		if(parts[1] == "resources"){
@@ -430,8 +449,10 @@ $(function(){
 			rView.logUser(get_resource_id);
 			return false;
 		}
+		return false;
 	});
 	$("#info-toggle").click(function(e){
+		e.preventDefault();
 	    	 if( e.target.tagName.toUpperCase() !== 'INPUT' ) {
 	    	 	rView.toggleBar();
 	    	 }
