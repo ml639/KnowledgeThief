@@ -18,6 +18,10 @@ gem 'devise'
 # Omniauth
 gem 'omniauth'
 gem 'omniauth-facebook'
+
+#Cancan
+gem "cancan"
+
 # ActiveRecord Reputation System for voting and user reputation
 gem 'activerecord-reputation-system', require: 'reputation_system'
 

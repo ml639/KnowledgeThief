@@ -11,7 +11,7 @@
 /db/*.sqlite3
 /app/views/.DS_Store
 /db/.DS_Store
-
+~/.DS_Store
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
