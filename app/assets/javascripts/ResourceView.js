@@ -18,7 +18,7 @@ var ResourceView = function(){
 		cleanUpWindow();
 
 		slidesContainer.css('overflow', 'hidden');
-		
+
 		// Remove scrollbar in JS
   		setKeyBindings();
   		slideWidth = $(window).width();
@@ -120,7 +120,7 @@ var ResourceView = function(){
 	},
 
 	updateBrowserHistory = function(){
-		window.history.isResource = true; // set a variable in our history we can check for during a popstate event.  
+		window.history.isResource = true; // set a variable in our history we can check for during a popstate event.
 		window.history.pushState({isResource: true}, "resourceViewEvent", '/resources/'+resource_id);
 	},
 	slideView = function(distance){ // -1 to slide left, +1 to slide right.
@@ -158,8 +158,9 @@ var ResourceView = function(){
 						}, 3000 );
 	       });
 		$('#home').click(function(event){
-			event.preventDefault();
+				event.preventDefault();
   			history.go(-currentPosition);
+  			logUserEndTime(resource_id);
   		});
   		$('.control')
     		.bind('click', function(event){
@@ -247,7 +248,11 @@ var ResourceView = function(){
 		//check the current position and load the next iframe if possible.
 		var currentLink = iFrameURLS[position];
 		var new_res_id = $('a[href$="'+currentLink+'"]').parent().attr('value');
+
+		logUserEndTime(resource_id);
 		resource_id = new_res_id;
+		logUser(resource_id);
+
 		comments(resource_id);
     	if(position==0){
     		$('#leftControl').hide()
@@ -301,6 +306,7 @@ var ResourceView = function(){
 		}
 	},
 	removeBar = function(){
+		logUserEndTime(resource_id);
 		$("#slidesContainer").html('');
 		$("#slideshow").fadeOut("fast");
 		$("#slidesContainer").fadeOut("fast");
@@ -356,7 +362,7 @@ var ResourceView = function(){
 	logUser = function(new_resource_id){
 		$.ajax({
 			type: "post",
-			url: "userResourceView",
+			url: "/userResourceView",
 			data: {
 				resource_id : new_resource_id
 			},
@@ -373,6 +379,26 @@ var ResourceView = function(){
 			}
 		});
 	},
+	logUserEndTime = function(new_resource_id){
+		$.ajax({
+			type: "PUT",  /*the request type being sent. (GET for index, POST for create, PUT for update)*/
+			url: "/userResourceView/" + resource_id,
+			data: {
+				//resource_id : new_resource_id   /*parameters being sent to the controller.*/
+			},
+			dataType: "json",
+			// Define request handlers.
+			success: function( objResponse ){  /* objResponse is the return data from the server on success, status 200 == success*/
+				// Check to see if request was successful.
+				if (objResponse.success){  /* if you look at the controller, i return :json= {:success=>true}*/
+				} else {
+				}
+			},
+			error: function( objRequest, strError ){ /* if something fucks up the server returns something other than 200, this method gets called. (404, 500) */
+
+			}
+		});
+	};
 	saveComment = function(commentText){
 		$.ajax({
 			type: "post",
@@ -428,6 +454,7 @@ var ResourceView = function(){
 		comments : comments,
 		vote : vote,
 		logUser : logUser,
+		logUserEndTime : logUserEndTime,
 		saveComment : saveComment,
 		toggleBar : toggleBar
 	};
