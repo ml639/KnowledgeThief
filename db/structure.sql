@@ -755,6 +755,38 @@ ALTER SEQUENCE user_resource_views_id_seq OWNED BY user_resource_views.id;
 
 
 --
+-- Name: user_searches; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE user_searches (
+    id integer NOT NULL,
+    user_id integer,
+    query character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: user_searches_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE user_searches_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: user_searches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE user_searches_id_seq OWNED BY user_searches.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -983,6 +1015,13 @@ ALTER TABLE ONLY user_resource_views ALTER COLUMN id SET DEFAULT nextval('user_r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY user_searches ALTER COLUMN id SET DEFAULT nextval('user_searches_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -1151,6 +1190,14 @@ ALTER TABLE ONLY tags
 
 ALTER TABLE ONLY user_resource_views
     ADD CONSTRAINT user_resource_views_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_searches_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY user_searches
+    ADD CONSTRAINT user_searches_pkey PRIMARY KEY (id);
 
 
 --
@@ -1508,3 +1555,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130217003226');
 INSERT INTO schema_migrations (version) VALUES ('20130217003233');
 
 INSERT INTO schema_migrations (version) VALUES ('20130217003234');
+
+INSERT INTO schema_migrations (version) VALUES ('20130225090655');

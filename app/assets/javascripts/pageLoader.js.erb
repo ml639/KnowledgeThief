@@ -43,26 +43,30 @@ var PageLoader = function(){
 		slideShow.css({'height': tempHeight});
 		$('#contentInner').css("height", tempHeight);
 	},
+	updateBrowser = function(url){
+		window.history.isPageLoader = true; // set a variable in our history we can check for during a popstate event. 
+		window.history.isResource = false; // set a variable in our history we can check for during a popstate event.  
+		window.history.pushState({isPageLoader: true, isResource : false}, "pageLoaderEvent", url);
+	},
 	setBindings = function(){
-		/*$(window).bind('popstate', function (ev){
-  			if (window.history.isResource && ev.originalEvent.state == null){
+		var popped = window.history.state != null;
+		var initialURL = location.href;
+		var initialPop = !popped && location.href == initialURL;
+  		popped = true;
+  		if ( initialPop ) return;
+		$(window).bind('popstate', function (ev){
+  			if (window.history.isPageLoader && ev.originalEvent.state == null){
   				// If a popstate occurs, check to see if we're in a resource, if so, remove the iframe, else, do nothing.
   				// if the originalEvent.state is false, then we know we're returning to the original page.
   				// Fucking wack shit.
   				removeBar();
-  			}else if(ev.originalEvent.state.isResource){
-  				currentPosition--;
-  				$("#slideInner").animate(
-		   			{"marginLeft": slideWidth*(-currentPosition)},{
-		     		duration: 750,
-		     		complete: function(){
-		       			manageIframes(currentPosition);
-				     }
-				   });
   			}else{
-  				return;
+  				 if(ev.originalEvent.state.isPageLoader){
+  				currentPosition--;
+  				slideToLeft(currentPosition);
   			}
-		});*/
+  			}
+		});
 		$("#profileLink").click(function() {
 			showProfile();
 			return false;

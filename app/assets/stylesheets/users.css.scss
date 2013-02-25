@@ -1,73 +1,84 @@
 /* @group core */
-.tempwrapper { width: 850px; overflow: hidden; margin: 0 auto; background: none; }
-#tempcontent {
-	h1,h2,h3,h4,a,li,ul{
-		
+#container{
+	h1,h2,h3,a,li,ul{
+		color:black !important;
 	}
-	color:black !important;
 }
-header #tempusernav { float: right; line-height: 100px; font-size: 14px; font-weight: bold; color: #000; }
-header #tempusernav a { color: #000; text-shadow: 0px 1px 1px #ddd; }
+#left{
+	width:70%;
+	float:left;
+	padding:20px;
+}
+#right{
+	width:30%;
+	float:left;
+	padding:20px;
+}
+#userInfo{
+	background:#e2e2e2;
+	padding:20px;
+	height:100%;
+	overflow:auto;
+	h1,h2,h3,a{
+		color:#434343 !important;
+		display: block; 
+		font-size: 3.4em; 
+		line-height: 1.1em; 
+		font-weight: bold; 
+	}
+	#userInfoLeft{
+		float:left;
+		height:100%;
+		width:30%;
+		h1,h2,h3,a{
+			color:#434343 !important;
+			display: block; 
+			font-size: 3.4em; 
+			line-height: 1.1em; 
+			font-weight: bold; 
+		}
+	}
+	#userInfoRight{
+		float:left;
+		padding-left: 25px;
+		height:100%;
+		width:70%;
+	}
+	#userDescription{
+		height:100%;
+		float:left;
+	}
+}
+#userResources{
+	margin-top: 15px;
+	h1,h2,h3,a{
+			color:#434343 !important;
+			display: block; 
+			font-size: 3.4em; 
+			line-height: 1.1em; 
+			font-weight: bold; 
+		}
+}
 
-header #tempusernav a span img { position: relative; top: 8px; background: #cecece; margin-left: 5px; padding: 3px; border: 1px solid #969696; }
-
-#tempcontent { display: block; width: 100%; padding:50px; margin: 0 auto; color: #000!important;  }
-
-#templeft { display: block; width: 70%; float: left; overflow: hidden; margin-right: 20px; }
-#tempright { display: block; width: 25%; float: right; overflow: hidden; }
-
-/* @group navigation */
-nav { width: auto; background: #eee; height: 45px; border-bottom: 1px solid #dadada; margin-bottom: 30px; }
-
-ul#tempn { width: 850px; margin: 0 auto; display: block; list-style: none; }
-ul#tempn li { float: left; line-height: 45px; border: 3px solid #eee; border-top: 0px; border-bottom: 0px; }
-ul#tempn li a { display: block; padding: 0 11px; color: #000; font-size: 15px; font-weight: bold; text-shadow: 0px 1px 1px #fff; }
-
-ul#tempn li.sel { background: #b4e127; border: 3px solid #c1ff00; border-top: 0px; border-bottom: 0px; }
-ul#tempn li.sel a { color: #000; text-shadow: 0px 1px 2px #88b618; }
-
-/* @group left */
-#tempuserStats { display: block; width: auto; background-color: #f9f9f9; border: 1px solid #ccc; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; padding: 12px; }
-
-#tempuserStats .pic { float: left; display: block; margin-right: 10px; }
-#tempuserStats .pic a img { padding: 7px; background: #fff; border: 1px solid #ccc; }
-
-#tempuserStats .data { float: left; display: block; position:  relative; width: 79%; height: 166px; padding: 4px; padding-left: 15px; background: #e6e6e6; overflow:  hidden; box-sizing: border-box; -moz-box-sizing: border-box; }
-#tempuserStats .data h1 { color: #000; line-height: 1.6em; text-shadow: 0px 1px 1px #fff; }
-#tempuserStats .data h3 { color: #000; line-height: 0.9em; margin-bottom: 5px; }
-#tempuserStats .data h4 { font-size: 1.2em; line-height: 1.3em; }
-
-#tempuserStats .data .socialMediaLinks { position: absolute; right: 6px; top: 8px; }
-#tempuserStats .data .socialMediaLinks a img { margin-right: 5px; }
-
-#tempuserStats .data .sep { clear: both; margin-top: 40px; width: 320px; height: 1px; border-bottom: 1px solid #ccc; margin-bottom: 0; }
-#tempuserStats .data ul.numbers { list-style: none; width: 320px; padding-top: 7px; margin-top: 0; border-top: 1px solid #fff; border-right: 1px solid #fff; color: #000;height:70px; }
-#tempuserStats .data ul.numbers li { width: 95px; float: left; display: block; padding-left: 8px; height: 50px; border-right: 1px dotted #bbb; text-transform: uppercase; }
-#tempuserStats .data ul.numbers li strong { color: #434343; display: block; font-size: 3.4em; line-height: 1.1em; font-weight: bold; }
+#userStats ul.numbers { list-style: none; width: 320px; padding-top: 7px; margin-top: 0; color: #000;height:70px; }
+#userStats ul.numbers li { width: 95px; float: left; display: block; padding-left: 8px; height: 50px;  text-transform: uppercase; }
+#userStats ul.numbers li strong {left: -10px;
+	text-align:center;
+position: relative; color: #434343; display: block; font-size: 3.4em; line-height: 1.1em; font-weight: bold; }
 
 /* @group right */
-#tempright .gcontent { display: block; margin-bottom: 20px; }
-#tempright .gcontent .head { background: #589fc6; border: 1px solid #3e82a7; padding-left: 8px; }
-#tempright .gcontent .head h1 { color: #fafcfd; font-weight: bold; font-size: 1.4em; }
+#right .gcontent { display: block; margin-bottom: 20px; }
+#right .gcontent .head { background: #589fc6; border: 1px solid #3e82a7; padding-left: 8px; }
+#right .gcontent .head h1 { color: #fafcfd; font-weight: bold; font-size: 1.4em; }
 
-#tempright .gcontent .boxy { border-radius: 0px 0px 5px 5px; border: 1px solid #ccc; border-top: 0px; padding: 10px 8px; background: #f9f9f9; }
+#right .gcontent .boxy { border-radius: 0px 0px 5px 5px; border: 1px solid #ccc; border-top: 0px; padding: 10px 8px; background: #f9f9f9; }
 
-#tempright .gcontent .boxy .badgeCount { margin-bottom: 30px;  }
-#tempright .gcontent .boxy .badgeCount a img { margin-right: 8px; }
-#tempright .gcontent .boxy span { font-size: 1.2em; display: block; margin-bottom: 7px; }
+#right .gcontent .boxy .badgeCount { margin-bottom: 30px;  }
+#right .gcontent .boxy .badgeCount a img { margin-right: 8px; }
+#right .gcontent .boxy span { font-size: 1.2em; display: block; margin-bottom: 7px; }
 
-#tempright .gcontent .boxy .tempfriendslist { display: block; margin-bottom: 15px; }
-#tempright .gcontent .boxy .tempfriend { border-top: 1px solid #ccc; float: left; height: 50px; padding: 5px 5px 5px 4px; width: 100px;}
-#tempright .gcontent .boxy .tempfriend .cusimg { border: 1px solid #ccc; float: left; padding: 1px; background: #fff; margin-right: 4px; }
-#tempright .gcontent .boxy .tempfriend .friendly {float: right; position: relative; top: -35px;
+#right .gcontent .boxy .tempfriendslist { display: block; margin-bottom: 15px; }
+#right .gcontent .boxy .tempfriend { border-top: 1px solid #ccc; float: left; height: 50px; padding: 5px 5px 5px 4px; width: 100px;}
+#right .gcontent .boxy .tempfriend .cusimg { border: 1px solid #ccc; float: left; padding: 1px; background: #fff; margin-right: 4px; }
+#right .gcontent .boxy .tempfriend .friendly {float: right; position: relative; top: -35px;
 left: 3px; font-size: 1em; color:black;}
-#tempright .gcontent .boxy .tempfriend .friendseeall { float:left; top: 12px; font-size: 1.2em; color:black;}
-
-/** @group clearfix **/
-.tempclearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
-.tempclearfix { display: inline-block; }
- 
-html[xmlns] .tempclearfix { display: block; }
-* html .tempclearfix { height: 1%; }
-
-.tempnobrdr { border: 0px !important; }

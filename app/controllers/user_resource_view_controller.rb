@@ -7,9 +7,8 @@ class UserResourceViewController < ApplicationController
   def update
     # Save in order to update "updated_at" so we know the end time
     u_id = current_user == nil ? 0 : current_user.id
-    r_id = params[:resource_id]
     # Grab the latest entry and save it to
-    urv = UserResourceView.where(resource_id: r_id, user_id: u_id).order('created_at desc').first
+    urv = UserResourceView.where(resource_id: params[:id], user_id: u_id).order('created_at desc').first
 
     urv.updated_at = Time.now
 

@@ -55,6 +55,11 @@ class ResourcesController < ApplicationController
   end
 
   def search
+
+    # Log the user's search
+    u_id = current_user == nil ? 0 : current_user.id
+    UserSearch.create(user_id: u_id, query: params[:q])
+
     # Make sure google(q, filter) is run first so the sort encompasses those results as well.
         # Make sure google(q, filter) is run first so the sort encompasses those results as well.
     filter = "site"

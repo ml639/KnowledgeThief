@@ -1,6 +1,6 @@
 var ResourceView = function(){
 	var resource_id = 0;
-	var isToggledUp = false;
+	var isToggledUp = true;
 	var currentPosition = 0;
   	var slideWidth = $(window).width();
   	var slideHeight = $(window).height();
@@ -12,13 +12,15 @@ var ResourceView = function(){
     var slidesContainer = $('#slidesContainer');
     var slideShow = $("#slideshow");
     var slidesInner = $('#slideInner');
+
+    var historyStackSize = 0;
 	init = function(url,new_resource_id){
 		resource_id = new_resource_id;
 		updateBrowserHistory();
 		cleanUpWindow();
 
 		slidesContainer.css('overflow', 'hidden');
-		
+
 		// Remove scrollbar in JS
   		setKeyBindings();
   		slideWidth = $(window).width();
@@ -118,8 +120,10 @@ var ResourceView = function(){
 	},
 
 	updateBrowserHistory = function(){
-		window.history.isResource = true; // set a variable in our history we can check for during a popstate event.  
-		window.history.pushState({isResource: true}, "resourceViewEvent", '/resources/'+resource_id);
+		window.history.isPageLoader = true; // set a variable in our history we can check for during a popstate event. 
+		window.history.isResource = true; // set a variable in our history we can check for during a popstate event.
+		window.history.pushState({isResource: true, isPageLoader : false}, "resourceViewEvent", '/resources/'+resource_id);
+		historyStackSize++;
 	},
 	slideView = function(distance){ // -1 to slide left, +1 to slide right.
 		currentPosition = currentPosition + distance;
@@ -139,9 +143,10 @@ var ResourceView = function(){
   				// If a popstate occurs, check to see if we're in a resource, if so, remove the iframe, else, do nothing.
   				// if the originalEvent.state is false, then we know we're returning to the original page.
   				removeBar();
-  			}else if(ev.originalEvent.state.isResource){
+  			}else {
+  				if(ev.originalEvent.state.isResource){
   				currentPosition--;
-  				$("#slideInner").animate(
+  				$("#slideInner").stop().animate(
 					{"marginLeft": slideWidth*(-currentPosition)},{
 	 				duration: 750,
 	 				complete: function(){
@@ -149,6 +154,7 @@ var ResourceView = function(){
 		     		}
 				});
   			}
+  		}
 		});
 
 	    $('#info-button').mouseover(function(){
@@ -162,8 +168,9 @@ var ResourceView = function(){
 						}, 3000 );
 	       });
 		$('#home').click(function(event){
-			event.preventDefault();
-  			history.go(-currentPosition);
+				event.preventDefault();
+  			history.go(-historyStackSize);
+  			logUserEndTime(resource_id);
   		});
   		$('.control')
     		.bind('click', function(event){
@@ -246,12 +253,22 @@ var ResourceView = function(){
 	          $(this).find('a').prev().slideUp(250);
 	          $(this).find('a').animate({opacity: 0}, 250);
 	       });
+	    $("#info-toggle").unbind("click").click(function(e){
+		e.preventDefault();
+	    	if( e.target.tagName.toUpperCase() !== 'INPUT' ) {
+	    		toggleBar();
+	    	}
+		});
 	},
 	manageIframes = function(position){
 		//check the current position and load the next iframe if possible.
 		var currentLink = iFrameURLS[position];
 		var new_res_id = $('a[href$="'+currentLink+'"]').parent().attr('value');
+
+		logUserEndTime(resource_id);
 		resource_id = new_res_id;
+		logUser(resource_id);
+
 		comments(resource_id);
     	if(position==0){
     		$('#leftControl').hide()
@@ -305,6 +322,7 @@ var ResourceView = function(){
 		}
 	},
 	removeBar = function(){
+		logUserEndTime(resource_id);
 		$("#slidesContainer").html('');
 		$("#slideshow").fadeOut("fast");
 		$("#slidesContainer").fadeOut("fast");
@@ -360,7 +378,7 @@ var ResourceView = function(){
 	logUser = function(new_resource_id){
 		$.ajax({
 			type: "post",
-			url: "userResourceView",
+			url: "/userResourceView",
 			data: {
 				resource_id : new_resource_id
 			},
@@ -377,6 +395,26 @@ var ResourceView = function(){
 			}
 		});
 	},
+	logUserEndTime = function(new_resource_id){
+		$.ajax({
+			type: "PUT",  /*the request type being sent. (GET for index, POST for create, PUT for update)*/
+			url: "/userResourceView/" + resource_id,
+			data: {
+				//resource_id : new_resource_id   /*parameters being sent to the controller.*/
+			},
+			dataType: "json",
+			// Define request handlers.
+			success: function( objResponse ){  /* objResponse is the return data from the server on success, status 200 == success*/
+				// Check to see if request was successful.
+				if (objResponse.success){  /* if you look at the controller, i return :json= {:success=>true}*/
+				} else {
+				}
+			},
+			error: function( objRequest, strError ){ /* if something fucks up the server returns something other than 200, this method gets called. (404, 500) */
+
+			}
+		});
+	};
 	saveComment = function(commentText){
 		$.ajax({
 			type: "post",
@@ -432,14 +470,15 @@ var ResourceView = function(){
 		comments : comments,
 		vote : vote,
 		logUser : logUser,
+		logUserEndTime : logUserEndTime,
 		saveComment : saveComment,
 		toggleBar : toggleBar
 	};
 };
 
 $(function(){
-	var rView = new ResourceView();
 	$('.resourceThumb').click(function(){
+		var rView = new ResourceView();
 		var link = $(this).find('a').attr('href');
 		//this is hacky as shit. split on /'s and check if its a resource link
 		var parts = link.split('/');
@@ -455,11 +494,4 @@ $(function(){
 		}
 		return false;
 	});
-	$("#info-toggle").click(function(e){
-		e.preventDefault();
-	    	 if( e.target.tagName.toUpperCase() !== 'INPUT' ) {
-	    	 	rView.toggleBar();
-	    	 }
-	    });
-
 });
