@@ -163,7 +163,7 @@ var ResourceView = function(){
 	       });
 		$('#home').click(function(event){
 			event.preventDefault();
-  			history.go(-currentPosition-1);
+  			history.go(-currentPosition);
   		});
   		$('.control')
     		.bind('click', function(event){
