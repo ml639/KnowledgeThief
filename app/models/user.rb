@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
   include Engage::Extensions::User
+  has_many :searches, :class_name => 'UserSearch'
   has_many :resources
   has_many :comments
   has_many :resource_views, :class_name => 'UserResourceView'
   has_many :viewed_resources, :through => :resource_views, :source => :resource
-  has_many :authentications 
+  has_many :authentications
   has_many :evaluations, class_name: "RSEvaluation", as: :source
 
   has_reputation :votes, source: {reputation: :votes, of: :resources}, aggregated_by: :sum
@@ -15,7 +16,7 @@ class User < ActiveRecord::Base
   def voted_for?(resource)
     evaluations.where(target_type: resource.class, target_id: resource.id).present?
   end
-  
+
   def recently_viewed_resources
     viewed_resources.order('user_resource_views.created_at DESC')
   end
@@ -28,11 +29,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :nickname, 
-                  :first_name, :last_name, :image, :location, :birthday, :hometown_name, 
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :nickname,
+                  :first_name, :last_name, :image, :location, :birthday, :hometown_name,
                   :bio, :gender, :full_name
   # attr_accessible :title, :body
-  
+
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
     self.full_name = omniauth['info']['name'] if full_name.blank?
@@ -51,9 +52,9 @@ class User < ActiveRecord::Base
 
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
-  
+
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end
-  
+
 end
