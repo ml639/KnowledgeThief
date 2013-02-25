@@ -61,7 +61,6 @@ var ResourceView = function(){
   			$('#slideInner').css('marginLeft', -slideWidth);
   			currentPosition++;
   		}
-
 		$("#slideshow").fadeIn("fast");
 		$("#slidesContainer").fadeIn("fast");
 		$('#contentWrapper').fadeOut();
@@ -86,7 +85,6 @@ var ResourceView = function(){
 		slidesContainer.css({'width': slideWidth});
 		slidesContainer.css({'height': slideHeight});
 		$('#slideInner').css('width', slideWidth * numberOfSlides);
-  		$('#slideInner').css('marginLeft', -slideWidth);
   		$('.slide').css({
       		'width' : slideWidth,
       		'height': slideHeight
@@ -142,8 +140,14 @@ var ResourceView = function(){
   				// if the originalEvent.state is false, then we know we're returning to the original page.
   				removeBar();
   			}else if(ev.originalEvent.state.isResource){
-  				history.back();
-  				slideView(-1);
+  				currentPosition--;
+  				$("#slideInner").animate(
+					{"marginLeft": slideWidth*(-currentPosition)},{
+	 				duration: 750,
+	 				complete: function(){
+			   			manageIframes(currentPosition);
+		     		}
+				});
   			}
 		});
 

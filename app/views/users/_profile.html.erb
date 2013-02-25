@@ -1,9 +1,13 @@
-<div class="container">
+<div class="container" style="width:100%;!important;">
 	<div id="tempcontent" class="tempclearfix" style="padding-top:25px;">
 		<section id="templeft">
 			<div id="tempuserStats" class="tempclearfix">
 				<div class="pic">
-					<a href="#"><img src=<%= current_user.image%> width="150" height="150" /></a>
+					<% if !current_user.image.nil? %>
+						<a href="#"><img src=<%= current_user.image%> width="150" height="150" /></a>
+					<% else %>
+						<%= img_tag('user_placeholder.png', :width => '150', :height => "150") %>
+					<% end %>
 				</div>
 				
 				<div class="data">
