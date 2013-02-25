@@ -44,6 +44,25 @@ var PageLoader = function(){
 		$('#contentInner').css("height", tempHeight);
 	},
 	setBindings = function(){
+		/*$(window).bind('popstate', function (ev){
+  			if (window.history.isResource && ev.originalEvent.state == null){
+  				// If a popstate occurs, check to see if we're in a resource, if so, remove the iframe, else, do nothing.
+  				// if the originalEvent.state is false, then we know we're returning to the original page.
+  				// Fucking wack shit.
+  				removeBar();
+  			}else if(ev.originalEvent.state.isResource){
+  				currentPosition--;
+  				$("#slideInner").animate(
+		   			{"marginLeft": slideWidth*(-currentPosition)},{
+		     		duration: 750,
+		     		complete: function(){
+		       			manageIframes(currentPosition);
+				     }
+				   });
+  			}else{
+  				return;
+  			}
+		});*/
 		$("#profileLink").click(function() {
 			showProfile();
 			return false;
