@@ -39,8 +39,7 @@ class ResourcesController < ApplicationController
       @resource.save
       @resource.update_attribute(:link, "/resources/"+@resource.id.to_s)
     end
-
-
+    current_user.facebook.put_wall_post("I post a resource on www.knowledgethief.com")
     redirect_to resources_path
   end
 
@@ -52,6 +51,7 @@ class ResourcesController < ApplicationController
         format.html { redirect_to :back, notice: "Thank you for voting" }
         format.json { render :status=>200, :json=>{:success=>true}}
     end
+    current_user.facebook.put_wall_post("I vote on a resource on www.knowledgethief.com")
   end
 
   def search
@@ -84,5 +84,7 @@ class ResourcesController < ApplicationController
       end
       @resource = @resource.paginate(:page => (params[:page] || 1), :per_page => 15) unless @resource.nil?
     end
+
+    current_user.facebook.put_wall_post("I just made a search on www.knowledgethief.com")
 
 end

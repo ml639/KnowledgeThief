@@ -51,6 +51,8 @@ class PathsController < ApplicationController
         format.json { render json: @path.errors, status: :unprocessable_entity }
       end
     end
+
+    current_user.facebook.put_wall_post("I just created a learning path for myself on www.knowledgethief.com")
   end
 
   # PUT /paths/1
