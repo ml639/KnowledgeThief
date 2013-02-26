@@ -40,7 +40,9 @@ class ResourcesController < ApplicationController
       @resource.save
       @resource.update_attribute(:link, "/resources/"+@resource.id.to_s)
     end
-    current_user.facebook.put_wall_post("I posted a resource on www.knowledgethief.com")
+    if(!current_user.facebook.access_token.nil?)
+      current_user.facebook.put_wall_post("I posted a resource on www.knowledgethief.com")
+    end
     redirect_to resources_path
   end
 
@@ -53,7 +55,9 @@ class ResourcesController < ApplicationController
         format.json { render :status=>200, :json=>{:success=>true}}
     end
     if !current_user.nil?
-      current_user.facebook.put_wall_post("I vote on a resource on www.knowledgethief.com")
+      if(!current_user.facebook.access_token.nil?)
+        current_user.facebook.put_wall_post("I vote on a resource on www.knowledgethief.com")
+      end
     end
   end
 

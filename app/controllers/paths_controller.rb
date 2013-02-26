@@ -63,7 +63,9 @@ class PathsController < ApplicationController
       end
     end
     if !current_user.nil?
-      current_user.facebook.put_wall_post("I just created a learning path for myself on www.knowledgethief.com")
+      if(!current_user.facebook.access_token.nil?)
+        current_user.facebook.put_wall_post("I just created a learning path for myself on www.knowledgethief.com")
+      end
     end
   end
 
