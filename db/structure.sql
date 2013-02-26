@@ -813,7 +813,8 @@ CREATE TABLE users (
     birthday date,
     hometown_name character varying(255),
     bio character varying(255),
-    gender character varying(255)
+    gender character varying(255),
+    oauth_token character varying(255)
 );
 
 
@@ -1557,3 +1558,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130217003233');
 INSERT INTO schema_migrations (version) VALUES ('20130217003234');
 
 INSERT INTO schema_migrations (version) VALUES ('20130225090655');
+
+INSERT INTO schema_migrations (version) VALUES ('20130226033515');
