@@ -15,6 +15,9 @@ gem 'acts_as_votable'
 # Devise
 gem 'devise'
 
+#koala
+gem 'koala'
+
 gem 'activeadmin'
 
 # Omniauth
@@ -31,6 +34,7 @@ gem "postrank-uri", "~> 1.0.17"
 
 # Engage! for user support forum
 gem 'engagecsm'
+
 
 # Postgresql gem for better continuous integration with Heroku
 gem 'pg'

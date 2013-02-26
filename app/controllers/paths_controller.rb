@@ -44,6 +44,13 @@ class PathsController < ApplicationController
   # POST /paths
   # POST /paths.json
   def create
+    if current_user == nil
+      flash[:alert] = "You must log in to submit a resource!"
+      redirect_to resources_path
+      return
+    else
+      params[:resource][:user_id] = current_user.id
+    end
     @path = Path.new(params[:path])
 
     respond_to do |format|
@@ -54,6 +61,9 @@ class PathsController < ApplicationController
         format.html { render action: "new" }
         format.json { render json: @path.errors, status: :unprocessable_entity }
       end
+    end
+    if !current_user.nil?
+      current_user.facebook.put_wall_post("I just created a learning path for myself on www.knowledgethief.com")
     end
   end
 
