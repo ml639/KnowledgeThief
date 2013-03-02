@@ -27,22 +27,19 @@ class Ability
     user ||= User.new # guest user
     if user.role.nil?
       can :read, :all
-      can :read, Resource
-      can :create, Resource
-      can :create, Comment
+      can :create, :all
       can :update, Resource do |resource|
-        resource.try(:user_id) == user.id || user.role?(:moderator)
+        resource.try(:user_id) == user.id 
       end
       can :update, Comment do |comment| 
-        comment.try(:user_id) == user.id || user.role?(:moderator)
+        comment.try(:user_id) == user.id
       end
     else  
       if user.role? :admin
         can :manage, :all
       else
         can :read, :all
-        can :create, Resource
-        can :create, Comment
+        can :create, :all
         can :update, Resource do |resource|
           resource.try(:user_id) == user.id || user.role?(:moderator)
         end
@@ -52,6 +49,8 @@ class Ability
         
       end
     end
+
+    can :manage, :all
 
   end
 end
