@@ -28,6 +28,8 @@ class Ability
     if user.role.nil?
       can :read, :all
       can :create, :all
+      can :search, :all
+      can :vote, :all
       can :update, Resource do |resource|
         resource.try(:user_id) == user.id 
       end
@@ -40,6 +42,8 @@ class Ability
       else
         can :read, :all
         can :create, :all
+        can :search, :all
+        can :vote, :all
         can :update, Resource do |resource|
           resource.try(:user_id) == user.id || user.role?(:moderator)
         end
@@ -49,8 +53,5 @@ class Ability
         
       end
     end
-
-    can :manage, :all
-
   end
 end
