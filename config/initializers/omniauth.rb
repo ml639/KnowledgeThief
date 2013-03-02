@@ -1,5 +1,5 @@
 #OmniAuth.config.logger = Rails.logger
-if Rails.evn.production?
+if Rails.env.production?
 	FAPP_ID='415358701886018'
 	FAPP_SECRET='399b918b8c7accb967b3a497beb21c40'
 else	
