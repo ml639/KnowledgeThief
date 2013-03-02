@@ -440,7 +440,7 @@ var ResourceView = function(){
 	vote = function(vote){
 		$.ajax({
 			type: "post",
-			url: "resources/"+resource_id +"/vote",
+			url: "/resources/"+resource_id +"/vote",
 			data: {
 				type : vote
 			},
