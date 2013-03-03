@@ -18,7 +18,7 @@
 				</div>
 				<div id ="userStats">
 					<ul class="numbers">
-						<li>Reputation<strong> <%= current_user.reputation_for(:karma).to_i %></strong></li>
+						<li>Reputation<strong> <%= current_user.reputation_for(:votes).to_i %></strong></li>
 						<li>Comment<strong><%= @comments.count %></strong></li>
 						<li class="tempnobrdr">Resource<strong> <%= @rc.count %></strong></li>
 					</ul>
