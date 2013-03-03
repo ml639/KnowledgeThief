@@ -119,5 +119,17 @@ var Pinterizr = function () {
 };
 $(function(){
 	var pinterest = new Pinterizr();
-	pinterest.init();
+	
+	$(".pin").hover(
+		  function () {
+		    $(this).find(".resourceButtons").stop().animate({
+		        opacity: 1
+		    	}, 250);
+		  },
+		  function () {
+		    $(this).find(".resourceButtons").stop().animate({
+		        opacity: 0
+		    	}, 250);
+		  }
+		);
 });
