@@ -10,6 +10,10 @@ class ResourcesController < ApplicationController
 
   def show
     @resource = Resource.find(params[:id])
+    respond_to do |format|
+        format.html { render @resource }
+        format.json { render :status=>200, :json=>{:resource=>@resource}}
+    end
   end
 
   def create
