@@ -50,6 +50,9 @@ var Pinterizr = function () {
 			success: function( objResponse ){
 				// Check to see if request was successful.
 				alert(objResponse.resource);
+				if(true){
+					
+				}
 			},
 			error: function( objRequest, strError ){
 				//alert("error loading content");
