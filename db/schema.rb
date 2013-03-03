@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130201231642) do
-=======
-ActiveRecord::Schema.define(:version => 20130128010513) do
->>>>>>> master
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"

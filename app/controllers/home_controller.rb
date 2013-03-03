@@ -9,7 +9,7 @@ class HomeController < ApplicationController
       #end
       
       @resources =  Resource.all
-      
+      @user_paths = Path.user_paths(current_user) unless current_user.nil?
       if current_user && params[:selection_type] && params[:selection_type] == "recent"
         # @resources = Recent resources (pending User Activity gem)
         @resources = current_user.recently_viewed_resources

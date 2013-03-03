@@ -19,7 +19,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 # ActiveRecord Reputation System for voting and user reputation
-gem 'activerecord-reputation-system', require: 'reputation_system'
+gem 'activerecord-reputation-system', :require => 'reputation_system'
 
 # Audited gem in order to track activity
 gem "audited-activerecord", "~> 3.0"

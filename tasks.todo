@@ -1,0 +1,19 @@
+Today:
+ ✔ Add in right side plus for hover resources @done (13-03-02 03:27)
+ ✔ Add in click option to add to paths for plus sign @done (13-03-02 17:38)
+ ✔ Add in drop down menu for paths with overflow true for div, come up with better design with Hoa @done (13-03-02 17:38)
+ ✔ Come up with pinterest style landing page for paths home page @done (13-03-02 17:38)
+ ☐ Add in migration for having position within path for each resource added
+ ☐ Add in the ability to edit the position in the path for each resource added
+ ☐ Add in completion of resource for viewing each one in path 
+ ☐ Add in path listing and links in the Veil
+ ☐ Change description hover text to only include 50 characters and a "..." if there is more
+ ☐ Add in search results in the Veil
+ ☐ Fix bug with log in and sign up link clicking and not changing (javascript issue?)
+ ☐ fix bug with adding new resource or question not going away (javascript issue?), talk with Hoa about it
+ ☐ get rid of filter by courses/interactive courses and just have one filter by 'Courses', change seed data to match appropriately
+ ☐ merge branch changes and resolve conflicts
+ ☐ use paperclip for path images (for pinterest stuff) come up with page for uploading images for path images
+ ☐ build unit tests in RSpec
+ ☐ build unit tests in Jasmine
+ ☐ add in pgsearch for paths and resources within paths 

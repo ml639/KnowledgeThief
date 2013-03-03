@@ -2,16 +2,12 @@ Kt::Application.routes.draw do
  
   #resources :authentications
 
-
   resources :paths
 
+  match '/in_paths/:path_id/resource/:resource_id', :to => 'in_paths#add_resource_to_path',
+        :as => 'add_resource_to_path', :via => 'post'
 
   mount Engage::Engine => '/engage', :as => 'engage'
-
-  resources :comments do
-    member {post :forresource}
-  end
-
 
   resources :resources do
       member { post :vote }
@@ -21,7 +17,6 @@ Kt::Application.routes.draw do
   devise_for :users
  
   resources :userResourceView
-  resources :learningPaths
   get "home/index"
   devise_scope :user do
     get "/login" => "devise/sessions#new"

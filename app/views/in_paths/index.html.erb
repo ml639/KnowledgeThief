@@ -1,0 +1,24 @@
+<h1>Listing paths</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Content</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @in_paths.each do |path| %>
+  <tr>
+    <td><%= path.path_id %></td>
+    <td><%= path.resource_id %></td>
+    <td><%= link_to 'Show', path %></td>
+    <td><%= link_to 'Edit', edit_path_path(path) %></td>
+    <td><%= link_to 'Destroy', path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Add Resource To Path', new_in_path_path %>

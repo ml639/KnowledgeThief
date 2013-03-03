@@ -25,7 +25,6 @@ require 'active_record/fixtures'
 #end
 
 Resource.delete_all # Have this line if we want to delete all resources before we add them.
-
 File.open("app/assets/files/seed_resources.txt") do |seed_resources|
   seed_resources.each_line do |r|
     pairs = r.chomp.split("|")
@@ -46,24 +45,24 @@ File.open("app/assets/files/seed_resources.txt") do |seed_resources|
     side_size = 300
     crop_side_size = 300
 
-    kit = IMGKit.new(url, :quality => 50,
-                          :width   => side_size,
-                          :height  => side_size,
-                          "crop-w" => crop_side_size,
-                          "crop-h" => crop_side_size,
-                          "zoom"   => 0.35,
-                          "disable-smart-width" => true,
-                          "load-error-handling" => "ignore")
+  #  kit = IMGKit.new(url, :quality => 50,
+  #                        :width   => side_size,
+  #                        :height  => side_size,
+  #                        "crop-w" => crop_side_size,
+  #                        "crop-h" => crop_side_size,
+  #                        "zoom"   => 0.35,
+  #                        "disable-smart-width" => true,
+  #                        "load-error-handling" => "ignore")
 
-    img   = kit.to_img(:jpg)
+  #  img   = kit.to_img(:jpg)
 
-    file  = Tempfile.new(["resource_#{temp_resource.id}", 'jpg'], 'tmp',
-                         :encoding => 'ascii-8bit')
-    file.write(img)
-    file.flush
-    temp_resource.snapshot = file
-    temp_resource.save!
-    file.unlink
+  #  file  = Tempfile.new(["resource_#{temp_resource.id}", 'jpg'], 'tmp',
+  #                       :encoding => 'ascii-8bit')
+  #  file.write(img)
+  #  file.flush
+  #  temp_resource.snapshot = file
+  #  temp_resource.save!
+  #  file.unlink
   end
 end
 

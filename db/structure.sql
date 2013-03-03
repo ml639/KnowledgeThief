@@ -361,6 +361,17 @@ ALTER SEQUENCE engage_votes_id_seq OWNED BY engage_votes.id;
 
 
 --
+-- Name: in_paths; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE in_paths (
+    path_id integer,
+    resource_id integer,
+    resource_path_position integer
+);
+
+
+--
 -- Name: paths; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -440,11 +451,11 @@ CREATE TABLE resources (
     updated_at timestamp without time zone NOT NULL,
     "youtubeID" character varying(255),
     media_type character varying(255),
+    path_id integer,
     snapshot_file_name character varying(255),
     snapshot_content_type character varying(255),
     snapshot_file_size integer,
-    snapshot_updated_at timestamp without time zone,
-    path_id integer
+    snapshot_updated_at timestamp without time zone
 );
 
 
@@ -1361,3 +1372,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130201231642');
 INSERT INTO schema_migrations (version) VALUES ('20130203203047');
 
 INSERT INTO schema_migrations (version) VALUES ('20130204041213');
+
+INSERT INTO schema_migrations (version) VALUES ('20130217225752');
+
+INSERT INTO schema_migrations (version) VALUES ('20130303012841');

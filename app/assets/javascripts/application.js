@@ -20,20 +20,39 @@
 //= require_tree .
 $('.text').hide().removeClass('text').addClass('text-js');
 
+$('.path').click(function () {
+	var navbar = $(this).find('ul.nav');
+	if (navbar.is(":hidden")) {
+	$('.path').css("background-color", "yellow");
+		navbar.slideDown("slow");
+	} else {
+		$('.path').css("background-color", "");
+		navbar.slideUp();
+	}
+});
+
 $('.thumb').hover(function(){
     $(this).find('.text-js').fadeToggle();
+    $(this).find('.path').fadeIn();
+}, function(){
+    $(this).find('.text-js').fadeToggle();
+	var navbar = $(this).find('ul.nav');
+    if (navbar.is(":hidden"))
+    {
+		$(this).find('.path').fadeOut();
+	} 
 });
 
 function setFilter(val)
 {
     $('#filter').val(val);
-   	$('#search').submit(); 
+   	$('#search').submit();
 }
 
 function setSort(val)
 {
     $('#sort').val(val);
-   	$('#search').submit(); 
+   	$('#search').submit();
 }
 
 // Isotope stuff
