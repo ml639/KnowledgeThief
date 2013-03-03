@@ -18,7 +18,7 @@
 				</div>
 				<div id ="userStats">
 					<ul class="numbers">
-						<li>Reputation<strong> <%= current_user.reputation_for(:karma).to_i %></strong></li>
+						<li>Reputation<strong> <%#= current_user.reputation_for(:karma).to_i %></strong></li>
 						<li>Comment<strong><%= @comments.count %></strong></li>
 						<li class="tempnobrdr">Resource<strong> <%= @rc.count %></strong></li>
 					</ul>
@@ -35,22 +35,23 @@
 				</div>
 			</div>
 		</div>
-		<div style="clear:both;"/>
+		<div style="clear:both;"/></div>
 		<ul>
-			<li id="userTab"><a id="userTabLink" class="userTabLink_resource">Resource ||</a></li>
-			<li id="userTab"><a id="userTabLink" class="userTabLink_path">Path<a/></li>
+			<li id="userTab"><a id="userTabLink" class="userTabLink_resource">Resource</a></li>
+			<li id="userTab">||</li>
+			<li id="userTab"><a id="userTabLink" class="userTabLink_path">Path</a></li>
 		</ul>
 		<div id = "userResources" >
 			<h1>My Resources:</h1>
 			<% if @rc.empty? %>
 				You haven't posted anything yet.
 			<% else %>
-				<div id="resultsContainer" style="margin-top:5px;">
+				<div id="userResourceContainer" style="margin-top:5px;">
 					<%= render :partial => 'result', :collection => @rc, :as => 'resource' %>
 				</div>
 			<% end %>
 		</div>
-		<div style="clear:both;"/>
+		<div style="clear:both;"/></div>
 		<div id = "userPaths" style="display:none">
 			<h1>My Path:</h1>
 			<%= render :partial => 'path' %>

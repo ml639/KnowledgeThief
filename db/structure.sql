@@ -814,8 +814,8 @@ CREATE TABLE users (
     hometown_name character varying(255),
     bio character varying(255),
     gender character varying(255),
-    role character varying(255),
-    oauth_token character varying(255)
+    oauth_token character varying(255),
+    role character varying(255)
 );
 
 

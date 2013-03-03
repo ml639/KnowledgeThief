@@ -1,0 +1,36 @@
+= form_for @flag do |f|
+  - if @flag.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@flag.errors.count, "error")} prohibited this flag from being saved:"
+      ul
+        - @flag.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :item_id
+    = f.number_field :item_id
+  .field
+    = f.label :itemtype
+    = f.text_field :itemtype
+  .field
+    = f.label :desc
+    = f.text_field :desc
+  .field
+    = f.label :reporter_id
+    = f.number_field :reporter_id
+  .field
+    = f.label :resolved
+    = f.check_box :resolved
+  .field
+    = f.label :moderator_id
+    = f.number_field :moderator_id
+  .field
+    = f.label :moderator_msg
+    = f.text_field :moderator_msg
+  .field
+    = f.label :action
+    = f.text_field :action
+  .field
+    = f.label :checked
+    = f.check_box :checked
+  .actions = f.submit 'Save'

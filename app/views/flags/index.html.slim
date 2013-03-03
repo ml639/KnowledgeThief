@@ -1,0 +1,35 @@
+h1 Listing flags
+
+table
+  tr
+    th Item
+    th Itemtype
+    th Desc
+    th Reporter
+    th Resolved
+    th Moderator
+    th Moderator msg
+    th Action
+    th Checked
+    th
+    th
+    th
+
+  - @flags.each do |flag|
+    tr
+      td = flag.item_id
+      td = flag.itemtype
+      td = flag.desc
+      td = flag.reporter_id
+      td = flag.resolved
+      td = flag.moderator_id
+      td = flag.moderator_msg
+      td = flag.action
+      td = flag.checked
+      td = link_to 'Show', flag
+      td = link_to 'Edit', edit_flag_path(flag)
+      td = link_to 'Destroy', flag, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Flag', new_flag_path
