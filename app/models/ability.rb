@@ -30,6 +30,8 @@ class Ability
       can :create, :all
       can :search, :all
       can :vote, :all
+      can :forresource, :all
+      can :failure, :all
       can :update, Resource do |resource|
         resource.try(:user_id) == user.id 
       end

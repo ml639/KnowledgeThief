@@ -4,7 +4,9 @@ class UsersController < ApplicationController
 			#raise current_user.to_yaml
 			#return current_user
 			@rc = Resource.where(:user_id => current_user.id)
+			#@rc = 
 			@comments = Comment.where(:user_id => current_user.id)
+			#@paths = Path.where()
 		else
 			redirect_to (home_path), :notice => "Please, log in." 
 		end
