@@ -1,21 +1,26 @@
  <div id="header">
-
-    <div id="logoText">
-        <%= link_to "Knowledge Thief", "/" %> 
-
-    </div>
-    <% if user_signed_in? %>
+    
+    <a href="#" class="addResource">
+      <%= image_tag "link.png", :class => 'headerIcon', :style => 'margin-left:40px;' %>
+      <p class="iconText" style="position:absolute; left:37px; top:10px;">Submit a Learning Resource</p>    
+    </a>
+    
+    <a href="#" class="addQuestion">
+      <div style="display:inline; font-size:25px; color:white; position:relative; left:235px; bottom:3px;" class="headerIcon icon-question-sign"></div>        
+      <p class="iconText" style="position:absolute; left:295px; top:10px;">Ask a Question</p> 
+    </a> 
+     <% if user_signed_in? %>
      <div class="signin">
       <ul>
 
         <li id="login">
           <a id="login-trigger" href="#">
-              <%= current_user.email %> 
+              <%= current_user.email %>
           </a>
           <div id="login-content">
           <br> Reputation: <%= current_user.reputation_for(:karma).to_i %></br>
             <b><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></b>
-          </div>                     
+          </div>
         </li>
       </ul>
     <% else %>
@@ -39,14 +44,14 @@
                 <% end -%>
                 <div><%= f.submit "Sign in" %></div>
             <% end %>
-          </div>                     
+          </div>
         </li>
         <li id="register" style="margin-left:1px;">
           <a id="register-trigger" href="#">
             Sign Up
           </a>
           <div id="register-content">
-            <div><%= link_to "Sign up with Facebook", "/auth/facebook" %></div>
+            <div><%= link_to "Log in with Facebook", "/auth/facebook" %></div>
             <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
               <%= devise_error_messages! %>
 
@@ -58,15 +63,14 @@
 
               <div><%= f.label :password_confirmation %><br />
               <%= f.password_field :password_confirmation %></div>
-              
+
               <div style="margin-top:5px;"><%= f.submit "Sign up" %></div>
             <%end%>
         </li>
       </ul>
-
+   </div>
     <%end%>
 
+    
     </div>
-
-
- </div>
+  </div>

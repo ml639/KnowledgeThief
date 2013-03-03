@@ -1,19 +1,7 @@
-<%= content_for :top_section do %>
- <div id="topTitle">
-       Search
- </div>
-
-    <%= render 'shared/search' %>
-        <%= render 'shared/leftMenu'  %>
-        <%= render 'shared/rightMenu' %>
-<%  end %>
-
-<%= content_for :bottom_wrapper do %>
-        <%= render 'shared/filter' %>
-        <%= (render :partial => 'shared/results', :collection => @resource,
+<%= render 'shared/filter' %>
+<%= (render :partial => 'shared/results', :collection => @resource,
 :as => 'resource') || "Sorry, no results returned. Please try again!"
 %>
-<%  end %>
 
 <div style="clear:both;">
 	<%= will_paginate(@resource, :class => "digg_pagination")  %>

@@ -1,0 +1,27 @@
+<%= form_for(Resource.new) do |f| %>
+					<div class="inputField">
+						<div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-link"></div>
+						<%= f.label :link %><br>
+						<%= f.text_field :link, :placeholder => "Paste link to resource" %>
+					</div>
+					<div class="inputField">
+						<div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-book"></div>
+						<%= f.label :title %><br>
+	        			<%= f.text_field :title, :placeholder => "Enter a title" %>
+	        		</div>
+	        		<div class="inputField">
+	        			<div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-info-sign"></div>
+	        			<%= f.label :description %><br>
+	       				<%= f.text_area :description, :rows => "5", :placeholder => "Describe your question"%>
+	        		</div>
+	        		<div style="clear:both"></div>
+	        		<div class="inputField">
+						<div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-tags"></div>
+						<%= f.label :tag_list %><br>
+	         			<%= f.text_field :tag_list, :placeholder => "Type at least 3 tags" %>
+	         		</div>
+	         		<br>
+	         		<button class="myButton" type="submit">Add Resource</button>
+	         		<button class="cancelButton">Cancel </button>
+	        		
+<% end %>

@@ -1,17 +1,7 @@
 <% javascript_include_tag :home %>
-<%= content_for :top_section do %>
- <div id="topTitle">
-       Search
- </div>
-
-    <%= render 'shared/search' %>
-	<%= render 'shared/leftMenu' %>
-	<%= render 'shared/rightMenu' %>    
-<%  end %>
-
-<%= content_for :bottom_wrapper do %>
-	<%= render 'shared/filter' %>
-	<div id="container">
-		<%= render :partial => 'shared/results', :collection => @resources, :as => 'resource' %>
+<%= render 'shared/filter' %>
+<div class="container">
+	<div id="columns">
+		<%= render :partial => 'shared/pinresults', :collection => @resources, :as => 'resource' %>
 	</div>
-<%  end %>
+</div>

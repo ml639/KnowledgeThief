@@ -4,12 +4,20 @@
 <title>Knowledge Thief</title>
 <%= csrf_meta_tag %>
 <%= stylesheet_link_tag "application" %>
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel= "stylesheet" type="text/css"/>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js" type="text/javascript"></script>
 </head>
 <body>
-    <div id="wrapper">
-        <%= render "shared/header" %>
+    <div id="boxes">
+        <div id="dialog" class="window">
+            <a href="#"class="close" style="color:black"/>close</a>
+            <%= render :partial => 'shared/modalPin' %>
+        </div>
+        <!-- Mask to cover the whole screen -->
+        <div id="mask"></div>
+        </div>
+
+    <div id="ktWrapper">
         <%= render :partial => 'layouts/resourceSlideShow' %>
         <div id="contentWrapper">
             <div id="topSection">
@@ -19,11 +27,31 @@
                 <% if flash[:error] %>
                   <p class="error"><%= flash[:error] %></p>
                 <% end %>
-               <%= yield :top_section %>
+                <div id="logoText">
+                    <%= link_to "Knowledge Thief", "/" %>
+                </div>
+                <%= render 'shared/navMenu' %> 
+                <%= render 'shared/search' %>
+                <%= render "shared/header" %>
             </div>
             <div class="bottomWrapper">
-                <%= yield :bottom_wrapper %>
-                <%= yield %>
+                <div id="contentSlideShow">
+                    <div id="contentSlidesContainer">
+                        <div class="contentSlide" id="pathSlide">
+                        </div>
+                        <div class="contentSlide" id="homeSlide">
+                            <%= yield %>
+                        </div>
+                        <div class="contentSlide" id="profileSlide">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="addNewResourceForm" style="display:none;">
+                <%= render :partial => 'layouts/addResourceForm' %>
+            </div>
+            <div class="addNewQuestionForm" style="display:none;">
+                <%= render :partial => 'layouts/addQuestionForm' %>
             </div>
         </div> <!-- end contentWrapper -->
 
