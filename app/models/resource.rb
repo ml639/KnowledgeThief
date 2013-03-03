@@ -19,7 +19,7 @@ class Resource < ActiveRecord::Base
   belongs_to :user
   belongs_to :path
 
-  has_many :resource_views, :class_name => 'UserResourceView'
+  has_many :views, :class_name => 'UserResourceView'
   has_many :comments
   has_reputation :votes, source: :user, aggregated_by: :sum
 
@@ -140,6 +140,16 @@ class Resource < ActiveRecord::Base
   # To display the image in view: <%= image_tag @resource.snapshot.url %>
   def self.upload_image(r)
     Resource.delay.deliver(r.id)
+  end
+
+  # Humanized version of time
+  def time
+    ChronicDuration.output(time_sec, :format => :long)
+  end
+
+  # Returns time in seconds
+  def time_sec
+    self.views.sum {|v| v.updated_at.to_i - v.created_at.to_i}
   end
 
 end

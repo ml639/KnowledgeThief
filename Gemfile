@@ -69,6 +69,9 @@ gem 'delayed_job_active_record'
 gem 'slim'
 gem 'slim-rails'
 
+# For time duration manipulation
+gem "chronic_duration", "~> 0.10.2"
+
 group :development do
    # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false
