@@ -4,11 +4,11 @@
 
 
   $ ->
-    $(".userTabLink_resource").click ->
+    $(".userTabLink_path").click ->
        $("#userPaths").show("slow")
        $("#userResources").hide()
 
   $ ->
-    $(".userTabLink_path").click ->
+    $(".userTabLink_resource").click ->
        $("#userResources").show("slow")
        $("#userPaths").hide()
