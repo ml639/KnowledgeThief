@@ -1,0 +1,39 @@
+<div id="userResultWrapper" class="item thumb"> <!-- result wrapper -->
+    <div class="userResourceThumb" value="<%= resource.id %>">
+        <%= link_to(image_tag(resource.snapshot.url, :style => "height:257px;width=257px;", :class=>"thumbImg"), url_for(resource.link)) %>  
+    </div>   
+    <div class="text">
+     <%= resource.description %>
+    </div>
+
+   	<div id="hoverBox">
+        <div id="thumbs">
+            <% if current_user %>
+                <%= link_to image_tag("thumbUp.png", :style => "height:18px;margin-top:8px;"), vote_resource_path(resource, type: "up"),
+                    method: "post"
+                     %>
+            <% else %>
+                <%= image_tag("thumbUp.png", :style => "height:18px;margin-top:8px;") %>
+            <% end %>
+            	<%= resource.reputation_for(:votes).to_i %>
+            |
+        </div>
+
+        <div id="resourceTitle">
+            <%= resource.title %>
+        </div>
+
+    </div>
+
+
+ 
+</div> 
+<div id="userResourceDetail">
+    	Title: <%= resource.title %><br/>
+    	Media Type: <%= resource.media_type %> <br/>
+    	<% @tempcomment = Comment.where(:resource_id => resource.id) %>
+    	Number of Comment: <%= @tempcomment.count %> <br/>
+    	View Time: 
+    	
+</div>
+<!-- end result wrapper -->

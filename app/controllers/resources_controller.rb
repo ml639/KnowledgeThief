@@ -52,9 +52,15 @@ class ResourcesController < ApplicationController
   end
 
   def vote
-    value = params[:type] == "up" ? 5 : -2
+    value = params[:type] == "up" ? 5 : -3
     @resource = Resource.find(params[:id])
     @resource.add_or_update_evaluation(:votes, value, current_user)
+
+    # Grant the user moderator role if they have 10000 points and aren't already an admin
+    # Test it on 5 points for now.
+    if current_user.reputation_for(:votes) > 10 && current_user.role != "admin"
+      current_user.role = "moderator"
+    end
     respond_to do |format|
         format.html { redirect_to :back, notice: "Thank you for voting" }
         format.json { render :status=>200, :json=>{:success=>true}}
@@ -101,5 +107,5 @@ class ResourcesController < ApplicationController
       end
       @resource = @resource.paginate(:page => (params[:page] || 1), :per_page => 15) unless @resource.nil?
     end
-    
+
 end

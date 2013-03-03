@@ -10,8 +10,9 @@ class User < ActiveRecord::Base
 
   has_reputation :votes, source: {reputation: :votes, of: :resources}, aggregated_by: :sum
 
-  has_reputation :karma,
-      :source => { :reputation => :votes, :of => :resources }
+
+  # has_reputation :karma,
+  #     :source => { :reputation => :votes, :of => :resources }
 
   def voted_for?(resource)
     evaluations.where(target_type: resource.class, target_id: resource.id).present?
@@ -30,8 +31,8 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :nickname, 
-                  :first_name, :last_name, :image, :location, :birthday, :hometown_name, 
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :nickname,
+                  :first_name, :last_name, :image, :location, :birthday, :hometown_name,
                   :bio, :gender, :full_name, :oauth_token
 
   # attr_accessible :title, :body
@@ -59,7 +60,7 @@ class User < ActiveRecord::Base
     (authentications.empty? || !password.blank?) && super
   end
 
-  
+
   def facebook
     @facebook ||= Koala::Facebook::API.new(oauth_token)
     block_given? ? yield(@facebook) : @facebook
@@ -67,7 +68,7 @@ class User < ActiveRecord::Base
     logger.info e.to_s
     nil
   end
-  
+
   def friends_count
     facebook { |fb| fb.get_connection("me", "friends").size }
   end

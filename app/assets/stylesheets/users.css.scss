@@ -22,7 +22,6 @@
 	h1,h2,h3,a{
 		color:#434343 !important;
 		display: block; 
-		font-size: 3.4em; 
 		line-height: 1.1em; 
 		font-weight: bold; 
 	}
@@ -33,12 +32,11 @@
 		h1,h2,h3,a{
 			color:#434343 !important;
 			display: block; 
-			font-size: 3.4em; 
 			line-height: 1.1em; 
-			font-weight: bold; 
 		}
 	}
 	#userInfoRight{
+		font-size: 2.8em; 
 		float:left;
 		padding-left: 25px;
 		height:100%;
@@ -49,16 +47,101 @@
 		float:left;
 	}
 }
+
+#userTab{
+	color:#434343;
+	display: inline-block;
+	margin-left: 10px;
+	line-height: 1.1em; 
+	#userTabLink
+	{
+		color:#434343;
+		font-size: 2.0em; 
+	}
+}
+
+
 #userResources{
 	margin-top: 15px;
+	width: 100%;
 	h1,h2,h3,a{
-			color:#434343 !important;
-			display: block; 
-			font-size: 3.4em; 
-			line-height: 1.1em; 
-			font-weight: bold; 
+		color:#434343 !important;
+		display: block; 
+		line-height: 1.1em; 
+		font-weight: bold; 
+	}
+
+	#userResultWrapper{
+	display: inline-block;
+    position: relative;
+    width: 25%;
+	overflow:hidden;
+	background:#999;
+	margin:0;
+	float:left;
+
+		#userResourceThumb{
+		position:absolute;
+	    top:0;
+	    left:0;
+		right:0;
+		bottom:0;
+	    background:#666;
+		text-align:center;
 		}
+
+		#hoverBox{
+		background-color:#333;
+		width:100%;
+		height:40px;
+		position:absolute;
+		bottom:0;
+		left:0;
+		opacity:.9;
+		line-height:40px;
+
+			#thumbs{
+			margin-left:10px;
+			display:inline;
+			opacity:.9;
+			color:white;
+			font-size:18px;
+			font-weight:800;
+			max-width:100%;
+			}
+
+			#resourceTitle{
+			font-size:16px;
+			display:inline;	
+			color:white;
+			}
+		}
+	}
+	#userResourceDetail
+	{
+		float:left;
+		position: relative;
+		margin-left:10px;
+		font-size:20px;
+	}
 }
+
+#userPaths{
+	margin-top: 15px;
+	width: 100%;
+	background: #00ff00;
+	h1,h2,h3,a{
+		color:#434343 !important;
+		display: block; 
+		font-size: 2.5em; 
+		line-height: 1.1em; 
+		font-weight: bold; 
+	}
+}
+
+
+
+
 
 #userStats ul.numbers { list-style: none; width: 320px; padding-top: 7px; margin-top: 0; color: #000;height:70px; }
 #userStats ul.numbers li { width: 95px; float: left; display: block; padding-left: 8px; height: 50px;  text-transform: uppercase; }
