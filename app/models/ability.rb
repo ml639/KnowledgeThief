@@ -25,21 +25,35 @@ class Ability
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
     user ||= User.new # guest user
-    
-    if user.role? :admin
-      can :manage, :all
-    else
+    if user.role.nil?
       can :read, :all
-      can :create, Resource
-      can :create, Comment
+      can :create, :all
+      can :search, :all
+      can :vote, :all
+      can :forresource, :all
+      can :failure, :all
       can :update, Resource do |resource|
-        resource.try(:user_id) == user.id || user.role?(:moderator)
+        resource.try(:user_id) == user.id 
       end
       can :update, Comment do |comment| 
-        comment.try(:user_id) == user.id || user.role?(:moderator)
+        comment.try(:user_id) == user.id
       end
-      
+    else  
+      if user.role? :admin
+        can :manage, :all
+      else
+        can :read, :all
+        can :create, :all
+        can :search, :all
+        can :vote, :all
+        can :update, Resource do |resource|
+          resource.try(:user_id) == user.id || user.role?(:moderator)
+        end
+        can :update, Comment do |comment| 
+          comment.try(:user_id) == user.id || user.role?(:moderator)
+        end
+        
+      end
     end
-
   end
 end

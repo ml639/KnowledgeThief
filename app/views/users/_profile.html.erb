@@ -9,128 +9,165 @@
 						<%= image_tag('user_placeholder.png', :width => '150', :height => "150") %>
 					<% end %>
 				</div>
-				<div id="userName">
-					<% if current_user.first_name.nil? && current_user.last_name.nil? %>
-						<h1>John Doe </h1>
-					<% else %>
-						<h1><%=current_user.first_name%> <%=current_user.last_name%></h1>
-					<% end %>
-				</div>
-				<div id ="userStats">
-					<ul class="numbers">
-						<li>Reputation<strong> <%= current_user.reputation_for(:karma).to_i %></strong></li>
-						<li>Comment
-							<strong>
-								<% if @comments %>
-								  <%= @comments.count %>
-								<% else %>
-								  0
-								<% end %>
-							</strong>
-						</li>
-						<li class="tempnobrdr">Resource
-							<strong>
-								<% if @rc %>
-								  <%= @rc.count %>
-								<% else %>
-								  0
-								<% end %>
-							</strong>
-						</li>
+
+				<div class="data">
+					<h1><%=current_user.first_name%> <%=current_user.last_name%></h1>
+					<h3><%=current_user.location%></h3>
+					<h4></h4>
+					<div class="socialMediaLinks">
+
+					</div>
+					<div class="sep"></div>
+					<ul class="numbers clearfix">
+						<li>Reputation<strong>18</strong></li>
+						<li>Comment<strong>4</strong></li>
+						<li class="tempnobrdr">Resource<strong>7</strong></li>
 					</ul>
 				</div>
 			</div>
-			<div id="userInfoRight">
-				<div id = "userDescription">
-					<h1 >About Me:</h1>
-					<% if current_user.bio.nil? %>
-						You haven't written anything about yourself yet.
-					<% else %>
-						<p ><%=current_user.bio%></p>
-					<% end %>
+
+			<h1 style="color:#000;">About Me:</h1>
+			<p style="color:#000;"><%=current_user.bio%></p>
+		</section>
+
+		<section id="tempright">
+			<div class="gcontent">
+				<div class="head"><h1>Badges(3)</h1></div>
+				<div class="boxy">
+
+					<div class="badgeCount">
+						<a href="#"><%= link_to image_tag("foursquare-badge.png")%></a>
+						<a href="#"><%= link_to image_tag("foursquare-badge.png")%></a>
+						<a href="#"><%= link_to image_tag("foursquare-badge.png")%></a>
+					</div>
+
+					<span><a href="#" style="color:black">See all…</a></span>
 				</div>
 			</div>
-		</div>
-		<div style="clear:both;"/>
-		<div id = "userResources">
-			<h1>My Resources:</h1>
-			<% unless @rc %>
-				You haven't posted anything yet.
-			<% else %>
-				<div id="resultsContainer" style="margin-top:5px;">
-					<%= render :partial => 'shared/results', :collection => @rc, :as => 'resource' %>
-				</div>
-			<% end %>
-		</div>
-	</section>
-	<section id="right">
-		<div class="gcontent">
-			<div class="head"><h1>Badges(3)</h1></div>
-			<div class="boxy">
-				
-				<div class="badgeCount">
-					<a href="#"><%= link_to image_tag("foursquare-badge.png")%></a>
-					<a href="#"><%= link_to image_tag("foursquare-badge.png")%></a>
-					<a href="#"><%= link_to image_tag("foursquare-badge.png")%></a>
-				</div>
-				
-				<span><a href="#" style="color:black">See all…</a></span>
-			</div>
-		</div>
-		
-		<div class="gcontent">
-			<div class="head"><h1>Friends List</h1></div>
-			<div class="boxy">
-				<p>Your friends - 106 total</p>
-				
-				<div class="tempfriendslist clearfix">
-					<div class="tempfriend">
-						<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Jerry K.", :class=>".cusimg"%></a>
-						<span ><a href="#" class="friendly">Jerry K.</a></span>
-					</div>
-					
-					<div class="tempfriend">
-						<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Katie F.", :class=>".cusimg" %></a>
-						<span ><a href="#" class="friendly">Katie F.</a></span>
-					</div>
-					
-					<div class="tempfriend">
-						<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Ash K.", :class=>".cusimg" %></a>
-						<span ><a href="#" class="friendly">Ash K.</a></span>
-					</div>
-					
-					<div class="tempfriend">
-						<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Sponge B.", :class=>".cusimg" %></a>
-						<span ><a href="#" class="friendly">Sponge B.</a></span>
-					</div>
-					
-					<div class="tempfriend">
-						<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Frank", :class=>".cusimg" %></a>
-						<span ><a href="#" class="friendly">Frank</a></span>
-					</div>
-					
-					<div class="tempfriend">
-						<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Alexa S.", :class=>".cusimg" %></a>
-						<span ><a href="#" class="friendly">Alexa S.</a></span>
+
+			<div class="gcontent">
+				<div class="head"><h1>Friends List</h1></div>
+				<div class="boxy">
+					<p>Your friends - 106 total</p>
+
+					<div class="tempfriendslist clearfix">
+						<div class="tempfriend">
+							<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Jerry K.", :class=>".cusimg"%></a>
+							<span ><a href="#" class="friendly">Jerry K.</a></span>
+						</div>
+
+						<div class="tempfriend">
+							<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Katie F.", :class=>".cusimg" %></a>
+							<span ><a href="#" class="friendly">Katie F.</a></span>
+						</div>
+
+						<div class="tempfriend">
+							<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Ash K.", :class=>".cusimg" %></a>
+							<span ><a href="#" class="friendly">Ash K.</a></span>
+						</div>
+
+						<div class="tempfriend">
+							<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Sponge B.", :class=>".cusimg" %></a>
+							<span ><a href="#" class="friendly">Sponge B.</a></span>
+						</div>
+
+						<div class="tempfriend">
+							<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Frank", :class=>".cusimg" %></a>
+							<span ><a href="#" class="friendly">Frank</a></span>
+						</div>
+
+						<div class="tempfriend">
+							<a href="#"><%= link_to image_tag("friend_default.jpg"), :width=>"30", :height=>"30", :alt=>"Alexa S.", :class=>".cusimg" %></a>
+							<span ><a href="#" class="friendly">Alexa S.</a></span>
+						</div>
 					</div>
 				</div>
 				<p style="float:clean;"></p>
 				<br/><br/><br/><br/><br/><br/><span class="friendseeall"><a href="#" style="color:black">See all...</a></span>
 			</div>
-		</div>
-		<div class="gcontent">
-			<div class="head"><h1>My Comments</h1></div>
-			<div class="boxy">
-				<% if @comments.nil? %>
-					You haven't posted any comments yet.
-				<% else %>
-					<ul>
-						<% @comments.each do |comment|  %>
-							<li><%= comment.content %></li>
-						<% end %>
-					</ul>
-					<% end %>
+
+		</section>
+		<section id="tempcenter">
+
+			<div id="tempuserStats" class="tempclearfix">
+
+				<div class="subheader user-tabs-nav">
+		        <div id="tabs">
+		            <a class="youarehere" href="/users/1769385/mikeliu639?tab=summary" title="your overall summary">
+
+		                summary
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=answers" title="answers you have provided">
+
+		                answers
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=questions" title="questions you have asked">
+
+		                questions
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=tags" title="tags you have posts in">
+
+		                tags
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=badges" title="badges you have earned">
+
+		                badges
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=favorites" title="questions you have favorited">
+
+		                favorites
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=bounties" title="bounties you have participated in">
+
+		                bounties
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=reputation" title="reputation you have earned">
+
+		                reputation
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=activity" title="your recent activity">
+
+		                activity
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=responses" title="your recent responses">
+
+		                responses
+		            </a>
+		            <a href="/users/1769385/mikeliu639?tab=votes" title="votes you have cast">
+
+		                votes
+		            </a>
+		        </div>
+		    </div>
+
+			<div>
+			<ul class="tabset_tabs">
+			   <li><a href="#tab1" class="active">Tab 1 1234</a></li>
+			   <li><a href="#tab2">Tab 2</a></li>
+			   <li><a href="#tab3">Tab 3</a></li>
+			</ul>
+
+			<div id="tab1" class="tabset_content">
+			   <h2 class="tabset_label">Tab 1</h2>
+			   Tab 1 Content
+			</div>
+
+			<div id="tab2" class="tabset_content">
+			   <h2 class="tabset_label">Tab 2</h2>
+			   Tab 2 Content
+			</div>
+
+			<div id="tab3" class="tabset_content">
+			   <h2 class="tabset_label">Tab 3</h2>
+			   Tab 3 Content
 			</div>
 		</div>
-	</section>
+				<div id="resource">
+					<%= @rc.each do |r|
+							r.to_s
+						end %>
+				</div>
+		</section>
+	</div>
+
 </div>
