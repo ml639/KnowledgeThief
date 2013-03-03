@@ -1,5 +1,9 @@
 Kt::Application.routes.draw do
  
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   #resources :authentications
 
 
@@ -30,6 +34,10 @@ Kt::Application.routes.draw do
   devise_for :user, :path => '', :path_names => {:sign_up => "register" }
 
   match '/user_profile', :to =>'users#index'
+  
+  match '/ajaxProfile', :to =>'users#ajaxProfile'
+  match '/ajaxPaths', :to =>'paths#ajaxPaths'
+  
   get 'tags/:tag', to: 'resources#index', as: :tag
 
   match '/auth/:provider/callback' => 'authentications#create'

@@ -15,9 +15,18 @@ gem 'acts_as_votable'
 # Devise
 gem 'devise'
 
+#koala
+gem 'koala'
+
+gem 'activeadmin'
+
 # Omniauth
 gem 'omniauth'
 gem 'omniauth-facebook'
+
+#Cancan
+gem "cancan"
+
 # ActiveRecord Reputation System for voting and user reputation
 gem 'activerecord-reputation-system', require: 'reputation_system'
 
@@ -29,6 +38,7 @@ gem "postrank-uri", "~> 1.0.17"
 
 # Engage! for user support forum
 gem 'engagecsm'
+
 
 # Postgresql gem for better continuous integration with Heroku
 gem 'pg'
@@ -58,6 +68,9 @@ gem 'delayed_job_active_record'
 # Slim for slim syntax for erb html files
 gem 'slim'
 gem 'slim-rails'
+
+# For time duration manipulation
+gem "chronic_duration", "~> 0.10.2"
 
 group :development do
    # The following three gems will make sure Linux, Mac and Windows work (respectively)

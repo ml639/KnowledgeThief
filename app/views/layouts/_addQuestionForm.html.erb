@@ -1,0 +1,21 @@
+<%= form_for(Resource.new) do |f| %>
+					<div class="inputField">
+						<div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-question-sign"></div>
+						<%= f.label :title %>
+	        			<%= f.text_field :title, :placeholder => "Enter a title" %>
+	        		</div>
+	        		<div class="inputField">
+	        			<div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-info-sign"></div>
+	        			<%= f.label :description %>
+	       				<%= f.text_area :description, :rows => "5", :placeholder => "What is your question?"%>
+	        		</div>
+	        		<div style="clear:both"></div>
+	        		<div class="inputField">
+						<div style="display:inline; font-size:13px; color: #ccc; margin-right:3px; margin-left:9px;" class="icon-tags"></div>
+						<%= f.label :tag_list %>
+	         			<%= f.text_field :tag_list, :placeholder => "Type at least 3 tags" %>
+	         		</div>
+	         		<br>
+	        		<button class="myButton" type="submit">Submit Question</button>
+	         		<button class="cancelButton">Cancel </button>
+			<% end %>

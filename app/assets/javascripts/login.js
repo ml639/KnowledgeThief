@@ -14,18 +14,18 @@ $(document).ready(function(){
 		if(!registerIsDown){
 		$(this).next('#login-content').slideToggle();
 		loginIsDown = !loginIsDown;
-		$(this).toggleClass('active');					
+		$(this).toggleClass('active');
 
 		if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
 			else $(this).find('span').html('&#x25BC;')
 		}
 		});
-		
+
 	$('#register-trigger').click(function(){
 		if(!loginIsDown){
 		$(this).next('#register-content').slideToggle();
 		registerIsDown = !registerIsDown;
-		$(this).toggleClass('active');					
+		$(this).toggleClass('active');
 
 		if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
 			else $(this).find('span').html('&#x25BC;')
