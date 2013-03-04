@@ -12,9 +12,10 @@ class ResourcesController < ApplicationController
   def show
     @resource = Resource.find(params[:id])
     @reputation = @resource.reputation_for(:votes).to_i
+    @comments = @resource.comments
     respond_to do |format|
         format.html
-        format.json { render :status=>200, :json=>{:resource=>@resource, :reputation =>@reputation, :comments => @resource.comments}}
+        format.json { render :status=>200, :json=>{:resource=>@resource, :reputation =>@reputation, :comments => @comments}}
     end
   end
 

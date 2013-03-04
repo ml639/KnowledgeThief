@@ -1,20 +1,39 @@
-<div class="resourceContentHolder">
-		<div class="resourceImage">
-			 <%= image_tag(@resource.snapshot.url, :class=>"thumbImg") %> 
+<div class = "resourceShowHolder">
+	<div class="resourceContentHolder">
+		<div class="descriptionHolder">
+			<div class="resourceImage">
+				 <%= image_tag(@resource.snapshot.url, :class=>"thumbImg") %> 
+			</div>
+			<div id="resourceInfo">
+				<div class="upvotesCount">
+		       		<%= @resource.reputation_for(:votes).to_i %> 
+		   		</div>
+		   		<div class="r" value="<%= resource.id %>">
+		       		<%= link_to @resource.title, url_for(@resource.link),:style => "color:black !important;", :value => @resource.id, :class => 'resourceTitle' %> 
+		       	</div>
+		    </div>
+		    <div style="clear:both;"></div>
+			<div class="resourceDescription">
+		    	<%= @resource.description %>
+		    </div>
+			<b>Tag list:</b>
+			<%= @resource.tag_list %>
 		</div>
-		<div id="resourceInfo">
-			<div class="upvotesCount">
-	       		<%= @resource.reputation_for(:votes).to_i %> 
-	   		</div>
-	   		<div class="r" value="<%= resource.id %>">
-	       		<%= link_to @resource.title, url_for(@resource.link),:style => "color:black !important;", :value => @resource.id, :class => 'resourceTitle' %> 
-	       	</div>
-	    </div>
-		<div class="resourceDescription">
-	    	<%= @resource.description %>
-	    </div>
-	</div>
-	<b>Tag list:</b>
-	<%= @resource.tag_list %>
-</p>
+	<div class="answersHolder">
+		<% @comments.each do |comment| %>
+  <tr>
+    <td><%= comment.content %></td>
+    <td><%= comment.user_id %></td>
+    <td><%= comment.resource_id %></td>
+    <td><%= link_to 'Show', comment %></td>
+    <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
+    <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
 
+<br />
+
+<%= link_to 'New Comment', new_comment_path %>
+	</div>
+</div>
