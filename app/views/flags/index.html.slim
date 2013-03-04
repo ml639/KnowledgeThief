@@ -1,6 +1,6 @@
-h1 Listing flags
+h1 style="color:#000000;" Listing flags
 
-table
+table id="flagtable" 
   tr
     th Item
     th Itemtype
@@ -26,9 +26,8 @@ table
       td = flag.moderator_msg
       td = flag.action
       td = flag.checked
-      td = link_to 'Show', flag
-      td = link_to 'Edit', edit_flag_path(flag)
-      td = link_to 'Destroy', flag, :confirm => 'Are you sure?', :method => :delete
+      td = link_to image_tag("takedown.png", :width=>"80", :height=>"20"), flag
+      td = link_to image_tag("destroy.png", :width=>"80", :height=>"20"), flag, :confirm => 'Are you sure?', :method => :delete
 
 br
 

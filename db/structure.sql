@@ -437,6 +437,45 @@ ALTER SEQUENCE engage_votes_id_seq OWNED BY engage_votes.id;
 
 
 --
+-- Name: flags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE flags (
+    id integer NOT NULL,
+    item_id integer,
+    itemtype character varying(255),
+    "desc" character varying(255),
+    reporter_id integer,
+    resolved boolean,
+    moderator_id integer,
+    moderator_msg character varying(255),
+    action character varying(255),
+    checked boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: flags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE flags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: flags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE flags_id_seq OWNED BY flags.id;
+
+
+--
 -- Name: paths; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -954,6 +993,13 @@ ALTER TABLE ONLY engage_votes ALTER COLUMN id SET DEFAULT nextval('engage_votes_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY flags ALTER COLUMN id SET DEFAULT nextval('flags_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY paths ALTER COLUMN id SET DEFAULT nextval('paths_id_seq'::regclass);
 
 
@@ -1120,6 +1166,14 @@ ALTER TABLE ONLY engage_user_profiles
 
 ALTER TABLE ONLY engage_votes
     ADD CONSTRAINT engage_votes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: flags_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY flags
+    ADD CONSTRAINT flags_pkey PRIMARY KEY (id);
 
 
 --
@@ -1563,3 +1617,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130217233555');
 INSERT INTO schema_migrations (version) VALUES ('20130225090655');
 
 INSERT INTO schema_migrations (version) VALUES ('20130226033515');
+
+INSERT INTO schema_migrations (version) VALUES ('20130303163406');
