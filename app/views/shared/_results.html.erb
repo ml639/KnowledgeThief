@@ -3,20 +3,7 @@
        <%= link_to(image_tag(resource.snapshot.url, :class=>"thumbImg"), url_for(resource.link)) %>  
     </div> 
      <div class="path">
-       <% if @user_paths %>
-       <%= image_tag("plus_small.png", :class=>"ico") %> 
-         <% for path in @user_paths %>
-            <%= render :partial => "shared/path_nav_bar",
-                 :locals =>{ :path => path, :resource =>resource } %>
-         <% end %> 
-         <% if @user_paths.empty? %>
-            <ul class="navigation_2">
-              <li>
-                <%= link_to 'Create a path', new_path_path %>
-              </li>
-            </ul>
-         <% end %>
-       <% end %>
+     
     </div>  
 
     <div class="text">

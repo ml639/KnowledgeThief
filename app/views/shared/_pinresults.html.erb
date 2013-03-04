@@ -1,13 +1,13 @@
-<div class="pin" value="<%= resource.id %>">
+<div class="pin">
 	<div class="resourceButtons">
 		
 
 	<div class="path">
-		<button class="path_bttn">
+		<button class="path_bttn"value="<%=resource.id%>">
 			Paths
 		</button>
-		
-		<div class="menu">
+
+		<div class="path">
 	    <% unless Path.all.empty? %>
 	         <% for path in Path.all %>
 	            <%= render :partial => "shared/path_nav_bar",
@@ -31,8 +31,8 @@
 			<div class="upvotesCount">
 	       		<%= resource.reputation_for(:votes).to_i %> 
 	   		</div>
-	   		<div class="resourceTitle">
-	       		<%= resource.title %>
+	   		<div class="r" value="<%= resource.id %>">
+	       		<%= link_to resource.title, url_for(resource.link), :value => resource.id, :class => 'resourceTitle' %> 
 	       	</div>
 	    </div>
 		<div class="resourceDescription">

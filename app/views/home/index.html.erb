@@ -4,4 +4,5 @@
 	<div id="columns">
 		<%= render :partial => 'shared/pinresults', :collection => @resources, :as => 'resource' %>
 	</div>
+	<%= will_paginate @resources %>
 </div>

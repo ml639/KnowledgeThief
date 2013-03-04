@@ -6,13 +6,14 @@ class ResourcesController < ApplicationController
 
   def index
       @resources = Resource.all
+      
   end
 
   def show
     @resource = Resource.find(params[:id])
+    @reputation = @resource.reputation_for(:votes).to_i
     respond_to do |format|
-        format.html { render @resource }
-        format.json { render :status=>200, :json=>{:resource=>@resource}}
+        format.json { render :status=>200, :json=>{:resource=>@resource, :reputation =>@reputation, :comments => @resource.comments}}
     end
   end
 
@@ -73,7 +74,7 @@ class ResourcesController < ApplicationController
   end
 
   def search
-
+    
     # Log the user's search
     u_id = current_user == nil ? 0 : current_user.id
     UserSearch.create(user_id: u_id, query: params[:q])
