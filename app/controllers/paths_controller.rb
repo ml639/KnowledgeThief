@@ -1,4 +1,5 @@
 class PathsController < ApplicationController
+
   # GET /paths
   # GET /paths.json
   def index
@@ -27,6 +28,8 @@ class PathsController < ApplicationController
   # GET /paths/new
   # GET /paths/new.json
   def new
+    require_login
+
     @path = Path.new
 
     respond_to do |format|
@@ -37,12 +40,16 @@ class PathsController < ApplicationController
 
   # GET /paths/1/edit
   def edit
+    require_login
+
     @path = Path.find(params[:id])
   end
 
   # POST /paths
   # POST /paths.json
   def create
+    require_login
+
     if current_user == nil
       flash[:alert] = "You must log in to submit a resource!"
       redirect_to resources_path
@@ -71,6 +78,8 @@ class PathsController < ApplicationController
   # PUT /paths/1
   # PUT /paths/1.json
   def update
+    require_login
+
     @path = Path.find(params[:id])
 
     respond_to do |format|
@@ -87,6 +96,8 @@ class PathsController < ApplicationController
   # DELETE /paths/1
   # DELETE /paths/1.json
   def destroy
+    require_login
+
     @path = Path.find(params[:id])
     @path.destroy
 
@@ -94,6 +105,19 @@ class PathsController < ApplicationController
       format.html { redirect_to paths_url }
       format.json { head :no_content }
     end
+  end
+ 
+  private
+ 
+  def require_login
+    unless logged_in?
+      flash[:error] = "You must be logged in to access this section"
+      redirect_to new_user_session_path # halts request cycle
+    end
+  end
+ 
+  def logged_in?
+    !!current_user
   end
 
 end
