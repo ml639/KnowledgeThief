@@ -51,6 +51,10 @@
 			<div class="navigation-box-white"></div>
 			<a href="#" id="nav-path-button" class="" style="opacity: 0;"></a>
 		</div>
+		<div class="navigation-box colorChange" id="resourceNav-addFlag">
+			<div class="navigation-box-white"></div>
+			<a href="#" id="nav-flag-button" class="" style="opacity: 0;"></a>
+		</div>
 	</div> <!-- End of Resource Navigation -->
 	<div id="resourceContent">
 		<!-- comments and search results -->
@@ -149,6 +153,22 @@
 			</div>
 		</div>
 		<!-- End of Paths -->
+		<div id="flag-form" class="colorChange">
+			<h2>New Flag</h2>
+			<div class="formHolder colorChange">
+				<div id="newFlagForm">
+						<% if(current_user) %>
+    						<form accept-charset="utf8" class="flagform" action="" method="get">
+								<textarea id="flagText" style="float:left;" placeholder="few words to tell us why you flag this resource..."></textarea>
+		 						<button type="button" style="float:right;" id="newFlag" >submit</button>
+							</form>
+						<% else %>
+								<div> Login to flag </div>
+						<% end %>
+					</div>
+			</div>
+		</div>
+		<!-- End of flag -->
 	</div><!-- End of Resource content -->
 	
 </div>

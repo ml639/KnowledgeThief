@@ -7,7 +7,6 @@
 	-webkit-box-sizing: border-box;
 	line-height:1.5;
 	font-family: 'Open Sans', helvetica, arial, sans-serif;
-	
 }
 
 ul{
@@ -548,3 +547,29 @@ input.mainSearch:focus{
     height: 1%; }
   *:first-child + html .digg_pagination {
     overflow: hidden; }
+
+.path{
+	font-size: small;
+	a{
+		color: black;
+		font-size: small;
+	}
+	ul.nav{
+		background-color: rgba(0, 0, 0, 0.2);
+		border-left: 15px;
+		border:2px solid;
+		border-radius:25px;
+		-moz-border-radius:25px; /* Old Firefox */
+		display:none;
+		width: 45%;
+		background: gray;
+		li{
+			display: inline-block;
+		}
+	}
+}
+
+#pathResources{
+	width: 40%;
+	height: 40%;	
+}

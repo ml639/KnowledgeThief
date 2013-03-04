@@ -4,3 +4,15 @@
 
 <%= link_to 'Show', @path %> |
 <%= link_to 'Back', paths_path %>
+
+<h1>Resources within Path </h1>
+<br/>
+<div id="pathResources">
+<hr/>
+	<% for path_item in InPath.where('path_id = ?',@path.id) %>
+	    <%= render :partial => "remove_resources_for_path",
+	               :locals =>{ :path_item => path_item } %>
+	<% end %> 
+</div>
+
+

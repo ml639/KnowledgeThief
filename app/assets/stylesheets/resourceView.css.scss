@@ -61,6 +61,10 @@ background: url("icons.png") -444px 0px no-repeat black;
 #resourceNav-addPath{
 background: url("icons.png") -369px 0px no-repeat black;
 }
+#resourceNav-addFlag{
+background: url("icons.png") -369px 0px no-repeat black;
+}
+
 
 #searchTitle{
   float:left;
@@ -185,7 +189,7 @@ background: url("icons.png") -265px -53px no-repeat transparent !important;
   .navigation-box{
     cursor:pointer;
   }
- #nav-path-button a, #nav-resource-button a, #nav-question-button a, #nav-info-button a{
+ #nav-path-button a, #nav-resource-button a, #nav-question-button a, #nav-info-button a, #nav-flag-button a{
 
  }
 #a-prev, #prevslide {
@@ -205,7 +209,7 @@ background: url("icons.png") -265px -53px no-repeat transparent !important;
   background: url("icons.png") -159px -53px;
   opacity: 0; }
 
-#prevslide:hover, #nextslide:hover, #upvote:hover, #downvote:hover, #a-next:hover, #a-prev:hover,#nav-path-button:hover, #nav-resource-button:hover, #nav-question-button:hover, #nav-info-button:hover {
+#prevslide:hover, #nextslide:hover, #upvote:hover, #downvote:hover, #a-next:hover, #a-prev:hover,#nav-path-button:hover, #nav-flag-button:hover,#nav-resource-button:hover, #nav-question-button:hover, #nav-info-button:hover {
   cursor: pointer; }
 
 .info-toggle a, #info-toggle a {
@@ -243,7 +247,7 @@ h1, h2 {
     h1, h2 {
       font-size: 2em; } }
 
-#questions-form, #resource-form, #path-form{
+#questions-form, #resource-form, #path-form, #flag-form{
   padding:10px;
   display:none;
   float:right;

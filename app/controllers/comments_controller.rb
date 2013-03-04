@@ -41,9 +41,9 @@ class CommentsController < ApplicationController
     resource_id = params[:id]
     #@comments = Comment.where(:resource_id => resource_id)
     @comments = Resource.find_by_id(resource_id).comments
-    respond_to do |format|  
-        format.html { redirect_to :back, notice: "Thank you for voting" }  
-        format.json { render :status=>200, :json=>{:success=>true, :comments => @comments}}  
+    respond_to do |format|
+        format.html { redirect_to :back, notice: "Thank you for voting" }
+        format.json { render :status=>200, :json=>{:success=>true, :comments => @comments}}
     end
   end
 
@@ -51,12 +51,14 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     resource_id = params[:resource]
+    r = Resource.find(resource_id)
     @comment = Comment.new(:user_id => current_user.id, :resource_id => resource_id, :content => params[:content])
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
         @comments = Comment.where(:resource_id => params[:resource])
         format.json { render :status=>200, :json=>{:success=>true, :comments => @comments}}
+        @comment.create_activity :create, owner: current_user, recipient: r
       else
         format.html { render action: "new" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }

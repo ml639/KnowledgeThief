@@ -1,5 +1,9 @@
 Kt::Application.routes.draw do
- 
+
+  resources :flags
+
+  resources :activities
+  
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -8,8 +12,10 @@ Kt::Application.routes.draw do
 
   resources :paths
 
-  match '/in_paths/:path_id/resource/:resource_id', :to => 'in_paths#add_resource_to_path',
+  match '/in_paths/:path_id/resource/:resource_id/add', :to => 'in_paths#add_resource_to_path',
         :as => 'add_resource_to_path', :via => 'post'
+  match '/in_paths/:path_id/resource/:resource_id/pos/:position/remove', :to => 'in_paths#remove_resource_from_path',
+        :as => 'remove_resource_from_path', :via => 'post'
 
   mount Engage::Engine => '/engage', :as => 'engage'
 
@@ -19,36 +25,36 @@ Kt::Application.routes.draw do
     end
 
   devise_for :users
- 
+
+
   resources :comments do
      member {post :forresource}
   end
-  
   resources :userResourceView
   get "home/index"
   devise_scope :user do
     get "/login" => "devise/sessions#new"
-    
+
   end
   devise_for :user, :path => '', :path_names => {:sign_up => "register" }
 
   match '/user_profile', :to =>'users#index'
-  
+
   match '/ajaxProfile', :to =>'users#ajaxProfile'
   match '/ajaxPaths', :to =>'paths#ajaxPaths'
-  
+
   get 'tags/:tag', to: 'resources#index', as: :tag
 
   match '/infiniteScroll' => 'home#infiteScroll'
   match '/auth/:provider/callback' => 'authentications#create'
   match '/auth/:provider/failure', :to => 'authentications#failure'
   #match '/auth/:provider/callback?error_reason...', :to => 'profiles#failure'
-  
+
   match '/resources', to: 'resources#create', :via => :post
   match 'contact' => 'contact#new', :as => 'contact', :via => :get
   match 'contact' => 'contact#create', :as => 'contact', :via => :post
   match '/forums' => 'forums#index'
-  
+
   root to: 'home#index', :as => :home
 
 

@@ -79,6 +79,44 @@ ALTER SEQUENCE active_admin_comments_id_seq OWNED BY active_admin_comments.id;
 
 
 --
+-- Name: activities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE activities (
+    id integer NOT NULL,
+    trackable_id integer,
+    trackable_type character varying(255),
+    owner_id integer,
+    owner_type character varying(255),
+    key character varying(255),
+    parameters text,
+    recipient_id integer,
+    recipient_type character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: activities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE activities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: activities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
+
+
+--
 -- Name: admin_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -437,6 +475,45 @@ ALTER SEQUENCE engage_votes_id_seq OWNED BY engage_votes.id;
 
 
 --
+-- Name: flags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE flags (
+    id integer NOT NULL,
+    item_id integer,
+    itemtype character varying(255),
+    "desc" character varying(255),
+    reporter_id integer,
+    resolved boolean,
+    moderator_id integer,
+    moderator_msg character varying(255),
+    action character varying(255),
+    checked boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: flags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE flags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: flags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE flags_id_seq OWNED BY flags.id;
+
+
+--
 -- Name: in_paths; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -514,6 +591,38 @@ ALTER SEQUENCE pg_search_documents_id_seq OWNED BY pg_search_documents.id;
 
 
 --
+-- Name: read_marks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE read_marks (
+    id integer NOT NULL,
+    readable_id integer,
+    user_id integer NOT NULL,
+    readable_type text NOT NULL,
+    "timestamp" timestamp without time zone
+);
+
+
+--
+-- Name: read_marks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE read_marks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: read_marks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE read_marks_id_seq OWNED BY read_marks.id;
+
+
+--
 -- Name: resources; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -527,11 +636,12 @@ CREATE TABLE resources (
     updated_at timestamp without time zone NOT NULL,
     "youtubeID" character varying(255),
     media_type character varying(255),
-    path_id integer,
     snapshot_file_name character varying(255),
     snapshot_content_type character varying(255),
     snapshot_file_size integer,
-    snapshot_updated_at timestamp without time zone
+    snapshot_updated_at timestamp without time zone,
+    path_id integer,
+    active boolean
 );
 
 
@@ -825,8 +935,8 @@ CREATE TABLE users (
     hometown_name character varying(255),
     bio character varying(255),
     gender character varying(255),
-    role character varying(255),
-    oauth_token character varying(255)
+    oauth_token character varying(255),
+    role character varying(255)
 );
 
 
@@ -889,6 +999,13 @@ ALTER SEQUENCE votes_id_seq OWNED BY votes.id;
 --
 
 ALTER TABLE ONLY active_admin_comments ALTER COLUMN id SET DEFAULT nextval('active_admin_comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_seq'::regclass);
 
 
 --
@@ -965,6 +1082,13 @@ ALTER TABLE ONLY engage_votes ALTER COLUMN id SET DEFAULT nextval('engage_votes_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY flags ALTER COLUMN id SET DEFAULT nextval('flags_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY paths ALTER COLUMN id SET DEFAULT nextval('paths_id_seq'::regclass);
 
 
@@ -973,6 +1097,13 @@ ALTER TABLE ONLY paths ALTER COLUMN id SET DEFAULT nextval('paths_id_seq'::regcl
 --
 
 ALTER TABLE ONLY pg_search_documents ALTER COLUMN id SET DEFAULT nextval('pg_search_documents_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY read_marks ALTER COLUMN id SET DEFAULT nextval('read_marks_id_seq'::regclass);
 
 
 --
@@ -1043,6 +1174,14 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 --
 
 ALTER TABLE ONLY votes ALTER COLUMN id SET DEFAULT nextval('votes_id_seq'::regclass);
+
+
+--
+-- Name: activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY activities
+    ADD CONSTRAINT activities_pkey PRIMARY KEY (id);
 
 
 --
@@ -1134,6 +1273,14 @@ ALTER TABLE ONLY engage_votes
 
 
 --
+-- Name: flags_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY flags
+    ADD CONSTRAINT flags_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: paths_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1147,6 +1294,14 @@ ALTER TABLE ONLY paths
 
 ALTER TABLE ONLY pg_search_documents
     ADD CONSTRAINT pg_search_documents_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: read_marks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY read_marks
+    ADD CONSTRAINT read_marks_pkey PRIMARY KEY (id);
 
 
 --
@@ -1265,6 +1420,27 @@ CREATE INDEX index_active_admin_comments_on_namespace ON active_admin_comments U
 
 
 --
+-- Name: index_activities_on_owner_id_and_owner_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_owner_id_and_owner_type ON activities USING btree (owner_id, owner_type);
+
+
+--
+-- Name: index_activities_on_recipient_id_and_recipient_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_recipient_id_and_recipient_type ON activities USING btree (recipient_id, recipient_type);
+
+
+--
+-- Name: index_activities_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON activities USING btree (trackable_id, trackable_type);
+
+
+--
 -- Name: index_admin_notes_on_resource_type_and_resource_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1367,6 +1543,13 @@ CREATE INDEX index_engage_votes_on_topic_id ON engage_votes USING btree (topic_i
 --
 
 CREATE INDEX index_engage_votes_on_user_id ON engage_votes USING btree (user_id);
+
+
+--
+-- Name: index_read_marks_on_user_id_and_readable_type_and_readable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_read_marks_on_user_id_and_readable_type_and_readable_id ON read_marks USING btree (user_id, readable_type, readable_id);
 
 
 --
@@ -1569,12 +1752,22 @@ INSERT INTO schema_migrations (version) VALUES ('20130217003233');
 
 INSERT INTO schema_migrations (version) VALUES ('20130217003234');
 
+INSERT INTO schema_migrations (version) VALUES ('20130217225752');
+
 INSERT INTO schema_migrations (version) VALUES ('20130217233555');
 
 INSERT INTO schema_migrations (version) VALUES ('20130225090655');
 
 INSERT INTO schema_migrations (version) VALUES ('20130226033515');
 
-INSERT INTO schema_migrations (version) VALUES ('20130217225752');
-
 INSERT INTO schema_migrations (version) VALUES ('20130303012841');
+
+INSERT INTO schema_migrations (version) VALUES ('20130303163406');
+
+INSERT INTO schema_migrations (version) VALUES ('20130303235612');
+
+INSERT INTO schema_migrations (version) VALUES ('20130303235745');
+
+INSERT INTO schema_migrations (version) VALUES ('20130304035656');
+
+INSERT INTO schema_migrations (version) VALUES ('20130304044437');

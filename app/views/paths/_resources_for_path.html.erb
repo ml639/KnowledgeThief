@@ -1,0 +1,20 @@
+<% resource = Resource.find(path_item.resource_id) %>
+<div class="pin">
+  <div class="resourceContentHolder">
+    <div class="resourceImage">
+       <%= image_tag(resource.snapshot.url, :class=>"thumbImg") %> 
+    </div>
+    <div id="resourceInfo">
+      <div class="upvotesCount">
+            <%= resource.reputation_for(:votes).to_i %> 
+        </div>
+        <div class="r" value="<%= resource.id %>">
+            <%= link_to resource.title, url_for(resource.link), :value => resource.id, :class => 'resourceTitle' %> 
+          </div>
+      </div>
+    <div class="resourceDescription">
+        <%= resource.description %>
+      </div>
+  </div>
+
+</div>

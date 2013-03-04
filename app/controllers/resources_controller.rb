@@ -36,6 +36,7 @@ class ResourcesController < ApplicationController
       params[:resource][:link] = PostRank::URI.clean(params[:resource][:link])
       if Resource.unique_link?(params[:resource][:link])
         @resource = Resource.new(params[:resource])
+        @resource.update_attributes(:active => true)
         @resource[:youtubeID] = Resource.isYoutube(@resource[:link])
         @resource.save
         Resource.upload_image(@resource)
@@ -45,13 +46,14 @@ class ResourcesController < ApplicationController
     # No link provided, so this must be a question
     else
       @resource = Resource.new(params[:resource])
+      @resource.update_attributes(:active => true)
       @resource.save
       @resource.update_attribute(:link, "/resources/"+@resource.id.to_s)
     end
     if(!current_user.facebook.access_token.nil?)
       current_user.facebook.put_wall_post("I posted a resource on www.knowledgethief.com")
     end
-    redirect_to resources_path
+    redirect_to home_path
   end
 
   def vote
