@@ -20,6 +20,10 @@ Kt::Application.routes.draw do
 
   devise_for :users
  
+  resources :comments do
+     member {post :forresource}
+  end
+  
   resources :userResourceView
   get "home/index"
   devise_scope :user do

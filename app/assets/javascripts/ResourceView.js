@@ -263,7 +263,7 @@ var ResourceView = function(){
 	manageIframes = function(position){
 		//check the current position and load the next iframe if possible.
 		var currentLink = iFrameURLS[position];
-		var new_res_id = $('a[href$="'+currentLink+'"]').parent().attr('value');
+		var new_res_id = $('a[href$="'+currentLink+'"]').attr('value');
 
 		logUserEndTime(resource_id);
 		resource_id = new_res_id;
