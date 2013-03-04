@@ -477,9 +477,9 @@ var ResourceView = function(){
 };
 
 $(function(){
-	$('.pin').click(function(){
+	$('.resourceTitle').click(function(){
 		var rView = new ResourceView();
-		var link = $(this).find('a').attr('href');
+		var link = $(this).attr('href');
 		//this is hacky as shit. split on /'s and check if its a resource link
 		var parts = link.split('/');
 		if(parts[1] == "resources"){

@@ -15,7 +15,7 @@ var Pinterizr = function () {
 		    	}, 250);
 		  }
 		);
-		$('.pin').click(function(e) {
+		$('.path_bttn').click(function(e) {
 			modalSetup(e);
 			var link = $(this).find('a').attr('href');
 			//this is hacky as shit. split on /'s and check if its a resource link
@@ -49,23 +49,23 @@ var Pinterizr = function () {
   //  			}
 		//  });
 	},
-	loadModalContents = function(url,new_resource_id){
-		$.ajax({
-			type: "get",
-			url: "/resources/"+new_resource_id,
-			dataType: "json",
+	//loadModalContents = function(url,new_resource_id){
+	//	$.ajax({
+	//		type: "get",
+	//		url: "/resources/"+new_resource_id,
+	//		dataType: "json",
 			// Define request handlers.
-			success: function( objResponse ){
+	//		success: function( objResponse ){
 				// Check to see if request was successful.
-				$(".modalUpvotesCount").append(objResponse.reputation);
-				$(".modalResourceTitle").append(objResponse.resource.title);
-				$(".modalResourceDescription").append(objResponse.resource.description);
-			},
-			error: function( objRequest, strError ){
+	//			$(".modalUpvotesCount").append(objResponse.reputation);
+	//			$(".modalResourceTitle").append(objResponse.resource.title);
+	//			$(".modalResourceDescription").append(objResponse.resource.description);
+	//		},
+	//		error: function( objRequest, strError ){
 				//alert("error loading content");
-			}
-		});
-	},
+	//		}
+	//	});
+	//},
 	modalSetup = function(e){
 		//Cancel the link behavior
 		e.preventDefault();
@@ -145,6 +145,7 @@ var Pinterizr = function () {
 };
 $(function(){
 	var pinterest = new Pinterizr();
+	//pinterest.init();
 	$(".pin").hover(
 		  function () {
 		    $(this).find(".resourceButtons").stop().animate({
