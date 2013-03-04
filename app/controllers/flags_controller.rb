@@ -8,6 +8,7 @@ class FlagsController < InheritedResources::Base
     end
   end
 
+=begin
   # GET /flags/1
   # GET /flags/1.json
   def show
@@ -18,6 +19,7 @@ class FlagsController < InheritedResources::Base
       format.json { render json: @flag }
     end
   end
+=end
 
   # GET /flags/new
   # GET /flags/new.json
@@ -56,6 +58,7 @@ class FlagsController < InheritedResources::Base
 
   # PUT /flags/1
   # PUT /flags/1.json
+=begin
   def update
     @flag = Flag.find(params[:id])
 
@@ -69,6 +72,7 @@ class FlagsController < InheritedResources::Base
       end
     end
   end
+=end
 
   # DELETE /flags/1
   # DELETE /flags/1.json
@@ -80,6 +84,15 @@ class FlagsController < InheritedResources::Base
       format.html { redirect_to flags_url }
       format.json { head :no_content }
     end
+  end
+
+  def show
+  	@flag = Flag.find(params[:id])
+  	@flag.update_attributes(:action => "takedown", :moderator_id => current_user.id)
+
+  	@resource = Resource.find(params[:resource])
+  	@resource.update_attributes(:active => false)
+  	redirect_to flags_path
   end
 
 end

@@ -25,7 +25,7 @@ class Resource < ActiveRecord::Base
   has_reputation :votes, source: :user, aggregated_by: :sum
 
   attr_accessible :title, :description, :link, :tag_list,
-                  :user_id, :youtubeID, :media_type, :snapshot, :snapshot_file_name
+                  :user_id, :youtubeID, :media_type, :snapshot, :snapshot_file_name, :active
 
   acts_as_taggable
 

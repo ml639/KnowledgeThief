@@ -570,7 +570,8 @@ CREATE TABLE resources (
     snapshot_content_type character varying(255),
     snapshot_file_size integer,
     snapshot_updated_at timestamp without time zone,
-    path_id integer
+    path_id integer,
+    active boolean
 );
 
 
@@ -1634,3 +1635,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130226033515');
 INSERT INTO schema_migrations (version) VALUES ('20130303012841');
 
 INSERT INTO schema_migrations (version) VALUES ('20130303163406');
+
+INSERT INTO schema_migrations (version) VALUES ('20130304044437');

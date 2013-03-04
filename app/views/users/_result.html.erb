@@ -1,39 +1,53 @@
-<div id="userResultWrapper" class="item thumb"> <!-- result wrapper -->
-    <div class="userResourceThumb" value="<%= resource.id %>">
-        <%= link_to(image_tag(resource.snapshot.url, :style => "height:257px;width=257px;", :class=>"thumbImg"), url_for(resource.link)) %>  
-    </div>   
-    <div class="text">
-     <%= resource.description %>
-    </div>
+<div class="pin">
+    <div class="resourceButtons">
+        
 
-   	<div id="hoverBox">
-        <div id="thumbs">
-            <% if current_user %>
-                <%= link_to image_tag("thumbUp.png", :style => "height:18px;margin-top:8px;"), vote_resource_path(resource, type: "up"),
-                    method: "post"
-                     %>
-            <% else %>
-                <%= image_tag("thumbUp.png", :style => "height:18px;margin-top:8px;") %>
-            <% end %>
-            	<%= resource.reputation_for(:votes).to_i %>
-            |
+    <div class="path">
+        <button class="path_bttn"value="<%=resource.id%>">
+            Paths
+        </button>
+
+        <div class="path">
+        <% unless Path.all.empty? %>
+             <% for path in Path.all %>
+                <%= render :partial => "shared/path_nav_bar",
+                     :locals =>{ :path => path, :resource =>resource } %>
+             <% end %> 
+        <% else %>
+               <ul class="nav">
+                  <li>
+                    <%= link_to 'Create a path', new_path_path %>
+                  </li>
+               </ul>
+        <% end %>
         </div>
-
-        <div id="resourceTitle">
-            <%= resource.title %>
-        </div>
-
+    </div>  
     </div>
-
-
- 
-</div> 
-<div id="userResourceDetail">
-    	Title: <%= resource.title %><br/>
-    	Media Type: <%= resource.media_type %> <br/>
-    	<% @tempcomment = Comment.where(:resource_id => resource.id) %>
-    	Number of Comment: <%= @tempcomment.count %> <br/>
-    	View Time: 
-    	
+    <div class="resourceContentHolder">
+        <div class="resourceImage">
+             <%= image_tag(resource.snapshot.url, :class=>"thumbImg") %> 
+        </div>
+        <div id="resourceInfo">
+            <div class="upvotesCount">
+                <%= resource.reputation_for(:votes).to_i %> 
+            </div>
+            <div class="r" value="<%= resource.id %>">
+                <%= link_to resource.title, url_for(resource.link), :value => resource.id, :class => 'resourceTitle' %> 
+            </div>
+        </div>
+        <div class="resourceDescription">
+            <%= resource.description %>
+        </div>
+    </div>
+    <!--div id="userResourceDetail">
+        Title: <%= resource.title %><br/>
+        Media Type: <%= resource.media_type %> <br/>
+        <%# @tempcomment = Comment.where(:resource_id => resource.id) %>
+        Number of Comment: <%#= @tempcomment.count %> <br/>
+        View Time: 
+        
+    </div-->
 </div>
+
+
 <!-- end result wrapper -->
