@@ -10,12 +10,13 @@
 <body>
     <div id="boxes">
         <div id="dialog" class="window">
-            <a href="#"class="close" style="color:black"/>close</a>
+            <a href="#"class="close" style="color:black;float:right;"/>close</a><div style='clear:both;'></div>
             <%= render :partial => 'shared/modalPin' %>
         </div>
+    </div>
         <!-- Mask to cover the whole screen -->
         <div id="mask"></div>
-        </div>
+        
 
     <div id="ktWrapper">
         <%= render :partial => 'layouts/resourceSlideShow' %>
@@ -27,19 +28,9 @@
                 <%= render 'shared/navMenu' %> 
                 <%= render 'shared/search' %>
                 <%= render "shared/header" %>
-            </div>
+            </div><div style="clear:both;"></div>
             <div class="bottomWrapper">
-                <div id="contentSlideShow">
-                    <div id="contentSlidesContainer">
-                        <div class="contentSlide" id="pathSlide">
-                        </div>
-                        <div class="contentSlide" id="homeSlide">
-                            <%= yield %>
-                        </div>
-                        <div class="contentSlide" id="profileSlide">
-                        </div>
-                    </div>
-                </div>
+                <%= yield %>
             </div>
             <div class="addNewResourceForm" style="display:none;">
                 <%= render :partial => 'layouts/addResourceForm' %>

@@ -1,5 +1,7 @@
 <%= render 'shared/filter' %>
-<%= (render :partial => 'shared/results', :collection => @resource,
+<div id="columns">
+<%= (render :partial => 'shared/pinresults', :collection => @resource,
 :as => 'resource') || "Sorry, no results returned. Please try again!"
 %>
+</div>
 <%= will_paginate(@resource) %>

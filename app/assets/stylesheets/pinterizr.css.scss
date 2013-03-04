@@ -111,30 +111,3 @@
 #columns:hover .pin:not(:hover) {
 	opacity: 0.4;
 }
-
-#mask {
-  position:absolute;
-  left:0;
-  top:0;
-  z-index:9000;
-  background-color:#000;
-  display:none;
-}
-  
-#boxes .window {
-  position:fixed;
-  left:0;
-  top:0;
-  width:90%;
-  height:90%;
-  display:none;
-  z-index:9999;
-  padding:20px;
-}
-
-#boxes #dialog {
-  width:50%;
-  height:90%;
-  padding:10px;
-  background-color:#ffffff;
-}
