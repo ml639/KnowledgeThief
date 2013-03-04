@@ -72,6 +72,12 @@ gem 'slim-rails'
 # For time duration manipulation
 gem "chronic_duration", "~> 0.10.2"
 
+# For notification system (unread notifications)
+gem 'unread'
+
+# For notificaiton/activity system
+gem 'public_activity'
+
 group :development do
    # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false
