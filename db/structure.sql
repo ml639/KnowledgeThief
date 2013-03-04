@@ -534,7 +534,8 @@ CREATE TABLE paths (
     content text,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    resource_id integer
+    resource_id integer,
+    user_id integer
 );
 
 
@@ -636,11 +637,11 @@ CREATE TABLE resources (
     updated_at timestamp without time zone NOT NULL,
     "youtubeID" character varying(255),
     media_type character varying(255),
+    path_id integer,
     snapshot_file_name character varying(255),
     snapshot_content_type character varying(255),
     snapshot_file_size integer,
     snapshot_updated_at timestamp without time zone,
-    path_id integer,
     active boolean
 );
 
@@ -935,8 +936,8 @@ CREATE TABLE users (
     hometown_name character varying(255),
     bio character varying(255),
     gender character varying(255),
-    oauth_token character varying(255),
-    role character varying(255)
+    role character varying(255),
+    oauth_token character varying(255)
 );
 
 
@@ -1764,11 +1765,14 @@ INSERT INTO schema_migrations (version) VALUES ('20130303012841');
 
 INSERT INTO schema_migrations (version) VALUES ('20130303163406');
 
-INSERT INTO schema_migrations (version) VALUES ('20130304044437');
-
 INSERT INTO schema_migrations (version) VALUES ('20130303235612');
 
 INSERT INTO schema_migrations (version) VALUES ('20130303235745');
 
 INSERT INTO schema_migrations (version) VALUES ('20130304035656');
 
+INSERT INTO schema_migrations (version) VALUES ('20130304044437');
+
+INSERT INTO schema_migrations (version) VALUES ('20130304063107');
+
+INSERT INTO schema_migrations (version) VALUES ('20130304064110');
