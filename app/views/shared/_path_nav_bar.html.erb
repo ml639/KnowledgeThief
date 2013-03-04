@@ -1,8 +1,8 @@
 <ul class="nav">
-    <li><%=path.name%> | 
-       	<%= link_to 'Edit', edit_path_path(path.id), :method => :get %>
+    <li> 
+       	<%= link_to path.name, edit_path_path(path.id), :method => :get %> |
     </li>
-        <ul> 
-       	<%= link_to 'Add', add_resource_to_path_path(path.id, resource.id), :method => :post %>
-        </ul>
+    <li>
+    	<%= link_to 'Add', add_resource_to_path_path(path.id, resource.id), :method => :post %>
+    </li>
 </ul>

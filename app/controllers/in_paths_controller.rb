@@ -18,15 +18,18 @@ class InPathsController < ApplicationController
     redirect_to :back
   end
 
-  def delete_resource_from_path
-    @path = Path.find(params[:path_id])
-    @resource = Resource.find(params[:resource_id]) 
+  def remove_resource_from_path
+    path_id = params[:path_id]
+    resource_id = params[:resource_id]
+    position = params[:position]
 
-    InPath.find(@path, @resource).destroy
+    InPath.delete_all(['path_id = ? and resource_id = ? and resource_path_position = ?',
+                 path_id, resource_id, 
+                 position])
     redirect_to :back
   end
 
-  def edit_resource_order_in_path
+  def change_resource_order_in_path
 
   end
 

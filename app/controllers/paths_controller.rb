@@ -3,7 +3,6 @@ class PathsController < ApplicationController
   # GET /paths.json
   def index
     @paths = Path.all
-    raise @paths
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @paths }
