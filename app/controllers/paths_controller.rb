@@ -50,13 +50,6 @@ class PathsController < ApplicationController
   def create
     require_login
 
-    if current_user == nil
-      flash[:alert] = "You must log in to submit a resource!"
-      redirect_to resources_path
-      return
-    else
-      params[:resource][:user_id] = current_user.id
-    end
     @path = Path.new(params[:path])
 
     respond_to do |format|

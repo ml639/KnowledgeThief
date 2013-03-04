@@ -1,6 +1,10 @@
 <h1>Editing path</h1>
 
 <%= render 'form' %>
+
+<%= link_to 'Show', @path %> |
+<%= link_to 'Back', paths_path %>
+
 <h1>Resources within Path </h1>
 <br/>
 <div id="pathResources">
@@ -11,5 +15,4 @@
 	<% end %> 
 </div>
 
-<%= link_to 'Show', @path %> |
-<%= link_to 'Back', paths_path %>
+
