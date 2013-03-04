@@ -1,6 +1,27 @@
-<div class="pin" value="<%= resource.id %>">
+<div class="pin">
 	<div class="resourceButtons">
-		<button>Paths</button>
+		
+
+	<div class="path">
+		<button class="path_bttn"value="<%=resource.id%>">
+			Paths
+		</button>
+
+		<div class="path">
+	    <% unless Path.all.empty? %>
+	         <% for path in Path.all %>
+	            <%= render :partial => "shared/path_nav_bar",
+	                 :locals =>{ :path => path, :resource =>resource } %>
+		     <% end %> 
+	    <% else %>
+		       <ul class="nav">
+	              <li>
+	                <%= link_to 'Create a path', new_path_path %>
+	              </li>
+	           </ul>
+	    <% end %>
+		</div>
+    </div>  
 	</div>
 	<div class="resourceContentHolder">
 		<div class="resourceImage">
@@ -10,8 +31,8 @@
 			<div class="upvotesCount">
 	       		<%= resource.reputation_for(:votes).to_i %> 
 	   		</div>
-	   		<div class="resourceTitle">
-	       		<%= resource.title %>
+	   		<div class="r" value="<%= resource.id %>">
+	       		<%= link_to resource.title, url_for(resource.link), :value => resource.id, :class => 'resourceTitle' %> 
 	       	</div>
 	    </div>
 		<div class="resourceDescription">

@@ -24,7 +24,7 @@ var ResourceView = function(){
 		// Remove scrollbar in JS
   		setKeyBindings();
   		slideWidth = $(window).width();
-		$('.resourceThumb').each(function(){
+		$('.pin').each(function(){
   			searchResultURLS.push($(this).find('a').attr('href'));
 		});
 		var isFirst = true;
@@ -477,9 +477,9 @@ var ResourceView = function(){
 };
 
 $(function(){
-	$('.resourceThumb').click(function(){
+	$('.resourceTitle').click(function(){
 		var rView = new ResourceView();
-		var link = $(this).find('a').attr('href');
+		var link = $(this).attr('href');
 		//this is hacky as shit. split on /'s and check if its a resource link
 		var parts = link.split('/');
 		if(parts[1] == "resources"){
