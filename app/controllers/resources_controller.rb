@@ -51,7 +51,7 @@ class ResourcesController < ApplicationController
     if(!current_user.facebook.access_token.nil?)
       current_user.facebook.put_wall_post("I posted a resource on www.knowledgethief.com")
     end
-    redirect_to resources_path
+    redirect_to home_path
   end
 
   def vote

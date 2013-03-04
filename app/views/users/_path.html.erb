@@ -1,5 +1,20 @@
- hahahhaha
- <br/>
- Yes
- <br/>
- This is Path :) <br/>
+
+ <table>
+  <tr>
+    <th>Name</th>
+    <th>Content</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @p = Path.user_paths(current_user.id) %>
+<% @p.each do |path| %>
+  <tr>
+    <td><%= link_to path.name, show_path_path(path.id) %></td>
+    <td><%= path.content %></td>
+    <td><%= link_to 'Show', path %></td>
+    <td><%= link_to 'Edit', edit_path_path(path) %></td>
+    <td><%= link_to 'Destroy', path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
