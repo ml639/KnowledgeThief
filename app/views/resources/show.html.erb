@@ -1,16 +1,19 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Title:</b>
-  <%= @resource.title %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @resource.description %>
-</p>
-
-<p>
+<div class="resourceContentHolder">
+		<div class="resourceImage">
+			 <%= image_tag(@resource.snapshot.url, :class=>"thumbImg") %> 
+		</div>
+		<div id="resourceInfo">
+			<div class="upvotesCount">
+	       		<%= @resource.reputation_for(:votes).to_i %> 
+	   		</div>
+	   		<div class="r" value="<%= resource.id %>">
+	       		<%= link_to @resource.title, url_for(@resource.link),:style => "color:black !important;", :value => @resource.id, :class => 'resourceTitle' %> 
+	       	</div>
+	    </div>
+		<div class="resourceDescription">
+	    	<%= @resource.description %>
+	    </div>
+	</div>
 	<b>Tag list:</b>
 	<%= @resource.tag_list %>
 </p>

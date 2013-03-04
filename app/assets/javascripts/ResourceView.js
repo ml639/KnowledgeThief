@@ -26,6 +26,7 @@ var ResourceView = function(){
   		slideWidth = $(window).width();
 		$('.resourceTitle').each(function(){
   			searchResultURLS.push($(this).attr('href'));
+  			$('.searchList').append("<li>" +$(this).attr('href') +" </li>").hide().fadeIn();
 		});
 		var isFirst = true;
 		for(var i = 0 ; i< searchResultURLS.length; i++){

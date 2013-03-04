@@ -13,6 +13,7 @@ class ResourcesController < ApplicationController
     @resource = Resource.find(params[:id])
     @reputation = @resource.reputation_for(:votes).to_i
     respond_to do |format|
+        format.html
         format.json { render :status=>200, :json=>{:resource=>@resource, :reputation =>@reputation, :comments => @resource.comments}}
     end
   end
