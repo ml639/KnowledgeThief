@@ -18,7 +18,6 @@ var ResourceView = function(){
 		resource_id = new_resource_id;
 		updateBrowserHistory();
 		cleanUpWindow();
-
 		slidesContainer.css('overflow', 'hidden');
 
 		// Remove scrollbar in JS
@@ -223,6 +222,11 @@ var ResourceView = function(){
 	             		$("#"+oldActive).removeClass('navHere');
 						$('#path-form').addClass('navHere');
 	             		break;
+	             	case 'resourceNav-addFlag':
+	             		$('#flag-form').slideDown(250);
+	             		$("#"+oldActive).removeClass('navHere');
+						$('#flag-form').addClass('navHere');
+	             		break;
 	    		}
 			});
     	});
@@ -234,8 +238,14 @@ var ResourceView = function(){
 			vote('down');
 		});
 		$('#saveComment').click(function(){
+			console.log("WOWOOWOW");
 			var commentText = $("#commenttext").val();
 			saveComment(commentText);
+		});
+
+		$('#newFlag').click(function(){
+			var flagText = $("#flagText").val();
+			newFlag(flagText);
 		});
 
 		$('#upvote').mouseover(function(){
@@ -429,17 +439,20 @@ var ResourceView = function(){
 		});
 	};
 	saveComment = function(commentText){
+		console.log(commentText);
 		$.ajax({
 			type: "post",
-			url: "/comments/",
+			url: "/comments",
 			data: {
 				content : commentText,
 				resource : resource_id
+
 			},
 			dataType: "json",
 			// Define request handlers.
 			success: function( objResponse ){
 				// Check to see if request was successful.
+				console.log("works");
 				$('.commentsList').html('');
 				$.each(objResponse.comments, function(i, item) {
     				$('.commentsList').append("<li>" +item.content +"</li>").hide().fadeIn();
@@ -449,7 +462,28 @@ var ResourceView = function(){
 				alert("error with comment");
 			}
 		});
-	},
+	};
+	newFlag = function(flagText){
+		console.log("lovely");
+		$.ajax({
+			type: "post",
+			url: "/flags/",
+			data: {
+				content : flagText,
+				resource : resource_id
+			},
+			dataType: "json",
+			// Define request handlers.
+			success: function( objResponse ){
+				$('#newFlagForm').html("");
+				$('#newFlagForm').append("Success.");
+				console.log("Success");
+			},
+			error: function( objRequest, strError ){
+				alert("error with comment");
+			}
+		});
+	}
 	vote = function(vote){
 		$.ajax({
 			type: "post",

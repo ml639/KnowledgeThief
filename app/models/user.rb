@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
     #self.birthday = Date.strptime(self.birthday, '%m-%d-%Y') if birthday.blank?
     #raise omniauth['extra']['raw_info']['hometown']['name']
     self.gender = omniauth['extra']['raw_info']['gender'] if gender.blank?
-    self.oauth_token = omniauth['credentials']['token'] if oauth_token.blank?
+    self.oauth_token = omniauth['credentials']['token'] unless omniauth['credentials']['token'].nil?#if oauth_token.blank?
     self.hometown_name = omniauth['extra']['raw_info']['hometown']['name'] unless omniauth['extra']['raw_info']['hometown'].nil?
 
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
