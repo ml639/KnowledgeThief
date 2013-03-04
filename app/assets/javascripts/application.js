@@ -18,29 +18,16 @@
 //= require jquery.treeTable.js
 //= require jquery.isotope.min.js
 //= require_tree .
-$('.text').hide().removeClass('text').addClass('text-js');
 
 $('.path').click(function () {
 	var navbar = $(this).find('ul.nav');
 	if (navbar.is(":hidden")) {
-	$('.path').css("background-color", "yellow");
+	$('.menu').css("background-color", "yellow");
 		navbar.slideDown("slow");
 	} else {
 		$('.path').css("background-color", "");
 		navbar.slideUp();
 	}
-});
-
-$('.thumb').hover(function(){
-    $(this).find('.text-js').fadeToggle();
-    $(this).find('.path').fadeIn();
-}, function(){
-    $(this).find('.text-js').fadeToggle();
-	var navbar = $(this).find('ul.nav');
-    if (navbar.is(":hidden"))
-    {
-		$(this).find('.path').fadeOut();
-	} 
 });
 
 function setFilter(val)
@@ -54,10 +41,3 @@ function setSort(val)
     $('#sort').val(val);
    	$('#search').submit();
 }
-
-// Isotope stuff
-$('#container').isotope({
-  // options
-  itemSelector : '.item',
-  layoutMode : 'fitRows'
-});

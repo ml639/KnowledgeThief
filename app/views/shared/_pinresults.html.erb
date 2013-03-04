@@ -1,6 +1,27 @@
 <div class="pin" value="<%= resource.id %>">
 	<div class="resourceButtons">
-		<button>Paths</button>
+		
+
+	<div class="path">
+		<button class="path_bttn">
+			Paths
+		</button>
+		
+		<div class="menu">
+	    <% unless Path.all.empty? %>
+	         <% for path in Path.all %>
+	            <%= render :partial => "shared/path_nav_bar",
+	                 :locals =>{ :path => path, :resource =>resource } %>
+		     <% end %> 
+	    <% else %>
+		       <ul class="nav">
+	              <li>
+	                <%= link_to 'Create a path', new_path_path %>
+	              </li>
+	           </ul>
+	    <% end %>
+		</div>
+    </div>  
 	</div>
 	<div class="resourceContentHolder">
 		<div class="resourceImage">

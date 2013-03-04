@@ -1,7 +1,6 @@
-    <ul class="nav">
-            <li><%=path.name%></li>
-            <ul> 
-            	<% # resource is a user object??? %>
-            	<%= link_to 'Add', add_resource_to_path_path(path.id, resource.id), :method => :post %>
-            </ul>
+<ul class="nav">
+    <li><%=path.name%></li>
+        <ul> 
+       	<%= link_to 'Add', add_resource_to_path_path(path.id, resource.id), :method => :post %>
         </ul>
+</ul>
