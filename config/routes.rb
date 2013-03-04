@@ -35,6 +35,7 @@ Kt::Application.routes.draw do
   
   get 'tags/:tag', to: 'resources#index', as: :tag
 
+  match '/infiniteScroll' => 'home#infiteScroll'
   match '/auth/:provider/callback' => 'authentications#create'
   match '/auth/:provider/failure', :to => 'authentications#failure'
   #match '/auth/:provider/callback?error_reason...', :to => 'profiles#failure'

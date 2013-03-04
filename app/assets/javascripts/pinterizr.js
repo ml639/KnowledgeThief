@@ -32,14 +32,22 @@ var Pinterizr = function () {
 			modalClose(e);
 		});
 		//if mask is clicked
-		$('#mask').click(function () {
-			$(this).hide();
-			$('.window').hide();
+		$('#boxes').click(function () {
+			$('#mask').hide();
+			$('#boxes').hide();
+			$('body').removeClass('body-locked');
 		});		
-
+		$(".modalPin").click(function(){
+			return;
+		});
 		$(window).resize(function () {
 	 	modalResize();
 		});
+		// $(window).scroll(function() {
+  //   			if($(window).scrollTop() + $(window).height() == $(document).height()) {
+  //      			  scroll();
+  //  			}
+		//  });
 	},
 	loadModalContents = function(url,new_resource_id){
 		$.ajax({
@@ -49,10 +57,9 @@ var Pinterizr = function () {
 			// Define request handlers.
 			success: function( objResponse ){
 				// Check to see if request was successful.
-				alert(objResponse.resource);
-				if(true){
-					
-				}
+				$(".modalUpvotesCount").append(objResponse.reputation);
+				$(".modalResourceTitle").append(objResponse.resource.title);
+				$(".modalResourceDescription").append(objResponse.resource.description);
 			},
 			error: function( objRequest, strError ){
 				//alert("error loading content");
@@ -62,11 +69,11 @@ var Pinterizr = function () {
 	modalSetup = function(e){
 		//Cancel the link behavior
 		e.preventDefault();
-		
+		$('body').addClass('body-locked');
 		//Get the A tag
-		var id = '#dialog';
+		var id = '#boxes';
 	
-		//Get the screen height and width
+		//Get the screen height and swidth
 		var maskHeight = $(document).height();
 		var maskWidth = $(window).width();
 	
@@ -76,14 +83,6 @@ var Pinterizr = function () {
 		//transition effect		
 		$('#mask').fadeIn(1000);	
 		$('#mask').fadeTo("slow",0.8);	
-	
-		//Get the window height and width
-		var winH = $(window).height();
-		var winW = $(window).width();
-              
-		//Set the popup window to center
-		$(id).css('top',  winH/2-$(id).height()/2);
-		$(id).css('left', winW/2-$(id).width()/2);
 	
 		//transition effect
 		$(id).fadeIn(700); 
@@ -98,28 +97,54 @@ var Pinterizr = function () {
       
         //Set height and width to mask to fill up the whole screen
         $('#mask').css({'width':maskWidth,'height':maskHeight});
-               
-        //Get the window height and width
-        var winH = $(window).height();
-        var winW = $(window).width();
+  
+	},
+	scroll  = function(){  
+			$.getScript('/infiniteScroll', function(){
+					alert("finished");
+					x= 1;
+			});
 
-        //Set the popup window to center
-        box.css('top',  winH/2 - box.height()/2);
-        box.css('left', winW/2 - box.width()/2);
+	   //  	$.ajax({
+				// type: "get",
+				// url: "/infiniteScroll",
+				// data: {
+				// 	offset : 10
+				// },
+				// dataType: "json",
+				// // Define request handlers.
+				// success: function( objResponse ){
+				// 	// Check to see if request was successful.
+				// 	if (objResponse.success){
+				// 		$.each(objResponse.resources, function(i, item) {
+    // 						$('.columns').hide().append("<div class='pin' value='" +item.id+"'>" 
+    // 							+"<div class='resourceButtons'><button>Paths</button></div>"
+    // 							+"<div class='resourceContentHolder'>"
+    // 						).fadeIn();
+				// 		});
+				// 	} else {
+				// 	}
+				// },
+				// error: function( objRequest, strError ){
+
+				// }
+			//});
 	},
 	modalClose = function(e){
 		//Cancel the link behavior
+		
 		e.preventDefault();
+		$('body').removeClass('body-locked');
 		$('#mask').hide();
-		$('.window').hide();
+		$('#boxes').hide();
 	}
 	return{
-		init : init
+		init : init,
+		scroll : scroll
 	};
 };
 $(function(){
 	var pinterest = new Pinterizr();
-	
 	$(".pin").hover(
 		  function () {
 		    $(this).find(".resourceButtons").stop().animate({

@@ -16,10 +16,20 @@ class HomeController < ApplicationController
         @select_type = "Recent"
       else
         # @resources = Popular resources
-        @resources = Resource.find_with_reputation(:votes, :all, :limit => 10, order: "votes desc")
+        
+        @resources = Resource.page(params[:page]).per_page(10).find_with_reputation(:votes, :all, order: "votes desc")
         @select_type = "Popular"
       end
       
       # @resources = Recommended resources (pending User Activity gem)
+  end
+
+  def infiteScroll
+    @resources = Resource.find_with_reputation(:votes, :all, :limit => 10, order: "votes desc", :offset => 10)
+    
+    @select_type = "Popular"
+    respond_to do |format|
+        format.json { render :json => { :resources => @resources}}
+    end
   end
 end
