@@ -8,11 +8,11 @@ var ResourceView = function(){
   	var numberOfSlides = slides.length;
     var searchResultURLS = new Array();
     var iFrameURLS = new Array();
-
+    var slideDisabled = false;
     var slidesContainer = $('#slidesContainer');
     var slideShow = $("#slideshow");
     var slidesInner = $('#slideInner');
-
+    var slideHistory = new Array(); //left 0; right 1;
     var historyStackSize = 0;
 	init = function(url,new_resource_id){
 		resource_id = new_resource_id;
@@ -24,8 +24,8 @@ var ResourceView = function(){
 		// Remove scrollbar in JS
   		setKeyBindings();
   		slideWidth = $(window).width();
-		$('.pin').each(function(){
-  			searchResultURLS.push($(this).find('a').attr('href'));
+		$('.resourceTitle').each(function(){
+  			searchResultURLS.push($(this).attr('href'));
 		});
 		var isFirst = true;
 		for(var i = 0 ; i< searchResultURLS.length; i++){
@@ -127,6 +127,7 @@ var ResourceView = function(){
 	},
 	slideView = function(distance){ // -1 to slide left, +1 to slide right.
 		currentPosition = currentPosition + distance;
+		slideHistory.push(distance);
 		// Move slideInner using margin-left
   		$("#slideInner").animate(
    			{"marginLeft": slideWidth*(-currentPosition)},{
@@ -134,6 +135,7 @@ var ResourceView = function(){
      		complete: function(){
        			manageIframes(currentPosition);
        			updateBrowserHistory(); // update our browser history to reflect the new page.
+       			slideDisabled = false;
 		     }
 		});
 	},
@@ -145,7 +147,14 @@ var ResourceView = function(){
   				removeBar();
   			}else {
   				if(ev.originalEvent.state.isResource){
-  				currentPosition--;
+  				switch(slideHistory.pop()){
+  					case -1:
+  						currentPosition++;
+  						break;
+					case 1:
+						currentPosition--;
+						break
+  				}
   				$("#slideInner").stop().animate(
 					{"marginLeft": slideWidth*(-currentPosition)},{
 	 				duration: 750,
@@ -176,13 +185,17 @@ var ResourceView = function(){
     		.bind('click', function(event){
     		event.preventDefault();
     		// Determine new position
-    		var isNext  = ($(this).attr('id')=='nextslide') ? true : false;
-    		if(currentPosition == 0  && !isNext)
-    			return false;
-    		else if(currentPosition == numberOfSlides-1 && isNext)
-    			return false;
-    		else
+    		if(!slideDisabled){
+    			slideDisabled = true;
+    			var isNext  = ($(this).attr('id')=='nextslide') ? true : false;
+	    		if(currentPosition == 0  && !isNext)
+	    			return false;
+	    		else if(currentPosition == numberOfSlides-1 && isNext)
+	    			return false;
+	    		else
     			($(this).attr('id')=='nextslide') ? slideView(1) : slideView(-1);
+    		}
+    		
     	});
     	$('.navigation-box').click(function(event){
     		event.preventDefault();
