@@ -559,7 +559,7 @@ CREATE TABLE read_marks (
     id integer NOT NULL,
     readable_id integer,
     user_id integer NOT NULL,
-    readable_type character varying(20) NOT NULL,
+    readable_type text NOT NULL,
     "timestamp" timestamp without time zone
 );
 
@@ -1710,3 +1710,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130303012841');
 INSERT INTO schema_migrations (version) VALUES ('20130303235612');
 
 INSERT INTO schema_migrations (version) VALUES ('20130303235745');
+
+INSERT INTO schema_migrations (version) VALUES ('20130304035656');
