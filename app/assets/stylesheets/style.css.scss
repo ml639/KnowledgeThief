@@ -7,7 +7,6 @@
 	-webkit-box-sizing: border-box;
 	line-height:1.5;
 	font-family: 'Open Sans', helvetica, arial, sans-serif;
-	
 }
 
 ul{
@@ -81,36 +80,40 @@ ul{
 }
 
 #mainSearchWrapper{
-	position:absolute; 
-	margin: 0 auto; 
-	height:40px; 
-	width:450px;
-	margin-top:0;
-	top:100px;
-	left:325px;
+	position: relative;
+	margin: 0 auto;
+	height: 40px;
+	width: 450px;
+	margin-top: 0;
+	background: url("museOn2.png") no-repeat;
+
 }
 #veilSearchWrapper{
 	position:relative;
 	top:5px;
 }
+mainSearch:focus{
+	outline:none !important;
+}
+*:focus {
+    outline: none !important;
+}
 
 input.mainSearch{
 	font-family: 'Open Sans';
-	width:100%;  
-	height:40px; 
-	font-size:22px;
-	font-weight:300;
-	padding:0;
-	padding-top:3px;
-	padding-left:8px;
-	color:#666;
-	border-style:solid;
-	border-width:1px;
-	outline:none;
-	background-color:white;
-	box-shadow:inset 0px 0px 2px #666;
-	-webkit-box-shadow:inset 0px 0px 2px #666;
-	-moz-box-shadow:inset 0px 0px 2px #666;
+	width: 350px;
+	height: 40px;
+	font-size: 22px;
+	font-weight: 300;
+	padding: 0;
+	padding-top: 3px;
+	padding-left: 8px;
+	color: white;
+	background-color: transparent;
+	position: relative;
+	left: 10px;
+	bottom: 11px;
+	outline:none !important;
 }
 
 input.mainSearch:focus{
@@ -120,11 +123,12 @@ input.mainSearch:focus{
 input.mainSubmit{
 	position:relative; 
 	display:inline-block; 
-	margin-top:-39px; 
-	height:39px;  
+	margin-top:0px; 
+	height:50px;  
 	background:transparent; 
 	border:none;
 	float:right;
+	right:30px;
 }
 .veilSubmit{
 	position:relative; 
@@ -446,7 +450,7 @@ ul{
 	position:relative;
 	height:230px;
 	width:100%;	
-	background-image:url(bg.jpg);
+	background-image:url(bg4.jpg);
 	background-size:cover;
 }
 
@@ -473,15 +477,7 @@ input.mainSearch:focus{
 
 }
 
-input.mainSubmit{
-	position:relative; 
-	display:inline-block; 
-	margin-top:-39px; 
-	height:39px;  
-	background:transparent; 
-	border:none;
-	float:right;
-}
+
 
 #bottomWrapper{
 	position:relative;
@@ -551,3 +547,24 @@ input.mainSubmit{
     height: 1%; }
   *:first-child + html .digg_pagination {
     overflow: hidden; }
+
+.path{
+	font-size: small;
+	a{
+		color: black;
+		font-size: small;
+	}
+	ul.nav{
+		background-color: rgba(0, 0, 0, 0.2);
+		border-left: 15px;
+		border:2px solid;
+		border-radius:25px;
+		-moz-border-radius:25px; /* Old Firefox */
+		display:none;
+		width: 45%;
+		background: gray;
+		li{
+			display: inline-block;
+		}
+	}
+}

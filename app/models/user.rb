@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+
+
   include Engage::Extensions::User
   has_many :searches, :class_name => 'UserSearch'
   has_many :resources
@@ -10,6 +12,7 @@ class User < ActiveRecord::Base
 
   has_reputation :votes, source: {reputation: :votes, of: :resources}, aggregated_by: :sum
 
+  acts_as_reader
 
   # has_reputation :karma,
   #     :source => { :reputation => :votes, :of => :resources }

@@ -1,4 +1,6 @@
 class Resource < ActiveRecord::Base
+
+
   include PgSearch
   pg_search_scope :full_search,
     :against => {
@@ -33,6 +35,9 @@ class Resource < ActiveRecord::Base
                     :storage => :s3,
                     :s3_credentials => "#{Rails.root}/config/s3.yml",
                     :default_url => "resourceex.JPG"
+
+
+
 
 
 
