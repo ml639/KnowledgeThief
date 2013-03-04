@@ -1,7 +1,9 @@
 Kt::Application.routes.draw do
 
-  resources :activities
+  resources :flags
 
+  resources :activities
+  
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config

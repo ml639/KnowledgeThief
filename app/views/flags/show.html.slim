@@ -1,0 +1,33 @@
+p#notice = notice
+
+p
+  strong Item:
+  = @flag.item_id
+p
+  strong Itemtype:
+  = @flag.itemtype
+p
+  strong Desc:
+  = @flag.desc
+p
+  strong Reporter:
+  = @flag.reporter_id
+p
+  strong Resolved:
+  = @flag.resolved
+p
+  strong Moderator:
+  = @flag.moderator_id
+p
+  strong Moderator msg:
+  = @flag.moderator_msg
+p
+  strong Action:
+  = @flag.action
+p
+  strong Checked:
+  = @flag.checked
+
+= link_to 'Edit', edit_flag_path(@flag)
+'|
+= link_to 'Back', flags_path

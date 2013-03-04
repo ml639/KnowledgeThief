@@ -16,7 +16,7 @@
           <%= current_user.email %>
           </a>
           <div id="login-content">
-          <br> Reputation: <%= current_user.reputation_for(:votes).to_i %></br>
+            <br> Reputation: <%= current_user.reputation_for(:votes).to_i %></br>
             <b><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></b>
           </div>
         </li>
