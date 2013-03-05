@@ -1,9 +1,9 @@
 <%= render 'shared/filter' %>
 <div id="columns">
-<%= (render :partial => 'shared/pinresults', :collection => @resource,
+<%= (render :partial => 'shared/pinresults', :collection => @resources,
 :as => 'resource') || "Sorry, no results returned. Please try again!"
 %>
 <div style="clear:both;">
-	<%= will_paginate(@resource, :class => "digg_pagination")  %>
+	
 </div>
-
+<%= will_paginate @resources %>
