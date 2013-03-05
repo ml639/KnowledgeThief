@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  #load_and_authorize_resource
   # GET /comments
   # GET /comments.json
   def index
@@ -39,7 +40,7 @@ class CommentsController < ApplicationController
   def forresource
     resource_id = params[:id]
     #@comments = Comment.where(:resource_id => resource_id)
-    @comments = Resource.find_by_id(resource_id).comments
+    @comments = Comment.where(:resource_id => resource_id)
     respond_to do |format|
         format.html { redirect_to :back, notice: "Thank you for voting" }
         format.json { render :status=>200, :json=>{:success=>true, :comments => @comments}}

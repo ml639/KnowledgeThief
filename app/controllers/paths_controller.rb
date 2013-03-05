@@ -30,7 +30,7 @@ class PathsController < ApplicationController
   def new
     require_login
 
-    @path = Path.new
+    @path = current_user.paths.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -49,8 +49,8 @@ class PathsController < ApplicationController
   # POST /paths.json
   def create
     require_login
-
-    @path = Path.new(params[:path])
+    @user = current_user
+    @path = @user.paths.new(params[:path])
 
     respond_to do |format|
       if @path.save
