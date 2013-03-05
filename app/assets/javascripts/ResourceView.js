@@ -16,12 +16,13 @@ var ResourceView = function(){
     var historyStackSize = 0;
 	init = function(url,new_resource_id){
 		resource_id = new_resource_id;
+		setKeyBindings();
 		updateBrowserHistory();
 		cleanUpWindow();
 		slidesContainer.css('overflow', 'hidden');
-
+		historyStackSize++;
 		// Remove scrollbar in JS
-  		setKeyBindings();
+  		
   		slideWidth = $(window).width();
 		$('.resourceTitle').each(function(){
   			searchResultURLS.push($(this).attr('href'));
@@ -140,32 +141,6 @@ var ResourceView = function(){
 		});
 	},
 	setKeyBindings = function(){
-		$(window).bind('popstate', function (ev){
-  			if (window.history.isResource && ev.originalEvent.state == null){
-  				// If a popstate occurs, check to see if we're in a resource, if so, remove the iframe, else, do nothing.
-  				// if the originalEvent.state is false, then we know we're returning to the original page.
-  				removeBar();
-  			}else {
-  				if(ev.originalEvent.state.isResource){
-  				switch(slideHistory.pop()){
-  					case -1:
-  						currentPosition++;
-  						break;
-					case 1:
-						currentPosition--;
-						break
-  				}
-  				$("#slideInner").stop().animate(
-					{"marginLeft": slideWidth*(-currentPosition)},{
-	 				duration: 750,
-	 				complete: function(){
-			   			manageIframes(currentPosition);
-		     		}
-				});
-  			}
-  		}
-		});
-
 	    $('#info-button').mouseover(function(){
 	          $('#navCollapse').fadeIn();
 	       });
@@ -178,8 +153,12 @@ var ResourceView = function(){
 	       });
 		$('#home').click(function(event){
 				event.preventDefault();
-  			history.go(-historyStackSize);
+  			history.go(-(slideHistory.length+1));
   			logUserEndTime(resource_id);
+  			currentPosition = 0;
+			numberOfSlides = 0;
+			slideHistory = [];
+	    	historyStackSize = 0;
   		});
   		$('.control')
     		.bind('click', function(event){
@@ -283,6 +262,31 @@ var ResourceView = function(){
 	    		toggleBar();
 	    	}
 		});
+		$(window).bind('popstate', function (ev){
+  			if (window.history.isResource && ev.originalEvent.state == null){
+  				// If a popstate occurs, check to see if we're in a resource, if so, remove the iframe, else, do nothing.
+  				// if the originalEvent.state is false, then we know we're returning to the original page.
+  				removeBar();
+  			}else {
+  				if(ev.originalEvent.state.isResource){
+  				switch(slideHistory.pop()){
+  					case -1:
+  						currentPosition++;
+  						break;
+					case 1:
+						currentPosition--;
+						break
+  				}
+  				$("#slideInner").stop().animate(
+					{"marginLeft": slideWidth*(-currentPosition)},{
+	 				duration: 750,
+	 				complete: function(){
+			   			manageIframes(currentPosition);
+		     		}
+				});
+  			}
+  		}
+		});
 	},
 	manageIframes = function(position){
 		//check the current position and load the next iframe if possible.
@@ -342,6 +346,7 @@ var ResourceView = function(){
 		     	complete: function(){
 		     }
 		   });
+			$('#navCollapse').stop().fadeIn();
 			isToggledUp = true;
 		}
 	},
@@ -365,6 +370,8 @@ var ResourceView = function(){
 		   });
 		currentPosition = 0;
 		numberOfSlides = 0;
+		slideHistory = [];
+    	historyStackSize = 0;
 
 	},
 
@@ -520,13 +527,15 @@ var ResourceView = function(){
 		logUser : logUser,
 		logUserEndTime : logUserEndTime,
 		saveComment : saveComment,
-		toggleBar : toggleBar
+		toggleBar : toggleBar,
+		setKeyBindings : setKeyBindings
 	};
 };
 
 $(function(){
-	$('.resourceTitle').click(function(){
-		var rView = new ResourceView();
+	var rView = new ResourceView();
+	$('#columns').on('click', '.resourceTitle', function (){
+		
 		var link = $(this).attr('href');
 		//this is hacky as shit. split on /'s and check if its a resource link
 		var parts = link.split('/');
@@ -536,10 +545,12 @@ $(function(){
 			var link_href = link;
 			var get_resource_id = $(this).attr('value');
 	    	rView.init(link_href, get_resource_id);
+	    	rView.setKeyBindings();
 			rView.comments(get_resource_id);
 			rView.logUser(get_resource_id);
 			return false;
 		}
 		return false;
 	});
+
 });
