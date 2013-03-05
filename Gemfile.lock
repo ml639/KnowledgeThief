@@ -409,6 +409,7 @@ DEPENDENCIES
   imgkit (~> 1.3.7)
   jquery-rails
   koala
+  less
   less-rails (~> 2.2.2)
   libnotify
   meta_request
