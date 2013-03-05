@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   has_reputation :votes, source: {reputation: :votes, of: :resources}, aggregated_by: :sum
 
-  acts_as_reader
+  #acts_as_reader
 
   # has_reputation :karma,
   #     :source => { :reputation => :votes, :of => :resources }
