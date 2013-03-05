@@ -4,12 +4,13 @@ class User < ActiveRecord::Base
   include Engage::Extensions::User
   has_many :searches, :class_name => 'UserSearch'
   has_many :resources
+  has_many :paths
   has_many :comments
   has_many :resource_views, :class_name => 'UserResourceView'
   has_many :viewed_resources, :through => :resource_views, :source => :resource
   has_many :authentications
   has_many :evaluations, class_name: "RSEvaluation", as: :source
-
+  has_many :paths
   has_reputation :votes, source: {reputation: :votes, of: :resources}, aggregated_by: :sum
 
   #acts_as_reader

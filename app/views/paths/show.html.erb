@@ -1,3 +1,4 @@
+<div id="pathsContainer">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -14,12 +15,13 @@
 <%= link_to 'Back', paths_path %>
 
 <h1>Resources within Path </h1>
-<br/>
 <div id="pathResources">
 <hr/>
+<br/>
 	<% for path_item in InPath.where('path_id = ?',@path.id) %>
 	    <%= render :partial => "resources_for_path",
 	               :locals =>{ :path_item => path_item } %>
 	<% end %> 
 </div>
 
+</div>

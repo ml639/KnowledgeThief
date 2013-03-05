@@ -534,7 +534,8 @@ CREATE TABLE paths (
     content text,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    resource_id integer
+    resource_id integer,
+    user_id integer
 );
 
 
@@ -1771,3 +1772,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130303235745');
 INSERT INTO schema_migrations (version) VALUES ('20130304035656');
 
 INSERT INTO schema_migrations (version) VALUES ('20130304044437');
+
+INSERT INTO schema_migrations (version) VALUES ('20130304063107');
+
+INSERT INTO schema_migrations (version) VALUES ('20130304064110');

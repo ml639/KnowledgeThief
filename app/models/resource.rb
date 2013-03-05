@@ -110,7 +110,7 @@ class Resource < ActiveRecord::Base
     results = ActiveSupport::JSON.decode(response.body, {:symbolize_names => true})
 
     # Return an empty array if Google CSE limit has been met.
-    results["items"] = results["items"] == nil ? [] : results["items"]
+    #results["items"] = results["items"] == nil ? [] : results["items"]
     #results = {"items" => []}
 
     # Now add those to our database here (call this method before )
@@ -125,12 +125,12 @@ class Resource < ActiveRecord::Base
     # Harvard's version of CS4400. Topics include assembly, buffer overflow,
     # optimization and virtual memory.|computer systems, machine organization
 
-    results["items"].each do |r|
-      r["link"] = PostRank::URI.clean(r["link"])
-      if unique_link?(r["link"])
-        temp_resource = Resource.create!(:title => r["title"],
-                                         :link => r["link"],
-                                         :description => r["snippet"],
+    results[:items].each do |r|
+      r[:link] = PostRank::URI.clean(r[:link])
+      if unique_link?(r[:link])
+        temp_resource = Resource.create!(:title => r[:title],
+                                         :link => r[:link],
+                                         :description => r[:snippet],
                                          :media_type => "other",
                                          :user_id => 1)
         temp_resource.tag_list = q

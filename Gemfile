@@ -40,7 +40,8 @@ gem "postrank-uri", "~> 1.0.17"
 gem 'engagecsm'
 
 # Bootstrap
-gem "less-rails"
+gem "less"
+gem "less-rails", "~> 2.2.2"
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 # Postgresql gem for better continuous integration with Heroku

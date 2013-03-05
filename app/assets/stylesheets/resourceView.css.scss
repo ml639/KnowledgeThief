@@ -256,6 +256,10 @@ h1, h2 {
   font-family: serif;
   color:white !important;
 }
+#searchResultsHolder{
+  height:250px;
+  overflow-y:scroll;
+}
 .formHolder{
   min-height:250px;
   height:100%;

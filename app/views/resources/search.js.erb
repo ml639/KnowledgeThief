@@ -1,0 +1,6 @@
+$('#columns').append('<%= j render :partial => 'shared/pinresults', :collection => @resources, :as => 'resource' %>').fadeIn();
+<% if @resources.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate(@resources) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>
