@@ -409,7 +409,7 @@ DEPENDENCIES
   imgkit (~> 1.3.7)
   jquery-rails
   koala
-  less-rails
+  less-rails (~> 2.2.2)
   libnotify
   meta_request
   omniauth
