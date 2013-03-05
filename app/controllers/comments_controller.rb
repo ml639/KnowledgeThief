@@ -58,7 +58,7 @@ class CommentsController < ApplicationController
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
         @comments = Comment.where(:resource_id => params[:resource])
         format.json { render :status=>200, :json=>{:success=>true, :comments => @comments}}
-        @comment.create_activity :create, owner: current_user, recipient: r
+       # @comment.create_activity :create, owner: current_user, recipient: r
       else
         format.html { render action: "new" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
