@@ -81,6 +81,9 @@ gem 'unread'
 # For notificaiton/activity system
 gem 'public_activity'
 
+# Intro.js for the beta presentation
+gem 'introjs-rails'
+
 group :development do
    # The following three gems will make sure Linux, Mac and Windows work (respectively)
    gem 'rb-inotify', :require => false

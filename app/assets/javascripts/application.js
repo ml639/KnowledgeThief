@@ -19,6 +19,7 @@
 //= require jquery.treeTable.js
 //= require jquery.isotope.min.js
 //= require_tree .
+//= require introjs
 
 $('.path').click(function () {
 	var navbar = $(this).find('ul.nav');
