@@ -47,14 +47,25 @@
 				You haven't posted anything yet.
 			<% else %>
 				<div id="userResourceContainer" style="margin-top:5px;">
-					<%= render :partial => 'result', :collection => @rc, :as => 'resource' %>
+					<div id="columns">
+						<%= render :partial => 'shared/pinresults', :collection => @rc, :as => 'resource' %>
+					</div>
 				</div>
 			<% end %>
 		</div>
 		<div style="clear:both;"/></div>
 		<div id = "userPaths" style="display:none">
 			<h1>My Path:</h1>
-			<%= render :partial => 'path' %>
+			<% if @paths.empty? %>
+				You haven't posted anything yet.
+			<% else %>
+				<div id="userResourceContainer" style="margin-top:5px;">
+					<div id="columns">
+						<%= render :partial => 'path',  :collection => @paths, :as => 'path'%>
+					</div>
+				</div>
+			<% end %>
+			
 		</div>
 	</section>
 	<section id="right">

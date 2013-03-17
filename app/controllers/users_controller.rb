@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 			@rc = Resource.where(:user_id => current_user.id)
 			#@rc = 
 			@comments = Comment.where(:user_id => current_user.id)
+			@paths = current_user.paths
 			#@paths = Path.where()
 		else
 			redirect_to new_user_session_path, :notice => "Please, log in." 

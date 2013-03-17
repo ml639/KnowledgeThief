@@ -637,11 +637,11 @@ CREATE TABLE resources (
     updated_at timestamp without time zone NOT NULL,
     "youtubeID" character varying(255),
     media_type character varying(255),
-    path_id integer,
     snapshot_file_name character varying(255),
     snapshot_content_type character varying(255),
     snapshot_file_size integer,
     snapshot_updated_at timestamp without time zone,
+    path_id integer,
     active boolean
 );
 
@@ -936,8 +936,8 @@ CREATE TABLE users (
     hometown_name character varying(255),
     bio character varying(255),
     gender character varying(255),
-    role character varying(255),
-    oauth_token character varying(255)
+    oauth_token character varying(255),
+    role character varying(255)
 );
 
 

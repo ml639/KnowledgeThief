@@ -62,7 +62,7 @@ background: url("icons.png") -444px 0px no-repeat black;
 background: url("icons.png") -369px 0px no-repeat black;
 }
 #resourceNav-addFlag{
-background: url("icons.png") -369px 0px no-repeat black;
+background: url("flag1.png") no-repeat;
 }
 
 
@@ -255,6 +255,10 @@ h1, h2 {
   background: black;
   font-family: serif;
   color:white !important;
+}
+#searchResultsHolder{
+  height:250px;
+  overflow-y:scroll;
 }
 .formHolder{
   min-height:250px;

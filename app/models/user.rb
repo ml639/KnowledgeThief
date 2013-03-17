@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :viewed_resources, :through => :resource_views, :source => :resource
   has_many :authentications
   has_many :evaluations, class_name: "RSEvaluation", as: :source
-
+  has_many :paths
   has_reputation :votes, source: {reputation: :votes, of: :resources}, aggregated_by: :sum
 
   #acts_as_reader

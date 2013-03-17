@@ -95,22 +95,22 @@ class ResourcesController < ApplicationController
     Resource.google(params[:q], "videos")
 
     unless params[:q].blank?
-      @resource = Resource.full_search(params[:q])
+      @resources = Resource.full_search(params[:q])
     else
-      @resource = Resource.all
+      @resources = Resource.all
     end
 
-     @resource = @resource.reject!{|r| !r.media_type.eql? params[:filter].downcase } unless params[:filter].blank?
+     @resources = @resources.reject!{|r| !r.media_type.eql? params[:filter].downcase } unless params[:filter].blank?
 
     unless params[:sort].blank?
       case params[:sort].downcase
         when 'newest'
-          then @resource = @resource.sort_by{|r| r.created_at}
+          then @resources = @resources.sort_by{|r| r.created_at}
         when 'votes'
-          then @resource = @resource.sort_by!{|r| r.reputation_for(:votes).to_i}.reverse
+          then @resources = @resources.sort_by!{|r| r.reputation_for(:votes).to_i}.reverse
         end
       end
-      @resource = @resource.paginate(:page => (params[:page] || 1), :per_page => 15) unless @resource.nil?
+      @resources = @resources.paginate(:page => (params[:page] || 1), :per_page => 15) unless @resources.nil?
     end
 
 end
